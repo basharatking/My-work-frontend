@@ -1,0 +1,29 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jasonpdf.com/sitemap.xml
+
+Disallow: /api/
+Disallow: /api/docs
+Disallow: /health
+Disallow: /merge-pdf$
+Disallow: /split-pdf$
+Disallow: /compress-pdf$
+Disallow: /rotate-pdf$
+Disallow: /add-watermark
+Disallow: /pdf-to-word$
+Disallow: /pdf-to-excel$
+Disallow: /pdf-to-jpg$
+Disallow: /jpg-to-pdf
+Disallow: /unlock-pdf$
+Disallow: /protect-pdf$
+Disallow: /pdf-to-text$
+Disallow: /pdf-to-pptx$
+Disallow: /add-page-numbers$
+Disallow: /ocr-check
+Disallow: /ai-summary
+Disallow: /ai-notes
+Disallow: /ai-quiz
+Disallow: /ai-keypoints
+Disallow: /ai-translate
+Disallow: /ask-pdf
