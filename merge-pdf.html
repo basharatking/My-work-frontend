@@ -1,97 +1,292 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Merge PDF — JasonPDF</title>
-<meta name="description" content="Free online PDF merger — combine multiple PDF files into one. No signup, no watermark. Fast and 100% private.">
-<meta name="keywords" content="merge pdf, free pdf tool, online pdf, jasonpdf, no signup">
-<meta name="robots" content="index, follow">
-<meta name="author" content="JasonPDF">
-<meta name="theme-color" content="#FF3814">
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
-</script>
-<link rel="sitemap" type="application/xml" href="/sitemap.xml">
-<link rel="canonical" href="https://jasonpdf.com/merge-pdf.html">
-<meta property="og:title" content="Merge PDF — JasonPDF">
-<meta property="og:description" content="Free online PDF merger — combine multiple PDF files into one. No signup, no watermark. Fast and 100% private.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://jasonpdf.com/merge-pdf.html">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Merge PDF — JasonPDF">
-<meta name="twitter:description" content="Free online PDF merger — combine multiple PDF files into one. No signup, no watermark. Fast and 100% private.">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"JasonPDF Merge Tool","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://jasonpdf.com/merge-pdf.html"}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="shared.css">
-<script src="config.js"></script>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Merge PDF | DocuFlow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-container": "#eeefff",
+                      "success": "#10B981",
+                      "secondary-fixed-dim": "#bec6e0",
+                      "warning": "#F59E0B",
+                      "surface-container-low": "#eff4ff",
+                      "on-secondary-container": "#5c647a",
+                      "error": "#EF4444",
+                      "tertiary-fixed": "#eaddff",
+                      "primary-fixed": "#dbe1ff",
+                      "surface-container": "#e5eeff",
+                      "inverse-on-surface": "#eaf1ff",
+                      "tertiary": "#6a1edb",
+                      "surface-tint": "#0053db",
+                      "on-tertiary": "#ffffff",
+                      "secondary-fixed": "#dae2fd",
+                      "primary-container": "#2563eb",
+                      "on-error": "#ffffff",
+                      "surface": "#f8f9ff",
+                      "border-subtle": "#E2E8F0",
+                      "bg-light": "#FFFFFF",
+                      "on-secondary-fixed-variant": "#3f465c",
+                      "primary": "#004ac6",
+                      "on-secondary": "#ffffff",
+                      "on-surface": "#0b1c30",
+                      "surface-dim": "#cbdbf5",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-variant": "#d3e4fe",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "outline-variant": "#c3c6d7",
+                      "tertiary-fixed-dim": "#d2bbff",
+                      "on-tertiary-fixed": "#25005a",
+                      "bg-dark": "#0B0F1A",
+                      "on-tertiary-container": "#f7edff",
+                      "secondary-container": "#dae2fd",
+                      "on-secondary-fixed": "#131b2e",
+                      "inverse-primary": "#b4c5ff",
+                      "error-container": "#ffdad6",
+                      "on-primary": "#ffffff",
+                      "surface-container-highest": "#d3e4fe",
+                      "inverse-surface": "#213145",
+                      "tertiary-container": "#8343f4",
+                      "on-error-container": "#93000a",
+                      "surface-bright": "#f8f9ff",
+                      "on-tertiary-fixed-variant": "#5a00c6",
+                      "on-background": "#0b1c30",
+                      "on-primary-fixed": "#00174b",
+                      "on-surface-variant": "#434655",
+                      "secondary": "#565e74",
+                      "surface-container-high": "#dce9ff",
+                      "outline": "#737686",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "background": "#f8f9ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "32px",
+                      "base": "8px",
+                      "margin-mobile": "16px",
+                      "gutter": "24px",
+                      "container-max": "1280px"
+              },
+              "fontFamily": {
+                      "headline-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Plus Jakarta Sans"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "14px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+            },
+          },
+        }
+    </script>
 </head>
-<body>
-<div id="nav-placeholder"></div>
-
-<div class="tool-page">
-  <div class="tool-container">
-    <div class="tool-header">
-      <div class="tool-icon-wrap">📎</div>
-      <h1 class="tool-title">Merge PDF</h1>
-      <p class="tool-sub">Combine multiple PDF files into a single document.</p>
-    </div>
-    
-<div class="tool-card">
-  <div class="notice notice-blue"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Files are deleted immediately after processing. We never store your data.</div>
-  <div class="upload-zone" onclick="document.getElementById('fi-merge').click()">
-    <div class="uz-icon">📎</div>
-    <div class="uz-title">Drop PDF files here or click to browse</div>
-    <div class="uz-sub">Select multiple PDFs — they'll be merged in order</div>
-    <div class="uz-badge">🔒 Processed securely · Max 25 MB each</div>
-    <input class="file-input" id="fi-merge" type="file" accept=".pdf" multiple onchange="handleFiles('merge',this)">
-  </div>
-  <div class="file-chips" id="fl-merge"></div>
-  <div class="pdf-preview-area" id="preview-merge"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
-  <div id="ocr-hint-merge"></div>
-  <button class="action-btn" id="btn-merge" onclick="run_merge()">📎 Merge PDFs</button>
-  <div class="progress-wrap" id="pw-merge"><div class="progress-track"><div class="progress-fill" id="pb-merge"></div></div><div class="progress-label" id="pl-merge">Processing…</div></div>
-  <div class="result-box" id="rb-merge"><p id="rb-merge-msg"></p></div>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 bg-surface/80 backdrop-blur-md border-b border-border-subtle shadow-sm transition-all duration-200 ease-in-out">
+<div class="flex items-center gap-8">
+<a class="font-headline-md text-headline-md font-bold text-primary" href="#">
+                DocuFlow
+            </a>
+<div class="hidden md:flex gap-6">
+<a class="font-body-md text-body-md text-primary font-bold border-b-2 border-primary pb-1" href="#">All Tools</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors pb-1" href="#">Solutions</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors pb-1" href="#">Pricing</a>
 </div>
-
-    <div class="tool-footer-links">
-      <p>More free PDF tools:</p>
-      <div class="tfl-grid">
-        <a href="split-pdf.html" class="tfl-link">✂️ Split PDF</a>
-<a href="compress-pdf.html" class="tfl-link">🗜️ Compress PDF</a>
-<a href="rotate-pdf.html" class="tfl-link">🔄 Rotate PDF</a>
-<a href="pdf-to-word.html" class="tfl-link">📝 PDF to Word</a>
-<a href="pdf-to-excel.html" class="tfl-link">📊 PDF to Excel</a>
-<a href="pdf-to-jpg.html" class="tfl-link">🖼️ PDF to JPG</a>
-<a href="jpg-to-pdf.html" class="tfl-link">📥 Image to PDF</a>
-<a href="protect-pdf.html" class="tfl-link">🔐 Protect PDF</a>
-      </div>
-    </div>
-  </div>
 </div>
-
-<div id="footer-placeholder"></div>
-<script src="shared.js"></script>
-<script>
-async function run_merge(){
-  const files=fileStore["merge"];
-  if(!files||files.length<2){showResult("merge","Please select at least 2 PDF files.",true);return;}
-  setBtnState("merge",true);
-  const fd=new FormData();
-  files.forEach(f=>fd.append("files",f));
-  try{
-    const r=await callAPI("/merge-pdf",fd,"merge","Merging PDFs…");
-    const blob=await r.blob();
-    showResult("merge","PDFs merged successfully!");
-    showDownloadBtn("merge",blob,"merged.pdf");
-  }catch(e){showResult("merge",e.message,true);}
-  finally{setBtnState("merge",false,"📎 Merge PDFs");hideProgress("merge");}
-}
-</script>
-</body>
-</html>
+<div class="flex items-center gap-4">
+<a class="hidden md:block font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Login</a>
+<a class="font-label-md text-label-md bg-primary text-on-primary px-4 py-2 rounded-lg hover:bg-primary-fixed-variant transition-colors" href="#">Sign Up</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-24 pb-16 px-margin-mobile md:px-margin-desktop flex flex-col items-center">
+<div class="max-w-4xl w-full text-center mb-12">
+<h1 class="font-display-lg text-display-lg text-on-surface mb-4">Merge PDF</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Combine multiple PDF files into one professional document. Fast, secure, and easy to use.</p>
+</div>
+<!-- Tool Interface -->
+<div class="max-w-3xl w-full bg-surface-container-lowest rounded-xl border border-border-subtle shadow-[0px_4px_12px_rgba(0,0,0,0.05)] overflow-hidden">
+<!-- Drop Zone -->
+<div class="p-8">
+<div class="border-2 border-dashed border-outline-variant rounded-xl p-12 flex flex-col items-center justify-center text-center hover:bg-surface-container-low hover:border-primary transition-colors cursor-pointer group">
+<div class="bg-surface-container-high rounded-full p-4 mb-4 group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant group-hover:text-on-primary-container" style="font-variation-settings: 'FILL' 0;">upload_file</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Drag &amp; drop PDFs here</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6">or click to browse from your device</p>
+<button class="font-label-md text-label-md bg-primary text-on-primary px-6 py-3 rounded-lg shadow-sm hover:bg-primary-fixed-variant transition-colors">Select Files</button>
+</div>
+</div>
+<!-- File List (Simulated State) -->
+<div class="px-8 pb-8 border-t border-border-subtle pt-6 bg-surface">
+<h4 class="font-label-md text-label-md text-on-surface mb-4 flex items-center justify-between">
+<span>Files to Merge (2)</span>
+<span class="text-on-surface-variant font-normal">Drag to reorder</span>
+</h4>
+<div class="flex flex-col gap-3">
+<!-- File Item 1 -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest border border-border-subtle rounded-lg hover:border-outline-variant transition-colors">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-outline cursor-grab hover:text-on-surface">drag_indicator</span>
+<div class="bg-error-container p-2 rounded">
+<span class="material-symbols-outlined text-on-error-container" style="font-variation-settings: 'FILL' 1;">picture_as_pdf</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Q3_Financial_Report.pdf</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">2.4 MB • 12 pages</p>
+</div>
+</div>
+<button class="text-outline hover:text-error transition-colors p-2 rounded-full hover:bg-error-container">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- File Item 2 -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest border border-border-subtle rounded-lg hover:border-outline-variant transition-colors">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-outline cursor-grab hover:text-on-surface">drag_indicator</span>
+<div class="bg-error-container p-2 rounded">
+<span class="material-symbols-outlined text-on-error-container" style="font-variation-settings: 'FILL' 1;">picture_as_pdf</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Appendix_A_Charts.pdf</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">845 KB • 3 pages</p>
+</div>
+</div>
+<button class="text-outline hover:text-error transition-colors p-2 rounded-full hover:bg-error-container">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</div>
+<!-- Action Area -->
+<div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+<button class="w-full sm:w-auto font-label-md text-label-md border border-border-subtle text-on-surface px-6 py-3 rounded-lg hover:bg-surface-container-low transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">add</span> Add More Files
+                    </button>
+<button class="w-full sm:w-auto font-label-md text-label-md bg-primary text-on-primary px-8 py-3 rounded-lg shadow-sm hover:bg-primary-fixed-variant transition-colors flex items-center justify-center gap-2">
+                        Merge PDFs <span class="material-symbols-outlined text-lg">call_merge</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Trust & Security Messaging -->
+<div class="mt-8 flex items-center justify-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-success" style="font-variation-settings: 'FILL' 1;">gpp_good</span>
+<p class="font-body-sm text-body-sm">Secure Processing. Files are deleted immediately after processing.</p>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-start gap-gutter bg-surface-container-lowest border-t border-border-subtle">
+<div class="flex flex-col gap-2">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">DocuFlow</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">© 2024 DocuFlow Inc. All rights reserved.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-body-sm text-body-sm text-primary font-bold hover:text-primary transition-opacity duration-150 underline" href="#">Tools</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-opacity duration-150 hover:underline" href="#">Company</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-opacity duration-150 hover:underline" href="#">Legal</a>
+</div>
+</footer>
+</body></html>
