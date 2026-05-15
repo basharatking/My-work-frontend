@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Watermark PDF — CatchPDF</title>
+<meta name="description" content="Add a custom text watermark to every page of your PDF. Control opacity, position and style. No signup required. Files deleted instantly.">
+<meta name="keywords" content="watermark pdf,add watermark to pdf,pdf watermark,catchpdf,free pdf tool,online pdf">
+<meta name="robots" content="index,follow"><meta name="author" content="CatchPDF"><meta name="theme-color" content="#1D4ED8">
+<link rel="canonical" href="https://catchpdf.com/watermark-pdf.html">
+<meta property="og:title" content="Watermark PDF — CatchPDF"><meta property="og:description" content="Add a custom text watermark to every page of your PDF. Control opacity, position and style."><meta property="og:type" content="website">
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="Watermark PDF — CatchPDF">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"CatchPDF Watermark Tool","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://catchpdf.com/watermark-pdf.html"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<script src="config.js"></script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-container">
+    <div class="tool-header">
+      <div class="tool-icon-wrap">🔏</div>
+      <h1 class="tool-title">Watermark PDF</h1>
+      <p class="tool-sub">Add a custom text watermark to every page of your PDF. Control opacity, position and style.</p>
+    </div>
+    <div class="tool-card">
+      <div class="upload-zone" onclick="document.getElementById('fi-watermark').click()">
+        <div class="uz-icon">🔏</div>
+        <div class="uz-title">Drop your PDF here or click to browse</div>
+        <div class="uz-sub">Supports PDF files up to 25 MB</div>
+        <div class="uz-badge">🔒 Files deleted after processing</div>
+        <input class="file-input" id="fi-watermark" type="file" accept=".pdf" onchange="handleFiles('watermark',this)">
+      </div>
+      <div class="file-chips" id="fl-watermark"></div>
+      <label class="f-label">Watermark Text</label>
+      <input class="f-input" id="watermark-text" type="text" placeholder="e.g. CONFIDENTIAL, DRAFT, SAMPLE" value="CONFIDENTIAL">
+      <label class="f-label">Position</label>
+      <select class="f-select" id="watermark-pos">
+        <option value="center" selected>Center (diagonal)</option>
+        <option value="bottom-right">Bottom right</option>
+        <option value="bottom-center">Bottom center</option>
+      </select>
+      <label class="f-label">Opacity</label>
+      <select class="f-select" id="watermark-opacity">
+        <option value="0.1">Very light (10%)</option>
+        <option value="0.2" selected>Light (20%)</option>
+        <option value="0.4">Medium (40%)</option>
+        <option value="0.6">Strong (60%)</option>
+      </select>
+      <button class="action-btn" id="btn-watermark" onclick="run_watermark()">🔏 Add Watermark</button>
+      <div class="progress-wrap" id="pw-watermark"><div class="progress-track"><div class="progress-fill" id="pb-watermark"></div></div><div class="progress-label" id="pl-watermark">Adding watermark…</div></div>
+      <div class="result-box" id="rb-watermark"><p id="rb-watermark-msg"></p></div>
+    </div>
+<script>
+async function run_watermark(){
+  const files=fileStore["watermark"]; if(!files?.length){toast("Please select a PDF first","error");return;}
+  const text=document.getElementById("watermark-text").value.trim();
+  if(!text){toast("Please enter watermark text","error");return;}
+  setBtnState("watermark",true);
+  const fd=new FormData(); fd.append("file",files[0]); fd.append("text",text);
+  fd.append("position",document.getElementById("watermark-pos").value);
+  fd.append("opacity",document.getElementById("watermark-opacity").value);
+  try{
+    const resp=await callAPI("/add-watermark",fd,"watermark","Adding watermark…");
+    const blob=await resp.blob();
+    showResult("watermark","Watermark added successfully!");
+    showDownloadBtn("watermark",blob,`watermarked_${files[0].name}`,{});
+  }catch(e){showResult("watermark",e.message,true);}
+  finally{setBtnState("watermark",false,"🔏 Add Watermark");}
+}
+</script>
+
+    <div class="tool-footer-links">
+      <p>More free PDF tools:</p>
+      <div class="tfl-grid"><a href="merge-pdf.html" class="tfl-link">📎 Merge PDF</a>
+<a href="split-pdf.html" class="tfl-link">✂️ Split PDF</a>
+<a href="compress-pdf.html" class="tfl-link">🗜️ Compress</a>
+<a href="pdf-to-word.html" class="tfl-link">📝 PDF to Word</a>
+<a href="pdf-to-excel.html" class="tfl-link">📊 PDF to Excel</a>
+<a href="pdf-to-jpg.html" class="tfl-link">🖼️ PDF to JPG</a>
+<a href="protect-pdf.html" class="tfl-link">🔐 Protect PDF</a>
+<a href="ai-tools.html" class="tfl-link">✨ Smart Tools</a></div>
+    </div>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+</body>
+</html>

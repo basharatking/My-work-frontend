@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PDF to Excel — CatchPDF</title>
+<meta name="description" content="Extract tables from PDFs into Excel. Smart grouping combines multi-page tables into one sheet automatically. No signup required. Files deleted instantly.">
+<meta name="keywords" content="pdf to excel,pdf to xlsx,extract tables from pdf,catchpdf,free pdf tool,online pdf">
+<meta name="robots" content="index,follow"><meta name="author" content="CatchPDF"><meta name="theme-color" content="#1D4ED8">
+<link rel="canonical" href="https://catchpdf.com/pdf-to-excel.html">
+<meta property="og:title" content="PDF to Excel — CatchPDF"><meta property="og:description" content="Extract tables from PDFs into Excel. Smart grouping combines multi-page tables into one sheet automatically."><meta property="og:type" content="website">
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="PDF to Excel — CatchPDF">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"CatchPDF PDF to Excel","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://catchpdf.com/pdf-to-excel.html"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<script src="config.js"></script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-container">
+    <div class="tool-header">
+      <div class="tool-icon-wrap">📊</div>
+      <h1 class="tool-title">PDF to Excel</h1>
+      <p class="tool-sub">Extract tables from PDFs into Excel. Smart grouping combines multi-page tables into one sheet automatically.</p>
+    </div>
+    <div class="tool-card">
+      <div class="upload-zone" onclick="document.getElementById('fi-pdfxl').click()">
+        <div class="uz-icon">📊</div>
+        <div class="uz-title">Drop your PDF here or click to browse</div>
+        <div class="uz-sub">Intelligently groups tables by headers across pages</div>
+        <div class="uz-badge">🔒 Files deleted after processing</div>
+        <input class="file-input" id="fi-pdfxl" type="file" accept=".pdf" onchange="handleFiles('pdfxl',this)">
+      </div>
+      <div class="file-chips" id="fl-pdfxl"></div>
+      <div class="pdf-preview-area" id="preview-pdfxl"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
+      <label class="f-label">Extraction Mode</label>
+      <select class="f-select" id="pdfxl-mode">
+        <option value="smart" selected>Smart — Auto-detect tables & group by headers</option>
+        <option value="tables">Tables only — Extract tables, ignore text</option>
+        <option value="text">Text mode — Extract all text as plain rows</option>
+      </select>
+      <div class="notice notice-blue" style="margin-top:.75rem">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span><strong>Smart grouping:</strong> Tables with matching headers across pages are combined into one sheet. Different table types become separate sheets.</span>
+      </div>
+      <div id="ocr-hint-pdfxl"></div>
+      <button class="action-btn" id="btn-pdfxl" onclick="run_pdfxl()">📊 Convert to Excel</button>
+      <div class="progress-wrap" id="pw-pdfxl"><div class="progress-track"><div class="progress-fill" id="pb-pdfxl"></div></div><div class="progress-label" id="pl-pdfxl">Extracting tables…</div></div>
+      <div class="result-box" id="rb-pdfxl"><p id="rb-pdfxl-msg"></p></div>
+    </div>
+<script>
+async function run_pdfxl(){
+  const files=fileStore["pdfxl"]; if(!files?.length){toast("Please select a PDF first","error");return;}
+  setBtnState("pdfxl",true);
+  const fd=new FormData(); fd.append("file",files[0]); fd.append("mode",document.getElementById("pdfxl-mode").value);
+  try{
+    const resp=await callAPI("/pdf-to-excel",fd,"pdfxl","Extracting tables…");
+    const blob=await resp.blob();
+    const name=files[0].name.replace(/\.pdf$/i,"")+".xlsx";
+    showResult("pdfxl","Tables extracted successfully!");
+    showDownloadBtn("pdfxl",blob,name,{});
+  }catch(e){showResult("pdfxl",e.message,true);}
+  finally{setBtnState("pdfxl",false,"📊 Convert to Excel");}
+}
+</script>
+
+<section style="padding:3rem 0;border-top:1px solid var(--border);margin-top:2rem">
+  <h2 style="font-size:20px;font-weight:800;color:var(--ink);margin-bottom:1.5rem">Frequently asked questions</h2>
+  <div class="faq-list"><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How does smart grouping work?<svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Tables with identical headers across multiple pages are automatically merged into one Excel sheet. Tables with different column structures get their own sheets.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What if my PDF has no tables?<svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">In Smart mode, if no tables are found, text is extracted row by row into a plain sheet.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Does it work with scanned PDFs?<svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">No — scanned image PDFs have no extractable table data. The PDF must have embedded text.</div></div><script>function toggleFaq(btn){const item=btn.closest(".faq-item");const wasOpen=item.classList.contains("open");document.querySelectorAll(".faq-item.open").forEach(i=>i.classList.remove("open"));if(!wasOpen)item.classList.add("open");}</script></div>
+</section>
+    <div class="tool-footer-links">
+      <p>More free PDF tools:</p>
+      <div class="tfl-grid"><a href="merge-pdf.html" class="tfl-link">📎 Merge PDF</a>
+<a href="split-pdf.html" class="tfl-link">✂️ Split PDF</a>
+<a href="compress-pdf.html" class="tfl-link">🗜️ Compress</a>
+<a href="pdf-to-word.html" class="tfl-link">📝 PDF to Word</a>
+<a href="pdf-to-excel.html" class="tfl-link">📊 PDF to Excel</a>
+<a href="pdf-to-jpg.html" class="tfl-link">🖼️ PDF to JPG</a>
+<a href="protect-pdf.html" class="tfl-link">🔐 Protect PDF</a>
+<a href="ai-tools.html" class="tfl-link">✨ Smart Tools</a></div>
+    </div>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://catchpdf.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://catchpdf.com/merge-pdf.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://catchpdf.com/split-pdf.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://catchpdf.com/compress-pdf.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://catchpdf.com/rotate-pdf.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://catchpdf.com/pdf-to-word.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://catchpdf.com/pdf-to-excel.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://catchpdf.com/pdf-to-jpg.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://catchpdf.com/jpg-to-pdf.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://catchpdf.com/pdf-to-pptx.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://catchpdf.com/pdf-to-text.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://catchpdf.com/watermark-pdf.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://catchpdf.com/protect-pdf.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://catchpdf.com/unlock-pdf.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://catchpdf.com/add-page-numbers.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://catchpdf.com/ai-tools.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://catchpdf.com/about.html</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://catchpdf.com/contact.html</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+</urlset>

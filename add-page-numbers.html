@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Add Page Numbers — CatchPDF</title>
+<meta name="description" content="Automatically add page numbers to every page of your PDF. Choose position and format. No signup required. Files deleted instantly.">
+<meta name="keywords" content="add page numbers to pdf,pdf page numbering,catchpdf,free pdf tool,online pdf">
+<meta name="robots" content="index,follow"><meta name="author" content="CatchPDF"><meta name="theme-color" content="#1D4ED8">
+<link rel="canonical" href="https://catchpdf.com/add-page-numbers.html">
+<meta property="og:title" content="Add Page Numbers — CatchPDF"><meta property="og:description" content="Automatically add page numbers to every page of your PDF. Choose position and format."><meta property="og:type" content="website">
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="Add Page Numbers — CatchPDF">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"CatchPDF Page Numbers Tool","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://catchpdf.com/add-page-numbers.html"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<script src="config.js"></script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-container">
+    <div class="tool-header">
+      <div class="tool-icon-wrap">🔢</div>
+      <h1 class="tool-title">Add Page Numbers</h1>
+      <p class="tool-sub">Automatically add page numbers to every page of your PDF. Choose position and format.</p>
+    </div>
+    <div class="tool-card">
+      <div class="upload-zone" onclick="document.getElementById('fi-pagenums').click()">
+        <div class="uz-icon">🔢</div>
+        <div class="uz-title">Drop your PDF here or click to browse</div>
+        <div class="uz-sub">Supports PDF files up to 25 MB</div>
+        <div class="uz-badge">🔒 Files deleted after processing</div>
+        <input class="file-input" id="fi-pagenums" type="file" accept=".pdf" onchange="handleFiles('pagenums',this)">
+      </div>
+      <div class="file-chips" id="fl-pagenums"></div>
+      <label class="f-label">Position</label>
+      <select class="f-select" id="pagenums-pos">
+        <option value="bottom-center" selected>Bottom Center</option>
+        <option value="bottom-right">Bottom Right</option>
+        <option value="top-center">Top Center</option>
+        <option value="top-right">Top Right</option>
+      </select>
+      <label class="f-label">Format</label>
+      <select class="f-select" id="pagenums-fmt">
+        <option value="number" selected>1, 2, 3 …</option>
+        <option value="page-of">Page 1 of N</option>
+        <option value="roman">i, ii, iii …</option>
+      </select>
+      <label class="f-label">Start Number</label>
+      <input class="f-input" id="pagenums-start" type="number" value="1" min="1">
+      <button class="action-btn" id="btn-pagenums" onclick="run_pagenums()">🔢 Add Page Numbers</button>
+      <div class="progress-wrap" id="pw-pagenums"><div class="progress-track"><div class="progress-fill" id="pb-pagenums"></div></div><div class="progress-label" id="pl-pagenums">Adding numbers…</div></div>
+      <div class="result-box" id="rb-pagenums"><p id="rb-pagenums-msg"></p></div>
+    </div>
+<script>
+async function run_pagenums(){
+  const files=fileStore["pagenums"]; if(!files?.length){toast("Please select a PDF first","error");return;}
+  setBtnState("pagenums",true);
+  const fd=new FormData(); fd.append("file",files[0]);
+  fd.append("position",document.getElementById("pagenums-pos").value);
+  fd.append("format",document.getElementById("pagenums-fmt").value);
+  fd.append("start",document.getElementById("pagenums-start").value);
+  try{
+    const resp=await callAPI("/add-page-numbers",fd,"pagenums","Adding numbers…");
+    const blob=await resp.blob();
+    showResult("pagenums","Page numbers added successfully!");
+    showDownloadBtn("pagenums",blob,`numbered_${files[0].name}`,{});
+  }catch(e){showResult("pagenums",e.message,true);}
+  finally{setBtnState("pagenums",false,"🔢 Add Page Numbers");}
+}
+</script>
+
+    <div class="tool-footer-links">
+      <p>More free PDF tools:</p>
+      <div class="tfl-grid"><a href="merge-pdf.html" class="tfl-link">📎 Merge PDF</a>
+<a href="split-pdf.html" class="tfl-link">✂️ Split PDF</a>
+<a href="compress-pdf.html" class="tfl-link">🗜️ Compress</a>
+<a href="pdf-to-word.html" class="tfl-link">📝 PDF to Word</a>
+<a href="pdf-to-excel.html" class="tfl-link">📊 PDF to Excel</a>
+<a href="pdf-to-jpg.html" class="tfl-link">🖼️ PDF to JPG</a>
+<a href="protect-pdf.html" class="tfl-link">🔐 Protect PDF</a>
+<a href="ai-tools.html" class="tfl-link">✨ Smart Tools</a></div>
+    </div>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+</body>
+</html>

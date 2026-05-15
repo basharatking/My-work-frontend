@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Split PDF — CatchPDF</title>
+<meta name="description" content="Extract specific pages or split a PDF into separate individual files. No signup required. Files deleted instantly.">
+<meta name="keywords" content="split pdf,extract pages from pdf,pdf splitter,catchpdf,free pdf tool,online pdf">
+<meta name="robots" content="index,follow"><meta name="author" content="CatchPDF"><meta name="theme-color" content="#1D4ED8">
+<link rel="canonical" href="https://catchpdf.com/split-pdf.html">
+<meta property="og:title" content="Split PDF — CatchPDF"><meta property="og:description" content="Extract specific pages or split a PDF into separate individual files."><meta property="og:type" content="website">
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="Split PDF — CatchPDF">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"CatchPDF Split Tool","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://catchpdf.com/split-pdf.html"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<script src="config.js"></script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-container">
+    <div class="tool-header">
+      <div class="tool-icon-wrap">✂️</div>
+      <h1 class="tool-title">Split PDF</h1>
+      <p class="tool-sub">Extract specific pages or split a PDF into separate individual files.</p>
+    </div>
+    <div class="tool-card">
+      <div class="upload-zone" onclick="document.getElementById('fi-split').click()">
+        <div class="uz-icon">✂️</div>
+        <div class="uz-title">Drop your PDF here or click to browse</div>
+        <div class="uz-sub">Supports PDF files up to 25 MB</div>
+        <div class="uz-badge">🔒 Encrypted upload · Files deleted after processing</div>
+        <input class="file-input" id="fi-split" type="file" accept=".pdf" onchange="handleFiles('split',this)">
+      </div>
+      <div class="file-chips" id="fl-split"></div>
+      <div class="pdf-preview-area" id="preview-split"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
+      <div id="ocr-hint-split"></div>
+      <label class="f-label">Split Mode</label>
+      <select class="f-select" id="split-mode" onchange="toggleSplitRange()">
+        <option value="each">Split into individual pages (ZIP)</option>
+        <option value="range">Extract a page range</option>
+      </select>
+      <div id="split-range" style="display:none">
+        <div class="range-row">
+          <div>
+            <label class="f-label">From Page</label>
+            <input class="f-input" type="number" id="split-start" value="1" min="1" placeholder="1">
+          </div>
+          <div>
+            <label class="f-label">To Page <span id="split-page-info" style="display:none;font-weight:400;color:var(--ink4)"></span></label>
+            <input class="f-input" type="number" id="split-end" value="1" min="1" placeholder="Last page">
+          </div>
+        </div>
+      </div>
+      <button class="action-btn" id="btn-split" onclick="run_split()">✂️ Split PDF</button>
+      <div class="progress-wrap" id="pw-split"><div class="progress-track"><div class="progress-fill" id="pb-split"></div></div><div class="progress-label" id="pl-split">Splitting…</div></div>
+      <div class="result-box" id="rb-split"><p id="rb-split-msg"></p></div>
+    </div>
+<script>
+function toggleSplitRange(){
+  const mode=document.getElementById("split-mode").value;
+  document.getElementById("split-range").style.display=mode==="range"?"block":"none";
+}
+async function run_split(){
+  const files=fileStore["split"]; if(!files?.length){toast("Please select a PDF first","error");return;}
+  setBtnState("split",true);
+  const mode=document.getElementById("split-mode").value;
+  const fd=new FormData(); fd.append("file",files[0]); fd.append("mode",mode);
+  if(mode==="range"){fd.append("start_page",document.getElementById("split-start").value);fd.append("end_page",document.getElementById("split-end").value);}
+  try{
+    const resp=await callAPI("/split-pdf",fd,"split","Splitting…");
+    const blob=await resp.blob();
+    const fname=mode==="range"?"split_pages.pdf":"split_pages.zip";
+    showResult("split","PDF split successfully!");
+    showDownloadBtn("split",blob,fname,{mode});
+  }catch(e){showResult("split",e.message,true);}
+  finally{setBtnState("split",false,"✂️ Split PDF");}
+}
+</script>
+
+<section style="padding:3rem 0;border-top:1px solid var(--border);margin-top:2rem">
+  <h2 style="font-size:20px;font-weight:800;color:var(--ink);margin-bottom:1.5rem">Frequently asked questions</h2>
+  <div class="faq-list"><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can I extract just one page?<svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Yes — select 'Extract a page range' and set both From and To to the same page number.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What format are the split files?<svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Individual pages are delivered as a ZIP archive. Page range extractions are a single PDF.</div></div><script>function toggleFaq(btn){const item=btn.closest(".faq-item");const wasOpen=item.classList.contains("open");document.querySelectorAll(".faq-item.open").forEach(i=>i.classList.remove("open"));if(!wasOpen)item.classList.add("open");}</script></div>
+</section>
+    <div class="tool-footer-links">
+      <p>More free PDF tools:</p>
+      <div class="tfl-grid"><a href="merge-pdf.html" class="tfl-link">📎 Merge PDF</a>
+<a href="split-pdf.html" class="tfl-link">✂️ Split PDF</a>
+<a href="compress-pdf.html" class="tfl-link">🗜️ Compress</a>
+<a href="pdf-to-word.html" class="tfl-link">📝 PDF to Word</a>
+<a href="pdf-to-excel.html" class="tfl-link">📊 PDF to Excel</a>
+<a href="pdf-to-jpg.html" class="tfl-link">🖼️ PDF to JPG</a>
+<a href="protect-pdf.html" class="tfl-link">🔐 Protect PDF</a>
+<a href="ai-tools.html" class="tfl-link">✨ Smart Tools</a></div>
+    </div>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+</body>
+</html>
