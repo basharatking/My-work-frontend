@@ -149,8 +149,76 @@
 .testi-name { font-size:13px;font-weight:700;color:var(--ink); }
 .testi-role { font-size:12px;color:var(--ink4); }
 
-/* ── PRICING ── */
-.pricing-section { padding:5.5rem 2rem;background:var(--bg2);border-top:1px solid var(--border); }
+/* ── ASK PDF HOME SECTION ── */
+.ask-section { padding:5rem 2rem;background:var(--bg2);border-top:1px solid var(--border); }
+.ask-inner { max-width:820px;margin:0 auto; }
+.ask-card {
+  background:var(--bg);border:1px solid var(--border);border-radius:var(--r2xl);
+  overflow:hidden;box-shadow:var(--shadow-md);
+}
+.ask-card-top {
+  background:linear-gradient(135deg,var(--brand) 0%,#0EA5E9 100%);
+  padding:2rem 2rem 1.5rem;display:flex;align-items:center;gap:1rem;
+}
+.ask-card-top-icon {
+  width:52px;height:52px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);
+  border-radius:var(--rl);display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;
+}
+.ask-card-top h3 { font-size:20px;font-weight:800;color:#fff;margin-bottom:.2rem; }
+.ask-card-top p { font-size:13.5px;color:rgba(255,255,255,.75);line-height:1.5; }
+.ask-card-body { padding:1.5rem; }
+.ask-upload-row { display:grid;grid-template-columns:1fr auto;gap:.75rem;align-items:center;margin-bottom:1rem; }
+.ask-file-label {
+  display:flex;align-items:center;gap:9px;padding:11px 15px;
+  background:var(--bg2);border:1.5px dashed var(--border2);border-radius:var(--r);
+  cursor:pointer;font-size:13.5px;color:var(--ink3);font-weight:500;transition:var(--t);
+}
+.ask-file-label:hover { border-color:var(--brand);color:var(--brand);background:var(--brand-bg); }
+.ask-file-label.has-file { border-color:var(--green);color:var(--green-dark);background:var(--green-bg);border-style:solid; }
+.ask-file-btn {
+  background:var(--brand);color:#fff;border:none;padding:11px 18px;border-radius:var(--r);
+  font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font);transition:var(--t);white-space:nowrap;
+}
+.ask-file-btn:hover { background:var(--brand-dark); }
+.ask-chat-box {
+  background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);
+  min-height:180px;max-height:280px;overflow-y:auto;padding:1rem;
+  display:flex;flex-direction:column;gap:.75rem;margin-bottom:.85rem;
+}
+.ask-empty-state {
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  height:140px;gap:.5rem;
+}
+.ask-empty-state p { font-size:13px;color:var(--ink4);text-align:center; }
+.ask-msg { padding:.75rem 1rem;border-radius:var(--r);font-size:13.5px;line-height:1.7;max-width:88%; }
+.ask-msg.user { background:var(--brand);color:#fff;align-self:flex-end;border-bottom-right-radius:4px; }
+.ask-msg.bot { background:var(--bg);color:var(--ink2);border:1px solid var(--border);align-self:flex-start;border-bottom-left-radius:4px; }
+.ask-msg.thinking { color:var(--ink4);font-style:italic; }
+.ask-input-row { display:flex;gap:8px; }
+.ask-q-input {
+  flex:1;padding:12px 15px;border:1.5px solid var(--border);border-radius:var(--rl);
+  font-size:14px;color:var(--ink);background:var(--bg);outline:none;font-family:var(--font);
+}
+.ask-q-input:focus { border-color:var(--brand);box-shadow:0 0 0 3px rgba(29,78,216,.1); }
+.ask-q-input:disabled { opacity:.5; }
+.ask-send-btn {
+  background:var(--brand);color:#fff;border:none;padding:12px 20px;border-radius:var(--rl);
+  font-size:13.5px;font-weight:700;cursor:pointer;font-family:var(--font);transition:var(--t);
+  display:flex;align-items:center;gap:6px;flex-shrink:0;
+}
+.ask-send-btn:hover:not(:disabled) { background:var(--brand-dark);transform:translateY(-1px); }
+.ask-send-btn:disabled { opacity:.5;cursor:not-allowed; }
+.ask-hints { display:flex;gap:7px;flex-wrap:wrap;margin-top:.75rem; }
+.ask-hint {
+  font-size:12px;color:var(--ink3);background:var(--bg2);border:1px solid var(--border);
+  padding:5px 11px;border-radius:100px;cursor:pointer;transition:var(--t);font-weight:500;
+}
+.ask-hint:hover { border-color:var(--brand);color:var(--brand);background:var(--brand-bg); }
+.ask-footer { display:flex;align-items:center;justify-content:space-between;margin-top:.85rem;padding-top:.85rem;border-top:1px solid var(--border); }
+.ask-footer-note { font-size:11.5px;color:var(--ink4);display:flex;align-items:center;gap:5px; }
+.ask-go-full { font-size:12px;color:var(--brand);font-weight:600;text-decoration:none; }
+.ask-go-full:hover { text-decoration:underline; }
+@media(max-width:560px){ .ask-upload-row{grid-template-columns:1fr} .ask-file-btn{width:100%;justify-content:center} }
 
 /* ── CTA SECTION ── */
 .cta-section {
@@ -180,9 +248,9 @@
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
   <div class="hero-content">
-    <div class="hero-pill"><span class="hero-pill-dot"></span>20 tools · No signup required</div>
-    <h1>Every PDF tool<br>you'll ever <em>need.</em></h1>
-    <p class="hero-sub">Merge, split, compress, convert, protect — everything in one place. Fast, private, and completely free.</p>
+    <div class="hero-pill"><span class="hero-pill-dot"></span>20 tools · No signup · Files deleted instantly</div>
+    <h1>Your PDFs,<br><em>handled perfectly.</em></h1>
+    <p class="hero-sub">The only PDF platform you'll ever need — merge, convert, compress, protect and chat with your documents. 100% free, no account required.</p>
     <div class="hero-upload" id="heroUploadZone">
       <div class="hero-upload-box" onclick="document.getElementById('heroFileInput').click()" id="heroDropBox">
         <input type="file" id="heroFileInput" accept=".pdf" onchange="heroFileSelect(this)">
@@ -227,211 +295,4 @@
       <a href="ai-tools.html#quiz" class="tool-card-link" data-cat="smart"><div class="tcl-icon">❓</div><div><div class="tcl-title">Quiz Generator</div><div class="tcl-desc">Auto-generate MCQ quizzes from PDF content</div></div><span class="tcl-badge" style="background:var(--blue-bg);color:var(--blue);border-color:var(--blue-border)">Smart</span></a>
       <a href="ai-tools.html#keypoints" class="tool-card-link" data-cat="smart"><div class="tcl-icon">💡</div><div><div class="tcl-title">Key Points</div><div class="tcl-desc">Extract the most important information instantly</div></div><span class="tcl-badge" style="background:var(--blue-bg);color:var(--blue);border-color:var(--blue-border)">Smart</span></a>
       <a href="ai-tools.html#translate" class="tool-card-link" data-cat="smart"><div class="tcl-icon">🌍</div><div><div class="tcl-title">Translate PDF</div><div class="tcl-desc">Translate between English, Urdu & more</div></div><span class="tcl-badge" style="background:var(--blue-bg);color:var(--blue);border-color:var(--blue-border)">Smart</span></a>
-      <a href="ai-tools.html#ask" class="tool-card-link" data-cat="smart"><div class="tcl-icon">💬</div><div><div class="tcl-title">Ask PDF</div><div class="tcl-desc">Chat with your document — ask anything</div></div><span class="tcl-badge" style="background:var(--blue-bg);color:var(--blue);border-color:var(--blue-border)">Smart</span></a>
-      <!-- Organize -->
-      <a href="merge-pdf.html" class="tool-card-link" data-cat="organize"><div class="tcl-icon">📎</div><div><div class="tcl-title">Merge PDF</div><div class="tcl-desc">Combine multiple PDFs into one file</div></div><span class="tcl-badge">Free</span></a>
-      <a href="split-pdf.html" class="tool-card-link" data-cat="organize"><div class="tcl-icon">✂️</div><div><div class="tcl-title">Split PDF</div><div class="tcl-desc">Extract pages or split into separate files</div></div><span class="tcl-badge">Free</span></a>
-      <a href="compress-pdf.html" class="tool-card-link" data-cat="organize"><div class="tcl-icon">🗜️</div><div><div class="tcl-title">Compress PDF</div><div class="tcl-desc">Reduce file size without losing quality</div></div><span class="tcl-badge">Free</span></a>
-      <a href="rotate-pdf.html" class="tool-card-link" data-cat="organize"><div class="tcl-icon">🔄</div><div><div class="tcl-title">Rotate PDF</div><div class="tcl-desc">Rotate pages 90, 180 or 270 degrees</div></div><span class="tcl-badge">Free</span></a>
-      <a href="add-page-numbers.html" class="tool-card-link" data-cat="organize"><div class="tcl-icon">🔢</div><div><div class="tcl-title">Add Page Numbers</div><div class="tcl-desc">Auto-number all pages, choose style</div></div><span class="tcl-badge">Free</span></a>
-      <!-- Convert -->
-      <a href="pdf-to-word.html" class="tool-card-link" data-cat="convert"><div class="tcl-icon">📝</div><div><div class="tcl-title">PDF to Word</div><div class="tcl-desc">Convert PDF to editable .docx file</div></div><span class="tcl-badge">Free</span></a>
-      <a href="pdf-to-excel.html" class="tool-card-link" data-cat="convert"><div class="tcl-icon">📊</div><div><div class="tcl-title">PDF to Excel</div><div class="tcl-desc">Smart table extraction to .xlsx</div></div><span class="tcl-badge">Free</span></a>
-      <a href="pdf-to-jpg.html" class="tool-card-link" data-cat="convert"><div class="tcl-icon">🖼️</div><div><div class="tcl-title">PDF to JPG</div><div class="tcl-desc">Convert pages to high-quality images</div></div><span class="tcl-badge">Free</span></a>
-      <a href="jpg-to-pdf.html" class="tool-card-link" data-cat="convert"><div class="tcl-icon">📥</div><div><div class="tcl-title">Image to PDF</div><div class="tcl-desc">Convert JPG, PNG to PDF</div></div><span class="tcl-badge">Free</span></a>
-      <a href="pdf-to-pptx.html" class="tool-card-link" data-cat="convert"><div class="tcl-icon">📽️</div><div><div class="tcl-title">PDF to PowerPoint</div><div class="tcl-desc">Convert PDF pages to .pptx slides</div></div><span class="tcl-badge new">New</span></a>
-      <a href="pdf-to-text.html" class="tool-card-link" data-cat="convert"><div class="tcl-icon">📄</div><div><div class="tcl-title">PDF to Text</div><div class="tcl-desc">Extract raw plain text from any PDF</div></div><span class="tcl-badge">Free</span></a>
-      <!-- Security -->
-      <a href="watermark-pdf.html" class="tool-card-link" data-cat="security"><div class="tcl-icon">🔏</div><div><div class="tcl-title">Watermark PDF</div><div class="tcl-desc">Add custom text watermark to pages</div></div><span class="tcl-badge">Free</span></a>
-      <a href="protect-pdf.html" class="tool-card-link" data-cat="security"><div class="tcl-icon">🔐</div><div><div class="tcl-title">Protect PDF</div><div class="tcl-desc">Add AES-256 password encryption</div></div><span class="tcl-badge">Free</span></a>
-      <a href="unlock-pdf.html" class="tool-card-link" data-cat="security"><div class="tcl-icon">🔓</div><div><div class="tcl-title">Unlock PDF</div><div class="tcl-desc">Remove password protection from PDF</div></div><span class="tcl-badge">Free</span></a>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURES -->
-<section class="section">
-  <div class="container">
-    <div style="text-align:center">
-      <span class="section-label">Why CatchPDF</span>
-      <h2 class="section-title">Built for the way you work</h2>
-      <p class="section-sub">We built every tool to be fast, reliable and genuinely useful — not just check boxes.</p>
-    </div>
-    <div class="feat-grid">
-      <div class="feat-item"><div class="feat-icon">⚡</div><div class="feat-title">Lightning Fast</div><div class="feat-desc">Dedicated processing backend. Most operations complete in under 5 seconds — even for large files.</div></div>
-      <div class="feat-item"><div class="feat-icon">🔒</div><div class="feat-title">Truly Private</div><div class="feat-desc">Your files are encrypted during upload and deleted immediately after processing. We never store them.</div></div>
-      <div class="feat-item"><div class="feat-icon">📱</div><div class="feat-title">Works Everywhere</div><div class="feat-desc">Fully responsive across desktop, tablet and mobile. No app download, no installation required.</div></div>
-      <div class="feat-item"><div class="feat-icon">🆓</div><div class="feat-title">Always Free</div><div class="feat-desc">All 20 tools are completely free with no watermarks, no hidden fees and no subscription required.</div></div>
-      <div class="feat-item"><div class="feat-icon">🌍</div><div class="feat-title">Multi-language</div><div class="feat-desc">Translate PDFs between English, Urdu and more. Smart processing that understands your content.</div></div>
-      <div class="feat-item"><div class="feat-icon">📊</div><div class="feat-title">Smart Table Extraction</div><div class="feat-desc">Our PDF to Excel tool intelligently groups tables by headers across pages — not just page-by-page.</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- SECURITY -->
-<section class="security-section">
-  <div class="container">
-    <div style="text-align:center;position:relative;z-index:1">
-      <h2 style="font-size:clamp(26px,3.5vw,38px);font-weight:800;color:#fff;letter-spacing:-.4px;margin-bottom:.6rem">Security you can trust</h2>
-      <p style="color:rgba(255,255,255,.5);font-size:16px">Your documents are processed with enterprise-grade security practices.</p>
-    </div>
-    <div class="sec-grid" style="margin-top:2.5rem">
-      <div class="sec-item"><div class="sec-icon">🔐</div><div class="sec-title">256-bit Encryption</div><div class="sec-desc">All file transfers use TLS encryption, the same standard as banks.</div></div>
-      <div class="sec-item"><div class="sec-icon">🗑️</div><div class="sec-title">Auto-delete</div><div class="sec-desc">Files are permanently deleted from our servers immediately after processing.</div></div>
-      <div class="sec-item"><div class="sec-icon">🚫</div><div class="sec-title">No Storage</div><div class="sec-desc">We never store, index or read the content of your documents.</div></div>
-      <div class="sec-item"><div class="sec-icon">🔎</div><div class="sec-title">No Tracking</div><div class="sec-desc">No ads, no data harvesting. Your privacy is not a product we sell.</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- STATS -->
-<section class="section" style="background:var(--bg2);border-bottom:1px solid var(--border)">
-  <div class="container-sm" style="text-align:center">
-    <span class="section-label">By the numbers</span>
-    <h2 class="section-title">Trusted by users worldwide</h2>
-    <div class="stats-row">
-      <div><div class="stat-num">20+</div><div class="stat-lbl">Tools & Features</div></div>
-      <div><div class="stat-num">25 MB</div><div class="stat-lbl">Free File Limit</div></div>
-      <div><div class="stat-num">0</div><div class="stat-lbl">Signups Required</div></div>
-      <div><div class="stat-num">100%</div><div class="stat-lbl">Private & Secure</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="section">
-  <div class="container">
-    <div style="text-align:center">
-      <span class="section-label">Testimonials</span>
-      <h2 class="section-title">What users are saying</h2>
-    </div>
-    <div class="testi-grid">
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"The PDF to Excel tool is a game-changer. It correctly groups my multi-page financial tables into one sheet — something no other tool does right."</p><div class="testi-author"><div class="testi-av">AM</div><div><div class="testi-name">Ahmed M.</div><div class="testi-role">Financial Analyst</div></div></div></div>
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"The summary and notes features saved me hours during exam prep. I just upload lecture PDFs and get structured notes instantly."</p><div class="testi-author"><div class="testi-av">SR</div><div><div class="testi-name">Sara R.</div><div class="testi-role">University Student</div></div></div></div>
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"CatchPDF replaced three different tools I was using. The UI is clean, everything works fast, and I love that files are deleted automatically."</p><div class="testi-author"><div class="testi-av">FK</div><div><div class="testi-name">Farhan K.</div><div class="testi-role">Business Owner</div></div></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section class="pricing-section" id="pricing">
-  <div class="container">
-    <div style="text-align:center">
-      <span class="section-label">Pricing</span>
-      <h2 class="section-title">Simple, honest pricing</h2>
-      <p class="section-sub">Start free. Upgrade if you need more. No tricks, no hidden fees.</p>
-    </div>
-    <div class="pricing-grid">
-      <div class="pricing-card">
-        <div class="pricing-badge">Free</div>
-        <div class="pricing-name">Starter</div>
-        <div class="pricing-price">$0<span>/month</span></div>
-        <div class="pricing-desc">Perfect for occasional PDF tasks. No credit card required.</div>
-        <ul class="pricing-features">
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>All 20 PDF tools</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Up to 25 MB per file</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Smart Tools included</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Files auto-deleted</li>
-          <li class="disabled"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Batch processing</li>
-          <li class="disabled"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>API access</li>
-        </ul>
-        <a href="#tools" class="btn btn-secondary btn-full" style="justify-content:center">Start for free</a>
-      </div>
-      <div class="pricing-card featured">
-        <div class="pricing-badge">Pro</div>
-        <div class="pricing-name">Professional</div>
-        <div class="pricing-price">$9<span>/month</span></div>
-        <div class="pricing-desc">For power users and small teams who process PDFs regularly.</div>
-        <ul class="pricing-features">
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Everything in Starter</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Up to 100 MB per file</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Batch processing (10 files)</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Priority processing</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Email support</li>
-          <li class="disabled"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>API access</li>
-        </ul>
-        <a href="contact.html" class="btn btn-primary btn-full" style="justify-content:center">Get Pro</a>
-      </div>
-      <div class="pricing-card">
-        <div class="pricing-badge">Business</div>
-        <div class="pricing-name">Enterprise</div>
-        <div class="pricing-price">$29<span>/month</span></div>
-        <div class="pricing-desc">For teams and businesses needing high-volume PDF processing.</div>
-        <ul class="pricing-features">
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Everything in Pro</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Unlimited file size</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Unlimited batch processing</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>REST API access</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Priority support + SLA</li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Custom integrations</li>
-        </ul>
-        <a href="contact.html" class="btn btn-secondary btn-full" style="justify-content:center">Contact Sales</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="section" id="faq">
-  <div class="container-sm">
-    <div style="text-align:center">
-      <span class="section-label">FAQ</span>
-      <h2 class="section-title">Frequently asked questions</h2>
-    </div>
-    <div class="faq-list" style="margin-top:2.5rem;max-width:660px;margin-left:auto;margin-right:auto">
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is CatchPDF really free?<svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Yes, completely free. All 14 PDF tools and 6 smart features work with no signup, no credit card, and no watermarks on output files. We offer optional Pro and Enterprise plans for power users.</div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Are my files kept private?<svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Absolutely. Files are encrypted during upload and deleted immediately after your download. We never store, read or share your documents. Your privacy is our top priority.</div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How does PDF to Excel work?<svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Our PDF to Excel tool intelligently detects and groups tables by their headers. If two pages contain the same table headers, the data is combined into one sheet. Different table structures automatically create separate sheets. This means multi-page tables are handled correctly.</div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is the file size limit?<svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Free plan supports files up to 25 MB. Pro plan supports up to 100 MB and Enterprise supports unlimited sizes. For large files on the free plan, try our Compress PDF tool first.</div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Does it work on mobile?<svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Yes! CatchPDF is fully responsive and works great on smartphones and tablets. No app download required — just open it in your mobile browser.</div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How accurate is the PDF to Word conversion?<svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Our converter works best with text-based PDFs and preserves paragraph structure, headings and most formatting. Scanned PDFs will produce plain text output. For best results, use native digital PDFs.</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-section">
-  <h2>Start processing your PDFs today</h2>
-  <p>20 tools, completely free. No signup, no ads, no limits.</p>
-  <div class="cta-btns">
-    <a href="#tools" class="cta-btn-white">Browse All Tools</a>
-    <a href="ai-tools.html" class="cta-btn-outline">✨ Try Smart Tools</a>
-  </div>
-</section>
-
-<div id="footer-placeholder"></div>
-<script src="shared.js"></script>
-<script>
-// Hero drag & drop
-const dropBox = document.getElementById("heroDropBox");
-if(dropBox){
-  dropBox.addEventListener("dragover", e=>{ e.preventDefault(); dropBox.classList.add("drag-over"); });
-  dropBox.addEventListener("dragleave", ()=>dropBox.classList.remove("drag-over"));
-  dropBox.addEventListener("drop", e=>{
-    e.preventDefault(); dropBox.classList.remove("drag-over");
-    const file = e.dataTransfer.files[0];
-    if(file) heroFileSelect({files:[file]});
-  });
-}
-function heroFileSelect(input){
-  const file = input.files[0]; if(!file) return;
-  if(file.type!=="application/pdf"){ toast("Please select a PDF file","error"); return; }
-  toast("PDF selected! Choose a tool below ↓","info");
-  document.getElementById("tools").scrollIntoView({behavior:"smooth"});
-}
-function filterTools(cat, btn){
-  document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
-  btn.classList.add("active");
-  document.querySelectorAll(".tool-card-link").forEach(c=>{
-    c.style.display=(cat==="all"||c.dataset.cat===cat)?"":"none";
-  });
-}
-function toggleFaq(btn){
-  const item = btn.closest(".faq-item");
-  const wasOpen = item.classList.contains("open");
-  document.querySelectorAll(".faq-item.open").forEach(i=>i.classList.remove("open"));
-  if(!wasOpen) item.classList.add("open");
-}
-</script>
-</body>
-</html>
+      <a href="ai-tools.html#ask" class="tool-card-link" data-cat="smart"><div class="tcl-icon">💬</div><div><div class="tcl-title">Ask PDF
