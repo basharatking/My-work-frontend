@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FallPDF — Fast & Secure PDF Tools Online</title>
+<meta name="description" content="Merge, Compress, Convert and Edit PDFs Online for Free. 20 professional PDF tools — no signup, no watermark, files deleted instantly.">
+<meta name="keywords" content="pdf tools,merge pdf,split pdf,compress pdf,pdf to word,pdf to excel,free pdf tools,online pdf editor">
+<meta name="robots" content="index,follow"><meta name="author" content="FallPDF"><meta name="theme-color" content="#2563EB">
+<link rel="canonical" href="https://fallpdf.netlify.app/">
+<meta property="og:title" content="FallPDF — Fast & Secure PDF Tools Online">
+<meta property="og:description" content="20 professional PDF tools. No signup. Files deleted instantly. 100% free.">
+<meta property="og:type" content="website"><meta property="og:url" content="https://fallpdf.netlify.app/">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"FallPDF","description":"Professional PDF tools — merge, split, compress, convert PDF files online for free","url":"https://fallpdf.netlify.app"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Bricolage+Grotesque:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<script src="config.js"></script>
+<style>
+/* ═══════════ HERO ═══════════ */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: calc(var(--nav-h) + 3.5rem) 2rem 5rem;
+  text-align: center; position: relative; overflow: hidden;
+}
+.hero-bg-grid {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(37,99,235,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,.055) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: radial-gradient(ellipse 80% 65% at 50% 0%, black 30%, transparent 75%);
+}
+[data-theme="dark"] .hero-bg-grid {
+  background-image:
+    linear-gradient(rgba(37,99,235,.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,.08) 1px, transparent 1px);
+}
+.hero-glow {
+  position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+  width: 700px; height: 500px; z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(37,99,235,.1) 0%, transparent 65%);
+}
+.hero-content { position: relative; z-index: 1; max-width: 820px; width: 100%; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--bg); border: 1px solid var(--border);
+  color: var(--ink3); font-size: 12.5px; font-weight: 600;
+  padding: 6px 14px 6px 8px; border-radius: 100px;
+  margin-bottom: 2rem; box-shadow: var(--shadow-sm);
+  animation: fadeUp .5s ease both;
+}
+.hero-badge-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex-shrink: 0;
+  box-shadow: 0 0 0 3px var(--green-bg);
+  animation: pulse 2.5s ease infinite;
+}
+@keyframes pulse { 0%,100%{box-shadow:0 0 0 3px var(--green-bg)} 50%{box-shadow:0 0 0 6px var(--green-bg)} }
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(46px, 8vw, 88px);
+  font-weight: 800; color: var(--ink);
+  line-height: 1.04; letter-spacing: -3.5px;
+  margin-bottom: 1.35rem;
+  animation: fadeUp .5s .08s ease both;
+}
+.hero h1 em { font-style: normal; color: var(--brand); }
+.hero-sub {
+  font-size: clamp(16px, 2.2vw, 20px); color: var(--ink3);
+  line-height: 1.65; max-width: 540px; margin: 0 auto 2.75rem;
+  animation: fadeUp .5s .14s ease both; font-weight: 400;
+}
+
+/* CTA buttons */
+.hero-ctas {
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  animation: fadeUp .5s .2s ease both; margin-bottom: 2rem;
+}
+.hero-btn-primary {
+  display: inline-flex; align-items: center; gap: 9px;
+  background: var(--brand); color: #fff;
+  padding: 14px 30px; border-radius: var(--rl);
+  font-size: 15px; font-weight: 700; border: none; cursor: pointer;
+  transition: var(--t); text-decoration: none;
+  box-shadow: 0 2px 12px rgba(37,99,235,.3);
+}
+.hero-btn-primary:hover { background: var(--brand-dark); transform: translateY(-2px); box-shadow: var(--shadow-brand); }
+.hero-btn-secondary {
+  display: inline-flex; align-items: center; gap: 9px;
+  background: var(--bg); color: var(--ink2);
+  padding: 14px 28px; border-radius: var(--rl);
+  font-size: 15px; font-weight: 600;
+  border: 1.5px solid var(--border); cursor: pointer;
+  transition: var(--t); text-decoration: none;
+  box-shadow: var(--shadow-sm);
+}
+.hero-btn-secondary:hover { background: var(--bg2); border-color: var(--border2); transform: translateY(-1px); }
+
+/* Trust badges row */
+.hero-trust {
+  display: flex; gap: 1.75rem; justify-content: center; flex-wrap: wrap;
+  animation: fadeUp .5s .28s ease both;
+}
+.trust-item {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 13px; color: var(--ink4); font-weight: 500;
+}
+.trust-item svg { color: var(--green); flex-shrink: 0; }
+
+/* Upload drop area in hero */
+.hero-drop {
+  max-width: 500px; margin: 0 auto 2rem;
+  animation: fadeUp .5s .18s ease both;
+}
+.hero-drop-box {
+  border: 2px dashed var(--border2); border-radius: var(--r2xl);
+  padding: 2rem 1.75rem; cursor: pointer; transition: var(--t-md);
+  background: rgba(255,255,255,.7); backdrop-filter: blur(10px);
+  position: relative;
+}
+[data-theme="dark"] .hero-drop-box { background: rgba(17,17,19,.7); }
+.hero-drop-box:hover, .hero-drop-box.drag-over {
+  border-color: var(--brand); background: var(--brand-pale); transform: scale(1.01);
+}
+.hero-drop-box input { display: none; }
+.hero-drop-icon { font-size: 2rem; margin-bottom: .6rem; }
+.hero-drop-title { font-size: 14.5px; font-weight: 700; color: var(--ink); margin-bottom: .25rem; }
+.hero-drop-sub { font-size: 13px; color: var(--ink4); }
+
+/* ═══════════ HOW IT WORKS ═══════════ */
+.how-section { padding: 5rem 2rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.how-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; margin-top: 3rem; }
+.how-step { text-align: center; position: relative; }
+.how-step:not(:last-child)::after {
+  content: ''; position: absolute; top: 22px; right: -1rem;
+  width: 2rem; height: 2px;
+  background: linear-gradient(90deg, var(--border2), transparent);
+}
+.how-num {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--brand); color: #fff;
+  font-size: 15px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1rem; box-shadow: 0 4px 12px rgba(37,99,235,.3);
+  font-family: var(--font-display);
+}
+.how-title { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: .35rem; }
+.how-desc { font-size: 13.5px; color: var(--ink3); line-height: 1.65; }
+
+/* ═══════════ TOOLS SECTION ═══════════ */
+.tools-section { padding: 5.5rem 2rem; }
+.tools-section-inner { max-width: var(--max-w); margin: 0 auto; }
+
+/* ═══════════ FEATURES ═══════════ */
+.feat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border-radius: var(--r2xl); overflow: hidden; margin-top: 3rem; }
+.feat-item { background: var(--bg); padding: 2rem; transition: var(--t); }
+.feat-item:hover { background: var(--bg2); }
+.feat-icon { width: 44px; height: 44px; border-radius: var(--r); background: var(--brand-pale); border: 1px solid var(--brand-border); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 1rem; }
+.feat-title { font-size: 14.5px; font-weight: 700; color: var(--ink); margin-bottom: .35rem; }
+.feat-desc { font-size: 13.5px; color: var(--ink3); line-height: 1.65; }
+
+/* ═══════════ STATS ═══════════ */
+.stats-section { padding: 4rem 2rem; background: var(--brand); }
+.stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem; max-width: var(--max-w); margin: 0 auto; text-align: center; }
+.stat-num { font-family: var(--font-display); font-size: clamp(34px,4vw,54px); font-weight: 800; color: #fff; line-height: 1; letter-spacing: -1px; }
+.stat-lbl { font-size: 13.5px; color: rgba(255,255,255,.65); margin-top: .35rem; font-weight: 500; }
+
+/* ═══════════ ASK PDF ═══════════ */
+.ask-section { padding: 5rem 2rem; background: var(--bg2); border-top: 1px solid var(--border); }
+.ask-inner { max-width: 800px; margin: 0 auto; }
+.ask-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--r2xl); overflow: hidden; box-shadow: var(--shadow-md); }
+.ask-card-hdr {
+  background: linear-gradient(120deg, var(--brand) 0%, #4F46E5 100%);
+  padding: 1.75rem; display: flex; align-items: center; gap: 1rem;
+}
+.ask-card-hdr-icon { width: 50px; height: 50px; background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25); border-radius: var(--rl); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+.ask-card-hdr h3 { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: #fff; margin-bottom: .2rem; }
+.ask-card-hdr p { font-size: 13.5px; color: rgba(255,255,255,.7); }
+.ask-card-body { padding: 1.5rem; }
+.ask-upload-row { display: grid; grid-template-columns: 1fr auto; gap: .75rem; align-items: stretch; margin-bottom: 1rem; }
+.ask-file-label { display: flex; align-items: center; gap: 9px; padding: 11px 14px; background: var(--bg2); border: 1.5px dashed var(--border2); border-radius: var(--r); cursor: pointer; font-size: 13.5px; color: var(--ink3); font-weight: 500; transition: var(--t); }
+.ask-file-label:hover { border-color: var(--brand); color: var(--brand); background: var(--brand-pale); }
+.ask-file-label.has-file { border-color: var(--green); color: var(--green-dark); background: var(--green-bg); border-style: solid; }
+.ask-file-btn { background: var(--brand); color: #fff; border: none; padding: 11px 20px; border-radius: var(--r); font-size: 13.5px; font-weight: 700; cursor: pointer; font-family: var(--font); transition: var(--t); white-space: nowrap; }
+.ask-file-btn:hover { background: var(--brand-dark); }
+.ask-chat { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--rl); min-height: 180px; max-height: 280px; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: .75rem; margin-bottom: .85rem; }
+.ask-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 150px; gap: .5rem; }
+.ask-empty p { font-size: 13px; color: var(--ink4); text-align: center; line-height: 1.6; }
+.ask-msg { padding: .75rem 1rem; border-radius: var(--r); font-size: 13.5px; line-height: 1.7; max-width: 88%; }
+.ask-msg.user { background: var(--brand); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+.ask-msg.bot { background: var(--bg); color: var(--ink2); border: 1px solid var(--border); align-self: flex-start; border-bottom-left-radius: 4px; }
+.ask-msg.thinking { color: var(--ink4); font-style: italic; }
+.ask-input-row { display: flex; gap: 8px; }
+.ask-q { flex: 1; padding: 12px 15px; border: 1.5px solid var(--border); border-radius: var(--rl); font-size: 14px; color: var(--ink); background: var(--bg); outline: none; font-family: var(--font); transition: var(--t); }
+.ask-q:focus { border-color: var(--brand); box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
+.ask-q:disabled { opacity: .5; }
+.ask-send { background: var(--brand); color: #fff; border: none; padding: 12px 20px; border-radius: var(--rl); font-size: 13.5px; font-weight: 700; cursor: pointer; font-family: var(--font); transition: var(--t); display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.ask-send:hover:not(:disabled) { background: var(--brand-dark); transform: translateY(-1px); }
+.ask-send:disabled { opacity: .5; cursor: not-allowed; }
+.ask-hints { display: flex; gap: 7px; flex-wrap: wrap; margin-top: .75rem; }
+.ask-hint { font-size: 12px; color: var(--ink3); background: var(--bg2); border: 1px solid var(--border); padding: 5px 12px; border-radius: 100px; cursor: pointer; transition: var(--t); font-weight: 500; }
+.ask-hint:hover { border-color: var(--brand); color: var(--brand); background: var(--brand-pale); }
+.ask-footer { display: flex; align-items: center; justify-content: space-between; margin-top: .9rem; padding-top: .9rem; border-top: 1px solid var(--border); flex-wrap: wrap; gap: .5rem; }
+.ask-footer-note { font-size: 11.5px; color: var(--ink4); display: flex; align-items: center; gap: 5px; }
+.ask-more-link { font-size: 12px; color: var(--brand); font-weight: 600; }
+.ask-more-link:hover { text-decoration: underline; }
+
+/* ═══════════ SECURITY ═══════════ */
+.security-section { padding: 5rem 2rem; background: var(--ink); position: relative; overflow: hidden; }
+[data-theme="dark"] .security-section { background: #050507; border-top: 1px solid var(--border); }
+.security-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 55% 60% at 50% 50%, rgba(37,99,235,.1) 0%, transparent 70%); pointer-events: none; }
+.sec-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem; position: relative; z-index: 1; }
+.sec-item { text-align: center; }
+.sec-icon { width: 54px; height: 54px; border-radius: var(--rxl); background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin: 0 auto .9rem; }
+.sec-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: .35rem; }
+.sec-desc { font-size: 13px; color: rgba(255,255,255,.42); line-height: 1.65; }
+
+/* ═══════════ TESTIMONIALS ═══════════ */
+.testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; margin-top: 2.5rem; }
+.testi-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--r2xl); padding: 1.5rem; transition: var(--t-md); }
+.testi-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.testi-stars { color: #F59E0B; font-size: 13px; letter-spacing: 1px; margin-bottom: .75rem; }
+.testi-text { font-size: 14px; color: var(--ink2); line-height: 1.75; margin-bottom: 1.1rem; font-style: italic; }
+.testi-author { display: flex; align-items: center; gap: 10px; }
+.testi-av { width: 36px; height: 36px; border-radius: 50%; background: var(--brand-pale); border: 1px solid var(--brand-border); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--brand); flex-shrink: 0; }
+.testi-name { font-size: 13px; font-weight: 700; color: var(--ink); }
+.testi-role { font-size: 12px; color: var(--ink4); }
+
+/* ═══════════ BLOG ═══════════ */
+.blog-section { padding: 5rem 2rem; background: var(--bg2); border-top: 1px solid var(--border); }
+
+/* ═══════════ PRICING ═══════════ */
+.pricing-section { padding: 5.5rem 2rem; border-top: 1px solid var(--border); }
+
+/* ═══════════ FAQ ═══════════ */
+.faq-section { padding: 5rem 2rem; background: var(--bg2); border-top: 1px solid var(--border); }
+
+/* ═══════════ CTA BOTTOM ═══════════ */
+.cta-section {
+  padding: 5rem 2rem; text-align: center; position: relative; overflow: hidden;
+  background: linear-gradient(135deg, var(--brand) 0%, #4F46E5 100%);
+}
+.cta-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 50% 80% at 80% 50%, rgba(255,255,255,.07) 0%, transparent 60%); }
+.cta-section > * { position: relative; z-index: 1; }
+.cta-section h2 { font-family: var(--font-display); font-size: clamp(28px,4.5vw,50px); font-weight: 700; color: #fff; margin-bottom: .75rem; letter-spacing: -.4px; }
+.cta-section p { color: rgba(255,255,255,.65); font-size: 17px; margin-bottom: 2.25rem; }
+.cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.cta-btn-white { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: var(--brand); padding: 14px 32px; border-radius: var(--rl); font-size: 15px; font-weight: 800; border: none; cursor: pointer; transition: var(--t); text-decoration: none; }
+.cta-btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,.2); }
+.cta-btn-outline { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.12); color: #fff; padding: 14px 30px; border-radius: var(--rl); font-size: 15px; font-weight: 700; border: 1.5px solid rgba(255,255,255,.25); cursor: pointer; transition: var(--t); text-decoration: none; }
+.cta-btn-outline:hover { background: rgba(255,255,255,.2); transform: translateY(-2px); }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+@media(max-width:900px){.how-steps{grid-template-columns:1fr}.how-step::after{display:none}.feat-grid{grid-template-columns:1fr 1fr}.testi-grid{grid-template-columns:1fr 1fr}.sec-grid{grid-template-columns:1fr 1fr;gap:1.5rem}.stats-grid{grid-template-columns:1fr 1fr;gap:1.5rem}}
+@media(max-width:580px){.feat-grid{grid-template-columns:1fr}.testi-grid{grid-template-columns:1fr}.hero-ctas{flex-direction:column;align-items:center}.ask-upload-row{grid-template-columns:1fr}.ask-file-btn{width:100%}}
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      20 free tools · No signup required
+    </div>
+    <h1>Fast &amp; Secure<br><em>PDF Tools</em></h1>
+    <p class="hero-sub">Merge, Compress, Convert and Edit PDFs Online for Free. No account, no watermarks — just fast, private processing.</p>
+
+    <!-- Drop Zone -->
+    <div class="hero-drop">
+      <div class="hero-drop-box" id="heroBox" onclick="document.getElementById('heroFile').click()" >
+        <input type="file" id="heroFile" accept=".pdf" onchange="heroSelect(this)">
+        <div class="hero-drop-icon">📄</div>
+        <div class="hero-drop-title">Drop your PDF here to get started</div>
+        <div class="hero-drop-sub">Max 25 MB · Deleted instantly after use</div>
+      </div>
+    </div>
+
+    <div class="hero-ctas">
+      <a href="#tools" class="hero-btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Explore Tools
+      </a>
+      <a href="compress-pdf.html" class="hero-btn-secondary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="10" y1="14" x2="21" y2="3"/><line x1="3" y1="21" x2="14" y2="10"/></svg>
+        Compress PDF
+      </a>
+    </div>
+
+    <div class="hero-trust">
+      <div class="trust-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Secure Processing</div>
+      <div class="trust-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>No Signup Required</div>
+      <div class="trust-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Fast Conversion</div>
+      <div class="trust-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Files Auto-Deleted</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ HOW IT WORKS ═══════════ -->
+<section class="how-section">
+  <div class="container-sm text-center">
+    <span class="section-label">How it works</span>
+    <h2 class="section-title">Three steps. Done.</h2>
+    <p class="section-sub">No learning curve. Just pick your tool, upload your file, and download the result.</p>
+  </div>
+  <div class="container" style="margin-top:0">
+    <div class="how-steps reveal">
+      <div class="how-step">
+        <div class="how-num">1</div>
+        <div class="how-title">Choose a Tool</div>
+        <div class="how-desc">Pick from 20 free PDF tools — merge, compress, convert, protect and more.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">2</div>
+        <div class="how-title">Upload Your File</div>
+        <div class="how-desc">Drag & drop your PDF or click to browse. Files are encrypted during upload.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">3</div>
+        <div class="how-title">Download Result</div>
+        <div class="how-desc">Processing takes seconds. Download your file — it's deleted from our servers immediately.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ TOOLS ═══════════ -->
+<section class="tools-section" id="tools">
+  <div class="tools-section-inner">
+    <div class="text-center reveal">
+      <span class="section-label">All Tools</span>
+      <h2 class="section-title">Everything your PDFs need</h2>
+      <p class="section-sub">20 tools covering every PDF task — organize, convert, secure, and process.</p>
+    </div>
+    <div style="margin-top:2rem" class="reveal">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="filterTools('all',this)">All (20)</button>
+        <button class="tab-btn" onclick="filterTools('smart',this)">✨ Smart (6)</button>
+        <button class="tab-btn" onclick="filterTools('organize',this)">📂 Organize</button>
+        <button class="tab-btn" onclick="filterTools('convert',this)">🔄 Convert</button>
+        <button class="tab-btn" onclick="filterTools('security',this)">🔒 Security</button>
+      </div>
+    </div>
+    <div class="tools-grid reveal" id="toolsGrid">
+      <!-- Smart -->
+      <a href="ai-tools.html#summary" class="tool-card-link" data-cat="smart"><div class="tcl-top"><div class="tcl-icon">📋</div><span class="tcl-badge smart">Smart</span></div><div class="tcl-body"><div class="tcl-title">PDF Summary</div><div class="tcl-desc">Get a concise summary of any PDF instantly</div></div><div class="tcl-footer"><span class="tcl-open">Open →</span></div></a>
+      <a href="ai-tools.html#notes" class="tool-card-link" data-cat="smart"><div class="tcl-top"><div class="tcl-icon">📝</div><span class="tcl-badge smart">Smart</span></div><div class="tcl-body"><div class="tcl-title">Notes Generator</div><div class="tcl-desc">Structured study notes from your PDF</div></div><div class="tcl-footer"><span class="tcl-open">Open →</span></div></a>
+      <a href="ai-tools.html#quiz" class="tool-card-link" data-cat="smart"><div class="tcl-top"><div class="tcl-icon">❓</div><span class="tcl-badge smart">Smart</span></div><div class="tcl-body"><div class="tcl-title">Quiz Generator</div><div class="tcl-desc">Auto-generate MCQ quizzes from PDF content</div></div><div class="tcl-footer"><span class="tcl-open">Open →</span></div></a>
+      <a href="ai-tools.html#keypoints" class="tool-card-link" data-cat="smart"><div class="tcl-top"><div class="tcl-icon">💡</div><span class="tcl-badge smart">Smart</span></div><div class="tcl-body"><div class="tcl-title">Key Points</div><div class="tcl-desc">Extract the most important insights instantly</div></div><div class="tcl-footer"><span class="tcl-open">Open →</span></div></a>
+      <a href="ai-tools.html#translate" class="tool-card-link" data-cat="smart"><div class="tcl-top"><div class="tcl-icon">🌍</div><span class="tcl-badge smart">Smart</span></div><div class="tcl-body"><div class="tcl-title">Translate PDF</div><div class="tcl-desc">Translate between English, Urdu & more</div></div><div class="tcl-footer"><span class="tcl-open">Open →</span></div></a>
+      <a href="ai-tools.html#ask" class="tool-card-link" data-cat="smart"><div class="tcl-top"><div class="tcl-icon">💬</div><span class="tcl-badge smart">Smart</span></div><div class="tcl-body"><div class="tcl-title">Ask PDF</div><div class="tcl-desc">Chat with your document — ask anything</div></div><div class="tcl-footer"><span class="tcl-open">Open →</span></div></a>
+      <!-- Organize -->
+      <a href="merge-pdf.html" class="tool-card-link" data-cat="organize"><div class="tcl-top"><div class="tcl-icon">📎</div><span class="tcl-badge">Free</span></div><div class="tcl-body"><div class="tcl-title">Merge PDF</div><div class="tcl-desc">Combine multiple PDFs into one file</div></div><div class="tcl-footer"><span class="tcl-open">Open →</span></div></a>
+      <a href="split-pdf.html" class="tool-card-link" data-cat="organize"><div class="tcl-top"><div class="tcl-icon">✂️</div><span class="tcl-badge">Free</span></div><div class="tcl-body"><div class="tcl-title">Split PDF</div><div class="tcl-desc">Extract pages or split into separate files</div></div><div class="tcl-footer"><span class="tcl-open">Open →</span></div></a>
+      <a href="compress-pdf.html" class="tool-card-link" data-cat="organize"><div class="tcl-top"><div class="tcl-icon">🗜️</div><span class="tcl-badge">Free</span></div><div class="tcl-body"><div class="tcl-title">Compress PDF</div><div class="tcl-desc">Reduce file size without losing quality</div></div><div class="tcl-footer"><span class="tcl-open">Open →</span></div></a>
+      <a href="rotate-pdf.html" class="tool-card-link" data-cat="organize"><div class="tcl-top"><div class="tcl-icon">🔄</div><span class="tcl-badge">Free</span></div><div class="tcl-body"><div class="tcl-title">Rotate PDF</div><div class="tcl-desc">Rotate pages 90, 180 or 270 degrees</div></div><div class="tcl-footer"><span class="tcl-open">Open →</span></div></a>
+      <a href="add-page-numbers.html" class="tool-card-link" data-cat="organize"><div class="tcl-top"><div class="tcl-icon">🔢</div><span class="tcl-badge">Free</span></div><div class="tcl-body"><div class="tcl-title">Add Page Numbers</div><div class="tcl-desc">Auto-number pages with custom style</div></div><div class="tcl-footer"><span class="tcl-open">Open →</span></div></a>
+      <!-- Convert -->
+      <a href="pdf-to-word.html" class="tool-card-link" data-cat="convert"><div class="tcl-top"><div class="tcl-icon">📝</div><span class="tcl-badge">Free</span></div><div class="tcl-body"><div class="tcl-title">PDF to Word</div><div class="tcl-desc">Convert PDF to editable .docx file</div></div><div class="tcl-footer"><span class="tcl-open">Open →</span></div></a>
+      <a href="pdf-to-excel.html" class="tool-card-link" data-cat="convert"><div class="tcl-top"><div class="tcl-icon">📊</div><span class="tcl-badge">Free</span></div><div class="tcl-body"><div class="tcl-title">PDF to Excel</div><div class="tcl-desc">Smart table extraction to .xlsx</div></div><div class="tcl-footer"><span class="tcl-open">Open →</span></div></a>
+      <a href="pdf-to-jpg.html" class="tool-card-link" data-cat="convert"><div class="tcl-top"><div class="tcl-icon">🖼️</div><span class="tcl-badge">Free</span></div><div class="tcl-body"><div class="tcl-title">PDF to JPG</div><div class="tcl-desc">Convert pages to high-quality images</div></div><div class="tcl-footer"><span class="tcl-open">Open →</span></div></a>
+      <a href="jpg-to-pdf.html" class="tool-card-link" data-cat="convert"><div class="tcl-top"><div class="tcl-icon">📥</div><span class="tcl-badge">Free</span></div><div class="tcl-body"><div class="tcl-title">Image to PDF</div><div class="tcl-desc">Convert JPG, PNG to PDF easily</div></div><div class="tcl-footer"><span class="tcl-open">Open →</span></div></a>
+      <a href="pdf-to-pptx.html" class="tool-card-link" data-cat="convert"><div class="tcl-top"><div class="tcl-icon">📽️</div><span class="tcl-badge new">New</span></div><div class="tcl-body"><div class="tcl-title">PDF to PowerPoint</div><div class="tcl-desc">Convert PDF pages to .pptx slides</div></div><div class="tcl-footer"><span class="tcl-open">Open →</span></div></a>
+      <a href="pdf-to-text.html" class="tool-card-link" data-cat="convert"><div class="tcl-top"><div class="tcl-icon">📄</div><span class="tcl-badge">Free</span></div><div class="tcl-body"><div class="tcl-title">PDF to Text</div><div class="tcl-desc">Extract raw plain text from any PDF</div></div><div class="tcl-footer"><span class="tcl-open">Open →</span></div></a>
+      <!-- Security -->
+      <a href="watermark-pdf.html" class="tool-card-link" data-cat="security"><div class="tcl-top"><div class="tcl-icon">🔏</div><span class="tcl-badge">Free</span></div><div class="tcl-body"><div class="tcl-title">Watermark PDF</div><div class="tcl-desc">Add custom text watermark to pages</div></div><div class="tcl-footer"><span class="tcl-open">Open →</span></div></a>
+      <a href="protect-pdf.html" class="tool-card-link" data-cat="security"><div class="tcl-top"><div class="tcl-icon">🔐</div><span class="tcl-badge">Free</span></div><div class="tcl-body"><div class="tcl-title">Protect PDF</div><div class="tcl-desc">Add AES-256 password encryption</div></div><div class="tcl-footer"><span class="tcl-open">Open →</span></div></a>
+      <a href="unlock-pdf.html" class="tool-card-link" data-cat="security"><div class="tcl-top"><div class="tcl-icon">🔓</div><span class="tcl-badge">Free</span></div><div class="tcl-body"><div class="tcl-title">Unlock PDF</div><div class="tcl-desc">Remove password protection from PDF</div></div><div class="tcl-footer"><span class="tcl-open">Open →</span></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ STATS ═══════════ -->
+<section class="stats-section">
+  <div class="stats-grid reveal">
+    <div><div class="stat-num">20+</div><div class="stat-lbl">Free PDF Tools</div></div>
+    <div><div class="stat-num">25 MB</div><div class="stat-lbl">Free File Limit</div></div>
+    <div><div class="stat-num">0</div><div class="stat-lbl">Signups Required</div></div>
+    <div><div class="stat-num">100%</div><div class="stat-lbl">Private &amp; Secure</div></div>
+  </div>
+</section>
+
+<!-- ═══════════ FEATURES ═══════════ -->
+<section class="section" style="background:var(--bg2);border-top:1px solid var(--border)">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="section-label">Why FallPDF</span>
+      <h2 class="section-title">Built for real work</h2>
+      <p class="section-sub">Every tool is optimized for speed, accuracy and simplicity. No bloat, no dark patterns.</p>
+    </div>
+    <div class="feat-grid reveal">
+      <div class="feat-item"><div class="feat-icon">⚡</div><div class="feat-title">Lightning Fast</div><div class="feat-desc">Most operations complete in under 5 seconds — even for large, multi-page PDFs.</div></div>
+      <div class="feat-item"><div class="feat-icon">🔒</div><div class="feat-title">Truly Private</div><div class="feat-desc">Files are encrypted during upload and permanently deleted immediately after processing.</div></div>
+      <div class="feat-item"><div class="feat-icon">📱</div><div class="feat-title">Mobile-Friendly</div><div class="feat-desc">Fully responsive. Works perfectly on phones and tablets — no app required.</div></div>
+      <div class="feat-item"><div class="feat-icon">🆓</div><div class="feat-title">100% Free</div><div class="feat-desc">All 20 tools are free with no watermarks, no hidden charges, no credit card.</div></div>
+      <div class="feat-item"><div class="feat-icon">📊</div><div class="feat-title">Smart Excel Export</div><div class="feat-desc">PDF to Excel groups related tables together — not a separate tab per page.</div></div>
+      <div class="feat-item"><div class="feat-icon">🌍</div><div class="feat-title">Multi-Language</div><div class="feat-desc">Translate PDFs between English, Urdu, Arabic and more languages.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ASK PDF ═══════════ -->
+<section class="ask-section" id="ask-pdf">
+  <div class="ask-inner">
+    <div class="text-center reveal" style="margin-bottom:2rem">
+      <span class="section-label">Smart Feature</span>
+      <h2 class="section-title">Ask anything about your PDF</h2>
+      <p class="section-sub">Upload any document and get instant answers directly from its content — no guessing.</p>
+    </div>
+    <div class="ask-card reveal">
+      <div class="ask-card-hdr">
+        <div class="ask-card-hdr-icon">💬</div>
+        <div>
+          <h3>Ask PDF</h3>
+          <p>Upload your PDF, then ask questions, request summaries, or find specific information.</p>
+        </div>
+      </div>
+      <div class="ask-card-body">
+        <div class="ask-upload-row">
+          <label class="ask-file-label" id="askLbl" for="askFile">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <span id="askLblTxt">Drop or click to upload PDF</span>
+            <input type="file" id="askFile" accept=".pdf" style="display:none" onchange="askFileSelect(this)">
+          </label>
+          <button class="ask-file-btn" onclick="document.getElementById('askFile').click()">Choose PDF</button>
+        </div>
+        <div class="ask-chat" id="askChat">
+          <div class="ask-empty" id="askEmpty">
+            <span style="font-size:1.85rem">💬</span>
+            <p>Upload a PDF above, then ask anything.<br><em>Try: "Summarize this" or "What are the key dates?"</em></p>
+          </div>
+        </div>
+        <div class="ask-input-row">
+          <input class="ask-q" id="askInput" type="text" placeholder="Ask a question about your PDF…" disabled onkeydown="if(event.key==='Enter')askSend()">
+          <button class="ask-send" id="askBtn" onclick="askSend()" disabled>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Ask
+          </button>
+        </div>
+        <div class="ask-hints">
+          <span class="ask-hint" onclick="askHint(this)">📋 Summarize this PDF</span>
+          <span class="ask-hint" onclick="askHint(this)">💡 What are the key points?</span>
+          <span class="ask-hint" onclick="askHint(this)">📅 List important dates</span>
+          <span class="ask-hint" onclick="askHint(this)">🔍 What is this document about?</span>
+        </div>
+        <div class="ask-footer">
+          <div class="ask-footer-note">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            File deleted after session. Never stored.
+          </div>
+          <a href="ai-tools.html" class="ask-more-link">More smart tools →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SECURITY ═══════════ -->
+<section class="security-section">
+  <div class="container text-center" style="position:relative;z-index:1">
+    <h2 style="font-family:var(--font-display);font-size:clamp(26px,3.5vw,40px);font-weight:700;color:#fff;letter-spacing:-.4px;margin-bottom:.6rem">Security you can count on</h2>
+    <p style="color:rgba(255,255,255,.45);font-size:16px;max-width:500px;margin:0 auto">Your documents are processed with enterprise-grade security at every step.</p>
+  </div>
+  <div class="sec-grid container reveal" style="margin-top:2.5rem">
+    <div class="sec-item"><div class="sec-icon">🔐</div><div class="sec-title">256-bit Encryption</div><div class="sec-desc">All transfers use TLS — the same standard as online banking.</div></div>
+    <div class="sec-item"><div class="sec-icon">🗑️</div><div class="sec-title">Instant Delete</div><div class="sec-desc">Files are permanently removed from servers right after download.</div></div>
+    <div class="sec-item"><div class="sec-icon">🚫</div><div class="sec-title">Zero Storage</div><div class="sec-desc">We never store, index or access the content of your documents.</div></div>
+    <div class="sec-item"><div class="sec-icon">🔎</div><div class="sec-title">No Tracking</div><div class="sec-desc">No ads, no data selling. Your privacy isn't our product.</div></div>
+  </div>
+</section>
+
+<!-- ═══════════ TESTIMONIALS ═══════════ -->
+<section class="section">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="section-label">Testimonials</span>
+      <h2 class="section-title">What people are saying</h2>
+    </div>
+    <div class="testi-grid reveal">
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"The PDF to Excel tool is amazing. It correctly groups multi-page tables into one sheet — no other free tool does this right."</p><div class="testi-author"><div class="testi-av">AM</div><div><div class="testi-name">Ahmed M.</div><div class="testi-role">Financial Analyst</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"The notes and summary tools saved me hours of study prep. I upload lecture PDFs and get structured notes in seconds."</p><div class="testi-author"><div class="testi-av">SR</div><div><div class="testi-name">Sara R.</div><div class="testi-role">University Student</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Replaced three different PDF tools with FallPDF. The UI is clean, everything is fast, and files are actually deleted."</p><div class="testi-author"><div class="testi-av">FK</div><div><div class="testi-name">Farhan K.</div><div class="testi-role">Business Owner</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ BLOG ═══════════ -->
+<section class="blog-section">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="section-label">Blog</span>
+      <h2 class="section-title">PDF tips &amp; guides</h2>
+      <p class="section-sub">Learn how to work smarter with your documents.</p>
+    </div>
+    <div class="blog-grid reveal">
+      <div class="blog-card">
+        <div class="blog-card-img" style="background:linear-gradient(135deg,#EFF6FF,#F5F3FF)">📦</div>
+        <div class="blog-card-body">
+          <div class="blog-cat">Guide</div>
+          <div class="blog-title">How to Compress a PDF Without Losing Quality</div>
+          <div class="blog-excerpt">Learn the best techniques to reduce PDF file size while keeping your images and text sharp.</div>
+          <div class="blog-meta"><span class="blog-date">Jan 2025</span><span class="blog-read">Read →</span></div>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-card-img" style="background:linear-gradient(135deg,#F0FDF4,#EFF6FF)">📝</div>
+        <div class="blog-card-body">
+          <div class="blog-cat">Tutorial</div>
+          <div class="blog-title">Convert PDF to Word — Best Free Methods</div>
+          <div class="blog-excerpt">A step-by-step guide to converting PDF files to editable Word documents with formatting preserved.</div>
+          <div class="blog-meta"><span class="blog-date">Feb 2025</span><span class="blog-read">Read →</span></div>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-card-img" style="background:linear-gradient(135deg,#FFFBEB,#FFF7F5)">🛠️</div>
+        <div class="blog-card-body">
+          <div class="blog-cat">Roundup</div>
+          <div class="blog-title">Best Free PDF Tools Online in 2025</div>
+          <div class="blog-excerpt">We compared the top free PDF platforms on speed, features and privacy. Here's our verdict.</div>
+          <div class="blog-meta"><span class="blog-date">Mar 2025</span><span class="blog-read">Read →</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PRICING ═══════════ -->
+<section class="pricing-section" id="pricing">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="section-label">Pricing</span>
+      <h2 class="section-title">Simple, honest pricing</h2>
+      <p class="section-sub">Start free — no credit card. Upgrade when you need more.</p>
+    </div>
+    <div class="pricing-grid reveal">
+      <div class="pricing-card">
+        <div class="pricing-badge">Free</div>
+        <div class="pricing-name">Starter</div>
+        <div class="pricing-price">$0<span>/month</span></div>
+        <div class="pricing-desc">All tools, no limits, no signup. Perfect for everyday PDF tasks.</div>
+        <ul class="pricing-features">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>All 20 PDF tools</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Up to 25 MB per file</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Smart Tools included</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Files auto-deleted</li>
+          <li class="disabled"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Batch processing</li>
+        </ul>
+        <a href="#tools" class="btn btn-secondary btn-full" style="justify-content:center">Start Free</a>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Pro</div>
+        <div class="pricing-name">Professional</div>
+        <div class="pricing-price">$9<span>/month</span></div>
+        <div class="pricing-desc">For power users who process PDFs regularly and need larger files.</div>
+        <ul class="pricing-features">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Everything in Starter</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Up to 100 MB per file</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Batch processing (10 files)</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Priority processing</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Email support</li>
+        </ul>
+        <a href="contact.html" class="btn btn-primary btn-full" style="justify-content:center">Get Pro</a>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-badge">Business</div>
+        <div class="pricing-name">Enterprise</div>
+        <div class="pricing-price">$29<span>/month</span></div>
+        <div class="pricing-desc">For teams needing high-volume PDF processing and API access.</div>
+        <ul class="pricing-features">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Everything in Pro</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Unlimited file size</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Unlimited batch processing</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>REST API access</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Priority support + SLA</li>
+        </ul>
+        <a href="contact.html" class="btn btn-secondary btn-full" style="justify-content:center">Contact Sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FAQ ═══════════ -->
+<section class="faq-section" id="faq">
+  <div class="container-sm">
+    <div class="text-center reveal">
+      <span class="section-label">FAQ</span>
+      <h2 class="section-title">Frequently asked questions</h2>
+    </div>
+    <div class="faq-list reveal" style="max-width:660px;margin:0 auto">
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is FallPDF really free?<svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Yes — completely free. All 20 tools work with no signup, no credit card and no watermarks on output files. Optional Pro and Enterprise plans are available for power users.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Are my files safe and private?<svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Absolutely. Files are encrypted during upload and permanently deleted right after you download. We never store, read or share your documents.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How does the smart PDF to Excel work?<svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Our tool detects tables across all pages and groups them by headers. Same headers = one sheet. Different table structure = new sheet. Multi-page tables are automatically combined — no separate tab per page.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is the file size limit?<svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Free plan: up to 25 MB. Pro plan: up to 100 MB. Enterprise: unlimited. For large files on free plan, try Compress PDF first.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Does it work on mobile?<svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Yes! FallPDF is fully responsive and works great on smartphones and tablets. No app download needed.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How accurate is PDF to Word conversion?<svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Excellent for text-based PDFs — headings, paragraphs and basic layout are preserved. Scanned PDFs produce plain text. For best results, use native digital PDFs.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="cta-section">
+  <h2>Start processing your PDFs today</h2>
+  <p>20 tools, completely free. No signup, no ads, no watermarks.</p>
+  <div class="cta-btns">
+    <a href="#tools" class="cta-btn-white">Browse All Tools</a>
+    <a href="ai-tools.html" class="cta-btn-outline">✨ Try Smart Tools</a>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+<script>
+/* Hero drop zone */
+const heroBox = document.getElementById("heroBox");
+if(heroBox){
+  heroBox.addEventListener("dragover", e=>{ e.preventDefault(); heroBox.classList.add("drag-over"); });
+  heroBox.addEventListener("dragleave", ()=>heroBox.classList.remove("drag-over"));
+  heroBox.addEventListener("drop", e=>{
+    e.preventDefault(); heroBox.classList.remove("drag-over");
+    const f = e.dataTransfer.files[0]; if(f) processHeroFile(f);
+  });
+}
+function heroSelect(inp){ const f = inp.files[0]; if(f) processHeroFile(f); }
+function processHeroFile(f){
+  if(f.type !== "application/pdf"){ toast("Please select a PDF file","error"); return; }
+  toast("PDF ready! Choose a tool below ↓","info");
+  setTimeout(()=>document.getElementById("tools").scrollIntoView({behavior:"smooth"}), 400);
+}
+
+/* Tool filter */
+function filterTools(cat, btn){
+  document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  document.querySelectorAll(".tool-card-link").forEach(c=>{
+    c.style.display = (cat==="all" || c.dataset.cat===cat) ? "" : "none";
+  });
+}
+
+/* FAQ */
+function toggleFaq(btn){
+  const item = btn.closest(".faq-item");
+  const wasOpen = item.classList.contains("open");
+  document.querySelectorAll(".faq-item.open").forEach(i=>i.classList.remove("open"));
+  if(!wasOpen) item.classList.add("open");
+}
+
+/* Ask PDF */
+let _askFile = null, _askHistory = [];
+function askFileSelect(inp){
+  const f = inp.files[0]; if(!f) return;
+  if(f.type !== "application/pdf"){ toast("Please select a PDF","error"); return; }
+  if(f.size > 25*1024*1024){ toast("Max 25 MB","error"); return; }
+  _askFile = f;
+  document.getElementById("askLbl").classList.add("has-file");
+  document.getElementById("askLblTxt").textContent = "✓ " + (f.name.length>34 ? f.name.substring(0,34)+"…" : f.name);
+  document.getElementById("askInput").disabled = false;
+  document.getElementById("askBtn").disabled = false;
+  document.getElementById("askEmpty").style.display = "none";
+  toast("PDF loaded! Ask your question below ↓","success");
+  document.getElementById("askInput").focus();
+}
+function askHint(el){
+  document.getElementById("askInput").value = el.textContent.replace(/^.\s/,"");
+  if(!_askFile){ toast("Upload a PDF first","error"); return; }
+  askSend();
+}
+async function askSend(){
+  if(!_askFile){ toast("Upload a PDF first","error"); return; }
+  const q = document.getElementById("askInput").value.trim();
+  if(!q){ toast("Type a question first","error"); return; }
+  const chat = document.getElementById("askChat");
+  const btn  = document.getElementById("askBtn");
+  const inp  = document.getElementById("askInput");
+  const API  = (window.CATCHPDF_CONFIG||{}).API_BASE||"";
+  chat.innerHTML += `<div class="ask-msg user">${_esc2(q)}</div>`;
+  chat.innerHTML += `<div class="ask-msg bot thinking" id="askThinking">⏳ Searching document…</div>`;
+  chat.scrollTop = 9999;
+  inp.value = ""; inp.disabled = true; btn.disabled = true;
+  btn.innerHTML = `<span class="spinner"></span>`;
+  const fd = new FormData();
+  fd.append("file",_askFile); fd.append("question",q); fd.append("history",JSON.stringify(_askHistory.slice(-4)));
+  try {
+    const r = await fetch(`${API}/ask-pdf`,{method:"POST",body:fd});
+    document.getElementById("askThinking")?.remove();
+    if(!r.ok){ const j=await r.json().catch(()=>({})); throw new Error(j.detail||"Processing failed. Check backend connection."); }
+    const d = await r.json();
+    const ans = d.result||d.answer||"No answer found.";
+    _askHistory.push({q,a:ans});
+    chat.innerHTML += `<div class="ask-msg bot">${_esc2(ans)}</div>`;
+  } catch(e){
+    document.getElementById("askThinking")?.remove();
+    chat.innerHTML += `<div class="ask-msg bot" style="color:var(--red)">❌ ${_esc2(e.message)}</div>`;
+  } finally {
+    chat.scrollTop = 9999;
+    inp.disabled=false; btn.disabled=false;
+    btn.innerHTML=`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Ask`;
+    inp.focus();
+  }
+}
+function _esc2(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+</script>
+</body>
+</html>
