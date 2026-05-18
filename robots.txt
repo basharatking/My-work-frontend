@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fallpdf.netlify.app/sitemap.xml
+
+# Block internal/admin paths if they exist
+Disallow: /api/
+Disallow: /_netlify/
