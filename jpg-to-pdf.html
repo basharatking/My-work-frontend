@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Image to PDF — PDFPilot</title>
+<meta name="description" content="Convert JPG, PNG and other images into a PDF document. No signup. Files deleted instantly.">
+<meta name="robots" content="index,follow"><meta name="author" content="PDFPilot"><meta name="theme-color" content="#2A5BFF">
+<link rel="canonical" href="https://pdfpilot.netlify.app/jpg2pdf.html">
+<meta property="og:title" content="Image to PDF — PDFPilot"><meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"PDFPilot Image to PDF","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@1,9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<script src="config.js"></script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-container">
+    <div class="tool-header">
+      <div class="tool-icon-wrap">📥</div>
+      <h1 class="tool-title">Image to PDF</h1>
+      <p class="tool-sub">Convert JPG, PNG and other image files into a single PDF document.</p>
+    </div>
+    <div class="tool-card">
+      <div class="upload-zone" onclick="document.getElementById('fi-jpg2pdf').click()">
+        <div class="uz-icon">📥</div>
+        <div class="uz-title">Drop your file here or click to browse</div>
+        <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
+        <div class="uz-badge">🔒 Files deleted after processing</div>
+        <input class="file-input" id="fi-jpg2pdf" type="file" accept="image/*" multiple onchange="handleFiles('jpg2pdf',this)">
+      </div>
+      <div class="file-chips" id="fl-jpg2pdf"></div>
+      <div class="pdf-preview-area" id="preview-jpg2pdf"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
+      <div id="ocr-hint-jpg2pdf"></div>
+      
+      <button class="action-btn" id="btn-jpg2pdf" onclick="run_jpg2pdf()">📥 Convert to PDF</button>
+      <div class="progress-wrap" id="pw-jpg2pdf"><div class="progress-track"><div class="progress-fill" id="pb-jpg2pdf"></div></div><div class="progress-label" id="pl-jpg2pdf">Processing…</div></div>
+      <div class="result-box" id="rb-jpg2pdf"><p id="rb-jpg2pdf-msg"></p></div>
+    </div>
+<script>
+async function run_jpg2pdf(){
+  const files=fileStore["jpg2pdf"]; if(!files?.length){toast("Please select a file first","error");return;}
+  setBtnState("jpg2pdf",true);
+  const fd=new FormData();
+  files.forEach(f=>fd.append('files',f));
+  
+  try{
+    const resp=await callAPI("/jpg-to-pdf",fd,"jpg2pdf","Convert to PDF...");
+    const blob=await resp.blob();
+    showResult("jpg2pdf","Done! File ready to download.");
+    showDownloadBtn("jpg2pdf",blob,"images.pdf",{ });
+  }catch(e){showResult("jpg2pdf",e.message,true);}
+  finally{setBtnState("jpg2pdf",false,"Convert to PDF");}
+}</script>
+
+    <div class="tool-footer-links">
+      <p>More free PDF tools:</p>
+      <div class="tfl-grid">
+        <a href="merge-pdf.html" class="tfl-link">📎 Merge PDF</a>
+        <a href="compress-pdf.html" class="tfl-link">🗜️ Compress</a>
+        <a href="pdf-to-word.html" class="tfl-link">📝 PDF to Word</a>
+        <a href="pdf-to-excel.html" class="tfl-link">📊 PDF to Excel</a>
+        <a href="pdf-to-jpg.html" class="tfl-link">🖼️ PDF to JPG</a>
+        <a href="protect-pdf.html" class="tfl-link">🔐 Lock PDF</a>
+        <a href="ai-tools.html" class="tfl-link">✨ AI Tools</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+</body>
+</html>

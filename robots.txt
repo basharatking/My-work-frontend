@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /_netlify/
+Sitemap: https://pdfpilot.netlify.app/sitemap.xml
