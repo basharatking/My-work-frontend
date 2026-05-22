@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Compress PDF — RunDocs</title>
+<meta name="description" content="Reduce PDF file size while maintaining quality. Up to 90% reduction. No signup.">
+<meta name="robots" content="index,follow"><meta name="author" content="RunDocs"><meta name="theme-color" content="#2563EB">
+<link rel="canonical" href="https://rundocs.netlify.app/compress.html">
+<meta property="og:title" content="Compress PDF — RunDocs"><meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"RunDocs Compress PDF","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<script src="config.js"></script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-container">
+    <div class="tool-header">
+      <div class="tool-icon-wrap">🗜️</div>
+      <h1 class="tool-title">Compress PDF</h1>
+      <p class="tool-sub">Reduce PDF file size by up to 90% while preserving quality.</p>
+    </div>
+    <div class="tool-card">
+      <div class="upload-zone" onclick="document.getElementById('fi-compress').click()">
+        <div class="uz-icon">🗜️</div>
+        <div class="uz-title">Drop your file here or click to browse</div>
+        <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
+        <div class="uz-badge">🔒 Files deleted after processing</div>
+        <input class="file-input" id="fi-compress" type="file" accept=".pdf" onchange="handleFiles('compress',this)">
+      </div>
+      <div class="file-chips" id="fl-compress"></div>
+      <div class="pdf-preview-area" id="preview-compress"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
+      <div id="ocr-hint-compress"></div>
+      <label class="f-label">Compression Level</label>
+<select class="f-select" id="compress-level">
+  <option value="low">Low — Best quality, smaller reduction</option>
+  <option value="medium" selected>Medium — Balanced quality &amp; size</option>
+  <option value="high">High — Smallest file, reduced quality</option>
+</select>
+      <button class="action-btn" id="btn-compress" onclick="run_compress()">🗜️ Compress PDF</button>
+      <div class="progress-wrap" id="pw-compress"><div class="progress-track"><div class="progress-fill" id="pb-compress"></div></div><div class="progress-label" id="pl-compress">Processing…</div></div>
+      <div class="result-box" id="rb-compress"><p id="rb-compress-msg"></p></div>
+    </div>
+<script>
+async function run_compress(){
+  const files=fileStore["compress"]; if(!files?.length){toast("Please select a file first","error");return;}
+  setBtnState("compress",true);
+  const fd=new FormData();
+  fd.append("file",files[0]);
+  fd.append("level",document.getElementById("compress-level").value);
+  try{
+    const resp=await callAPI("/compress-pdf",fd,"compress","Compress PDF...");
+    const blob=await resp.blob();
+    showResult("compress","Done! File ready to download.");
+    showDownloadBtn("compress",blob,`compressed_${files[0].name}`);
+  }catch(e){showResult("compress",e.message,true);}
+  finally{setBtnState("compress",false,"Compress PDF");}
+}</script>
+
+<section style="padding:2.5rem 0;border-top:1px solid var(--border);margin-top:2rem">
+  <h2 style="font-size:18px;font-weight:700;color:var(--ink);margin-bottom:1.25rem">Frequently asked questions</h2>
+  <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How much can you compress a PDF?
+          <svg class="faq-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a">Typically 20–70% reduction. PDFs with many images compress much more than text-only documents.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Will compression affect quality?
+          <svg class="faq-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a">Low mode preserves near-original quality. Medium is balanced. High reduces image quality but creates the smallest files.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Is there a size limit?
+          <svg class="faq-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a">Free plan supports up to 25 MB.</div>
+      </div></div>
+</section>
+    <div class="tool-footer-links">
+      <p>More free tools:</p>
+      <div class="tfl-grid">
+        <a href="merge-pdf.html" class="tfl-link">📎 Merge</a>
+        <a href="compress-pdf.html" class="tfl-link">🗜️ Compress</a>
+        <a href="pdf-to-word.html" class="tfl-link">📝 PDF to Word</a>
+        <a href="pdf-to-excel.html" class="tfl-link">📊 PDF to Excel</a>
+        <a href="pdf-to-jpg.html" class="tfl-link">🖼️ PDF to JPG</a>
+        <a href="protect-pdf.html" class="tfl-link">🔐 Lock PDF</a>
+        <a href="ai-tools.html" class="tfl-link">✨ AI Tools</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+</body>
+</html>

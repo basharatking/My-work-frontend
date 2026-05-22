@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PDF to PowerPoint — RunDocs</title>
+<meta name="description" content="Convert PDF pages to editable PowerPoint slides. No signup.">
+<meta name="robots" content="index,follow"><meta name="author" content="RunDocs"><meta name="theme-color" content="#2563EB">
+<link rel="canonical" href="https://rundocs.netlify.app/pdfpptx.html">
+<meta property="og:title" content="PDF to PowerPoint — RunDocs"><meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"RunDocs PDF to PowerPoint","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<script src="config.js"></script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-container">
+    <div class="tool-header">
+      <div class="tool-icon-wrap">📽️</div>
+      <h1 class="tool-title">PDF to PowerPoint</h1>
+      <p class="tool-sub">Convert PDF pages to PowerPoint slides. Each page becomes a slide.</p>
+    </div>
+    <div class="tool-card">
+      <div class="upload-zone" onclick="document.getElementById('fi-pdfpptx').click()">
+        <div class="uz-icon">📽️</div>
+        <div class="uz-title">Drop your file here or click to browse</div>
+        <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
+        <div class="uz-badge">🔒 Files deleted after processing</div>
+        <input class="file-input" id="fi-pdfpptx" type="file" accept=".pdf" onchange="handleFiles('pdfpptx',this)">
+      </div>
+      <div class="file-chips" id="fl-pdfpptx"></div>
+      <div class="pdf-preview-area" id="preview-pdfpptx"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
+      <div id="ocr-hint-pdfpptx"></div>
+      
+      <button class="action-btn" id="btn-pdfpptx" onclick="run_pdfpptx()">📽️ Convert to PowerPoint</button>
+      <div class="progress-wrap" id="pw-pdfpptx"><div class="progress-track"><div class="progress-fill" id="pb-pdfpptx"></div></div><div class="progress-label" id="pl-pdfpptx">Processing…</div></div>
+      <div class="result-box" id="rb-pdfpptx"><p id="rb-pdfpptx-msg"></p></div>
+    </div>
+<script>
+async function run_pdfpptx(){
+  const files=fileStore["pdfpptx"]; if(!files?.length){toast("Please select a file first","error");return;}
+  setBtnState("pdfpptx",true);
+  const fd=new FormData();
+  fd.append("file",files[0]);
+  
+  try{
+    const resp=await callAPI("/pdf-to-pptx",fd,"pdfpptx","Convert to PowerPoint...");
+    const blob=await resp.blob();
+    showResult("pdfpptx","Done! File ready to download.");
+    showDownloadBtn("pdfpptx",blob,`${files[0].name.replace(/\.pdf$/i,"")}.pptx`);
+  }catch(e){showResult("pdfpptx",e.message,true);}
+  finally{setBtnState("pdfpptx",false,"Convert to PowerPoint");}
+}</script>
+
+    <div class="tool-footer-links">
+      <p>More free tools:</p>
+      <div class="tfl-grid">
+        <a href="merge-pdf.html" class="tfl-link">📎 Merge</a>
+        <a href="compress-pdf.html" class="tfl-link">🗜️ Compress</a>
+        <a href="pdf-to-word.html" class="tfl-link">📝 PDF to Word</a>
+        <a href="pdf-to-excel.html" class="tfl-link">📊 PDF to Excel</a>
+        <a href="pdf-to-jpg.html" class="tfl-link">🖼️ PDF to JPG</a>
+        <a href="protect-pdf.html" class="tfl-link">🔐 Lock PDF</a>
+        <a href="ai-tools.html" class="tfl-link">✨ AI Tools</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+</body>
+</html>
