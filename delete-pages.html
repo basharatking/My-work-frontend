@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Delete Pages — RunDocs</title>
+<meta name="description" content="Delete specific pages from your PDF. Free, no signup required.">
+<meta name="robots" content="index,follow"><meta name="author" content="RunDocs"><meta name="theme-color" content="#2563EB">
+<link rel="canonical" href="https://rundocs.netlify.app/delpages.html">
+<meta property="og:title" content="Delete Pages — RunDocs"><meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"RunDocs Delete Pages","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<script src="config.js"></script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-container">
+    <div class="tool-header">
+      <div class="tool-icon-wrap">🗑️</div>
+      <h1 class="tool-title">Delete Pages</h1>
+      <p class="tool-sub">Remove specific pages from your PDF. Enter page numbers to delete.</p>
+    </div>
+    <div class="tool-card">
+      <div class="upload-zone" onclick="document.getElementById('fi-delpages').click()">
+        <div class="uz-icon">🗑️</div>
+        <div class="uz-title">Drop your PDF here or click to browse</div>
+        <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
+        <div class="uz-badge">🔒 Files deleted after processing</div>
+        <input class="file-input" id="fi-delpages" type="file" accept=".pdf" onchange="handleFiles('delpages',this)">
+      </div>
+      <div class="file-chips" id="fl-delpages"></div>
+      <div class="pdf-preview-area" id="preview-delpages"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
+      <div id="ocr-hint-delpages"></div>
+      <label class="f-label">Pages to Delete (e.g. 1,3,5 or 2-4)</label>
+      <input class="f-input" id="delpages-pages" type="text" placeholder="e.g. 1,3,5 or 2-4">
+      <div class="notice notice-amber"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>This action cannot be undone. Make sure you have a backup.</span></div>
+      <button class="action-btn" id="btn-delpages" onclick="run_delpages()">🗑️ Delete Pages</button>
+      <div class="progress-wrap" id="pw-delpages"><div class="progress-track"><div class="progress-fill" id="pb-delpages"></div></div><div class="progress-label" id="pl-delpages">Processing…</div></div>
+      <div class="result-box" id="rb-delpages"><p id="rb-delpages-msg"></p></div>
+    </div>
+<script>
+async function run_delpages(){
+  const files=fileStore["delpages"]; if(!files?.length){toast("Please select a file first","error");return;}
+  const pages=document.getElementById("delpages-pages").value.trim();
+  if(!pages){toast("Please enter page numbers to delete","error");return;}
+  setBtnState("delpages",true);
+  const fd=new FormData();
+  fd.append("file",files[0]);
+  fd.append("pages",pages);
+  try{
+    const resp=await callAPI("/delete-pages",fd,"delpages","Deleting pages...");
+    const blob=await resp.blob();
+    showResult("delpages","Done! File ready to download.");
+    showDownloadBtn("delpages",blob,`edited_${files[0].name}`);
+  }catch(e){showResult("delpages",e.message,true);}
+  finally{setBtnState("delpages",false,"Delete Pages");}
+}
+</script>
+    <div class="tool-footer-links">
+      <p>More free tools:</p>
+      <div class="tfl-grid">
+        <a href="merge-pdf.html" class="tfl-link">📎 Merge</a>
+        <a href="compress-pdf.html" class="tfl-link">🗜️ Compress</a>
+        <a href="pdf-to-word.html" class="tfl-link">📝 PDF to Word</a>
+        <a href="pdf-to-excel.html" class="tfl-link">📊 PDF to Excel</a>
+        <a href="split-pdf.html" class="tfl-link">✂️ Split PDF</a>
+        <a href="protect-pdf.html" class="tfl-link">🔐 Lock PDF</a>
+        <a href="ai-tools.html" class="tfl-link">✨ AI Tools</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Excel to PDF — RunDocs</title>
+<meta name="description" content="Convert Excel .xlsx files to PDF instantly. Free, no signup required.">
+<meta name="robots" content="index,follow"><meta name="author" content="RunDocs"><meta name="theme-color" content="#2563EB">
+<link rel="canonical" href="https://rundocs.netlify.app/excel2pdf.html">
+<meta property="og:title" content="Excel to PDF — RunDocs"><meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"RunDocs Excel to PDF","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<script src="config.js"></script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-container">
+    <div class="tool-header">
+      <div class="tool-icon-wrap">📋</div>
+      <h1 class="tool-title">Excel to PDF</h1>
+      <p class="tool-sub">Convert your Excel .xlsx file to PDF instantly. Free and secure.</p>
+    </div>
+    <div class="tool-card">
+      <div class="upload-zone" onclick="document.getElementById('fi-excel2pdf').click()">
+        <div class="uz-icon">📋</div>
+        <div class="uz-title">Drop your Excel file here or click to browse</div>
+        <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
+        <div class="uz-badge">🔒 Files deleted after processing</div>
+        <input class="file-input" id="fi-excel2pdf" type="file" accept=".xls,.xlsx" onchange="handleFiles('excel2pdf',this)">
+      </div>
+      <div class="file-chips" id="fl-excel2pdf"></div>
+      <div class="pdf-preview-area" id="preview-excel2pdf"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
+      <div id="ocr-hint-excel2pdf"></div>
+      <button class="action-btn" id="btn-excel2pdf" onclick="run_excel2pdf()">📋 Convert to PDF</button>
+      <div class="progress-wrap" id="pw-excel2pdf"><div class="progress-track"><div class="progress-fill" id="pb-excel2pdf"></div></div><div class="progress-label" id="pl-excel2pdf">Processing…</div></div>
+      <div class="result-box" id="rb-excel2pdf"><p id="rb-excel2pdf-msg"></p></div>
+    </div>
+<script>
+async function run_excel2pdf(){
+  const files=fileStore["excel2pdf"]; if(!files?.length){toast("Please select a file first","error");return;}
+  setBtnState("excel2pdf",true);
+  const fd=new FormData();
+  fd.append("file",files[0]);
+  try{
+    const resp=await callAPI("/excel-to-pdf",fd,"excel2pdf","Converting to PDF...");
+    const blob=await resp.blob();
+    showResult("excel2pdf","Done! File ready to download.");
+    showDownloadBtn("excel2pdf",blob,`${files[0].name.replace(/\.(xls|xlsx)$/i,"")}.pdf`);
+  }catch(e){showResult("excel2pdf",e.message,true);}
+  finally{setBtnState("excel2pdf",false,"Convert to PDF");}
+}
+</script>
+    <div class="tool-footer-links">
+      <p>More free tools:</p>
+      <div class="tfl-grid">
+        <a href="merge-pdf.html" class="tfl-link">📎 Merge</a>
+        <a href="compress-pdf.html" class="tfl-link">🗜️ Compress</a>
+        <a href="pdf-to-word.html" class="tfl-link">📝 PDF to Word</a>
+        <a href="pdf-to-excel.html" class="tfl-link">📊 PDF to Excel</a>
+        <a href="pdf-to-jpg.html" class="tfl-link">🖼️ PDF to JPG</a>
+        <a href="protect-pdf.html" class="tfl-link">🔐 Lock PDF</a>
+        <a href="ai-tools.html" class="tfl-link">✨ AI Tools</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+</body>
+</html>
