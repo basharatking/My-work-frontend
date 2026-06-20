@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/%40tabler/icons-webfont/3.31.0/tabler-icons.min.css">
 <script src="config.js"></script>
 </head>
 <body>
@@ -18,13 +19,13 @@
 <div class="tool-page">
   <div class="tool-container">
     <div class="tool-header">
-      <div class="tool-icon-wrap">↕️</div>
+      <div class="tool-icon-wrap"></div>
       <h1 class="tool-title">Reorder Pages</h1>
       <p class="tool-sub">Rearrange the pages of your PDF in any order you want.</p>
     </div>
     <div class="tool-card">
       <div class="upload-zone" onclick="document.getElementById('fi-reorder').click()">
-        <div class="uz-icon">↕️</div>
+        <div class="uz-icon"></div>
         <div class="uz-title">Drop your PDF here or click to browse</div>
         <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
         <div class="uz-badge">🔒 Files deleted after processing</div>
@@ -36,7 +37,7 @@
       <label class="f-label">New Page Order (e.g. 3,1,2,4 for a 4-page PDF)</label>
       <input class="f-input" id="reorder-pages" type="text" placeholder="e.g. 3,1,2,4">
       <div class="notice notice-blue"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>Enter all page numbers in the desired order. Every page must be included.</span></div>
-      <button class="action-btn" id="btn-reorder" onclick="run_reorder()">↕️ Reorder Pages</button>
+      <button class="action-btn" id="btn-reorder" onclick="run_reorder()">Reorder Pages</button>
       <div class="progress-wrap" id="pw-reorder"><div class="progress-track"><div class="progress-fill" id="pb-reorder"></div></div><div class="progress-label" id="pl-reorder">Processing…</div></div>
       <div class="result-box" id="rb-reorder"><p id="rb-reorder-msg"></p></div>
     </div>

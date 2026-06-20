@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/%40tabler/icons-webfont/3.31.0/tabler-icons.min.css">
 <script src="config.js"></script>
 </head>
 <body>
@@ -18,13 +19,13 @@
 <div class="tool-page">
   <div class="tool-container">
     <div class="tool-header">
-      <div class="tool-icon-wrap">🔏</div>
+      <div class="tool-icon-wrap"></div>
       <h1 class="tool-title">Watermark PDF</h1>
       <p class="tool-sub">Add a custom text watermark to every page. Control opacity, position and style.</p>
     </div>
     <div class="tool-card">
       <div class="upload-zone" onclick="document.getElementById('fi-watermark').click()">
-        <div class="uz-icon">🔏</div>
+        <div class="uz-icon"></div>
         <div class="uz-title">Drop your file here or click to browse</div>
         <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
         <div class="uz-badge">🔒 Files deleted after processing</div>
@@ -48,7 +49,7 @@
   <option value="0.4">Medium (40%)</option>
   <option value="0.6">Strong (60%)</option>
 </select>
-      <button class="action-btn" id="btn-watermark" onclick="run_watermark()">🔏 Add Watermark</button>
+      <button class="action-btn" id="btn-watermark" onclick="run_watermark()">Add Watermark</button>
       <div class="progress-wrap" id="pw-watermark"><div class="progress-track"><div class="progress-fill" id="pb-watermark"></div></div><div class="progress-label" id="pl-watermark">Processing…</div></div>
       <div class="result-box" id="rb-watermark"><p id="rb-watermark-msg"></p></div>
     </div>
@@ -58,7 +59,7 @@ async function run_watermark(){
   setBtnState("watermark",true);
   const fd=new FormData();
   fd.append("file",files[0]);
-  const wt=document.getElementById("watermark-text").value.trim();if(!wt){toast("Please enter watermark text","error");setBtnState("watermark",false,"🔏 Add Watermark");return;}fd.append("text",wt);fd.append("position",document.getElementById("watermark-pos").value);fd.append("opacity",document.getElementById("watermark-opacity").value);
+  const wt=document.getElementById("watermark-text").value.trim();if(!wt){toast("Please enter watermark text","error");setBtnState("watermark",false,"Add Watermark");return;}fd.append("text",wt);fd.append("position",document.getElementById("watermark-pos").value);fd.append("opacity",document.getElementById("watermark-opacity").value);
   try{
     const resp=await callAPI("/add-watermark",fd,"watermark","Add Watermark...");
     const blob=await resp.blob();
@@ -71,13 +72,13 @@ async function run_watermark(){
     <div class="tool-footer-links">
       <p>More free tools:</p>
       <div class="tfl-grid">
-        <a href="merge-pdf.html" class="tfl-link">📎 Merge</a>
-        <a href="compress-pdf.html" class="tfl-link">🗜️ Compress</a>
-        <a href="pdf-to-word.html" class="tfl-link">📝 PDF to Word</a>
-        <a href="pdf-to-excel.html" class="tfl-link">📊 PDF to Excel</a>
-        <a href="pdf-to-jpg.html" class="tfl-link">🖼️ PDF to JPG</a>
-        <a href="protect-pdf.html" class="tfl-link">🔐 Lock PDF</a>
-        <a href="ai-tools.html" class="tfl-link">✨ AI Tools</a>
+        <a href="merge-pdf.html" class="tfl-link">Merge</a>
+        <a href="compress-pdf.html" class="tfl-link">Compress</a>
+        <a href="pdf-to-word.html" class="tfl-link">PDF to Word</a>
+        <a href="pdf-to-excel.html" class="tfl-link">PDF to Excel</a>
+        <a href="pdf-to-jpg.html" class="tfl-link">PDF to JPG</a>
+        <a href="protect-pdf.html" class="tfl-link">Lock PDF</a>
+        <a href="ai-tools.html" class="tfl-link">AI Tools</a>
       </div>
     </div>
   </div>

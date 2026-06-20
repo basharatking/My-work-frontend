@@ -1,8 +1,94 @@
-/* RunDocs shared.js v3.0 — Improved Navigation */
+/* RunDocs shared.js v3.1 — Real Tabler Icons (replaces emoji) */
 const _CFG = window.RUNDOCS_CONFIG || {};
 const API_BASE   = _CFG.API_BASE   || "";
 const FREE_MB    = _CFG.FREE_LIMIT_MB || 25;
 const FREE_BYTES = FREE_MB * 1024 * 1024;
+
+/* ── Real Icon Map (Tabler Icons — replaces all emoji) ── */
+const TOOL_ICONS = {
+  "compress-pdf.html": "ti-zoom-out",
+  "merge-pdf.html": "ti-stack-2",
+  "split-pdf.html": "ti-cut",
+  "pdf-to-word.html": "ti-file-word",
+  "pdf-to-excel.html": "ti-file-spreadsheet",
+  "pdf-to-jpg.html": "ti-photo",
+  "pdf-to-pptx.html": "ti-presentation",
+  "pdf-to-text.html": "ti-file-text",
+  "word-to-pdf.html": "ti-file-type-doc",
+  "excel-to-pdf.html": "ti-file-type-xls",
+  "jpg-to-pdf.html": "ti-photo-plus",
+  "rotate-pdf.html": "ti-rotate-clockwise",
+  "delete-pages.html": "ti-trash",
+  "reorder-pages.html": "ti-arrows-sort",
+  "add-page-numbers.html": "ti-number-123",
+  "protect-pdf.html": "ti-lock",
+  "unlock-pdf.html": "ti-lock-open",
+  "watermark-pdf.html": "ti-stamp",
+  "sign-pdf.html": "ti-signature",
+  "repair-pdf.html": "ti-tool",
+  "optimize-pdf.html": "ti-bolt",
+  "bank-statement.html": "ti-building-bank",
+  "invoice-to-excel.html": "ti-receipt",
+  "ai-tools.html": "ti-sparkles",
+};
+
+/* Icon for the small AI-feature cards on ai-tools.html, keyed by element id */
+const AI_CARD_ICONS = {
+  summary: "ti-clipboard-text",
+  notes: "ti-notes",
+  quiz: "ti-help-circle",
+  keypoints: "ti-bulb",
+  translate: "ti-language",
+  ask: "ti-message-circle-2",
+};
+
+function _iconHTML(name, extraClass) {
+  return `<i class="ti ${name}${extraClass ? " " + extraClass : ""}" aria-hidden="true"></i>`;
+}
+
+/* Replace emoji glyphs inside known icon containers with real Tabler icons,
+   based on the current page filename or explicit data-tool attributes. */
+function _applyRealIcons() {
+  const path = window.location.pathname.split("/").pop() || "index.html";
+  const iconName = TOOL_ICONS[path];
+
+  if (iconName) {
+    const heroIcon = document.querySelector(".tool-icon-wrap");
+    if (heroIcon) heroIcon.innerHTML = _iconHTML(iconName);
+
+    const uzIcon = document.querySelector(".uz-icon");
+    if (uzIcon) uzIcon.innerHTML = _iconHTML(iconName);
+  }
+
+  // ai-tools.html small card icons
+  Object.keys(AI_CARD_ICONS).forEach(key => {
+    const card = document.getElementById(key);
+    if (!card) return;
+    const iconEl = card.querySelector(".ai-card-icon");
+    if (iconEl) iconEl.innerHTML = _iconHTML(AI_CARD_ICONS[key]);
+  });
+
+  // Homepage tool-card-link icons (.tc-icon spans with emoji inside)
+  document.querySelectorAll(".tool-card-link").forEach(link => {
+    const href = link.getAttribute("href")?.split("#")[0];
+    const iconWrap = link.querySelector(".tc-icon");
+    if (iconWrap && TOOL_ICONS[href]) {
+      iconWrap.innerHTML = _iconHTML(TOOL_ICONS[href]);
+    }
+  });
+
+  // about.html value cards (privacy/speed/free/honest) — keep distinct icons
+  const valueIconMap = ["ti-shield-lock", "ti-bolt", "ti-gift", "ti-sparkles"];
+  document.querySelectorAll(".value-icon").forEach((el, i) => {
+    el.innerHTML = _iconHTML(valueIconMap[i] || "ti-check");
+  });
+
+  // homepage trust section icons
+  const trustIconMap = ["ti-lock", "ti-trash", "ti-ban", "ti-bell-off"];
+  document.querySelectorAll(".trust-icon").forEach((el, i) => {
+    el.innerHTML = _iconHTML(trustIconMap[i] || "ti-shield-check");
+  });
+}
 
 /* ── Theme ── */
 (function(){
@@ -21,9 +107,7 @@ function _setDarkIcon(){
   const btn = document.getElementById("darkBtn"); if(!btn) return;
   const dark = document.documentElement.getAttribute("data-theme") === "dark";
   btn.title = dark ? "Light mode" : "Dark mode";
-  btn.innerHTML = dark
-    ? `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`
-    : `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+  btn.innerHTML = dark ? _iconHTML("ti-sun") : _iconHTML("ti-moon");
 }
 function _initStickyNav(){
   const nav = document.querySelector(".nav"); if(!nav) return;
@@ -40,7 +124,7 @@ function _initScrollReveal(){
 function toast(msg, type="success", dur=3400){
   let c = document.getElementById("toast-container");
   if(!c){ c = document.createElement("div"); c.id="toast-container"; c.className="toast-container"; document.body.appendChild(c); }
-  const icons = { success:`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>`, error:`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>` };
+  const icons = { success: _iconHTML("ti-check"), error: _iconHTML("ti-x") };
   const t = document.createElement("div"); t.className=`toast ${type}`; t.innerHTML=(icons[type]||"")+_esc(msg); c.appendChild(t);
   setTimeout(() => { t.style.opacity="0"; t.style.transition="opacity .25s"; setTimeout(()=>t.remove(),260); }, dur);
 }
@@ -115,7 +199,7 @@ function handleFiles(tid, input){
 }
 function _renderChips(tid, files){
   const el=document.getElementById("fl-"+tid); if(!el) return;
-  el.innerHTML=files.map((f,i)=>`<div class="file-chip"><svg class="fc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span class="fc-name">${_esc(f.name)}</span><span class="fc-size">${_bytes(f.size)}</span><button class="fc-rm" onclick="removeFile('${tid}',${i})">×</button></div>`).join("");
+  el.innerHTML=files.map((f,i)=>`<div class="file-chip">${_iconHTML("ti-file-text","fc-icon")}<span class="fc-name">${_esc(f.name)}</span><span class="fc-size">${_bytes(f.size)}</span><button class="fc-rm" onclick="removeFile('${tid}',${i})">×</button></div>`).join("");
 }
 function removeFile(tid, idx){
   fileStore[tid]?.splice(idx,1); _renderChips(tid, fileStore[tid]||[]);
@@ -138,21 +222,21 @@ async function _renderPdfPreview(tid, file){
 function _loadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement("script"); s.src=src; s.onload=res; s.onerror=rej; document.head.appendChild(s); }); }
 async function _ocrHint(tid, file){
   const el=document.getElementById("ocr-hint-"+tid); if(!el||!file) return;
-  try{ const fd=new FormData(); fd.append("file",file); const r=await fetch(`${API_BASE}/ocr-check`,{method:"POST",body:fd}); if(!r.ok) return; const d=await r.json(); if(d.is_scanned) el.innerHTML=`<div class="notice notice-amber"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span><strong>Scanned PDF detected.</strong> Text extraction may be limited.</span></div>`; }catch(_){}
+  try{ const fd=new FormData(); fd.append("file",file); const r=await fetch(`${API_BASE}/ocr-check`,{method:"POST",body:fd}); if(!r.ok) return; const d=await r.json(); if(d.is_scanned) el.innerHTML=`<div class="notice notice-amber">${_iconHTML("ti-alert-circle")}<span><strong>Scanned PDF detected.</strong> Text extraction may be limited.</span></div>`; }catch(_){}
 }
 function showProgress(tid,pct,lbl){ document.getElementById("pw-"+tid)?.classList.add("show"); const pb=document.getElementById("pb-"+tid); const pl=document.getElementById("pl-"+tid); if(pb) pb.style.width=pct+"%"; if(pl&&lbl) pl.textContent=lbl; }
 function hideProgress(tid){ document.getElementById("pw-"+tid)?.classList.remove("show"); const pb=document.getElementById("pb-"+tid); if(pb) pb.style.width="0%"; }
 function showResult(tid,msg,err){
   const rb=document.getElementById("rb-"+tid), mp=document.getElementById("rb-"+tid+"-msg"); if(!rb||!mp) return;
   rb.className="result-box show"+(err?" err":"");
-  const ico=err?`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>`:`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>`;
+  const ico=err?_iconHTML("ti-x"):_iconHTML("ti-check");
   mp.innerHTML=ico+" "+_esc(msg); if(!err) toast(msg,"success"); else toast(msg,"error");
 }
 function setBtnState(tid,loading,label){ const btn=document.getElementById("btn-"+tid); if(!btn) return; btn.disabled=loading; if(loading) btn.innerHTML=`<span class="spinner"></span> Processing…`; else if(label) btn.textContent=label; }
 function showDownloadBtn(tid,blob,filename){
   document.getElementById("dl-btn-"+tid)?.remove();
   const btn=document.createElement("button"); btn.id="dl-btn-"+tid; btn.className="download-btn";
-  btn.innerHTML=`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download ${_esc(filename)}`;
+  btn.innerHTML=`${_iconHTML("ti-download")} Download ${_esc(filename)}`;
   btn.onclick=()=>{ downloadBlob(blob,filename); toast("Download started!","success"); };
   const rb=document.getElementById("rb-"+tid), ab=document.getElementById("btn-"+tid);
   const after=rb||ab; if(after?.parentNode) after.parentNode.insertBefore(btn,after.nextSibling);
@@ -170,13 +254,13 @@ async function callAPI(endpoint,fd,tid,label){
 }
 function copyResult(btn){ const body=btn.closest(".ai-result")?.querySelector(".ai-result-body"); if(!body) return; navigator.clipboard.writeText(body.textContent).then(()=>{ toast("Copied!","success"); btn.textContent="✓ Copied"; setTimeout(()=>btn.textContent="Copy",1500); }); }
 function downloadBlob(blob,name){ const u=URL.createObjectURL(blob); const a=Object.assign(document.createElement("a"),{href:u,download:name}); document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(u); a.remove(); },2000); }
-function _freemiumModal(name,size){ document.getElementById("rundocs-modal")?.remove(); const m=document.createElement("div"); m.id="rundocs-modal"; m.className="modal-overlay"; m.innerHTML=`<div class="modal-box"><div class="modal-icon">📁</div><h3>File Too Large</h3><p><strong>${_esc(name)}</strong> is ${_bytes(size)}.</p><p>Free plan supports up to <strong>${FREE_MB} MB</strong>.</p><div class="modal-actions"><button class="btn btn-primary btn-sm" onclick="document.getElementById('rundocs-modal').remove()">Got it</button></div></div>`; document.body.appendChild(m); m.addEventListener("click",e=>{ if(e.target===m) m.remove(); }); }
+function _freemiumModal(name,size){ document.getElementById("rundocs-modal")?.remove(); const m=document.createElement("div"); m.id="rundocs-modal"; m.className="modal-overlay"; m.innerHTML=`<div class="modal-box"><div class="modal-icon">${_iconHTML("ti-folder-x")}</div><h3>File Too Large</h3><p><strong>${_esc(name)}</strong> is ${_bytes(size)}.</p><p>Free plan supports up to <strong>${FREE_MB} MB</strong>.</p><div class="modal-actions"><button class="btn btn-primary btn-sm" onclick="document.getElementById('rundocs-modal').remove()">Got it</button></div></div>`; document.body.appendChild(m); m.addEventListener("click",e=>{ if(e.target===m) m.remove(); }); }
 async function loadSplitMeta(file){ try{ if(typeof pdfjsLib==="undefined"){ await _loadScript("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"); pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"; } const buf=await file.arrayBuffer(); const pdf=await pdfjsLib.getDocument({data:buf}).promise; const n=pdf.numPages; const el=document.getElementById("split-page-info"); if(el){ el.textContent=`Total: ${n} pages`; el.style.display="inline"; } const es=document.getElementById("split-start"), ee=document.getElementById("split-end"); if(es) es.max=n; if(ee){ ee.value=n; ee.max=n; } }catch(_){} }
 function toggleFaq(btn){ const item=btn.closest(".faq-item"); const wasOpen=item.classList.contains("open"); document.querySelectorAll(".faq-item.open").forEach(i=>i.classList.remove("open")); if(!wasOpen) item.classList.add("open"); }
 function _bytes(b){ if(b<1024) return b+" B"; if(b<1048576) return (b/1024).toFixed(1)+" KB"; return (b/1048576).toFixed(1)+" MB"; }
 function _esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
 
-/* ── LOGO SVG ── */
+/* ── LOGO SVG (unchanged — this is the brand mark, not a tool icon) ── */
 const LOGO_SVG = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect x="3" y="1" width="13" height="17" rx="2.5" fill="white" fill-opacity=".95"/>
   <path d="M15 1L20 6H15V1Z" fill="white" fill-opacity=".55"/>
@@ -187,85 +271,85 @@ const LOGO_SVG = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xm
   <path d="M16.5 18.5L17.8 19.8L20.5 17" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`;
 
-/* ── NAV DROPDOWN DATA ── */
+/* ── NAV DROPDOWN DATA — icon field now holds a Tabler class, not emoji ── */
 const NAV_DROPS = {
   convert: {
     label: "Convert PDF",
-    icon: "🔄",
+    icon: "ti-replace",
     tools: [
-      ["pdf-to-word.html","📝","PDF to Word","Convert PDF to editable .docx"],
-      ["pdf-to-excel.html","📊","PDF to Excel","Smart table extraction"],
-      ["pdf-to-jpg.html","🖼️","PDF to JPG","Export pages as images"],
-      ["pdf-to-pptx.html","📽️","PDF to PowerPoint","Each page = one slide"],
-      ["pdf-to-text.html","📄","PDF to Text","Extract raw plain text"],
-      ["word-to-pdf.html","📄","Word to PDF","Convert .docx to PDF"],
-      ["excel-to-pdf.html","📋","Excel to PDF","Convert .xlsx to PDF"],
-      ["jpg-to-pdf.html","📥","Image to PDF","JPG/PNG to PDF"],
+      ["pdf-to-word.html","ti-file-word","PDF to Word","Convert PDF to editable .docx"],
+      ["pdf-to-excel.html","ti-file-spreadsheet","PDF to Excel","Smart table extraction"],
+      ["pdf-to-jpg.html","ti-photo","PDF to JPG","Export pages as images"],
+      ["pdf-to-pptx.html","ti-presentation","PDF to PowerPoint","Each page = one slide"],
+      ["pdf-to-text.html","ti-file-text","PDF to Text","Extract raw plain text"],
+      ["word-to-pdf.html","ti-file-type-doc","Word to PDF","Convert .docx to PDF"],
+      ["excel-to-pdf.html","ti-file-type-xls","Excel to PDF","Convert .xlsx to PDF"],
+      ["jpg-to-pdf.html","ti-photo-plus","Image to PDF","JPG/PNG to PDF"],
     ]
   },
   merge: {
     label: "Merge PDF",
-    icon: "📎",
+    icon: "ti-stack-2",
     tools: [
-      ["merge-pdf.html","📎","Merge PDF","Combine multiple PDFs into one"],
-      ["rotate-pdf.html","🔄","Rotate PDF","90°, 180°, 270° rotation"],
-      ["delete-pages.html","🗑️","Delete Pages","Remove unwanted pages"],
-      ["reorder-pages.html","↕️","Reorder Pages","Rearrange page order"],
-      ["add-page-numbers.html","🔢","Add Page Numbers","Auto number pages"],
+      ["merge-pdf.html","ti-stack-2","Merge PDF","Combine multiple PDFs into one"],
+      ["rotate-pdf.html","ti-rotate-clockwise","Rotate PDF","90°, 180°, 270° rotation"],
+      ["delete-pages.html","ti-trash","Delete Pages","Remove unwanted pages"],
+      ["reorder-pages.html","ti-arrows-sort","Reorder Pages","Rearrange page order"],
+      ["add-page-numbers.html","ti-number-123","Add Page Numbers","Auto number pages"],
     ]
   },
   split: {
     label: "Split PDF",
-    icon: "✂️",
+    icon: "ti-cut",
     tools: [
-      ["split-pdf.html","✂️","Split PDF","Split into individual pages"],
-      ["split-pdf.html","📄","Extract Pages","Extract a specific page range"],
-      ["delete-pages.html","🗑️","Delete Pages","Remove specific pages"],
-      ["pdf-to-jpg.html","🖼️","PDF to Images","Export each page as JPG"],
-      ["pdf-to-text.html","📄","Extract Text","Pull text content from PDF"],
+      ["split-pdf.html","ti-cut","Split PDF","Split into individual pages"],
+      ["split-pdf.html","ti-file-export","Extract Pages","Extract a specific page range"],
+      ["delete-pages.html","ti-trash","Delete Pages","Remove specific pages"],
+      ["pdf-to-jpg.html","ti-photo","PDF to Images","Export each page as JPG"],
+      ["pdf-to-text.html","ti-file-text","Extract Text","Pull text content from PDF"],
     ]
   },
   compress: {
     label: "Compress PDF",
-    icon: "🗜️",
+    icon: "ti-zoom-out",
     tools: [
-      ["compress-pdf.html","🗜️","Compress PDF","Reduce file size up to 90%"],
-      ["optimize-pdf.html","⚡","Optimize PDF","Optimize for web/print"],
-      ["repair-pdf.html","🔧","Repair PDF","Fix corrupted PDFs"],
+      ["compress-pdf.html","ti-zoom-out","Compress PDF","Reduce file size up to 90%"],
+      ["optimize-pdf.html","ti-bolt","Optimize PDF","Optimize for web/print"],
+      ["repair-pdf.html","ti-tool","Repair PDF","Fix corrupted PDFs"],
     ]
   },
   security: {
     label: "Security",
-    icon: "🔒",
+    icon: "ti-shield-lock",
     tools: [
-      ["protect-pdf.html","🔐","Lock PDF","AES-256 encryption"],
-      ["unlock-pdf.html","🔓","Unlock PDF","Remove password"],
-      ["watermark-pdf.html","🔏","Watermark PDF","Add text watermark"],
-      ["sign-pdf.html","✍️","Sign PDF","Add signature"],
+      ["protect-pdf.html","ti-lock","Lock PDF","AES-256 encryption"],
+      ["unlock-pdf.html","ti-lock-open","Unlock PDF","Remove password"],
+      ["watermark-pdf.html","ti-stamp","Watermark PDF","Add text watermark"],
+      ["sign-pdf.html","ti-signature","Sign PDF","Add signature"],
     ]
   },
   ai: {
     label: "AI Tools",
-    icon: "✨",
+    icon: "ti-sparkles",
     tools: [
-      ["ai-tools.html#ask","💬","Ask PDF","Chat with your document"],
-      ["ai-tools.html#summary","📋","Summarize PDF","Get instant summary"],
-      ["ai-tools.html#notes","📝","Generate Notes","Study notes from PDF"],
-      ["ai-tools.html#quiz","❓","Quiz Generator","Auto quiz questions"],
-      ["ai-tools.html#keypoints","💡","Key Points","Extract key insights"],
-      ["ai-tools.html#translate","🌍","Translate PDF","Urdu, Arabic & more"],
+      ["ai-tools.html#ask","ti-message-circle-2","Ask PDF","Chat with your document"],
+      ["ai-tools.html#summary","ti-clipboard-text","Summarize PDF","Get instant summary"],
+      ["ai-tools.html#notes","ti-notes","Generate Notes","Study notes from PDF"],
+      ["ai-tools.html#quiz","ti-help-circle","Quiz Generator","Auto quiz questions"],
+      ["ai-tools.html#keypoints","ti-bulb","Key Points","Extract key insights"],
+      ["ai-tools.html#translate","ti-language","Translate PDF","Urdu, Arabic & more"],
     ]
   }
 };
 
-/* ── Mobile tools data ── */
+/* ── Mobile tools data — icon field now holds a Tabler class ── */
 const MOBILE_TOOLS = [
-  { cat:"Convert PDF", icon:"🔄", tools:[["pdf-to-word.html","📝","PDF to Word"],["pdf-to-excel.html","📊","PDF to Excel"],["pdf-to-jpg.html","🖼️","PDF to JPG"],["pdf-to-pptx.html","📽️","PDF to PowerPoint"],["pdf-to-text.html","📄","PDF to Text"],["word-to-pdf.html","📄","Word to PDF"],["excel-to-pdf.html","📋","Excel to PDF"],["jpg-to-pdf.html","📥","Image to PDF"]] },
-  { cat:"Merge & Organize", icon:"📂", tools:[["merge-pdf.html","📎","Merge PDF"],["split-pdf.html","✂️","Split PDF"],["rotate-pdf.html","🔄","Rotate PDF"],["delete-pages.html","🗑️","Delete Pages"],["reorder-pages.html","↕️","Reorder Pages"],["add-page-numbers.html","🔢","Page Numbers"]] },
-  { cat:"Compress", icon:"🗜️", tools:[["compress-pdf.html","🗜️","Compress PDF"],["optimize-pdf.html","⚡","Optimize PDF"],["repair-pdf.html","🔧","Repair PDF"]] },
-  { cat:"Security", icon:"🔒", tools:[["protect-pdf.html","🔐","Lock PDF"],["unlock-pdf.html","🔓","Unlock PDF"],["watermark-pdf.html","🔏","Watermark"],["sign-pdf.html","✍️","Sign PDF"]] },
-  { cat:"AI Tools", icon:"✨", tools:[["ai-tools.html","💬","Ask PDF"],["ai-tools.html#summary","📋","Summarize"],["ai-tools.html#notes","📝","Notes"],["ai-tools.html#quiz","❓","Quiz Generator"],["ai-tools.html#translate","🌍","Translate"]] },
-  { cat:"Business", icon:"💼", tools:[["invoice-to-excel.html","🧾","Invoice to Excel"],["bank-statement.html","🏦","Bank Statement"],["pdf-to-excel.html","📊","Smart Table Extract"]] },
+  { cat:"Convert PDF", icon:"ti-replace", tools:[["pdf-to-word.html","ti-file-word","PDF to Word"],["pdf-to-excel.html","ti-file-spreadsheet","PDF to Excel"],["pdf-to-jpg.html","ti-photo","PDF to JPG"],["pdf-to-pptx.html","ti-presentation","PDF to PowerPoint"],["pdf-to-text.html","ti-file-text","PDF to Text"],["word-to-pdf.html","ti-file-type-doc","Word to PDF"],["excel-to-pdf.html","ti-file-type-xls","Excel to PDF"],["jpg-to-pdf.html","ti-photo-plus","Image to PDF"]] },
+  { cat:"Merge & Organize", icon:"ti-folder", tools:[["merge-pdf.html","ti-stack-2","Merge PDF"],["split-pdf.html","ti-cut","Split PDF"],["rotate-pdf.html","ti-rotate-clockwise","Rotate PDF"],["delete-pages.html","ti-trash","Delete Pages"],["reorder-pages.html","ti-arrows-sort","Reorder Pages"],["add-page-numbers.html","ti-number-123","Page Numbers"]] },
+  { cat:"Compress", icon:"ti-zoom-out", tools:[["compress-pdf.html","ti-zoom-out","Compress PDF"],["optimize-pdf.html","ti-bolt","Optimize PDF"],["repair-pdf.html","ti-tool","Repair PDF"]] },
+  { cat:"Security", icon:"ti-shield-lock", tools:[["protect-pdf.html","ti-lock","Lock PDF"],["unlock-pdf.html","ti-lock-open","Unlock PDF"],["watermark-pdf.html","ti-stamp","Watermark"],["sign-pdf.html","ti-signature","Sign PDF"]] },
+  { cat:"AI Tools", icon:"ti-sparkles", tools:[["ai-tools.html","ti-message-circle-2","Ask PDF"],["ai-tools.html#summary","ti-clipboard-text","Summarize"],["ai-tools.html#notes","ti-notes","Notes"],["ai-tools.html#quiz","ti-help-circle","Quiz Generator"],["ai-tools.html#translate","ti-language","Translate"]] },
+  { cat:"Business", icon:"ti-briefcase", tools:[["invoice-to-excel.html","ti-receipt","Invoice to Excel"],["bank-statement.html","ti-building-bank","Bank Statement"],["pdf-to-excel.html","ti-file-spreadsheet","Smart Table Extract"]] },
 ];
 
 /* ── Build dropdown HTML ── */
@@ -273,7 +357,7 @@ function _buildDrop(key) {
   const d = NAV_DROPS[key];
   const items = d.tools.map(([href, icon, label, desc]) => `
     <a href="${href}" class="drop-item">
-      <span class="drop-item-icon">${icon}</span>
+      <span class="drop-item-icon">${_iconHTML(icon)}</span>
       <span class="drop-item-text">
         <span class="drop-item-label">${label}</span>
         <span class="drop-item-desc">${desc}</span>
@@ -286,7 +370,7 @@ function _buildDrop(key) {
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
       <div class="nav-drop-menu">
-        <div class="drop-header">${d.icon} ${d.label}</div>
+        <div class="drop-header">${_iconHTML(d.icon)} ${d.label}</div>
         <div class="drop-items">${items}</div>
       </div>
     </div>`;
@@ -298,8 +382,8 @@ function _buildAllTools() {
   const cols = allDropKeys.map(key => {
     const d = NAV_DROPS[key];
     return `<div class="all-tools-col">
-      <div class="all-tools-col-head">${d.icon} ${d.label}</div>
-      ${d.tools.map(([href,icon,label])=>`<a href="${href}" class="all-tool-link"><span>${icon}</span>${label}</a>`).join("")}
+      <div class="all-tools-col-head">${_iconHTML(d.icon)} ${d.label}</div>
+      ${d.tools.map(([href,icon,label])=>`<a href="${href}" class="all-tool-link">${_iconHTML(icon)}${label}</a>`).join("")}
     </div>`;
   }).join("");
   return `
@@ -312,7 +396,7 @@ function _buildAllTools() {
       <div class="nav-drop-menu nav-all-menu">
         <div class="all-tools-grid">${cols}</div>
         <div class="all-tools-footer">
-          <span>🔒 Files deleted after processing &nbsp;·&nbsp; All 25+ tools free</span>
+          <span>${_iconHTML("ti-lock")} Files deleted after processing &nbsp;·&nbsp; All 25+ tools free</span>
         </div>
       </div>
     </div>`;
@@ -323,11 +407,11 @@ function buildNav(){
   const mobileAccs = MOBILE_TOOLS.map(c=>`
     <div>
       <button class="mobile-acc-btn" onclick="toggleMobileAcc(this)">
-        <span>${c.icon} ${c.cat}</span>
+        <span>${_iconHTML(c.icon)} ${c.cat}</span>
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
       <div class="mobile-acc-body">
-        ${c.tools.map(([href,icon,label])=>`<a href="${href}">${icon} ${label}</a>`).join("")}
+        ${c.tools.map(([href,icon,label])=>`<a href="${href}">${_iconHTML(icon)} ${label}</a>`).join("")}
       </div>
     </div>`).join("");
 
@@ -363,10 +447,10 @@ function buildNav(){
   </div>
   <div class="mobile-nav-sep">Navigation</div>
   <div style="padding:0 .5rem">
-    <a href="index.html">🏠 Home</a>
-    <a href="ai-tools.html">✨ AI Tools</a>
-    <a href="index.html#pricing">💰 Pricing</a>
-    <a href="contact.html">✉️ Contact</a>
+    <a href="index.html">${_iconHTML("ti-home")} Home</a>
+    <a href="ai-tools.html">${_iconHTML("ti-sparkles")} AI Tools</a>
+    <a href="index.html#pricing">${_iconHTML("ti-coin")} Pricing</a>
+    <a href="contact.html">${_iconHTML("ti-mail")} Contact</a>
   </div>
   <div class="mobile-nav-sep">All Tools</div>
   <div style="padding:0 .5rem">${mobileAccs}</div>
@@ -388,7 +472,7 @@ function buildFooter(){
       </div>
       <p>Professional PDF tools for everyday workflows. Fast, secure, and always free.</p>
       <div class="footer-delete-note">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        ${_iconHTML("ti-shield-check")}
         Files deleted after processing
       </div>
     </div>
@@ -450,5 +534,5 @@ function buildFooter(){
 document.addEventListener("DOMContentLoaded", () => {
   const navPh=document.getElementById("nav-placeholder"); if(navPh) navPh.outerHTML=buildNav();
   const ftPh=document.getElementById("footer-placeholder"); if(ftPh) ftPh.outerHTML=buildFooter();
-  setTimeout(()=>{ _setDarkIcon(); _initStickyNav(); _initScrollReveal(); initDropZones(); _initDropdowns(); },50);
+  setTimeout(()=>{ _setDarkIcon(); _initStickyNav(); _initScrollReveal(); initDropZones(); _initDropdowns(); _applyRealIcons(); },50);
 });

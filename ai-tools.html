@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/%40tabler/icons-webfont/3.31.0/tabler-icons.min.css">
 <script src="config.js"></script>
 <style>
 .ai-hero{padding:calc(var(--nav-h)+3rem) 2rem 3rem;text-align:center;background:var(--bg2);border-bottom:1px solid var(--border)}
@@ -20,7 +21,7 @@
 .ai-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--r2xl);overflow:hidden;transition:var(--t-md)}
 .ai-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:var(--brand-border)}
 .ai-card-hdr{padding:1.25rem 1.25rem 0}
-.ai-card-icon{font-size:1.6rem;margin-bottom:.5rem}
+.ai-card-icon{font-size:1.6rem;margin-bottom:.5rem;color:var(--brand)}
 .ai-card-title{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:.25rem}
 .ai-card-desc{font-size:13px;color:var(--ink3);line-height:1.6;margin-bottom:.85rem}
 .ai-card-body{padding:0 1.25rem 1.25rem}
@@ -61,7 +62,7 @@
     <!-- SUMMARY -->
     <div class="ai-card" id="summary">
       <div class="ai-card-hdr">
-        <div class="ai-card-icon">📋</div>
+        <div class="ai-card-icon"></div>
         <div class="ai-card-title">PDF Summary</div>
         <div class="ai-card-desc">Get a concise, well-structured summary of any PDF in seconds.</div>
       </div>
@@ -78,7 +79,7 @@
           <option value="medium" selected>Medium (1 paragraph)</option>
           <option value="long">Long (detailed overview)</option>
         </select>
-        <button class="action-btn" id="btn-summary" onclick="run_summary()" style="margin-top:.75rem;padding:11px;font-size:13.5px">📋 Summarize PDF</button>
+        <button class="action-btn" id="btn-summary" onclick="run_summary()" style="margin-top:.75rem;padding:11px;font-size:13.5px">Summarize PDF</button>
         <div class="progress-wrap" id="pw-summary"><div class="progress-track"><div class="progress-fill" id="pb-summary"></div></div><div class="progress-label" id="pl-summary">Analyzing…</div></div>
         <div class="ai-result" id="result-summary">
           <div class="ai-result-header"><span>Summary</span></div>
@@ -91,7 +92,7 @@
     <!-- NOTES -->
     <div class="ai-card" id="notes">
       <div class="ai-card-hdr">
-        <div class="ai-card-icon">📝</div>
+        <div class="ai-card-icon"></div>
         <div class="ai-card-title">Notes Generator</div>
         <div class="ai-card-desc">Structured study notes from any PDF — perfect for learning.</div>
       </div>
@@ -109,7 +110,7 @@
           <option value="cornell">Cornell format</option>
           <option value="mindmap">Mind map text</option>
         </select>
-        <button class="action-btn" id="btn-notes" onclick="run_notes()" style="margin-top:.75rem;padding:11px;font-size:13.5px">📝 Generate Notes</button>
+        <button class="action-btn" id="btn-notes" onclick="run_notes()" style="margin-top:.75rem;padding:11px;font-size:13.5px">Generate Notes</button>
         <div class="progress-wrap" id="pw-notes"><div class="progress-track"><div class="progress-fill" id="pb-notes"></div></div><div class="progress-label" id="pl-notes">Generating…</div></div>
         <div class="ai-result" id="result-notes">
           <div class="ai-result-header"><span>Notes</span></div>
@@ -122,7 +123,7 @@
     <!-- QUIZ -->
     <div class="ai-card" id="quiz">
       <div class="ai-card-hdr">
-        <div class="ai-card-icon">❓</div>
+        <div class="ai-card-icon"></div>
         <div class="ai-card-title">Quiz Generator</div>
         <div class="ai-card-desc">Auto-generate multiple-choice quiz questions from PDF content.</div>
       </div>
@@ -152,7 +153,7 @@
             </select>
           </div>
         </div>
-        <button class="action-btn" id="btn-quiz" onclick="run_quiz()" style="margin-top:.75rem;padding:11px;font-size:13.5px">❓ Generate Quiz</button>
+        <button class="action-btn" id="btn-quiz" onclick="run_quiz()" style="margin-top:.75rem;padding:11px;font-size:13.5px">Generate Quiz</button>
         <div class="progress-wrap" id="pw-quiz"><div class="progress-track"><div class="progress-fill" id="pb-quiz"></div></div><div class="progress-label" id="pl-quiz">Generating…</div></div>
         <div class="ai-result" id="result-quiz">
           <div class="ai-result-header"><span>Quiz Questions</span></div>
@@ -165,7 +166,7 @@
     <!-- KEY POINTS -->
     <div class="ai-card" id="keypoints">
       <div class="ai-card-hdr">
-        <div class="ai-card-icon">💡</div>
+        <div class="ai-card-icon"></div>
         <div class="ai-card-title">Key Points</div>
         <div class="ai-card-desc">Extract the most important insights from any document instantly.</div>
       </div>
@@ -176,7 +177,7 @@
           <input class="file-input" id="fi-keypoints" type="file" accept=".pdf" onchange="handleFiles('keypoints',this)">
         </div>
         <div class="file-chips" id="fl-keypoints"></div>
-        <button class="action-btn" id="btn-keypoints" onclick="run_keypoints()" style="margin-top:.75rem;padding:11px;font-size:13.5px">💡 Extract Key Points</button>
+        <button class="action-btn" id="btn-keypoints" onclick="run_keypoints()" style="margin-top:.75rem;padding:11px;font-size:13.5px">Extract Key Points</button>
         <div class="progress-wrap" id="pw-keypoints"><div class="progress-track"><div class="progress-fill" id="pb-keypoints"></div></div><div class="progress-label" id="pl-keypoints">Extracting…</div></div>
         <div class="ai-result" id="result-keypoints">
           <div class="ai-result-header"><span>Key Points</span></div>
@@ -189,7 +190,7 @@
     <!-- TRANSLATE -->
     <div class="ai-card" id="translate">
       <div class="ai-card-hdr">
-        <div class="ai-card-icon">🌍</div>
+        <div class="ai-card-icon"></div>
         <div class="ai-card-title">Translate PDF</div>
         <div class="ai-card-desc">Translate PDF content between English, Urdu, Arabic and more.</div>
       </div>
@@ -224,7 +225,7 @@
             </select>
           </div>
         </div>
-        <button class="action-btn" id="btn-translate" onclick="run_translate()" style="margin-top:.75rem;padding:11px;font-size:13.5px">🌍 Translate PDF</button>
+        <button class="action-btn" id="btn-translate" onclick="run_translate()" style="margin-top:.75rem;padding:11px;font-size:13.5px">Translate PDF</button>
         <div class="progress-wrap" id="pw-translate"><div class="progress-track"><div class="progress-fill" id="pb-translate"></div></div><div class="progress-label" id="pl-translate">Translating…</div></div>
         <div class="ai-result" id="result-translate">
           <div class="ai-result-header"><span>Translation</span></div>
@@ -237,7 +238,7 @@
     <!-- ASK PDF -->
     <div class="ai-card" id="ask">
       <div class="ai-card-hdr">
-        <div class="ai-card-icon">💬</div>
+        <div class="ai-card-icon"></div>
         <div class="ai-card-title">Ask PDF</div>
         <div class="ai-card-desc">Upload a PDF and ask any question — get direct answers from the document.</div>
       </div>
@@ -289,11 +290,11 @@ async function _aiCall(endpoint,formData,tid,label,resultId,bodyId){
   }catch(e){toast(e.message,"error");hideProgress(tid);}
   finally{setBtnState(tid,false);}
 }
-async function run_summary(){const files=fileStore["summary"];if(!files?.length){toast("Please select a PDF first","error");return;}const fd=new FormData();fd.append("file",files[0]);fd.append("length",document.getElementById("summary-length").value);await _aiCall("/ai-summary",fd,"summary","Analyzing…","result-summary","body-summary");document.getElementById("btn-summary").textContent="📋 Summarize PDF";}
-async function run_notes(){const files=fileStore["notes"];if(!files?.length){toast("Please select a PDF first","error");return;}const fd=new FormData();fd.append("file",files[0]);fd.append("style",document.getElementById("notes-style").value);await _aiCall("/ai-notes",fd,"notes","Generating notes…","result-notes","body-notes");document.getElementById("btn-notes").textContent="📝 Generate Notes";}
-async function run_quiz(){const files=fileStore["quiz"];if(!files?.length){toast("Please select a PDF first","error");return;}const fd=new FormData();fd.append("file",files[0]);fd.append("count",document.getElementById("quiz-count").value);fd.append("difficulty",document.getElementById("quiz-diff").value);await _aiCall("/ai-quiz",fd,"quiz","Generating quiz…","result-quiz","body-quiz");document.getElementById("btn-quiz").textContent="❓ Generate Quiz";}
-async function run_keypoints(){const files=fileStore["keypoints"];if(!files?.length){toast("Please select a PDF first","error");return;}const fd=new FormData();fd.append("file",files[0]);await _aiCall("/ai-keypoints",fd,"keypoints","Extracting…","result-keypoints","body-keypoints");document.getElementById("btn-keypoints").textContent="💡 Extract Key Points";}
-async function run_translate(){const files=fileStore["translate"];if(!files?.length){toast("Please select a PDF first","error");return;}const fd=new FormData();fd.append("file",files[0]);fd.append("from_lang",document.getElementById("translate-from").value);fd.append("to_lang",document.getElementById("translate-to").value);await _aiCall("/ai-translate",fd,"translate","Translating…","result-translate","body-translate");document.getElementById("btn-translate").textContent="🌍 Translate PDF";}
+async function run_summary(){const files=fileStore["summary"];if(!files?.length){toast("Please select a PDF first","error");return;}const fd=new FormData();fd.append("file",files[0]);fd.append("length",document.getElementById("summary-length").value);await _aiCall("/ai-summary",fd,"summary","Analyzing…","result-summary","body-summary");document.getElementById("btn-summary").textContent="Summarize PDF";}
+async function run_notes(){const files=fileStore["notes"];if(!files?.length){toast("Please select a PDF first","error");return;}const fd=new FormData();fd.append("file",files[0]);fd.append("style",document.getElementById("notes-style").value);await _aiCall("/ai-notes",fd,"notes","Generating notes…","result-notes","body-notes");document.getElementById("btn-notes").textContent="Generate Notes";}
+async function run_quiz(){const files=fileStore["quiz"];if(!files?.length){toast("Please select a PDF first","error");return;}const fd=new FormData();fd.append("file",files[0]);fd.append("count",document.getElementById("quiz-count").value);fd.append("difficulty",document.getElementById("quiz-diff").value);await _aiCall("/ai-quiz",fd,"quiz","Generating quiz…","result-quiz","body-quiz");document.getElementById("btn-quiz").textContent="Generate Quiz";}
+async function run_keypoints(){const files=fileStore["keypoints"];if(!files?.length){toast("Please select a PDF first","error");return;}const fd=new FormData();fd.append("file",files[0]);await _aiCall("/ai-keypoints",fd,"keypoints","Extracting…","result-keypoints","body-keypoints");document.getElementById("btn-keypoints").textContent="Extract Key Points";}
+async function run_translate(){const files=fileStore["translate"];if(!files?.length){toast("Please select a PDF first","error");return;}const fd=new FormData();fd.append("file",files[0]);fd.append("from_lang",document.getElementById("translate-from").value);fd.append("to_lang",document.getElementById("translate-to").value);await _aiCall("/ai-translate",fd,"translate","Translating…","result-translate","body-translate");document.getElementById("btn-translate").textContent="Translate PDF";}
 async function run_ask(){
   const files=fileStore["ask"];const question=document.getElementById("ask-question").value.trim();
   if(!files?.length){toast("Please select a PDF first","error");return;}

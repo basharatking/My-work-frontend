@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/%40tabler/icons-webfont/3.31.0/tabler-icons.min.css">
 <script src="config.js"></script>
 </head>
 <body>
@@ -18,13 +19,13 @@
 <div class="tool-page">
   <div class="tool-container">
     <div class="tool-header">
-      <div class="tool-icon-wrap">🔢</div>
+      <div class="tool-icon-wrap"></div>
       <h1 class="tool-title">Add Page Numbers</h1>
       <p class="tool-sub">Automatically number every page of your PDF. Choose position and format.</p>
     </div>
     <div class="tool-card">
       <div class="upload-zone" onclick="document.getElementById('fi-pagenums').click()">
-        <div class="uz-icon">🔢</div>
+        <div class="uz-icon"></div>
         <div class="uz-title">Drop your file here or click to browse</div>
         <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
         <div class="uz-badge">🔒 Files deleted after processing</div>
@@ -48,7 +49,7 @@
 </select>
 <label class="f-label">Start Number</label>
 <input class="f-input" id="pagenums-start" type="number" value="1" min="1">
-      <button class="action-btn" id="btn-pagenums" onclick="run_pagenums()">🔢 Add Page Numbers</button>
+      <button class="action-btn" id="btn-pagenums" onclick="run_pagenums()">Add Page Numbers</button>
       <div class="progress-wrap" id="pw-pagenums"><div class="progress-track"><div class="progress-fill" id="pb-pagenums"></div></div><div class="progress-label" id="pl-pagenums">Processing…</div></div>
       <div class="result-box" id="rb-pagenums"><p id="rb-pagenums-msg"></p></div>
     </div>
@@ -71,13 +72,13 @@ async function run_pagenums(){
     <div class="tool-footer-links">
       <p>More free tools:</p>
       <div class="tfl-grid">
-        <a href="merge-pdf.html" class="tfl-link">📎 Merge</a>
-        <a href="compress-pdf.html" class="tfl-link">🗜️ Compress</a>
-        <a href="pdf-to-word.html" class="tfl-link">📝 PDF to Word</a>
-        <a href="pdf-to-excel.html" class="tfl-link">📊 PDF to Excel</a>
-        <a href="pdf-to-jpg.html" class="tfl-link">🖼️ PDF to JPG</a>
-        <a href="protect-pdf.html" class="tfl-link">🔐 Lock PDF</a>
-        <a href="ai-tools.html" class="tfl-link">✨ AI Tools</a>
+        <a href="merge-pdf.html" class="tfl-link">Merge</a>
+        <a href="compress-pdf.html" class="tfl-link">Compress</a>
+        <a href="pdf-to-word.html" class="tfl-link">PDF to Word</a>
+        <a href="pdf-to-excel.html" class="tfl-link">PDF to Excel</a>
+        <a href="pdf-to-jpg.html" class="tfl-link">PDF to JPG</a>
+        <a href="protect-pdf.html" class="tfl-link">Lock PDF</a>
+        <a href="ai-tools.html" class="tfl-link">AI Tools</a>
       </div>
     </div>
   </div>

@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/%40tabler/icons-webfont/3.31.0/tabler-icons.min.css">
 <script src="config.js"></script>
 </head>
 <body>
@@ -18,13 +19,13 @@
 <div class="tool-page">
   <div class="tool-container">
     <div class="tool-header">
-      <div class="tool-icon-wrap">📄</div>
+      <div class="tool-icon-wrap"></div>
       <h1 class="tool-title">Word to PDF</h1>
       <p class="tool-sub">Convert your Word .docx file to PDF instantly. Free and secure.</p>
     </div>
     <div class="tool-card">
       <div class="upload-zone" onclick="document.getElementById('fi-word2pdf').click()">
-        <div class="uz-icon">📄</div>
+        <div class="uz-icon"></div>
         <div class="uz-title">Drop your Word file here or click to browse</div>
         <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
         <div class="uz-badge">🔒 Files deleted after processing</div>
@@ -33,7 +34,7 @@
       <div class="file-chips" id="fl-word2pdf"></div>
       <div class="pdf-preview-area" id="preview-word2pdf"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
       <div id="ocr-hint-word2pdf"></div>
-      <button class="action-btn" id="btn-word2pdf" onclick="run_word2pdf()">📄 Convert to PDF</button>
+      <button class="action-btn" id="btn-word2pdf" onclick="run_word2pdf()">Convert to PDF</button>
       <div class="progress-wrap" id="pw-word2pdf"><div class="progress-track"><div class="progress-fill" id="pb-word2pdf"></div></div><div class="progress-label" id="pl-word2pdf">Processing…</div></div>
       <div class="result-box" id="rb-word2pdf"><p id="rb-word2pdf-msg"></p></div>
     </div>

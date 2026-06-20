@@ -1,3 +1,113 @@
+/* ════════════════════════════════════════════════════
+   REAL TOOL ICONS — Tabler Icons (replaces emoji icons)
+   ════════════════════════════════════════════════════ */
+
+/* Sizing for icon font inside existing icon containers */
+.tool-icon-wrap i,
+.uz-icon i,
+.tc-icon i,
+.ci-icon i,
+.value-icon i,
+.trust-icon i,
+.mega-col-icon i,
+.drop-item-icon i,
+.all-tools-col-head i,
+.tl-icon i,
+.review-avatar i {
+  display: inline-block;
+  line-height: 1;
+}
+
+/* Tool page hero icon (big circle at top of every tool page) */
+.tool-icon-wrap {
+  color: var(--brand);
+}
+.tool-icon-wrap i {
+  font-size: 1.75rem;
+}
+
+/* Upload-zone icon */
+.uz-icon {
+  color: var(--brand);
+}
+.uz-icon i {
+  font-size: 3.2rem;
+}
+
+/* Homepage tool-card icons */
+.tc-icon {
+  font-size: 1.25rem;
+}
+.tc-icon-blue { color: var(--brand); }
+.tc-icon-green { color: var(--accent); }
+.tc-icon-amber { color: #D97706; }
+.tc-icon-red { color: var(--red); }
+
+/* Footer tool-link pill icons */
+.tfl-link i {
+  font-size: 12px;
+  margin-right: 4px;
+  vertical-align: -1px;
+}
+
+/* Nav dropdown / mega menu icons */
+.mega-col-icon, .drop-item-icon {
+  color: var(--brand);
+}
+.mega-col-icon i, .drop-item-icon i {
+  font-size: 1rem;
+}
+.all-tools-col-head i {
+  margin-right: 4px;
+}
+.all-tool-link i {
+  font-size: 13px;
+  margin-right: 6px;
+  color: var(--brand);
+  opacity: .75;
+}
+
+/* Mobile nav icons */
+.mobile-acc-btn i, .mobile-nav a i {
+  font-size: 15px;
+  margin-right: 8px;
+  color: var(--brand);
+  vertical-align: -2px;
+}
+
+/* AI tools card icons (ai-tools.html) */
+.ai-card-icon {
+  color: var(--brand);
+}
+
+/* About page value icons + homepage trust icons */
+.value-icon, .trust-icon {
+  color: var(--brand);
+}
+
+/* Toast icons */
+.toast i {
+  margin-right: 2px;
+  vertical-align: -1px;
+}
+
+/* File chip icon */
+.fc-icon i {
+  font-size: 13px;
+}
+
+/* Download button + modal icons */
+.download-btn i, .modal-icon i {
+  vertical-align: -2px;
+}
+.modal-icon i {
+  font-size: 2.5rem;
+}
+
+/* ════════════════════════════════════════════════════
+   ORIGINAL RUNDOCS STYLES (unchanged below this line)
+   ════════════════════════════════════════════════════ */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap');
 
 :root {
