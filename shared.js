@@ -92,13 +92,9 @@ function _applyRealIcons() {
 
 /* ── Theme ── */
 (function(){
-  try {
-    const s = localStorage.getItem("rundocs-theme");
-    const dark = s === "dark" || (!s && typeof matchMedia === "function" && matchMedia("(prefers-color-scheme:dark)").matches);
-    if(dark) document.documentElement.setAttribute("data-theme","dark");
-  } catch(e) {
-    console.warn("Theme detection skipped:", e);
-  }
+  const s = localStorage.getItem("rundocs-theme");
+  const dark = s === "dark" || (!s && matchMedia("(prefers-color-scheme:dark)").matches);
+  if(dark) document.documentElement.setAttribute("data-theme","dark");
 })();
 function toggleDark(){
   const isDark = document.documentElement.getAttribute("data-theme") === "dark";
