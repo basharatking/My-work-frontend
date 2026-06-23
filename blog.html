@@ -1,52 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Blog — RunDocs</title>
-<meta name="description" content="Tips, guides and tutorials for working with PDFs. Learn how to compress, convert, merge and process PDF documents efficiently.">
-<meta name="robots" content="index,follow"><meta name="theme-color" content="#4F6EF7">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RunDocs Blog — PDF Tools Guides, Tips & Tutorials</title>
+<meta name="description" content="Learn how to convert PDF to Excel, compress PDFs, extract bank statements and more. Free PDF tool guides for Pakistan users.">
+<meta name="keywords" content="PDF to Excel Pakistan, compress PDF, bank statement Excel, PDF tools guide, RunDocs blog">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#2563EB">
 <link rel="canonical" href="https://rundocs.netlify.app/blog.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <script src="config.js"></script>
 <style>
 .blog-hero{padding:calc(var(--nav-h)+3rem) 2rem 3rem;background:var(--bg2);border-bottom:1px solid var(--border);text-align:center}
-.blog-hero h1{font-family:var(--font-display);font-size:clamp(28px,4vw,44px);font-weight:800;color:var(--ink);margin-bottom:.6rem;letter-spacing:-.04em}
+.blog-hero h1{font-family:var(--font-display);font-size:clamp(28px,4vw,42px);font-weight:400;color:var(--ink);margin-bottom:.5rem;letter-spacing:-.02em}
 .blog-hero p{font-size:16px;color:var(--ink3);max-width:480px;margin:0 auto;line-height:1.7}
-
-.blog-section{padding:4rem 2rem 6rem}
-.blog-container{max-width:1100px;margin:0 auto}
-
-.blog-featured{display:grid;grid-template-columns:1.6fr 1fr;gap:1.75rem;margin-bottom:2.5rem}
-.blog-card{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r2xl);overflow:hidden;transition:var(--t-md);text-decoration:none;color:inherit;display:flex;flex-direction:column}
-.blog-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--brand-border)}
-.blog-card-thumb{height:200px;display:flex;align-items:center;justify-content:center;font-size:4rem;flex-shrink:0}
-.blog-card.featured .blog-card-thumb{height:260px;font-size:5rem}
-.blog-card-body{padding:1.5rem;flex:1;display:flex;flex-direction:column}
-.blog-tag{display:inline-flex;align-items:center;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;padding:3px 10px;border-radius:var(--round);margin-bottom:.75rem}
-.tag-guide{background:var(--brand-pale);color:var(--brand);border:1px solid var(--brand-border)}
-.tag-tips{background:var(--accent-pale);color:#16A34A;border:1px solid var(--accent-border)}
-.tag-ai{background:#F3E8FF;color:#7C3AED;border:1px solid #DDD6FE}
-.tag-howto{background:#FEF9EC;color:#92400E;border:1px solid #FDE68A}
-.tag-security{background:#FEF2F2;color:var(--red);border:1px solid var(--red-border)}
-.blog-card-title{font-family:var(--font-display);font-size:1.15rem;font-weight:700;color:var(--ink);margin-bottom:.5rem;line-height:1.35;letter-spacing:-.02em}
-.blog-card.featured .blog-card-title{font-size:1.45rem}
-.blog-card-excerpt{font-size:13.5px;color:var(--ink3);line-height:1.7;flex:1}
-.blog-card-meta{display:flex;align-items:center;gap:.5rem;margin-top:1rem;font-size:12px;color:var(--ink4);font-weight:500}
-.blog-card-meta-dot{width:3px;height:3px;border-radius:50%;background:var(--ink5)}
-.blog-read-more{display:inline-flex;align-items:center;gap:5px;margin-top:1rem;font-size:13px;font-weight:600;color:var(--brand);transition:var(--t)}
-.blog-card:hover .blog-read-more{gap:8px}
-
+.blog-container{max-width:1100px;margin:0 auto;padding:3rem 2rem 5rem}
+.blog-cats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2rem}
+.cat-btn{padding:7px 16px;border-radius:var(--round);font-size:13px;font-weight:600;border:1.5px solid var(--border2);background:var(--bg);color:var(--ink3);cursor:pointer;transition:var(--t)}
+.cat-btn:hover,.cat-btn.active{background:var(--brand);color:white;border-color:var(--brand)}
 .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-
-.blog-sidebar-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--ink4);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--border)}
-.blog-topics{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2rem}
-.blog-topic{font-size:12.5px;font-weight:500;color:var(--ink3);padding:5px 13px;border:1.5px solid var(--border);border-radius:var(--round);cursor:pointer;transition:var(--t);text-decoration:none}
-.blog-topic:hover{border-color:var(--brand);color:var(--brand);background:var(--brand-pale)}
-
-@media(max-width:900px){.blog-featured{grid-template-columns:1fr}.blog-grid{grid-template-columns:1fr 1fr}}
+.blog-card{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r2xl);overflow:hidden;transition:var(--t-md);display:flex;flex-direction:column}
+.blog-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--brand-border)}
+.blog-img{height:160px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:var(--brand-pale)}
+.blog-body{padding:1.25rem;flex:1;display:flex;flex-direction:column}
+.blog-cat-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--brand);margin-bottom:.5rem}
+.blog-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:.5rem;line-height:1.4}
+.blog-excerpt{font-size:13px;color:var(--ink3);line-height:1.65;flex:1;margin-bottom:.85rem}
+.blog-meta{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--ink4)}
+.read-link{color:var(--brand);font-weight:600;font-size:13px;text-decoration:none}
+.read-link:hover{text-decoration:underline}
+.featured-article{background:linear-gradient(135deg,var(--brand),var(--brand-light));border-radius:var(--r2xl);padding:2.5rem;color:white;margin-bottom:2.5rem;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center}
+.featured-article h2{font-size:22px;font-weight:700;margin-bottom:.6rem;line-height:1.3}
+.featured-article p{font-size:14px;opacity:.85;line-height:1.7;margin-bottom:1.1rem}
+.featured-btn{display:inline-flex;align-items:center;gap:7px;background:white;color:var(--brand);padding:10px 22px;border-radius:var(--r);font-size:14px;font-weight:700;text-decoration:none;transition:var(--t)}
+.featured-btn:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.15)}
+.featured-icon{font-size:4rem;opacity:.9}
+@media(max-width:900px){.blog-grid{grid-template-columns:1fr 1fr}.featured-article{grid-template-columns:1fr}.featured-icon{display:none}}
 @media(max-width:600px){.blog-grid{grid-template-columns:1fr}}
+
+/* Article modal */
+.article-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:800;overflow-y:auto;padding:2rem 1rem}
+.article-overlay.open{display:flex;align-items:flex-start;justify-content:center}
+.article-box{background:var(--bg);border-radius:var(--r2xl);max-width:720px;width:100%;padding:2.5rem;position:relative;margin:auto}
+.article-close{position:absolute;top:1.25rem;right:1.25rem;width:36px;height:36px;border-radius:50%;background:var(--bg3);border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:var(--t)}
+.article-close:hover{background:var(--red-bg);color:var(--red)}
+.article-box h1{font-family:var(--font-display);font-size:clamp(22px,3vw,30px);font-weight:400;color:var(--ink);margin-bottom:.75rem;letter-spacing:-.02em;line-height:1.3}
+.article-box .article-meta{font-size:12.5px;color:var(--ink4);margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.article-box h2{font-size:18px;font-weight:700;color:var(--ink);margin:1.5rem 0 .6rem}
+.article-box p{font-size:14.5px;color:var(--ink3);line-height:1.8;margin-bottom:.9rem}
+.article-box ul,.article-box ol{padding-left:1.4rem;margin-bottom:.9rem;display:flex;flex-direction:column;gap:.4rem}
+.article-box li{font-size:14.5px;color:var(--ink3);line-height:1.7}
+.article-box .tip-box{background:var(--brand-pale);border:1px solid var(--brand-border);border-radius:var(--r);padding:1rem 1.25rem;margin:1rem 0}
+.article-box .tip-box strong{color:var(--brand)}
+.article-cta{background:var(--brand);color:white;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;border-radius:var(--rl);margin-top:2rem;gap:1rem;flex-wrap:wrap}
+.article-cta p{font-size:14px;font-weight:600;margin:0}
+.article-cta a{display:inline-flex;align-items:center;gap:6px;background:white;color:var(--brand);padding:9px 20px;border-radius:var(--r);font-size:13.5px;font-weight:700;text-decoration:none;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -54,131 +66,426 @@
 
 <div class="blog-hero">
   <div class="section-eyebrow" style="justify-content:center">RunDocs Blog</div>
-  <h1>PDF Tips & Guides</h1>
-  <p>Practical guides, tutorials and tips for working smarter with PDF documents.</p>
+  <h1>PDF Tips, Guides & Tutorials</h1>
+  <p>Step-by-step guides to help you work smarter with PDF documents. Free tools, no signup.</p>
 </div>
 
-<section class="blog-section">
-  <div class="blog-container">
+<div class="blog-container">
 
-    <!-- Topics -->
-    <div class="blog-topics" style="margin-bottom:2.5rem">
-      <span style="font-size:12.5px;font-weight:600;color:var(--ink4);align-self:center">Topics:</span>
-      <a href="#" class="blog-topic">All Posts</a>
-      <a href="#" class="blog-topic">PDF Guides</a>
-      <a href="#" class="blog-topic">Tips & Tricks</a>
-      <a href="#" class="blog-topic">AI Tools</a>
-      <a href="#" class="blog-topic">Security</a>
-      <a href="#" class="blog-topic">How To</a>
+  <!-- Featured Article -->
+  <div class="featured-article">
+    <div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;opacity:.7;margin-bottom:.5rem">📌 Featured Guide</div>
+      <h2>Bank Statement PDF to Excel — HBL, MCB, UBL Guide 2026</h2>
+      <p>Step-by-step guide to convert your Pakistani bank statement PDF into Excel format for accounting and budgeting. Works with HBL, MCB, UBL, Meezan, and all major banks.</p>
+      <a href="#" class="featured-btn" onclick="openArticle('bank-statement');return false;">Read Full Guide →</a>
     </div>
+    <div class="featured-icon">🏦</div>
+  </div>
 
-    <!-- Featured + Side -->
-    <div class="blog-featured">
-      <a href="blog/how-to-compress-pdf.html" class="blog-card featured reveal">
-        <div class="blog-card-thumb" style="background:linear-gradient(135deg,var(--brand-pale),#E0E8FF)"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#4F6EF7" stroke-width="1.5"><path d="M12 2v20M8 6h8M8 10h8M8 14h8M8 18h8"/><rect x="5" y="2" width="14" height="20" rx="2"/></svg></div>
-        <div class="blog-card-body">
-          <span class="blog-tag tag-guide">Guide</span>
-          <div class="blog-card-title">How to Compress a PDF Without Losing Quality</div>
-          <div class="blog-card-excerpt">Learn the difference between low, medium and high compression and when to use each. We explain exactly how PDF compression works and how to get the best results for your files.</div>
-          <div class="blog-card-meta"><span>5 min read</span><span class="blog-card-meta-dot"></span><span>Compression</span></div>
-          <span class="blog-read-more">Read article →</span>
-        </div>
-      </a>
-      <div style="display:flex;flex-direction:column;gap:1.25rem">
-        <a href="blog/pdf-to-excel-guide.html" class="blog-card reveal">
-          <div class="blog-card-thumb" style="background:var(--accent-pale);height:140px"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
-          <div class="blog-card-body">
-            <span class="blog-tag tag-tips">Tips</span>
-            <div class="blog-card-title" style="font-size:1rem">PDF to Excel: Smart Table Extraction Guide</div>
-            <div class="blog-card-meta"><span>4 min read</span></div>
-            <span class="blog-read-more">Read →</span>
-          </div>
-        </a>
-        <a href="blog/ask-pdf-ai.html" class="blog-card reveal">
-          <div class="blog-card-thumb" style="background:#F3E8FF;height:140px"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.6"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/></svg></div>
-          <div class="blog-card-body">
-            <span class="blog-tag tag-ai">AI</span>
-            <div class="blog-card-title" style="font-size:1rem">How to Chat with Your PDF Using AI</div>
-            <div class="blog-card-meta"><span>3 min read</span></div>
-            <span class="blog-read-more">Read →</span>
-          </div>
-        </a>
+  <!-- Category Filter -->
+  <div class="blog-cats">
+    <button class="cat-btn active" onclick="filterCat('all',this)">All Articles</button>
+    <button class="cat-btn" onclick="filterCat('convert',this)">Convert PDF</button>
+    <button class="cat-btn" onclick="filterCat('compress',this)">Compress</button>
+    <button class="cat-btn" onclick="filterCat('business',this)">Business</button>
+    <button class="cat-btn" onclick="filterCat('ai',this)">AI Tools</button>
+    <button class="cat-btn" onclick="filterCat('security',this)">Security</button>
+  </div>
+
+  <!-- Blog Grid -->
+  <div class="blog-grid" id="blogGrid">
+
+    <div class="blog-card" data-cat="convert">
+      <div class="blog-img">📊</div>
+      <div class="blog-body">
+        <div class="blog-cat-tag">Convert PDF</div>
+        <div class="blog-title">PDF to Excel: Complete Guide for Pakistan Users 2026</div>
+        <div class="blog-excerpt">Learn how to convert any PDF document into an editable Excel spreadsheet in seconds. Perfect for invoices, reports, and bank statements.</div>
+        <div class="blog-meta"><span>5 min read</span><a class="read-link" href="#" onclick="openArticle('pdf-to-excel');return false;">Read More →</a></div>
       </div>
     </div>
 
-    <!-- Blog Grid -->
-    <div class="blog-grid">
-      <a href="blog/merge-pdf-guide.html" class="blog-card reveal">
-        <div class="blog-card-thumb" style="background:#FEF9EC;height:160px"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.5"><path d="M14 4h6v6M20 4l-9 9"/><path d="M9 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/></svg></div>
-        <div class="blog-card-body">
-          <span class="blog-tag tag-howto">How To</span>
-          <div class="blog-card-title">How to Merge Multiple PDFs Into One File</div>
-          <div class="blog-card-excerpt">Step-by-step guide to combining PDFs in the correct order without any quality loss.</div>
-          <div class="blog-card-meta"><span>3 min read</span><span class="blog-card-meta-dot"></span><span>Merge</span></div>
-          <span class="blog-read-more">Read article →</span>
-        </div>
-      </a>
+    <div class="blog-card" data-cat="compress">
+      <div class="blog-img">🗜️</div>
+      <div class="blog-body">
+        <div class="blog-cat-tag">Compress PDF</div>
+        <div class="blog-title">How to Compress PDF Without Losing Quality — Free Method</div>
+        <div class="blog-excerpt">Reduce your PDF file size by up to 90% without any quality loss. No software installation needed — works directly in your browser.</div>
+        <div class="blog-meta"><span>3 min read</span><a class="read-link" href="#" onclick="openArticle('compress');return false;">Read More →</a></div>
+      </div>
+    </div>
 
-      <a href="blog/protect-pdf.html" class="blog-card reveal reveal-delay-1">
-        <div class="blog-card-thumb" style="background:#FEF2F2;height:160px"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="1.6"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
-        <div class="blog-card-body">
-          <span class="blog-tag tag-security">Security</span>
-          <div class="blog-card-title">How to Password Protect a PDF with AES-256</div>
-          <div class="blog-card-excerpt">Everything you need to know about PDF encryption and how to keep your documents safe.</div>
-          <div class="blog-card-meta"><span>4 min read</span><span class="blog-card-meta-dot"></span><span>Security</span></div>
-          <span class="blog-read-more">Read article →</span>
-        </div>
-      </a>
+    <div class="blog-card" data-cat="business">
+      <div class="blog-img">🧾</div>
+      <div class="blog-body">
+        <div class="blog-cat-tag">Business</div>
+        <div class="blog-title">Invoice to Excel: Save 3 Hours Every Week on Accounting</div>
+        <div class="blog-excerpt">Automatically extract invoice data from PDFs into Excel. Perfect for small businesses and freelancers in Pakistan managing multiple invoices.</div>
+        <div class="blog-meta"><span>4 min read</span><a class="read-link" href="#" onclick="openArticle('invoice');return false;">Read More →</a></div>
+      </div>
+    </div>
 
-      <a href="blog/pdf-to-word.html" class="blog-card reveal reveal-delay-2">
-        <div class="blog-card-thumb" style="background:var(--brand-pale);height:160px"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#4F6EF7" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M8 13h8M8 17h5"/></svg></div>
-        <div class="blog-card-body">
-          <span class="blog-tag tag-guide">Guide</span>
-          <div class="blog-card-title">PDF to Word: How to Convert and Keep Formatting</div>
-          <div class="blog-card-excerpt">Learn why some PDFs convert perfectly and others lose formatting — and what you can do about it.</div>
-          <div class="blog-card-meta"><span>5 min read</span><span class="blog-card-meta-dot"></span><span>Convert</span></div>
-          <span class="blog-read-more">Read article →</span>
-        </div>
-      </a>
+    <div class="blog-card" data-cat="ai">
+      <div class="blog-img">✨</div>
+      <div class="blog-body">
+        <div class="blog-cat-tag">AI Tools</div>
+        <div class="blog-title">AI PDF Summary: Summarize Any Document in 10 Seconds</div>
+        <div class="blog-excerpt">Use AI to instantly summarize long PDF documents, generate study notes, and extract key points. Perfect for students and professionals.</div>
+        <div class="blog-meta"><span>3 min read</span><a class="read-link" href="#" onclick="openArticle('ai-summary');return false;">Read More →</a></div>
+      </div>
+    </div>
 
-      <a href="blog/split-pdf.html" class="blog-card reveal">
-        <div class="blog-card-thumb" style="background:#ECFDF5;height:160px"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="1.6"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg></div>
-        <div class="blog-card-body">
-          <span class="blog-tag tag-howto">How To</span>
-          <div class="blog-card-title">How to Split a PDF Into Individual Pages</div>
-          <div class="blog-card-excerpt">Extract a single page, a range, or split every page into separate files with ease.</div>
-          <div class="blog-card-meta"><span>3 min read</span><span class="blog-card-meta-dot"></span><span>Split</span></div>
-          <span class="blog-read-more">Read article →</span>
-        </div>
-      </a>
+    <div class="blog-card" data-cat="security">
+      <div class="blog-img">🔐</div>
+      <div class="blog-body">
+        <div class="blog-cat-tag">Security</div>
+        <div class="blog-title">How to Password Protect a PDF — AES-256 Encryption Free</div>
+        <div class="blog-excerpt">Add military-grade AES-256 password protection to any PDF document. Keep your confidential documents secure from unauthorized access.</div>
+        <div class="blog-meta"><span>3 min read</span><a class="read-link" href="#" onclick="openArticle('protect');return false;">Read More →</a></div>
+      </div>
+    </div>
 
-      <a href="blog/ai-pdf-summary.html" class="blog-card reveal reveal-delay-1">
-        <div class="blog-card-thumb" style="background:#F3E8FF;height:160px"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.5"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg></div>
-        <div class="blog-card-body">
-          <span class="blog-tag tag-ai">AI</span>
-          <div class="blog-card-title">Summarize Any PDF in Seconds Using AI</div>
-          <div class="blog-card-excerpt">How AI document summarization works and how to get the most accurate summaries from your PDFs.</div>
-          <div class="blog-card-meta"><span>4 min read</span><span class="blog-card-meta-dot"></span><span>AI Tools</span></div>
-          <span class="blog-read-more">Read article →</span>
-        </div>
-      </a>
+    <div class="blog-card" data-cat="convert">
+      <div class="blog-img">📝</div>
+      <div class="blog-body">
+        <div class="blog-cat-tag">Convert PDF</div>
+        <div class="blog-title">PDF to Word: Convert & Edit Any PDF Document for Free</div>
+        <div class="blog-excerpt">Convert your PDF files into fully editable Microsoft Word documents. Preserves formatting, headings, and layout. No signup required.</div>
+        <div class="blog-meta"><span>4 min read</span><a class="read-link" href="#" onclick="openArticle('pdf-to-word');return false;">Read More →</a></div>
+      </div>
+    </div>
 
-      <a href="blog/watermark-pdf.html" class="blog-card reveal reveal-delay-2">
-        <div class="blog-card-thumb" style="background:#FFF7ED;height:160px"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" opacity="0.4"/><polyline points="14 2 14 8 20 8" opacity="0.4"/><text x="6" y="15" font-size="6" font-weight="700" fill="#D97706" stroke="none">DRAFT</text></svg></div>
-        <div class="blog-card-body">
-          <span class="blog-tag tag-tips">Tips</span>
-          <div class="blog-card-title">How to Add a Watermark to a PDF Document</div>
-          <div class="blog-card-excerpt">Add professional text watermarks like CONFIDENTIAL or DRAFT with custom opacity and position.</div>
-          <div class="blog-card-meta"><span>3 min read</span><span class="blog-card-meta-dot"></span><span>Watermark</span></div>
-          <span class="blog-read-more">Read article →</span>
-        </div>
-      </a>
+    <div class="blog-card" data-cat="business">
+      <div class="blog-img">📎</div>
+      <div class="blog-body">
+        <div class="blog-cat-tag">Business</div>
+        <div class="blog-title">Merge Multiple PDFs Online — Free Tool, No Signup</div>
+        <div class="blog-excerpt">Combine multiple PDF files into one document in seconds. Perfect for combining reports, contracts, and documents for clients.</div>
+        <div class="blog-meta"><span>2 min read</span><a class="read-link" href="#" onclick="openArticle('merge');return false;">Read More →</a></div>
+      </div>
+    </div>
+
+    <div class="blog-card" data-cat="ai">
+      <div class="blog-img">🌍</div>
+      <div class="blog-body">
+        <div class="blog-cat-tag">AI Tools</div>
+        <div class="blog-title">Translate PDF to Urdu — Free AI Translation Tool</div>
+        <div class="blog-excerpt">Translate any English PDF document into Urdu, Arabic, or other languages using AI. Perfect for students and businesses in Pakistan.</div>
+        <div class="blog-meta"><span>3 min read</span><a class="read-link" href="#" onclick="openArticle('translate');return false;">Read More →</a></div>
+      </div>
+    </div>
+
+    <div class="blog-card" data-cat="compress">
+      <div class="blog-img">⚡</div>
+      <div class="blog-body">
+        <div class="blog-cat-tag">Tips</div>
+        <div class="blog-title">Top 10 Free PDF Tools Every Pakistani Professional Needs</div>
+        <div class="blog-excerpt">A complete list of free PDF tools you should be using in 2026. From compression to AI summaries — all free, no watermark.</div>
+        <div class="blog-meta"><span>6 min read</span><a class="read-link" href="#" onclick="openArticle('top10');return false;">Read More →</a></div>
+      </div>
     </div>
 
   </div>
-</section>
+</div>
+
+<!-- Article Modals -->
+<div class="article-overlay" id="articleOverlay" onclick="closeArticle(event)">
+  <div class="article-box" id="articleBox">
+    <button class="article-close" onclick="closeArticleBtn()">×</button>
+    <div id="articleContent"></div>
+  </div>
+</div>
 
 <div id="footer-placeholder"></div>
 <script src="shared.js"></script>
+<script>
+const articles = {
+  'bank-statement': {
+    title: 'Bank Statement PDF to Excel — HBL, MCB, UBL Guide 2026',
+    meta: 'Business · 5 min read · June 2026',
+    tool: 'bank-statement.html',
+    toolName: 'Try Bank Statement Converter',
+    content: `
+      <h2>Why Convert Bank Statements to Excel?</h2>
+      <p>Pakistani bank statements come as PDF files that are hard to analyze. Converting them to Excel lets you sort transactions, calculate totals, and create monthly budgets easily — without typing anything manually.</p>
+      <h2>Which Banks Are Supported?</h2>
+      <ul>
+        <li><strong>HBL (Habib Bank Limited)</strong> — Works perfectly with standard statements</li>
+        <li><strong>MCB (Muslim Commercial Bank)</strong> — Supported for all account types</li>
+        <li><strong>UBL (United Bank Limited)</strong> — Full transaction extraction</li>
+        <li><strong>Meezan Bank</strong> — Islamic banking statements supported</li>
+        <li><strong>Bank Alfalah</strong> — Supported</li>
+        <li><strong>Standard Chartered Pakistan</strong> — Supported</li>
+      </ul>
+      <h2>Step-by-Step: Convert Bank Statement to Excel</h2>
+      <ol>
+        <li>Go to <strong>RunDocs Bank Statement tool</strong></li>
+        <li>Click "Upload PDF" or drag your statement file</li>
+        <li>Wait 10-15 seconds for processing</li>
+        <li>Download your Excel file with all transactions</li>
+      </ol>
+      <div class="tip-box"><strong>💡 Pro Tip:</strong> Make sure your bank statement PDF has selectable text (not a scanned image). Most bank portal downloads are text-based and work perfectly.</div>
+      <h2>What You Get in Excel</h2>
+      <p>The Excel output includes columns for: Date, Description, Debit, Credit, and Balance — exactly as shown in your bank statement, but now fully editable and sortable.</p>
+      <h2>Free vs Pro Plan</h2>
+      <p>The free plan supports files up to 25 MB, which covers most bank statements. Pro plan ($9/month) supports up to 100 MB for multi-year statements.</p>
+    `
+  },
+  'pdf-to-excel': {
+    title: 'PDF to Excel: Complete Guide for Pakistan Users 2026',
+    meta: 'Convert PDF · 5 min read · June 2026',
+    tool: 'pdf-to-excel.html',
+    toolName: 'Try PDF to Excel',
+    content: `
+      <h2>When Do You Need PDF to Excel?</h2>
+      <p>Any time you receive data in a PDF — price lists, reports, invoices, financial statements — and need to work with it in a spreadsheet, RunDocs can extract it instantly.</p>
+      <h2>3 Extraction Modes</h2>
+      <ul>
+        <li><strong>Smart Mode (Recommended):</strong> Automatically detects tables and groups matching headers from multiple pages into one sheet</li>
+        <li><strong>Tables Only:</strong> Extracts only table data, ignores plain text</li>
+        <li><strong>Text Mode:</strong> Extracts all text as plain rows — good for unstructured documents</li>
+      </ul>
+      <h2>Step-by-Step Guide</h2>
+      <ol>
+        <li>Open <strong>RunDocs PDF to Excel</strong> tool</li>
+        <li>Upload your PDF file (up to 25 MB free)</li>
+        <li>Select "Smart" mode for best results</li>
+        <li>Click "Convert to Excel"</li>
+        <li>Download your .xlsx file</li>
+      </ol>
+      <div class="tip-box"><strong>💡 Pro Tip:</strong> If your PDF has tables spread across multiple pages with the same headers, Smart Mode automatically combines them into one Excel sheet — saving hours of manual work!</div>
+      <h2>Does It Work With Scanned PDFs?</h2>
+      <p>No — scanned PDFs are images and have no extractable text. For scanned documents, you need OCR software. RunDocs works best with digital PDFs downloaded from websites or created from applications.</p>
+    `
+  },
+  'compress': {
+    title: 'How to Compress PDF Without Losing Quality',
+    meta: 'Compress · 3 min read · June 2026',
+    tool: 'compress-pdf.html',
+    toolName: 'Try PDF Compressor',
+    content: `
+      <h2>Why Compress PDFs?</h2>
+      <p>Large PDF files are hard to email, upload, or share. Compressing reduces the file size while keeping the content perfectly readable. Most email services limit attachments to 10-25 MB.</p>
+      <h2>3 Compression Levels</h2>
+      <ul>
+        <li><strong>Low:</strong> Smallest size reduction, best quality — good for professional documents</li>
+        <li><strong>Medium (Recommended):</strong> Balanced quality and size — good for most uses</li>
+        <li><strong>High:</strong> Maximum compression — good when size matters more than image quality</li>
+      </ul>
+      <h2>How Much Can You Compress?</h2>
+      <p>Typical results: 20-70% reduction. A 10 MB PDF with images can become 2-3 MB. Text-only PDFs compress less but still see 10-20% improvement.</p>
+      <div class="tip-box"><strong>💡 Pro Tip:</strong> For WhatsApp sharing, use Medium compression. For email attachments, try High compression to stay under size limits.</div>
+      <h2>Is Quality Affected?</h2>
+      <p>Text quality is never affected — it stays perfectly sharp. Only image quality may slightly reduce on High mode. For documents with no images (like text reports), all three modes give identical quality.</p>
+    `
+  },
+  'invoice': {
+    title: 'Invoice to Excel: Save 3 Hours Every Week',
+    meta: 'Business · 4 min read · June 2026',
+    tool: 'invoice-to-excel.html',
+    toolName: 'Try Invoice to Excel',
+    content: `
+      <h2>The Problem With PDF Invoices</h2>
+      <p>If you receive invoices as PDFs, manually copying data into Excel takes time and causes errors. RunDocs extracts all invoice data automatically — vendor name, items, quantities, prices, and totals.</p>
+      <h2>Perfect For</h2>
+      <ul>
+        <li>Small businesses processing supplier invoices</li>
+        <li>Accountants managing multiple client invoices</li>
+        <li>Freelancers tracking income and expenses</li>
+        <li>E-commerce sellers managing purchase orders</li>
+      </ul>
+      <h2>How It Works</h2>
+      <ol>
+        <li>Upload your invoice PDF to RunDocs</li>
+        <li>The tool automatically detects invoice tables</li>
+        <li>Downloads as Excel with item, quantity, rate, and total columns</li>
+        <li>Ready to paste into your accounting spreadsheet</li>
+      </ol>
+      <div class="tip-box"><strong>💡 Pro Tip:</strong> Pro users can process multiple invoices in batch — upload 10 at once and download all as Excel files together, saving even more time.</div>
+    `
+  },
+  'ai-summary': {
+    title: 'AI PDF Summary: Summarize Any Document in 10 Seconds',
+    meta: 'AI Tools · 3 min read · June 2026',
+    tool: 'ai-tools.html',
+    toolName: 'Try AI Tools',
+    content: `
+      <h2>What Is AI PDF Summary?</h2>
+      <p>RunDocs AI Summary reads your entire PDF and produces a concise summary in seconds. No more reading through 50-page reports to find the key points.</p>
+      <h2>6 AI Tools Available</h2>
+      <ul>
+        <li><strong>PDF Summary:</strong> Get a 2-3 sentence or full paragraph summary</li>
+        <li><strong>Notes Generator:</strong> Structured study notes in bullet or Cornell format</li>
+        <li><strong>Quiz Generator:</strong> Auto-generate MCQ questions for studying</li>
+        <li><strong>Key Points:</strong> Extract 8-12 most important insights</li>
+        <li><strong>Translate PDF:</strong> Translate to Urdu, Arabic, and more</li>
+        <li><strong>Ask PDF:</strong> Chat with your document — ask any question</li>
+      </ul>
+      <h2>Best Uses for Students</h2>
+      <p>Upload lecture PDFs and get structured study notes instantly. Use Quiz Generator to test yourself before exams. Use Key Points to review before presentations.</p>
+      <div class="tip-box"><strong>💡 Pro Tip:</strong> Use "Ask PDF" to chat with large documents — ask specific questions and get direct answers from the text. Great for contracts, legal documents, and research papers.</div>
+    `
+  },
+  'protect': {
+    title: 'How to Password Protect a PDF — AES-256 Encryption',
+    meta: 'Security · 3 min read · June 2026',
+    tool: 'protect-pdf.html',
+    toolName: 'Try Lock PDF',
+    content: `
+      <h2>Why Password Protect PDFs?</h2>
+      <p>Sensitive documents — contracts, financial reports, ID cards, CVs — should always be password protected before sharing via email or WhatsApp. AES-256 is the same encryption used by banks.</p>
+      <h2>How to Lock Your PDF</h2>
+      <ol>
+        <li>Go to RunDocs "Lock PDF" tool</li>
+        <li>Upload your PDF file</li>
+        <li>Enter a strong password</li>
+        <li>Click "Lock PDF"</li>
+        <li>Share the locked file — share the password separately via call or message</li>
+      </ol>
+      <div class="tip-box"><strong>⚠️ Important:</strong> Save your password safely. RunDocs cannot recover it — we don't store any passwords or file data. If you forget the password, you'll need the original unlocked file.</div>
+      <h2>How to Unlock a PDF</h2>
+      <p>Use the RunDocs "Unlock PDF" tool — enter the current password to remove protection and get an unlocked copy. You must know the correct password to unlock.</p>
+      <h2>What Encryption Is Used?</h2>
+      <p>RunDocs uses AES-256 encryption — the gold standard in document security, used by banks, governments, and military organizations worldwide.</p>
+    `
+  },
+  'pdf-to-word': {
+    title: 'PDF to Word: Convert & Edit Any PDF Document for Free',
+    meta: 'Convert PDF · 4 min read · June 2026',
+    tool: 'pdf-to-word.html',
+    toolName: 'Try PDF to Word',
+    content: `
+      <h2>When Do You Need PDF to Word?</h2>
+      <p>When you receive a PDF contract, form, or report and need to edit it — without retyping everything from scratch. RunDocs extracts the text and formatting into a proper .docx file.</p>
+      <h2>What Gets Preserved</h2>
+      <ul>
+        <li>Headings and subheadings structure</li>
+        <li>Paragraph formatting</li>
+        <li>Bold and italic text</li>
+        <li>Page breaks</li>
+      </ul>
+      <h2>Limitations to Know</h2>
+      <ul>
+        <li>Complex multi-column layouts may shift</li>
+        <li>Images are not transferred</li>
+        <li>Scanned PDFs produce plain text only (no formatting)</li>
+      </ul>
+      <div class="tip-box"><strong>💡 Pro Tip:</strong> After converting, use Ctrl+H in Word to do find-and-replace cleanup if any text needs fixing. The overall structure will be preserved.</div>
+      <h2>Free to Use — No Signup</h2>
+      <p>No account required. Upload, convert, download. Files are deleted from our servers immediately after you download your result.</p>
+    `
+  },
+  'merge': {
+    title: 'Merge Multiple PDFs Online — Free Tool, No Signup',
+    meta: 'Business · 2 min read · June 2026',
+    tool: 'merge-pdf.html',
+    toolName: 'Try Merge PDF',
+    content: `
+      <h2>When to Merge PDFs?</h2>
+      <p>Combining multiple documents into one PDF is useful for submitting job applications (CV + cover letter + certificates), sending project reports, or creating a complete contract package.</p>
+      <h2>How to Merge PDFs</h2>
+      <ol>
+        <li>Open RunDocs Merge PDF tool</li>
+        <li>Upload your PDFs — select all files at once</li>
+        <li>Files merge in the order you selected them</li>
+        <li>Click "Merge PDFs"</li>
+        <li>Download your combined PDF</li>
+      </ol>
+      <div class="tip-box"><strong>💡 Pro Tip:</strong> Select files in the order you want them to appear. First file selected = first in the merged document.</div>
+      <h2>How Many Files Can I Merge?</h2>
+      <p>As many as you need — there's no limit on the number of files. Each file can be up to 25 MB on the free plan.</p>
+    `
+  },
+  'translate': {
+    title: 'Translate PDF to Urdu — Free AI Translation Tool',
+    meta: 'AI Tools · 3 min read · June 2026',
+    tool: 'ai-tools.html#translate',
+    toolName: 'Try PDF Translator',
+    content: `
+      <h2>Who Needs PDF Translation?</h2>
+      <p>Students translating English research papers to Urdu, businesses translating contracts, professionals reading foreign documents — RunDocs AI translation tool handles all of these for free.</p>
+      <h2>Supported Languages</h2>
+      <ul>
+        <li>English ↔ Urdu</li>
+        <li>English ↔ Arabic</li>
+        <li>English ↔ French</li>
+        <li>English ↔ Spanish</li>
+        <li>English ↔ German</li>
+        <li>Auto-detect source language</li>
+      </ul>
+      <h2>How to Translate a PDF</h2>
+      <ol>
+        <li>Go to AI Tools → Translate PDF</li>
+        <li>Upload your PDF</li>
+        <li>Select source language (or use Auto-detect)</li>
+        <li>Select target language (e.g. Urdu)</li>
+        <li>Click Translate and copy the result</li>
+      </ol>
+      <div class="tip-box"><strong>💡 Note:</strong> Translation works on the text content of the PDF. The output is translated text that you can copy. For best results, use PDFs with clear, simple text (not scanned images).</div>
+    `
+  },
+  'top10': {
+    title: 'Top 10 Free PDF Tools Every Pakistani Professional Needs in 2026',
+    meta: 'Tips · 6 min read · June 2026',
+    tool: 'index.html#tools',
+    toolName: 'Browse All Tools',
+    content: `
+      <h2>1. PDF to Excel (Most Popular)</h2>
+      <p>Extract tables from any PDF into Excel. Essential for accountants, finance teams, and anyone who receives data in PDF format. Smart grouping combines multi-page tables automatically.</p>
+      <h2>2. Compress PDF</h2>
+      <p>Reduce PDF size by up to 90%. Essential for sending files via WhatsApp, email, and NADRA/FBR portal uploads that have strict file size limits.</p>
+      <h2>3. Bank Statement to Excel</h2>
+      <p>Convert HBL, MCB, UBL statements to Excel instantly. Perfect for monthly budgeting and tax filing.</p>
+      <h2>4. Merge PDF</h2>
+      <p>Combine multiple documents — CV, cover letter, certificates — into one file for job applications.</p>
+      <h2>5. Lock PDF (AES-256)</h2>
+      <p>Password-protect sensitive documents before sharing. Same encryption used by banks.</p>
+      <h2>6. AI PDF Summary</h2>
+      <p>Summarize 50-page reports in 10 seconds. Perfect for busy professionals and students.</p>
+      <h2>7. PDF to Word</h2>
+      <p>Edit any PDF document in Microsoft Word. No retyping needed.</p>
+      <h2>8. Translate PDF to Urdu</h2>
+      <p>Translate English documents to Urdu instantly using AI. Great for students and government document processing.</p>
+      <h2>9. Ask PDF (AI Chat)</h2>
+      <p>Upload any PDF and ask questions — get direct answers from the document. Perfect for contracts and legal documents.</p>
+      <h2>10. Invoice to Excel</h2>
+      <p>Extract all invoice data to Excel automatically. Saves hours of manual data entry every month.</p>
+      <div class="tip-box"><strong>💡 All Free:</strong> All 10 tools above are completely free on RunDocs — no watermarks, no signup, no hidden fees. Files are deleted immediately after processing.</div>
+    `
+  }
+};
+
+function openArticle(key) {
+  const a = articles[key]; if(!a) return;
+  document.getElementById('articleContent').innerHTML = `
+    <h1>${a.title}</h1>
+    <div class="article-meta">${a.meta}</div>
+    ${a.content}
+    <div class="article-cta">
+      <p>Ready to try it yourself?</p>
+      <a href="${a.tool}">🚀 ${a.toolName} →</a>
+    </div>
+  `;
+  document.getElementById('articleOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeArticle(e) {
+  if(e.target === document.getElementById('articleOverlay')) closeArticleBtn();
+}
+function closeArticleBtn() {
+  document.getElementById('articleOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeArticleBtn(); });
+
+function filterCat(cat, btn) {
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.blog-card').forEach(card => {
+    card.style.display = (cat === 'all' || card.dataset.cat === cat) ? 'flex' : 'none';
+  });
+}
+</script>
 </body>
 </html>
