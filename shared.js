@@ -453,7 +453,6 @@ function buildNav(){
   <div style="padding:0 .5rem">
     <a href="index.html">${_iconHTML("ti-home")} Home</a>
     <a href="ai-tools.html">${_iconHTML("ti-sparkles")} AI Tools</a>
-    <a href="index.html#pricing">${_iconHTML("ti-coin")} Pricing</a>
     <a href="contact.html">${_iconHTML("ti-mail")} Contact</a>
   </div>
   <div class="mobile-nav-sep">All Tools</div>
@@ -492,8 +491,8 @@ function buildFooter(){
     <div class="footer-col">
       <h4>Company</h4>
       <a href="about.html">About Us</a>
-      <a href="blog.html">Blog</a>
       <a href="contact.html">Contact Us</a>
+      <a href="blog.html">Blog</a>
     </div>
     <div class="footer-col">
       <h4>Legal</h4>
