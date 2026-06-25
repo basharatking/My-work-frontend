@@ -6,30 +6,30 @@ const FREE_BYTES = FREE_MB * 1024 * 1024;
 
 /* ── Real Icon Map (Tabler Icons — replaces all emoji) ── */
 const TOOL_ICONS = {
-  "compress-pdf.html": "ti-zoom-out",
-  "merge-pdf.html": "ti-stack-2",
-  "split-pdf.html": "ti-cut",
-  "pdf-to-word.html": "ti-file-word",
-  "pdf-to-excel.html": "ti-file-spreadsheet",
-  "pdf-to-jpg.html": "ti-photo",
-  "pdf-to-pptx.html": "ti-presentation",
-  "pdf-to-text.html": "ti-file-text",
-  "word-to-pdf.html": "ti-file-type-doc",
-  "excel-to-pdf.html": "ti-file-type-xls",
-  "jpg-to-pdf.html": "ti-photo-plus",
-  "rotate-pdf.html": "ti-rotate-clockwise",
-  "delete-pages.html": "ti-trash",
-  "reorder-pages.html": "ti-arrows-sort",
-  "add-page-numbers.html": "ti-number-123",
-  "protect-pdf.html": "ti-lock",
-  "unlock-pdf.html": "ti-lock-open",
-  "watermark-pdf.html": "ti-stamp",
-  "sign-pdf.html": "ti-signature",
-  "repair-pdf.html": "ti-tool",
-  "optimize-pdf.html": "ti-bolt",
-  "bank-statement.html": "ti-building-bank",
-  "invoice-to-excel.html": "ti-receipt",
-  "ai-tools.html": "ti-sparkles",
+  "/compress-pdf": "ti-zoom-out",
+  "/merge-pdf": "ti-stack-2",
+  "/split-pdf": "ti-cut",
+  "/pdf-to-word": "ti-file-word",
+  "/pdf-to-excel": "ti-file-spreadsheet",
+  "/pdf-to-jpg": "ti-photo",
+  "/pdf-to-pptx": "ti-presentation",
+  "/pdf-to-text": "ti-file-text",
+  "/word-to-pdf": "ti-file-type-doc",
+  "/excel-to-pdf": "ti-file-type-xls",
+  "/jpg-to-pdf": "ti-photo-plus",
+  "/rotate-pdf": "ti-rotate-clockwise",
+  "/delete-pages": "ti-trash",
+  "/reorder-pages": "ti-arrows-sort",
+  "/add-page-numbers": "ti-number-123",
+  "/protect-pdf": "ti-lock",
+  "/unlock-pdf": "ti-lock-open",
+  "/watermark-pdf": "ti-stamp",
+  "/sign-pdf": "ti-signature",
+  "/repair-pdf": "ti-tool",
+  "/optimize-pdf": "ti-bolt",
+  "/bank-statement": "ti-building-bank",
+  "/invoice-to-excel": "ti-receipt",
+  "/ai-tools": "ti-sparkles",
 };
 
 /* Icon for the small AI-feature cards on ai-tools.html, keyed by element id */
@@ -49,7 +49,7 @@ function _iconHTML(name, extraClass) {
 /* Replace emoji glyphs inside known icon containers with real Tabler icons,
    based on the current page filename or explicit data-tool attributes. */
 function _applyRealIcons() {
-  const path = window.location.pathname.split("/").pop() || "index.html";
+  const path = window.location.pathname.split("/").pop() || "/";
   const iconName = TOOL_ICONS[path];
 
   if (iconName) {
@@ -282,79 +282,79 @@ const NAV_DROPS = {
     label: "Convert PDF",
     icon: "ti-replace",
     tools: [
-      ["pdf-to-word.html","ti-file-word","PDF to Word","Convert PDF to editable .docx"],
-      ["pdf-to-excel.html","ti-file-spreadsheet","PDF to Excel","Smart table extraction"],
-      ["pdf-to-jpg.html","ti-photo","PDF to JPG","Export pages as images"],
-      ["pdf-to-pptx.html","ti-presentation","PDF to PowerPoint","Each page = one slide"],
-      ["pdf-to-text.html","ti-file-text","PDF to Text","Extract raw plain text"],
-      ["word-to-pdf.html","ti-file-type-doc","Word to PDF","Convert .docx to PDF"],
-      ["excel-to-pdf.html","ti-file-type-xls","Excel to PDF","Convert .xlsx to PDF"],
-      ["jpg-to-pdf.html","ti-photo-plus","Image to PDF","JPG/PNG to PDF"],
+      ["/pdf-to-word","ti-file-word","PDF to Word","Convert PDF to editable .docx"],
+      ["/pdf-to-excel","ti-file-spreadsheet","PDF to Excel","Smart table extraction"],
+      ["/pdf-to-jpg","ti-photo","PDF to JPG","Export pages as images"],
+      ["/pdf-to-pptx","ti-presentation","PDF to PowerPoint","Each page = one slide"],
+      ["/pdf-to-text","ti-file-text","PDF to Text","Extract raw plain text"],
+      ["/word-to-pdf","ti-file-type-doc","Word to PDF","Convert .docx to PDF"],
+      ["/excel-to-pdf","ti-file-type-xls","Excel to PDF","Convert .xlsx to PDF"],
+      ["/jpg-to-pdf","ti-photo-plus","Image to PDF","JPG/PNG to PDF"],
     ]
   },
   merge: {
     label: "Merge PDF",
     icon: "ti-stack-2",
     tools: [
-      ["merge-pdf.html","ti-stack-2","Merge PDF","Combine multiple PDFs into one"],
-      ["rotate-pdf.html","ti-rotate-clockwise","Rotate PDF","90°, 180°, 270° rotation"],
-      ["delete-pages.html","ti-trash","Delete Pages","Remove unwanted pages"],
-      ["reorder-pages.html","ti-arrows-sort","Reorder Pages","Rearrange page order"],
-      ["add-page-numbers.html","ti-number-123","Add Page Numbers","Auto number pages"],
+      ["/merge-pdf","ti-stack-2","Merge PDF","Combine multiple PDFs into one"],
+      ["/rotate-pdf","ti-rotate-clockwise","Rotate PDF","90°, 180°, 270° rotation"],
+      ["/delete-pages","ti-trash","Delete Pages","Remove unwanted pages"],
+      ["/reorder-pages","ti-arrows-sort","Reorder Pages","Rearrange page order"],
+      ["/add-page-numbers","ti-number-123","Add Page Numbers","Auto number pages"],
     ]
   },
   split: {
     label: "Split PDF",
     icon: "ti-cut",
     tools: [
-      ["split-pdf.html","ti-cut","Split PDF","Split into individual pages"],
-      ["split-pdf.html","ti-file-export","Extract Pages","Extract a specific page range"],
-      ["delete-pages.html","ti-trash","Delete Pages","Remove specific pages"],
-      ["pdf-to-jpg.html","ti-photo","PDF to Images","Export each page as JPG"],
-      ["pdf-to-text.html","ti-file-text","Extract Text","Pull text content from PDF"],
+      ["/split-pdf","ti-cut","Split PDF","Split into individual pages"],
+      ["/split-pdf","ti-file-export","Extract Pages","Extract a specific page range"],
+      ["/delete-pages","ti-trash","Delete Pages","Remove specific pages"],
+      ["/pdf-to-jpg","ti-photo","PDF to Images","Export each page as JPG"],
+      ["/pdf-to-text","ti-file-text","Extract Text","Pull text content from PDF"],
     ]
   },
   compress: {
     label: "Compress PDF",
     icon: "ti-zoom-out",
     tools: [
-      ["compress-pdf.html","ti-zoom-out","Compress PDF","Reduce file size up to 90%"],
-      ["optimize-pdf.html","ti-bolt","Optimize PDF","Optimize for web/print"],
-      ["repair-pdf.html","ti-tool","Repair PDF","Fix corrupted PDFs"],
+      ["/compress-pdf","ti-zoom-out","Compress PDF","Reduce file size up to 90%"],
+      ["/optimize-pdf","ti-bolt","Optimize PDF","Optimize for web/print"],
+      ["/repair-pdf","ti-tool","Repair PDF","Fix corrupted PDFs"],
     ]
   },
   security: {
     label: "Security",
     icon: "ti-shield-lock",
     tools: [
-      ["protect-pdf.html","ti-lock","Lock PDF","AES-256 encryption"],
-      ["unlock-pdf.html","ti-lock-open","Unlock PDF","Remove password"],
-      ["watermark-pdf.html","ti-stamp","Watermark PDF","Add text watermark"],
-      ["sign-pdf.html","ti-signature","Sign PDF","Add signature"],
+      ["/protect-pdf","ti-lock","Lock PDF","AES-256 encryption"],
+      ["/unlock-pdf","ti-lock-open","Unlock PDF","Remove password"],
+      ["/watermark-pdf","ti-stamp","Watermark PDF","Add text watermark"],
+      ["/sign-pdf","ti-signature","Sign PDF","Add signature"],
     ]
   },
   ai: {
     label: "AI Tools",
     icon: "ti-sparkles",
     tools: [
-      ["ai-tools.html#ask","ti-message-circle-2","Ask PDF","Chat with your document"],
-      ["ai-tools.html#summary","ti-clipboard-text","Summarize PDF","Get instant summary"],
-      ["ai-tools.html#notes","ti-notes","Generate Notes","Study notes from PDF"],
-      ["ai-tools.html#quiz","ti-help-circle","Quiz Generator","Auto quiz questions"],
-      ["ai-tools.html#keypoints","ti-bulb","Key Points","Extract key insights"],
-      ["ai-tools.html#translate","ti-language","Translate PDF","Urdu, Arabic & more"],
+      ["/ai-tools#ask","ti-message-circle-2","Ask PDF","Chat with your document"],
+      ["/ai-tools#summary","ti-clipboard-text","Summarize PDF","Get instant summary"],
+      ["/ai-tools#notes","ti-notes","Generate Notes","Study notes from PDF"],
+      ["/ai-tools#quiz","ti-help-circle","Quiz Generator","Auto quiz questions"],
+      ["/ai-tools#keypoints","ti-bulb","Key Points","Extract key insights"],
+      ["/ai-tools#translate","ti-language","Translate PDF","Urdu, Arabic & more"],
     ]
   }
 };
 
 /* ── Mobile tools data — icon field now holds a Tabler class ── */
 const MOBILE_TOOLS = [
-  { cat:"Convert PDF", icon:"ti-replace", tools:[["pdf-to-word.html","ti-file-word","PDF to Word"],["pdf-to-excel.html","ti-file-spreadsheet","PDF to Excel"],["pdf-to-jpg.html","ti-photo","PDF to JPG"],["pdf-to-pptx.html","ti-presentation","PDF to PowerPoint"],["pdf-to-text.html","ti-file-text","PDF to Text"],["word-to-pdf.html","ti-file-type-doc","Word to PDF"],["excel-to-pdf.html","ti-file-type-xls","Excel to PDF"],["jpg-to-pdf.html","ti-photo-plus","Image to PDF"]] },
-  { cat:"Merge & Organize", icon:"ti-folder", tools:[["merge-pdf.html","ti-stack-2","Merge PDF"],["split-pdf.html","ti-cut","Split PDF"],["rotate-pdf.html","ti-rotate-clockwise","Rotate PDF"],["delete-pages.html","ti-trash","Delete Pages"],["reorder-pages.html","ti-arrows-sort","Reorder Pages"],["add-page-numbers.html","ti-number-123","Page Numbers"]] },
-  { cat:"Compress", icon:"ti-zoom-out", tools:[["compress-pdf.html","ti-zoom-out","Compress PDF"],["optimize-pdf.html","ti-bolt","Optimize PDF"],["repair-pdf.html","ti-tool","Repair PDF"]] },
-  { cat:"Security", icon:"ti-shield-lock", tools:[["protect-pdf.html","ti-lock","Lock PDF"],["unlock-pdf.html","ti-lock-open","Unlock PDF"],["watermark-pdf.html","ti-stamp","Watermark"],["sign-pdf.html","ti-signature","Sign PDF"]] },
-  { cat:"AI Tools", icon:"ti-sparkles", tools:[["ai-tools.html","ti-message-circle-2","Ask PDF"],["ai-tools.html#summary","ti-clipboard-text","Summarize"],["ai-tools.html#notes","ti-notes","Notes"],["ai-tools.html#quiz","ti-help-circle","Quiz Generator"],["ai-tools.html#translate","ti-language","Translate"]] },
-  { cat:"Business", icon:"ti-briefcase", tools:[["invoice-to-excel.html","ti-receipt","Invoice to Excel"],["bank-statement.html","ti-building-bank","Bank Statement"],["pdf-to-excel.html","ti-file-spreadsheet","Smart Table Extract"]] },
+  { cat:"Convert PDF", icon:"ti-replace", tools:[["/pdf-to-word","ti-file-word","PDF to Word"],["/pdf-to-excel","ti-file-spreadsheet","PDF to Excel"],["/pdf-to-jpg","ti-photo","PDF to JPG"],["/pdf-to-pptx","ti-presentation","PDF to PowerPoint"],["/pdf-to-text","ti-file-text","PDF to Text"],["/word-to-pdf","ti-file-type-doc","Word to PDF"],["/excel-to-pdf","ti-file-type-xls","Excel to PDF"],["/jpg-to-pdf","ti-photo-plus","Image to PDF"]] },
+  { cat:"Merge & Organize", icon:"ti-folder", tools:[["/merge-pdf","ti-stack-2","Merge PDF"],["/split-pdf","ti-cut","Split PDF"],["/rotate-pdf","ti-rotate-clockwise","Rotate PDF"],["/delete-pages","ti-trash","Delete Pages"],["/reorder-pages","ti-arrows-sort","Reorder Pages"],["/add-page-numbers","ti-number-123","Page Numbers"]] },
+  { cat:"Compress", icon:"ti-zoom-out", tools:[["/compress-pdf","ti-zoom-out","Compress PDF"],["/optimize-pdf","ti-bolt","Optimize PDF"],["/repair-pdf","ti-tool","Repair PDF"]] },
+  { cat:"Security", icon:"ti-shield-lock", tools:[["/protect-pdf","ti-lock","Lock PDF"],["/unlock-pdf","ti-lock-open","Unlock PDF"],["/watermark-pdf","ti-stamp","Watermark"],["/sign-pdf","ti-signature","Sign PDF"]] },
+  { cat:"AI Tools", icon:"ti-sparkles", tools:[["/ai-tools","ti-message-circle-2","Ask PDF"],["/ai-tools#summary","ti-clipboard-text","Summarize"],["/ai-tools#notes","ti-notes","Notes"],["/ai-tools#quiz","ti-help-circle","Quiz Generator"],["/ai-tools#translate","ti-language","Translate"]] },
+  { cat:"Business", icon:"ti-briefcase", tools:[["/invoice-to-excel","ti-receipt","Invoice to Excel"],["/bank-statement","ti-building-bank","Bank Statement"],["/pdf-to-excel","ti-file-spreadsheet","Smart Table Extract"]] },
 ];
 
 /* ── Build dropdown HTML ── */
@@ -422,15 +422,15 @@ function buildNav(){
 
   return `
 <nav class="nav">
-  <a href="index.html" class="nav-logo">
+  <a href="/" class="nav-logo">
     <div class="nav-logo-mark">${LOGO_SVG}</div>
     <span class="nav-logo-name">Run<span>Docs</span></span>
   </a>
 
   <div class="nav-links">
-    <a href="merge-pdf.html" class="nav-plain-link">Merge PDF</a>
-    <a href="split-pdf.html" class="nav-plain-link">Split PDF</a>
-    <a href="compress-pdf.html" class="nav-plain-link">Compress PDF</a>
+    <a href="/merge-pdf" class="nav-plain-link">Merge PDF</a>
+    <a href="/split-pdf" class="nav-plain-link">Split PDF</a>
+    <a href="/compress-pdf" class="nav-plain-link">Compress PDF</a>
     ${_buildDrop("convert")}
     ${_buildAllTools()}
   </div>
@@ -438,8 +438,8 @@ function buildNav(){
   <div class="nav-spacer"></div>
   <div class="nav-right">
     <button class="nav-icon-btn" id="darkBtn" onclick="toggleDark()"></button>
-    <a href="contact.html" class="nav-btn-outline">Sign In</a>
-    <a href="index.html#tools" class="nav-btn-primary">Get Started →</a>
+    <a href="/contact" class="nav-btn-outline">Sign In</a>
+    <a href="/#tools" class="nav-btn-primary">Get Started →</a>
   </div>
   <button class="hamburger" id="menuBtn" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
@@ -452,15 +452,15 @@ function buildNav(){
   </div>
   <div class="mobile-nav-sep">Navigation</div>
   <div style="padding:0 .5rem">
-    <a href="index.html">${_iconHTML("ti-home")} Home</a>
-    <a href="ai-tools.html">${_iconHTML("ti-sparkles")} AI Tools</a>
-    <a href="contact.html">${_iconHTML("ti-mail")} Contact</a>
+    <a href="/">${_iconHTML("ti-home")} Home</a>
+    <a href="/ai-tools">${_iconHTML("ti-sparkles")} AI Tools</a>
+    <a href="/contact">${_iconHTML("ti-mail")} Contact</a>
   </div>
   <div class="mobile-nav-sep">All Tools</div>
   <div style="padding:0 .5rem">${mobileAccs}</div>
   <div style="padding:.75rem 1rem;display:flex;flex-direction:column;gap:.5rem;border-top:1px solid var(--border);margin-top:.5rem">
-    <a href="contact.html" class="btn btn-outline btn-full" style="justify-content:center">Sign In</a>
-    <a href="index.html#tools" class="btn btn-primary btn-full" style="justify-content:center">Get Started Free →</a>
+    <a href="/contact" class="btn btn-outline btn-full" style="justify-content:center">Sign In</a>
+    <a href="/#tools" class="btn btn-primary btn-full" style="justify-content:center">Get Started Free →</a>
   </div>
 </div>`;
 }
@@ -482,24 +482,24 @@ function buildFooter(){
     </div>
     <div class="footer-col">
       <h4>Tools</h4>
-      <a href="compress-pdf.html">Compress PDF</a>
-      <a href="merge-pdf.html">Merge PDF</a>
-      <a href="pdf-to-word.html">PDF to Word</a>
-      <a href="pdf-to-excel.html">PDF to Excel</a>
-      <a href="ai-tools.html">AI Tools</a>
-      <a href="protect-pdf.html">Lock PDF</a>
+      <a href="/compress-pdf">Compress PDF</a>
+      <a href="/merge-pdf">Merge PDF</a>
+      <a href="/pdf-to-word">PDF to Word</a>
+      <a href="/pdf-to-excel">PDF to Excel</a>
+      <a href="/ai-tools">AI Tools</a>
+      <a href="/protect-pdf">Lock PDF</a>
     </div>
     <div class="footer-col">
       <h4>Company</h4>
-      <a href="about.html">About Us</a>
-      <a href="contact.html">Contact Us</a>
-      <a href="blog.html">Blog</a>
+      <a href="/about">About Us</a>
+      <a href="/contact">Contact Us</a>
+      <a href="/blog">Blog</a>
     </div>
     <div class="footer-col">
       <h4>Legal</h4>
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="terms.html">Terms of Service</a>
-      <a href="about.html#security">Security</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+      <a href="/about#security">Security</a>
       <a href="sitemap.xml">Sitemap</a>
     </div>
   </div>
@@ -526,9 +526,9 @@ function buildFooter(){
       </a>
     </div>
     <div class="footer-bottom-links">
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
-      <a href="contact.html">Contact</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="/contact">Contact</a>
     </div>
   </div>
 </footer>`;

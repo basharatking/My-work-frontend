@@ -1,6 +1,158 @@
 [build]
   publish = "."
 
+# ── 301 redirects: old .html URLs → clean URLs (preserves SEO / bookmarks / backlinks) ──
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/privacy.html"
+  to = "/privacy"
+  status = 301
+
+[[redirects]]
+  from = "/terms.html"
+  to = "/terms"
+  status = 301
+
+[[redirects]]
+  from = "/about.html"
+  to = "/about"
+  status = 301
+
+[[redirects]]
+  from = "/contact.html"
+  to = "/contact"
+  status = 301
+
+[[redirects]]
+  from = "/ai-tools.html"
+  to = "/ai-tools"
+  status = 301
+
+[[redirects]]
+  from = "/compress-pdf.html"
+  to = "/compress-pdf"
+  status = 301
+
+[[redirects]]
+  from = "/merge-pdf.html"
+  to = "/merge-pdf"
+  status = 301
+
+[[redirects]]
+  from = "/split-pdf.html"
+  to = "/split-pdf"
+  status = 301
+
+[[redirects]]
+  from = "/pdf-to-word.html"
+  to = "/pdf-to-word"
+  status = 301
+
+[[redirects]]
+  from = "/pdf-to-excel.html"
+  to = "/pdf-to-excel"
+  status = 301
+
+[[redirects]]
+  from = "/pdf-to-jpg.html"
+  to = "/pdf-to-jpg"
+  status = 301
+
+[[redirects]]
+  from = "/pdf-to-pptx.html"
+  to = "/pdf-to-pptx"
+  status = 301
+
+[[redirects]]
+  from = "/pdf-to-text.html"
+  to = "/pdf-to-text"
+  status = 301
+
+[[redirects]]
+  from = "/protect-pdf.html"
+  to = "/protect-pdf"
+  status = 301
+
+[[redirects]]
+  from = "/unlock-pdf.html"
+  to = "/unlock-pdf"
+  status = 301
+
+[[redirects]]
+  from = "/watermark-pdf.html"
+  to = "/watermark-pdf"
+  status = 301
+
+[[redirects]]
+  from = "/rotate-pdf.html"
+  to = "/rotate-pdf"
+  status = 301
+
+[[redirects]]
+  from = "/jpg-to-pdf.html"
+  to = "/jpg-to-pdf"
+  status = 301
+
+[[redirects]]
+  from = "/add-page-numbers.html"
+  to = "/add-page-numbers"
+  status = 301
+
+[[redirects]]
+  from = "/word-to-pdf.html"
+  to = "/word-to-pdf"
+  status = 301
+
+[[redirects]]
+  from = "/excel-to-pdf.html"
+  to = "/excel-to-pdf"
+  status = 301
+
+[[redirects]]
+  from = "/invoice-to-excel.html"
+  to = "/invoice-to-excel"
+  status = 301
+
+[[redirects]]
+  from = "/bank-statement.html"
+  to = "/bank-statement"
+  status = 301
+
+[[redirects]]
+  from = "/blog.html"
+  to = "/blog"
+  status = 301
+
+[[redirects]]
+  from = "/delete-pages.html"
+  to = "/delete-pages"
+  status = 301
+
+[[redirects]]
+  from = "/reorder-pages.html"
+  to = "/reorder-pages"
+  status = 301
+
+[[redirects]]
+  from = "/sign-pdf.html"
+  to = "/sign-pdf"
+  status = 301
+
+[[redirects]]
+  from = "/repair-pdf.html"
+  to = "/repair-pdf"
+  status = 301
+
+[[redirects]]
+  from = "/optimize-pdf.html"
+  to = "/optimize-pdf"
+  status = 301
+
+# ── 200 rewrites: clean URLs → serve the actual .html file (URL bar stays clean) ──
 [[redirects]]
   from = "/privacy"
   to = "/privacy.html"
@@ -119,6 +271,31 @@
 [[redirects]]
   from = "/blog"
   to = "/blog.html"
+  status = 200
+
+[[redirects]]
+  from = "/delete-pages"
+  to = "/delete-pages.html"
+  status = 200
+
+[[redirects]]
+  from = "/reorder-pages"
+  to = "/reorder-pages.html"
+  status = 200
+
+[[redirects]]
+  from = "/sign-pdf"
+  to = "/sign-pdf.html"
+  status = 200
+
+[[redirects]]
+  from = "/repair-pdf"
+  to = "/repair-pdf.html"
+  status = 200
+
+[[redirects]]
+  from = "/optimize-pdf"
+  to = "/optimize-pdf.html"
   status = 200
 
 [[headers]]
