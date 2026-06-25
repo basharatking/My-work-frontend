@@ -24,15 +24,24 @@
       <p class="tool-sub">Combine multiple PDF files into one perfectly ordered document.</p>
     </div>
     <div class="tool-card">
-      <div class="upload-zone" onclick="document.getElementById('fi-merge').click()">
+      <div class="upload-zone" id="merge-upload-zone" onclick="document.getElementById('fi-merge').click()">
         <div class="uz-icon"></div>
         <div class="uz-title">Drop your file here or click to browse</div>
         <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
         <div class="uz-badge">🔒 Files deleted after processing</div>
         <input class="file-input" id="fi-merge" type="file" accept=".pdf" multiple onchange="handleFiles('merge',this)">
       </div>
-      <div class="file-chips" id="fl-merge"></div>
-      <div class="pdf-preview-area" id="preview-merge"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
+
+      <div class="file-review-step" id="frs-merge">
+        <div class="frs-header">
+          <div class="frs-count" id="frs-count-merge"></div>
+          <button class="frs-restart" type="button" onclick="restartMerge()"><i class="ti ti-rotate" aria-hidden="true"></i> Start over</button>
+        </div>
+        <div class="file-grid" id="file-grid-merge"></div>
+        <button class="frs-add-more" type="button" onclick="document.getElementById('fi-merge-add').click()"><i class="ti ti-plus" aria-hidden="true"></i> Add more files</button>
+        <input class="file-input" id="fi-merge-add" type="file" accept=".pdf" multiple onchange="addMoreMergeFiles(this)">
+      </div>
+
       <div id="ocr-hint-merge"></div>
       
       <button class="action-btn" id="btn-merge" onclick="run_merge()">Merge PDFs</button>
@@ -53,7 +62,79 @@ async function run_merge(){
     showDownloadBtn("merge",blob,"merged.pdf");
   }catch(e){showResult("merge",e.message,true);}
   finally{setBtnState("merge",false,"Merge PDFs");}
-}</script>
+}
+
+/* ── New select → review/reorder → convert flow ── */
+window.onFiles_merge = function(){ renderMergeGrid(); };
+
+function renderMergeGrid(){
+  const files = fileStore["merge"]||[];
+  const uz = document.getElementById("merge-upload-zone");
+  const frs = document.getElementById("frs-merge");
+  if(!files.length){ uz.style.display=""; frs.classList.remove("show"); return; }
+  uz.style.display="none"; frs.classList.add("show");
+  document.getElementById("frs-count-merge").innerHTML = `${files.length} file${files.length>1?'s':''} selected <span>— drag to reorder, they'll merge in this sequence</span>`;
+  const grid = document.getElementById("file-grid-merge");
+  grid.innerHTML = files.map((f,i)=>`
+    <div class="file-thumb-card" draggable="true" data-idx="${i}" ondragstart="_mergeDragStart(event)" ondragover="_mergeDragOver(event)" ondrop="_mergeDrop(event)" ondragend="_mergeDragEnd(event)">
+      <button class="ftc-rm" type="button" onclick="removeMergeFile(${i})" aria-label="Remove file">×</button>
+      <div class="ftc-order">${i+1}</div>
+      <div class="ftc-canvas-wrap" id="ftc-canvas-${i}"><i class="ti ti-loader-2 ftc-loading ftc-spin" aria-hidden="true"></i></div>
+      <div class="ftc-name">${_esc(f.name)}</div>
+      <div class="ftc-size">${_bytes(f.size)}</div>
+    </div>
+  `).join("");
+  files.forEach((f,i)=>_renderMergeThumb(f,i));
+}
+
+async function _renderMergeThumb(file, idx){
+  const wrap = document.getElementById(`ftc-canvas-${idx}`);
+  try{
+    const buf = await file.arrayBuffer();
+    if(typeof pdfjsLib==="undefined"){ await _loadScript("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"); pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"; }
+    const pdf = await pdfjsLib.getDocument({data:buf}).promise;
+    const page = await pdf.getPage(1);
+    const vp = page.getViewport({scale:0.42});
+    const canvas = document.createElement("canvas"); canvas.width=vp.width; canvas.height=vp.height;
+    await page.render({canvasContext:canvas.getContext("2d"), viewport:vp}).promise;
+    if(wrap){ wrap.innerHTML=""; wrap.appendChild(canvas); }
+  }catch(e){ console.warn("merge thumb:",e); if(wrap) wrap.innerHTML=`<i class="ti ti-file-text ftc-fallback" aria-hidden="true"></i>`; }
+}
+
+function removeMergeFile(idx){
+  fileStore["merge"].splice(idx,1);
+  renderMergeGrid();
+}
+
+function addMoreMergeFiles(input){
+  const newFiles = Array.from(input.files); if(!newFiles.length) return;
+  for(const f of newFiles){ if(f.size > FREE_BYTES){ _freemiumModal(f.name, f.size); input.value=""; return; } }
+  fileStore["merge"] = [...(fileStore["merge"]||[]), ...newFiles];
+  input.value="";
+  renderMergeGrid();
+}
+
+function restartMerge(){
+  fileStore["merge"] = [];
+  document.getElementById("fi-merge").value = "";
+  renderMergeGrid();
+}
+
+let _mergeDragSrc = null;
+function _mergeDragStart(e){ _mergeDragSrc = +e.currentTarget.dataset.idx; e.currentTarget.classList.add("dragging"); e.dataTransfer.effectAllowed = "move"; }
+function _mergeDragOver(e){ e.preventDefault(); }
+function _mergeDrop(e){
+  e.preventDefault();
+  const targetIdx = +e.currentTarget.dataset.idx;
+  if(_mergeDragSrc===null || _mergeDragSrc===targetIdx) return;
+  const arr = fileStore["merge"];
+  const [moved] = arr.splice(_mergeDragSrc,1);
+  arr.splice(targetIdx,0,moved);
+  _mergeDragSrc = null;
+  renderMergeGrid();
+}
+function _mergeDragEnd(e){ e.currentTarget.classList.remove("dragging"); }
+</script>
 
 <section style="padding:2.5rem 0;border-top:1px solid var(--border);margin-top:2rem">
   <h2 style="font-size:18px;font-weight:700;color:var(--ink);margin-bottom:1.25rem">Frequently asked questions</h2>

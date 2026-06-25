@@ -522,6 +522,52 @@ img, svg { display: block; }
 .pdf-canvas-wrap { display: flex; justify-content: center; padding: 1rem; max-height: 280px; overflow: hidden; }
 .pdf-canvas-wrap canvas { max-width: 100%; height: auto; border-radius: var(--rs); box-shadow: var(--shadow-md); }
 
+/* ── FILE REVIEW STEP (merge-pdf style: select → review/reorder → convert) ── */
+.file-review-step { display: none; }
+.file-review-step.show { display: block; animation: slideUp .22s var(--ease) both; }
+.frs-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; gap: 1rem; }
+.frs-count { font-size: 13.5px; font-weight: 600; color: var(--ink); }
+.frs-count span { color: var(--ink4); font-weight: 400; }
+.frs-restart { display: flex; align-items: center; gap: 5px; font-size: 12.5px; font-weight: 600; color: var(--brand); background: none; border: none; cursor: pointer; padding: 4px 0; flex-shrink: 0; }
+.frs-restart:hover { color: var(--brand-dark); }
+.file-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 12px; }
+.file-thumb-card {
+  position: relative; background: var(--bg); border: 1.5px solid var(--border);
+  border-radius: var(--r); padding: 10px 8px 9px; cursor: grab; transition: var(--t);
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+}
+.file-thumb-card:hover { border-color: var(--brand-border); }
+.file-thumb-card.dragging { opacity: .4; }
+.ftc-rm {
+  position: absolute; top: 6px; right: 6px; width: 20px; height: 20px;
+  border-radius: 50%; background: var(--bg3); color: var(--ink4);
+  font-size: 14px; line-height: 1; display: flex; align-items: center; justify-content: center;
+  border: none; cursor: pointer; transition: var(--t); z-index: 2;
+}
+.ftc-rm:hover { background: var(--red-bg); color: var(--red); }
+.ftc-order {
+  position: absolute; top: 6px; left: 6px; min-width: 18px; height: 18px; padding: 0 4px;
+  border-radius: var(--round); background: var(--brand); color: #fff;
+  font-size: 10.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; z-index: 2;
+}
+.ftc-canvas-wrap {
+  width: 100%; height: 92px; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 7px; border-radius: var(--rs); overflow: hidden; background: var(--bg3);
+}
+.ftc-canvas-wrap canvas { max-width: 100%; max-height: 100%; box-shadow: var(--shadow-md); border-radius: 2px; }
+.ftc-loading, .ftc-fallback { color: var(--ink4); font-size: 1.4rem; }
+.ftc-spin { animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.ftc-name { font-size: 11.5px; font-weight: 500; color: var(--ink2); width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ftc-size { font-size: 10.5px; color: var(--ink4); margin-top: 1px; }
+.frs-add-more {
+  display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%;
+  margin-top: 12px; padding: 11px; border: 1.5px dashed var(--brand-border); border-radius: var(--r);
+  background: none; color: var(--brand); font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: var(--t); font-family: var(--font);
+}
+.frs-add-more:hover { background: var(--brand-pale); border-color: var(--brand); }
+
 /* ── TOOL PAGE ── */
 .tool-page { padding-top: calc(var(--nav-h) + 2.5rem); padding-bottom: 5rem; min-height: 100vh; }
 .tool-container { max-width: 700px; margin: 0 auto; padding: 0 1.5rem; }

@@ -200,6 +200,7 @@ function handleFiles(tid, input){
   if(files[0]?.type === "application/pdf") _renderPdfPreview(tid, files[0]);
   _ocrHint(tid, files[0]);
   if(tid === "split" && files[0]) loadSplitMeta(files[0]);
+  if(typeof window["onFiles_"+tid] === "function") window["onFiles_"+tid](files);
 }
 function _renderChips(tid, files){
   const el=document.getElementById("fl-"+tid); if(!el) return;
