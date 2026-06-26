@@ -56,8 +56,29 @@ const TOOL_COLOR = {
   "/delete-pages": "red", "/protect-pdf": "red", "/unlock-pdf": "red", "/sign-pdf": "red",
 };
 
+/* Format-conversion tools show BOTH the source and target file-type icon
+   (with a small arrow between them) instead of a single icon */
+const CONVERT_ICONS = {
+  "/pdf-to-word":  ["ti-file-type-pdf", "ti-file-word"],
+  "/pdf-to-excel": ["ti-file-type-pdf", "ti-file-spreadsheet"],
+  "/pdf-to-jpg":   ["ti-file-type-pdf", "ti-photo"],
+  "/pdf-to-pptx":  ["ti-file-type-pdf", "ti-presentation"],
+  "/pdf-to-text":  ["ti-file-type-pdf", "ti-file-text"],
+  "/word-to-pdf":  ["ti-file-word", "ti-file-type-pdf"],
+  "/excel-to-pdf": ["ti-file-spreadsheet", "ti-file-type-pdf"],
+  "/jpg-to-pdf":   ["ti-photo", "ti-file-type-pdf"],
+};
+
 function _iconHTML(name, extraClass) {
   return `<i class="ti ${name}${extraClass ? " " + extraClass : ""}" aria-hidden="true"></i>`;
+}
+
+function _dualIconHTML(fromIcon, toIcon) {
+  return `<span class="dual-icon">` +
+    `<i class="ti ${fromIcon}" aria-hidden="true"></i>` +
+    `<i class="ti ti-arrow-right dual-arrow" aria-hidden="true"></i>` +
+    `<i class="ti ${toIcon}" aria-hidden="true"></i>` +
+  `</span>`;
 }
 
 /* Replace emoji glyphs inside known icon containers with real Tabler icons,
@@ -68,11 +89,22 @@ function _applyRealIcons() {
 
   if (iconName) {
     const colorClass = "tiw-" + (TOOL_COLOR[path] || "blue");
+    const dual = CONVERT_ICONS[path];
+    const iconHtml = dual ? _dualIconHTML(dual[0], dual[1]) : _iconHTML(iconName);
+
     const heroIcon = document.querySelector(".tool-icon-wrap");
-    if (heroIcon) { heroIcon.innerHTML = _iconHTML(iconName); heroIcon.classList.add(colorClass); }
+    if (heroIcon) {
+      heroIcon.innerHTML = iconHtml;
+      heroIcon.classList.add(colorClass);
+      if (dual) heroIcon.classList.add("tiw-dual");
+    }
 
     const uzIcon = document.querySelector(".uz-icon");
-    if (uzIcon) { uzIcon.innerHTML = _iconHTML(iconName); uzIcon.classList.add(colorClass); }
+    if (uzIcon) {
+      uzIcon.innerHTML = iconHtml;
+      uzIcon.classList.add(colorClass);
+      if (dual) uzIcon.classList.add("tiw-dual");
+    }
   }
 
   // ai-tools.html small card icons

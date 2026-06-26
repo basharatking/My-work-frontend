@@ -30,6 +30,13 @@
 .tool-icon-wrap.tiw-amber { background: #FEF9EC;             border-color: #FBE4B4;            color: #D97706; }
 .tool-icon-wrap.tiw-red   { background: #FEF2F2;             border-color: #FAD3D3;            color: var(--red); }
 
+/* Conversion tools (pdf-to-X / X-to-pdf): show source + target icon together */
+.dual-icon { display: inline-flex; align-items: center; gap: 3px; }
+.tool-icon-wrap.tiw-dual i { font-size: 1.05rem; }
+.tool-icon-wrap.tiw-dual .dual-arrow { font-size: .65rem; opacity: .55; }
+.uz-icon.tiw-dual i { font-size: 2rem; }
+.uz-icon.tiw-dual .dual-arrow { font-size: 1.1rem; opacity: .55; }
+
 /* Upload-zone icon */
 .uz-icon {
   color: var(--brand);
