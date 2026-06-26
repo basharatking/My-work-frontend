@@ -49,7 +49,7 @@ function _iconHTML(name, extraClass) {
 /* Replace emoji glyphs inside known icon containers with real Tabler icons,
    based on the current page filename or explicit data-tool attributes. */
 function _applyRealIcons() {
-  const path = window.location.pathname.split("/").pop() || "/";
+  const path = window.location.pathname.replace(/\/$/, "") || "/";
   const iconName = TOOL_ICONS[path];
 
   if (iconName) {
