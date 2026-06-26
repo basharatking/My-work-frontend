@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://rundocs.netlify.app/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://rundocs.netlify.app/ai-tools</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://rundocs.netlify.app/compress-pdf</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://rundocs.netlify.app/repair-pdf</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rundocs.netlify.app/optimize-pdf</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://rundocs.netlify.app/merge-pdf</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://rundocs.netlify.app/split-pdf</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://rundocs.netlify.app/pdf-to-word</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
@@ -12,15 +15,19 @@
   <url><loc>https://rundocs.netlify.app/pdf-to-pptx</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://rundocs.netlify.app/pdf-to-text</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://rundocs.netlify.app/rotate-pdf</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://rundocs.netlify.app/delete-pages</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://rundocs.netlify.app/reorder-pages</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://rundocs.netlify.app/watermark-pdf</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://rundocs.netlify.app/protect-pdf</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://rundocs.netlify.app/unlock-pdf</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rundocs.netlify.app/sign-pdf</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://rundocs.netlify.app/add-page-numbers</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://rundocs.netlify.app/word-to-pdf</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://rundocs.netlify.app/excel-to-pdf</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://rundocs.netlify.app/invoice-to-excel</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://rundocs.netlify.app/bank-statement</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://rundocs.netlify.app/about</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://rundocs.netlify.app/blog</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://rundocs.netlify.app/contact</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://rundocs.netlify.app/privacy</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
   <url><loc>https://rundocs.netlify.app/terms</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
