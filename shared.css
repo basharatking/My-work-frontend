@@ -25,6 +25,10 @@
 .tool-icon-wrap i {
   font-size: 1.75rem;
 }
+.tool-icon-wrap.tiw-blue  { background: var(--brand-pale);  border-color: var(--brand-border); color: var(--brand); }
+.tool-icon-wrap.tiw-green { background: var(--accent-pale); border-color: #BBF0CE;            color: var(--accent); }
+.tool-icon-wrap.tiw-amber { background: #FEF9EC;             border-color: #FBE4B4;            color: #D97706; }
+.tool-icon-wrap.tiw-red   { background: #FEF2F2;             border-color: #FAD3D3;            color: var(--red); }
 
 /* Upload-zone icon */
 .uz-icon {
@@ -33,6 +37,10 @@
 .uz-icon i {
   font-size: 3.2rem;
 }
+.uz-icon.tiw-blue  { color: var(--brand); }
+.uz-icon.tiw-green { color: var(--accent); }
+.uz-icon.tiw-amber { color: #D97706; }
+.uz-icon.tiw-red   { color: var(--red); }
 
 /* Homepage tool-card icons */
 .tc-icon {

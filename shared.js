@@ -42,6 +42,20 @@ const AI_CARD_ICONS = {
   ask: "ti-message-circle-2",
 };
 
+/* Per-tool color grouping — matches the 4-color system already used on the
+   homepage's popular-tools grid (tc-icon-blue/green/amber/red) */
+const TOOL_COLOR = {
+  "/pdf-to-word": "blue", "/pdf-to-pptx": "blue", "/pdf-to-text": "blue",
+  "/word-to-pdf": "blue", "/add-page-numbers": "blue", "/ai-tools": "blue",
+  "/compress-pdf": "green", "/pdf-to-excel": "green", "/excel-to-pdf": "green",
+  "/repair-pdf": "green", "/optimize-pdf": "green", "/bank-statement": "green",
+  "/invoice-to-excel": "green",
+  "/merge-pdf": "amber", "/split-pdf": "amber", "/pdf-to-jpg": "amber",
+  "/jpg-to-pdf": "amber", "/rotate-pdf": "amber", "/reorder-pages": "amber",
+  "/watermark-pdf": "amber",
+  "/delete-pages": "red", "/protect-pdf": "red", "/unlock-pdf": "red", "/sign-pdf": "red",
+};
+
 function _iconHTML(name, extraClass) {
   return `<i class="ti ${name}${extraClass ? " " + extraClass : ""}" aria-hidden="true"></i>`;
 }
@@ -53,11 +67,12 @@ function _applyRealIcons() {
   const iconName = TOOL_ICONS[path];
 
   if (iconName) {
+    const colorClass = "tiw-" + (TOOL_COLOR[path] || "blue");
     const heroIcon = document.querySelector(".tool-icon-wrap");
-    if (heroIcon) heroIcon.innerHTML = _iconHTML(iconName);
+    if (heroIcon) { heroIcon.innerHTML = _iconHTML(iconName); heroIcon.classList.add(colorClass); }
 
     const uzIcon = document.querySelector(".uz-icon");
-    if (uzIcon) uzIcon.innerHTML = _iconHTML(iconName);
+    if (uzIcon) { uzIcon.innerHTML = _iconHTML(iconName); uzIcon.classList.add(colorClass); }
   }
 
   // ai-tools.html small card icons
