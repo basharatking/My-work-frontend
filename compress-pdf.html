@@ -24,23 +24,36 @@
       <p class="tool-sub">Reduce PDF file size by up to 90% while preserving quality.</p>
     </div>
     <div class="tool-card">
-      <div class="upload-zone" onclick="document.getElementById('fi-compress').click()">
+      <div class="upload-zone" id="uz-compress" onclick="document.getElementById('fi-compress').click()">
         <div class="uz-icon"></div>
         <div class="uz-title">Drop your file here or click to browse</div>
         <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
         <div class="uz-badge">🔒 Files deleted after processing</div>
         <input class="file-input" id="fi-compress" type="file" accept=".pdf" onchange="handleFiles('compress',this)">
       </div>
-      <div class="file-chips" id="fl-compress"></div>
-      <div class="pdf-preview-area" id="preview-compress"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
-      <div id="ocr-hint-compress"></div>
+      <div class="frs-single" id="frs-compress">
+        <div class="frs-single-inner">
+          <div class="frs-thumb-wrap" id="frs-thumb-compress">
+            <i class="ti ti-loader-2 ftc-spin" aria-hidden="true"></i>
+          </div>
+          <div class="frs-meta">
+            <div class="frs-fname" id="frs-fname-compress"></div>
+            <div class="frs-fsize" id="frs-fsize-compress"></div>
+            <button class="frs-restart" type="button" onclick="_singleRestart('compress')">
+              <i class="ti ti-rotate" aria-hidden="true"></i> Change file
+            </button>
+          </div>
+        </div>
       <label class="f-label">Compression Level</label>
 <select class="f-select" id="compress-level">
   <option value="low">Low — Best quality, smaller reduction</option>
   <option value="medium" selected>Medium — Balanced quality &amp; size</option>
   <option value="high">High — Smallest file, reduced quality</option>
 </select>
-      <button class="action-btn" id="btn-compress" onclick="run_compress()">Compress PDF</button>
+
+        <button class="action-btn" id="btn-compress" onclick="run_compress()">Compress PDF</button>
+      </div>
+      <div id="ocr-hint-compress"></div>
       <div class="progress-wrap" id="pw-compress"><div class="progress-track"><div class="progress-fill" id="pb-compress"></div></div><div class="progress-label" id="pl-compress">Processing…</div></div>
       <div class="result-box" id="rb-compress"><p id="rb-compress-msg"></p></div>
     </div>

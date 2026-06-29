@@ -24,24 +24,29 @@
       <p class="tool-sub">Convert every PDF page to high-quality JPG images. Download as a ZIP.</p>
     </div>
     <div class="tool-card">
-      <div class="upload-zone" onclick="document.getElementById('fi-pdfjpg').click()">
+      <div class="upload-zone" id="uz-pdfjpg" onclick="document.getElementById('fi-pdfjpg').click()">
         <div class="uz-icon"></div>
         <div class="uz-title">Drop your file here or click to browse</div>
         <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
         <div class="uz-badge">🔒 Files deleted after processing</div>
         <input class="file-input" id="fi-pdfjpg" type="file" accept=".pdf" onchange="handleFiles('pdfjpg',this)">
       </div>
-      <div class="file-chips" id="fl-pdfjpg"></div>
-      <div class="pdf-preview-area" id="preview-pdfjpg"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
+      <div class="frs-single" id="frs-pdfjpg">
+        <div class="frs-single-inner">
+          <div class="frs-thumb-wrap" id="frs-thumb-pdfjpg">
+            <i class="ti ti-loader-2 ftc-spin" aria-hidden="true"></i>
+          </div>
+          <div class="frs-meta">
+            <div class="frs-fname" id="frs-fname-pdfjpg"></div>
+            <div class="frs-fsize" id="frs-fsize-pdfjpg"></div>
+            <button class="frs-restart" type="button" onclick="_singleRestart('pdfjpg')">
+              <i class="ti ti-rotate" aria-hidden="true"></i> Change file
+            </button>
+          </div>
+        </div>
+        <button class="action-btn" id="btn-pdfjpg" onclick="run_pdfjpg()">Convert to JPG</button>
+      </div>
       <div id="ocr-hint-pdfjpg"></div>
-      <label class="f-label">Image Quality (DPI)</label>
-<select class="f-select" id="pdfjpg-dpi">
-  <option value="96">96 DPI — Web quality (smallest)</option>
-  <option value="150" selected>150 DPI — Standard quality</option>
-  <option value="200">200 DPI — High quality</option>
-  <option value="300">300 DPI — Print quality (largest)</option>
-</select>
-      <button class="action-btn" id="btn-pdfjpg" onclick="run_pdfjpg()">Convert to JPG</button>
       <div class="progress-wrap" id="pw-pdfjpg"><div class="progress-track"><div class="progress-fill" id="pb-pdfjpg"></div></div><div class="progress-label" id="pl-pdfjpg">Processing…</div></div>
       <div class="result-box" id="rb-pdfjpg"><p id="rb-pdfjpg-msg"></p></div>
     </div>

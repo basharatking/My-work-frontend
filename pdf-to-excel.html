@@ -24,24 +24,29 @@
       <p class="tool-sub">Smart table extraction — groups related tables across pages automatically.</p>
     </div>
     <div class="tool-card">
-      <div class="upload-zone" onclick="document.getElementById('fi-pdfxl').click()">
+      <div class="upload-zone" id="uz-pdfxl" onclick="document.getElementById('fi-pdfxl').click()">
         <div class="uz-icon"></div>
         <div class="uz-title">Drop your file here or click to browse</div>
         <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
         <div class="uz-badge">🔒 Files deleted after processing</div>
         <input class="file-input" id="fi-pdfxl" type="file" accept=".pdf" onchange="handleFiles('pdfxl',this)">
       </div>
-      <div class="file-chips" id="fl-pdfxl"></div>
-      <div class="pdf-preview-area" id="preview-pdfxl"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
+      <div class="frs-single" id="frs-pdfxl">
+        <div class="frs-single-inner">
+          <div class="frs-thumb-wrap" id="frs-thumb-pdfxl">
+            <i class="ti ti-loader-2 ftc-spin" aria-hidden="true"></i>
+          </div>
+          <div class="frs-meta">
+            <div class="frs-fname" id="frs-fname-pdfxl"></div>
+            <div class="frs-fsize" id="frs-fsize-pdfxl"></div>
+            <button class="frs-restart" type="button" onclick="_singleRestart('pdfxl')">
+              <i class="ti ti-rotate" aria-hidden="true"></i> Change file
+            </button>
+          </div>
+        </div>
+        <button class="action-btn" id="btn-pdfxl" onclick="run_pdfxl()">Convert to Excel</button>
+      </div>
       <div id="ocr-hint-pdfxl"></div>
-      <label class="f-label">Extraction Mode</label>
-<select class="f-select" id="pdfxl-mode">
-  <option value="smart" selected>Smart — Auto-detect &amp; group tables by headers</option>
-  <option value="tables">Tables Only — Extract tables, ignore text</option>
-  <option value="text">Text Mode — Extract all text as plain rows</option>
-</select>
-<div class="notice notice-blue"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span><strong>Smart grouping:</strong> Tables with matching headers across pages are merged into one sheet automatically.</span></div>
-      <button class="action-btn" id="btn-pdfxl" onclick="run_pdfxl()">Convert to Excel</button>
       <div class="progress-wrap" id="pw-pdfxl"><div class="progress-track"><div class="progress-fill" id="pb-pdfxl"></div></div><div class="progress-label" id="pl-pdfxl">Processing…</div></div>
       <div class="result-box" id="rb-pdfxl"><p id="rb-pdfxl-msg"></p></div>
     </div>

@@ -24,18 +24,29 @@
       <p class="tool-sub">Process your invoice to excel instantly. Free and secure.</p>
     </div>
     <div class="tool-card">
-      <div class="upload-zone" onclick="document.getElementById('fi-invoice2xl').click()">
+      <div class="upload-zone" id="uz-invoice2xl" onclick="document.getElementById('fi-invoice2xl').click()">
         <div class="uz-icon"></div>
         <div class="uz-title">Drop your file here or click to browse</div>
         <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
         <div class="uz-badge">🔒 Files deleted after processing</div>
         <input class="file-input" id="fi-invoice2xl" type="file" accept=".pdf" onchange="handleFiles('invoice2xl',this)">
       </div>
-      <div class="file-chips" id="fl-invoice2xl"></div>
-      <div class="pdf-preview-area" id="preview-invoice2xl"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
+      <div class="frs-single" id="frs-invoice2xl">
+        <div class="frs-single-inner">
+          <div class="frs-thumb-wrap" id="frs-thumb-invoice2xl">
+            <i class="ti ti-loader-2 ftc-spin" aria-hidden="true"></i>
+          </div>
+          <div class="frs-meta">
+            <div class="frs-fname" id="frs-fname-invoice2xl"></div>
+            <div class="frs-fsize" id="frs-fsize-invoice2xl"></div>
+            <button class="frs-restart" type="button" onclick="_singleRestart('invoice2xl')">
+              <i class="ti ti-rotate" aria-hidden="true"></i> Change file
+            </button>
+          </div>
+        </div>
+        <button class="action-btn" id="btn-invoice2xl" onclick="run_invoice2xl()">Extract to Excel</button>
+      </div>
       <div id="ocr-hint-invoice2xl"></div>
-      
-      <button class="action-btn" id="btn-invoice2xl" onclick="run_invoice2xl()">Process File</button>
       <div class="progress-wrap" id="pw-invoice2xl"><div class="progress-track"><div class="progress-fill" id="pb-invoice2xl"></div></div><div class="progress-label" id="pl-invoice2xl">Processing…</div></div>
       <div class="result-box" id="rb-invoice2xl"><p id="rb-invoice2xl-msg"></p></div>
     </div>

@@ -24,16 +24,26 @@
       <p class="tool-sub">Add a custom text watermark to every page. Control opacity, position and style.</p>
     </div>
     <div class="tool-card">
-      <div class="upload-zone" onclick="document.getElementById('fi-watermark').click()">
+      <div class="upload-zone" id="uz-watermark" onclick="document.getElementById('fi-watermark').click()">
         <div class="uz-icon"></div>
         <div class="uz-title">Drop your file here or click to browse</div>
         <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
         <div class="uz-badge">🔒 Files deleted after processing</div>
         <input class="file-input" id="fi-watermark" type="file" accept=".pdf" onchange="handleFiles('watermark',this)">
       </div>
-      <div class="file-chips" id="fl-watermark"></div>
-      <div class="pdf-preview-area" id="preview-watermark"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
-      <div id="ocr-hint-watermark"></div>
+      <div class="frs-single" id="frs-watermark">
+        <div class="frs-single-inner">
+          <div class="frs-thumb-wrap" id="frs-thumb-watermark">
+            <i class="ti ti-loader-2 ftc-spin" aria-hidden="true"></i>
+          </div>
+          <div class="frs-meta">
+            <div class="frs-fname" id="frs-fname-watermark"></div>
+            <div class="frs-fsize" id="frs-fsize-watermark"></div>
+            <button class="frs-restart" type="button" onclick="_singleRestart('watermark')">
+              <i class="ti ti-rotate" aria-hidden="true"></i> Change file
+            </button>
+          </div>
+        </div>
       <label class="f-label">Watermark Text</label>
 <input class="f-input" id="watermark-text" type="text" placeholder="e.g. CONFIDENTIAL, DRAFT" value="CONFIDENTIAL">
 <label class="f-label">Position</label>
@@ -49,7 +59,10 @@
   <option value="0.4">Medium (40%)</option>
   <option value="0.6">Strong (60%)</option>
 </select>
-      <button class="action-btn" id="btn-watermark" onclick="run_watermark()">Add Watermark</button>
+
+        <button class="action-btn" id="btn-watermark" onclick="run_watermark()">Add Watermark</button>
+      </div>
+      <div id="ocr-hint-watermark"></div>
       <div class="progress-wrap" id="pw-watermark"><div class="progress-track"><div class="progress-fill" id="pb-watermark"></div></div><div class="progress-label" id="pl-watermark">Processing…</div></div>
       <div class="result-box" id="rb-watermark"><p id="rb-watermark-msg"></p></div>
     </div>

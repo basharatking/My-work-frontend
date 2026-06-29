@@ -24,18 +24,29 @@
       <p class="tool-sub">Process your optimize pdf instantly. Free and secure.</p>
     </div>
     <div class="tool-card">
-      <div class="upload-zone" onclick="document.getElementById('fi-optimize').click()">
+      <div class="upload-zone" id="uz-optimize" onclick="document.getElementById('fi-optimize').click()">
         <div class="uz-icon"></div>
         <div class="uz-title">Drop your file here or click to browse</div>
         <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
         <div class="uz-badge">🔒 Files deleted after processing</div>
         <input class="file-input" id="fi-optimize" type="file" accept=".pdf" onchange="handleFiles('optimize',this)">
       </div>
-      <div class="file-chips" id="fl-optimize"></div>
-      <div class="pdf-preview-area" id="preview-optimize"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
+      <div class="frs-single" id="frs-optimize">
+        <div class="frs-single-inner">
+          <div class="frs-thumb-wrap" id="frs-thumb-optimize">
+            <i class="ti ti-loader-2 ftc-spin" aria-hidden="true"></i>
+          </div>
+          <div class="frs-meta">
+            <div class="frs-fname" id="frs-fname-optimize"></div>
+            <div class="frs-fsize" id="frs-fsize-optimize"></div>
+            <button class="frs-restart" type="button" onclick="_singleRestart('optimize')">
+              <i class="ti ti-rotate" aria-hidden="true"></i> Change file
+            </button>
+          </div>
+        </div>
+        <button class="action-btn" id="btn-optimize" onclick="run_optimize()">Process File</button>
+      </div>
       <div id="ocr-hint-optimize"></div>
-      
-      <button class="action-btn" id="btn-optimize" onclick="run_optimize()">Process File</button>
       <div class="progress-wrap" id="pw-optimize"><div class="progress-track"><div class="progress-fill" id="pb-optimize"></div></div><div class="progress-label" id="pl-optimize">Processing…</div></div>
       <div class="result-box" id="rb-optimize"><p id="rb-optimize-msg"></p></div>
     </div>

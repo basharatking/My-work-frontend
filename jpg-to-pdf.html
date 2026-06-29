@@ -24,18 +24,29 @@
       <p class="tool-sub">Convert JPG, PNG and other image files into a single PDF document.</p>
     </div>
     <div class="tool-card">
-      <div class="upload-zone" onclick="document.getElementById('fi-jpg2pdf').click()">
+      <div class="upload-zone" id="uz-jpg2pdf" onclick="document.getElementById('fi-jpg2pdf').click()">
         <div class="uz-icon"></div>
         <div class="uz-title">Drop your file here or click to browse</div>
         <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
         <div class="uz-badge">🔒 Files deleted after processing</div>
         <input class="file-input" id="fi-jpg2pdf" type="file" accept="image/*" multiple onchange="handleFiles('jpg2pdf',this)">
       </div>
-      <div class="file-chips" id="fl-jpg2pdf"></div>
-      <div class="pdf-preview-area" id="preview-jpg2pdf"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
+      <div class="frs-single" id="frs-jpg2pdf">
+        <div class="frs-single-inner">
+          <div class="frs-thumb-wrap" id="frs-thumb-jpg2pdf">
+            <i class="ti ti-loader-2 ftc-spin" aria-hidden="true"></i>
+          </div>
+          <div class="frs-meta">
+            <div class="frs-fname" id="frs-fname-jpg2pdf"></div>
+            <div class="frs-fsize" id="frs-fsize-jpg2pdf"></div>
+            <button class="frs-restart" type="button" onclick="_singleRestart('jpg2pdf')">
+              <i class="ti ti-rotate" aria-hidden="true"></i> Change file
+            </button>
+          </div>
+        </div>
+        <button class="action-btn" id="btn-jpg2pdf" onclick="run_jpg2pdf()">Convert to PDF</button>
+      </div>
       <div id="ocr-hint-jpg2pdf"></div>
-      
-      <button class="action-btn" id="btn-jpg2pdf" onclick="run_jpg2pdf()">Convert to PDF</button>
       <div class="progress-wrap" id="pw-jpg2pdf"><div class="progress-track"><div class="progress-fill" id="pb-jpg2pdf"></div></div><div class="progress-label" id="pl-jpg2pdf">Processing…</div></div>
       <div class="result-box" id="rb-jpg2pdf"><p id="rb-jpg2pdf-msg"></p></div>
     </div>

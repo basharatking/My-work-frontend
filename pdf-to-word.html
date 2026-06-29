@@ -24,18 +24,29 @@
       <p class="tool-sub">Convert PDF to editable Microsoft Word (.docx) with formatting preserved.</p>
     </div>
     <div class="tool-card">
-      <div class="upload-zone" onclick="document.getElementById('fi-pdfword').click()">
+      <div class="upload-zone" id="uz-pdfword" onclick="document.getElementById('fi-pdfword').click()">
         <div class="uz-icon"></div>
         <div class="uz-title">Drop your file here or click to browse</div>
         <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
         <div class="uz-badge">🔒 Files deleted after processing</div>
         <input class="file-input" id="fi-pdfword" type="file" accept=".pdf" onchange="handleFiles('pdfword',this)">
       </div>
-      <div class="file-chips" id="fl-pdfword"></div>
-      <div class="pdf-preview-area" id="preview-pdfword"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
+      <div class="frs-single" id="frs-pdfword">
+        <div class="frs-single-inner">
+          <div class="frs-thumb-wrap" id="frs-thumb-pdfword">
+            <i class="ti ti-loader-2 ftc-spin" aria-hidden="true"></i>
+          </div>
+          <div class="frs-meta">
+            <div class="frs-fname" id="frs-fname-pdfword"></div>
+            <div class="frs-fsize" id="frs-fsize-pdfword"></div>
+            <button class="frs-restart" type="button" onclick="_singleRestart('pdfword')">
+              <i class="ti ti-rotate" aria-hidden="true"></i> Change file
+            </button>
+          </div>
+        </div>
+        <button class="action-btn" id="btn-pdfword" onclick="run_pdfword()">Convert to Word</button>
+      </div>
       <div id="ocr-hint-pdfword"></div>
-      <div class="notice notice-blue"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>Works best with text-based PDFs. Scanned documents produce plain text.</span></div>
-      <button class="action-btn" id="btn-pdfword" onclick="run_pdfword()">Convert to Word</button>
       <div class="progress-wrap" id="pw-pdfword"><div class="progress-track"><div class="progress-fill" id="pb-pdfword"></div></div><div class="progress-label" id="pl-pdfword">Processing…</div></div>
       <div class="result-box" id="rb-pdfword"><p id="rb-pdfword-msg"></p></div>
     </div>

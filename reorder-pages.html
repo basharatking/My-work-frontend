@@ -24,20 +24,33 @@
       <p class="tool-sub">Rearrange the pages of your PDF in any order you want.</p>
     </div>
     <div class="tool-card">
-      <div class="upload-zone" onclick="document.getElementById('fi-reorder').click()">
+      <div class="upload-zone" id="uz-reorder" onclick="document.getElementById('fi-reorder').click()">
         <div class="uz-icon"></div>
         <div class="uz-title">Drop your PDF here or click to browse</div>
         <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
         <div class="uz-badge">🔒 Files deleted after processing</div>
         <input class="file-input" id="fi-reorder" type="file" accept=".pdf" onchange="handleFiles('reorder',this)">
       </div>
-      <div class="file-chips" id="fl-reorder"></div>
-      <div class="pdf-preview-area" id="preview-reorder"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
-      <div id="ocr-hint-reorder"></div>
+      <div class="frs-single" id="frs-reorder">
+        <div class="frs-single-inner">
+          <div class="frs-thumb-wrap" id="frs-thumb-reorder">
+            <i class="ti ti-loader-2 ftc-spin" aria-hidden="true"></i>
+          </div>
+          <div class="frs-meta">
+            <div class="frs-fname" id="frs-fname-reorder"></div>
+            <div class="frs-fsize" id="frs-fsize-reorder"></div>
+            <button class="frs-restart" type="button" onclick="_singleRestart('reorder')">
+              <i class="ti ti-rotate" aria-hidden="true"></i> Change file
+            </button>
+          </div>
+        </div>
       <label class="f-label">New Page Order (e.g. 3,1,2,4 for a 4-page PDF)</label>
       <input class="f-input" id="reorder-pages" type="text" placeholder="e.g. 3,1,2,4">
       <div class="notice notice-blue"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>Enter all page numbers in the desired order. Every page must be included.</span></div>
-      <button class="action-btn" id="btn-reorder" onclick="run_reorder()">Reorder Pages</button>
+
+        <button class="action-btn" id="btn-reorder" onclick="run_reorder()">Reorder Pages</button>
+      </div>
+      <div id="ocr-hint-reorder"></div>
       <div class="progress-wrap" id="pw-reorder"><div class="progress-track"><div class="progress-fill" id="pb-reorder"></div></div><div class="progress-label" id="pl-reorder">Processing…</div></div>
       <div class="result-box" id="rb-reorder"><p id="rb-reorder-msg"></p></div>
     </div>

@@ -24,18 +24,29 @@
       <p class="tool-sub">Extract raw plain text from any PDF. Perfect for copying content.</p>
     </div>
     <div class="tool-card">
-      <div class="upload-zone" onclick="document.getElementById('fi-pdftext').click()">
+      <div class="upload-zone" id="uz-pdftext" onclick="document.getElementById('fi-pdftext').click()">
         <div class="uz-icon"></div>
         <div class="uz-title">Drop your file here or click to browse</div>
         <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
         <div class="uz-badge">🔒 Files deleted after processing</div>
         <input class="file-input" id="fi-pdftext" type="file" accept=".pdf" onchange="handleFiles('pdftext',this)">
       </div>
-      <div class="file-chips" id="fl-pdftext"></div>
-      <div class="pdf-preview-area" id="preview-pdftext"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
+      <div class="frs-single" id="frs-pdftext">
+        <div class="frs-single-inner">
+          <div class="frs-thumb-wrap" id="frs-thumb-pdftext">
+            <i class="ti ti-loader-2 ftc-spin" aria-hidden="true"></i>
+          </div>
+          <div class="frs-meta">
+            <div class="frs-fname" id="frs-fname-pdftext"></div>
+            <div class="frs-fsize" id="frs-fsize-pdftext"></div>
+            <button class="frs-restart" type="button" onclick="_singleRestart('pdftext')">
+              <i class="ti ti-rotate" aria-hidden="true"></i> Change file
+            </button>
+          </div>
+        </div>
+        <button class="action-btn" id="btn-pdftext" onclick="run_pdftext()">Extract Text</button>
+      </div>
       <div id="ocr-hint-pdftext"></div>
-      
-      <button class="action-btn" id="btn-pdftext" onclick="run_pdftext()">Extract Text</button>
       <div class="progress-wrap" id="pw-pdftext"><div class="progress-track"><div class="progress-fill" id="pb-pdftext"></div></div><div class="progress-label" id="pl-pdftext">Processing…</div></div>
       <div class="result-box" id="rb-pdftext"><p id="rb-pdftext-msg"></p></div>
     </div>

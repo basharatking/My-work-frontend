@@ -24,19 +24,32 @@
       <p class="tool-sub">Remove password protection from your PDF. You must know the current password.</p>
     </div>
     <div class="tool-card">
-      <div class="upload-zone" onclick="document.getElementById('fi-unlock').click()">
+      <div class="upload-zone" id="uz-unlock" onclick="document.getElementById('fi-unlock').click()">
         <div class="uz-icon"></div>
         <div class="uz-title">Drop your file here or click to browse</div>
         <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
         <div class="uz-badge">🔒 Files deleted after processing</div>
         <input class="file-input" id="fi-unlock" type="file" accept=".pdf" onchange="handleFiles('unlock',this)">
       </div>
-      <div class="file-chips" id="fl-unlock"></div>
-      <div class="pdf-preview-area" id="preview-unlock"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
-      <div id="ocr-hint-unlock"></div>
+      <div class="frs-single" id="frs-unlock">
+        <div class="frs-single-inner">
+          <div class="frs-thumb-wrap" id="frs-thumb-unlock">
+            <i class="ti ti-loader-2 ftc-spin" aria-hidden="true"></i>
+          </div>
+          <div class="frs-meta">
+            <div class="frs-fname" id="frs-fname-unlock"></div>
+            <div class="frs-fsize" id="frs-fsize-unlock"></div>
+            <button class="frs-restart" type="button" onclick="_singleRestart('unlock')">
+              <i class="ti ti-rotate" aria-hidden="true"></i> Change file
+            </button>
+          </div>
+        </div>
       <label class="f-label">Current Password (if any)</label>
 <input class="f-input" id="unlock-pwd" type="password" placeholder="Enter current password">
-      <button class="action-btn" id="btn-unlock" onclick="run_unlock()">Unlock PDF</button>
+
+        <button class="action-btn" id="btn-unlock" onclick="run_unlock()">Unlock PDF</button>
+      </div>
+      <div id="ocr-hint-unlock"></div>
       <div class="progress-wrap" id="pw-unlock"><div class="progress-track"><div class="progress-fill" id="pb-unlock"></div></div><div class="progress-label" id="pl-unlock">Processing…</div></div>
       <div class="result-box" id="rb-unlock"><p id="rb-unlock-msg"></p></div>
     </div>

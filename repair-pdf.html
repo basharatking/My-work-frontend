@@ -24,18 +24,29 @@
       <p class="tool-sub">Process your repair pdf instantly. Free and secure.</p>
     </div>
     <div class="tool-card">
-      <div class="upload-zone" onclick="document.getElementById('fi-repair').click()">
+      <div class="upload-zone" id="uz-repair" onclick="document.getElementById('fi-repair').click()">
         <div class="uz-icon"></div>
         <div class="uz-title">Drop your file here or click to browse</div>
         <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
         <div class="uz-badge">🔒 Files deleted after processing</div>
         <input class="file-input" id="fi-repair" type="file" accept=".pdf" onchange="handleFiles('repair',this)">
       </div>
-      <div class="file-chips" id="fl-repair"></div>
-      <div class="pdf-preview-area" id="preview-repair"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
+      <div class="frs-single" id="frs-repair">
+        <div class="frs-single-inner">
+          <div class="frs-thumb-wrap" id="frs-thumb-repair">
+            <i class="ti ti-loader-2 ftc-spin" aria-hidden="true"></i>
+          </div>
+          <div class="frs-meta">
+            <div class="frs-fname" id="frs-fname-repair"></div>
+            <div class="frs-fsize" id="frs-fsize-repair"></div>
+            <button class="frs-restart" type="button" onclick="_singleRestart('repair')">
+              <i class="ti ti-rotate" aria-hidden="true"></i> Change file
+            </button>
+          </div>
+        </div>
+        <button class="action-btn" id="btn-repair" onclick="run_repair()">Process File</button>
+      </div>
       <div id="ocr-hint-repair"></div>
-      
-      <button class="action-btn" id="btn-repair" onclick="run_repair()">Process File</button>
       <div class="progress-wrap" id="pw-repair"><div class="progress-track"><div class="progress-fill" id="pb-repair"></div></div><div class="progress-label" id="pl-repair">Processing…</div></div>
       <div class="result-box" id="rb-repair"><p id="rb-repair-msg"></p></div>
     </div>

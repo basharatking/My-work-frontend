@@ -583,6 +583,40 @@ img, svg { display: block; }
 }
 .frs-add-more:hover { background: var(--brand-pale); border-color: var(--brand); }
 
+/* ── Single-file review step (all simple tool pages) ── */
+.frs-single { display: none; }
+.frs-single.show { display: block; animation: slideUp .22s var(--ease) both; }
+
+.frs-single-inner {
+  display: flex; gap: 16px; align-items: flex-start;
+  background: var(--bg); border: 1.5px solid var(--border);
+  border-radius: var(--r); padding: 14px; margin-bottom: 16px;
+}
+.frs-thumb-wrap {
+  flex-shrink: 0; width: 90px; height: 118px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg3); border-radius: var(--rs); overflow: hidden; position: relative;
+}
+.frs-thumb-wrap canvas { max-width: 100%; max-height: 100%; border-radius: 2px; }
+.frs-thumb-wrap img   { max-width: 100%; max-height: 100%; }
+.frs-page-badge {
+  position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%);
+  background: rgba(0,0,0,.52); color: #fff; font-size: 9.5px; font-weight: 600;
+  padding: 1px 7px; border-radius: 100px; white-space: nowrap; pointer-events: none;
+}
+.frs-meta { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; padding-top: 2px; }
+.frs-fname {
+  font-size: 13.5px; font-weight: 600; color: var(--ink);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.frs-fsize { font-size: 12px; color: var(--ink4); }
+.frs-restart {
+  display: inline-flex; align-items: center; gap: 5px; margin-top: 6px;
+  font-size: 12.5px; font-weight: 600; color: var(--brand);
+  background: none; border: none; cursor: pointer; padding: 0; font-family: var(--font);
+}
+.frs-restart:hover { color: var(--brand-dark); }
+
 /* ── TOOL PAGE ── */
 .tool-page { padding-top: calc(var(--nav-h) + 2.5rem); padding-bottom: 5rem; min-height: 100vh; }
 .tool-container { max-width: 700px; margin: 0 auto; padding: 0 1.5rem; }

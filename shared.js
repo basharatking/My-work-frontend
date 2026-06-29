@@ -248,6 +248,73 @@ function handleFiles(tid, input){
   _ocrHint(tid, files[0]);
   if(tid === "split" && files[0]) loadSplitMeta(files[0]);
   if(typeof window["onFiles_"+tid] === "function") window["onFiles_"+tid](files);
+
+  /* Generic single-file review step (iLovePDF-style) */
+  _showSingleReview(tid, files[0]);
+}
+
+/* ── Single-file review: show thumbnail + meta, hide upload zone ── */
+async function _showSingleReview(tid, file){
+  if(!file) return;
+  const uz  = document.getElementById("uz-"+tid);
+  const frs = document.getElementById("frs-"+tid);
+  if(!frs) return;                    // tool uses its own custom flow (e.g. merge)
+  if(uz)  uz.style.display = "none";
+  frs.classList.add("show");
+
+  /* meta */
+  const nameEl = document.getElementById("frs-fname-"+tid);
+  const sizeEl = document.getElementById("frs-fsize-"+tid);
+  if(nameEl) nameEl.textContent = file.name;
+  if(sizeEl) sizeEl.textContent = _bytes(file.size);
+
+  /* thumbnail */
+  const wrap = document.getElementById("frs-thumb-"+tid);
+  if(!wrap) return;
+  try{
+    if(file.type === "application/pdf"){
+      const buf = await file.arrayBuffer();
+      if(typeof pdfjsLib === "undefined"){
+        await _loadScript("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js");
+        pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+      }
+      const pdf  = await pdfjsLib.getDocument({data: buf}).promise;
+      const page = await pdf.getPage(1);
+      const vp   = page.getViewport({scale: 0.55});
+      const canvas = document.createElement("canvas");
+      canvas.width = vp.width; canvas.height = vp.height;
+      await page.render({canvasContext: canvas.getContext("2d"), viewport: vp}).promise;
+      wrap.innerHTML = "";
+      wrap.appendChild(canvas);
+
+      /* page count badge */
+      const badge = document.createElement("div");
+      badge.className = "frs-page-badge";
+      badge.textContent = pdf.numPages + (pdf.numPages === 1 ? " page" : " pages");
+      wrap.appendChild(badge);
+    } else {
+      /* image files (jpg-to-pdf) */
+      const img = new Image();
+      img.style.cssText = "max-width:100%;max-height:100%;border-radius:4px;object-fit:contain;";
+      img.src = URL.createObjectURL(file);
+      wrap.innerHTML = ""; wrap.appendChild(img);
+    }
+  }catch(e){
+    wrap.innerHTML = `<i class="ti ti-file-text" style="font-size:2rem;color:var(--ink4)" aria-hidden="true"></i>`;
+  }
+}
+
+function _singleRestart(tid){
+  const uz  = document.getElementById("uz-"+tid);
+  const frs = document.getElementById("frs-"+tid);
+  const inp = document.getElementById("fi-"+tid);
+  if(uz)  uz.style.display = "";
+  if(frs) frs.classList.remove("show");
+  if(inp) inp.value = "";
+  fileStore[tid] = [];
+  /* clear any previous result */
+  const rb = document.getElementById("rb-"+tid);
+  if(rb) rb.className = "result-box";
 }
 function _renderChips(tid, files){
   const el=document.getElementById("fl-"+tid); if(!el) return;

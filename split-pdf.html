@@ -24,16 +24,26 @@
       <p class="tool-sub">Extract pages or split a PDF into separate individual files.</p>
     </div>
     <div class="tool-card">
-      <div class="upload-zone" onclick="document.getElementById('fi-split').click()">
+      <div class="upload-zone" id="uz-split" onclick="document.getElementById('fi-split').click()">
         <div class="uz-icon"></div>
         <div class="uz-title">Drop your file here or click to browse</div>
         <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
         <div class="uz-badge">🔒 Files deleted after processing</div>
         <input class="file-input" id="fi-split" type="file" accept=".pdf" onchange="handleFiles('split',this)">
       </div>
-      <div class="file-chips" id="fl-split"></div>
-      <div class="pdf-preview-area" id="preview-split"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
-      <div id="ocr-hint-split"></div>
+      <div class="frs-single" id="frs-split">
+        <div class="frs-single-inner">
+          <div class="frs-thumb-wrap" id="frs-thumb-split">
+            <i class="ti ti-loader-2 ftc-spin" aria-hidden="true"></i>
+          </div>
+          <div class="frs-meta">
+            <div class="frs-fname" id="frs-fname-split"></div>
+            <div class="frs-fsize" id="frs-fsize-split"></div>
+            <button class="frs-restart" type="button" onclick="_singleRestart('split')">
+              <i class="ti ti-rotate" aria-hidden="true"></i> Change file
+            </button>
+          </div>
+        </div>
       <label class="f-label">Split Mode</label>
 <select class="f-select" id="split-mode" onchange="toggleSplitRange()">
   <option value="each">Split into individual pages (ZIP)</option>
@@ -45,8 +55,10 @@
     <div><label class="f-label">To Page <span id="split-page-info" style="display:none;font-weight:400;color:var(--ink4)"></span></label><input class="f-input" type="number" id="split-end" value="1" min="1"></div>
   </div>
 </div>
-<script>function toggleSplitRange(){const m=document.getElementById("split-mode").value;document.getElementById("split-range").style.display=m==="range"?"block":"none";}</script>
-      <button class="action-btn" id="btn-split" onclick="run_split()">Split PDF</button>
+
+        <button class="action-btn" id="btn-split" onclick="run_split()">Split PDF</button>
+      </div>
+      <div id="ocr-hint-split"></div>
       <div class="progress-wrap" id="pw-split"><div class="progress-track"><div class="progress-fill" id="pb-split"></div></div><div class="progress-label" id="pl-split">Processing…</div></div>
       <div class="result-box" id="rb-split"><p id="rb-split-msg"></p></div>
     </div>

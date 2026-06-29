@@ -24,16 +24,26 @@
       <p class="tool-sub">Automatically number every page of your PDF. Choose position and format.</p>
     </div>
     <div class="tool-card">
-      <div class="upload-zone" onclick="document.getElementById('fi-pagenums').click()">
+      <div class="upload-zone" id="uz-pagenums" onclick="document.getElementById('fi-pagenums').click()">
         <div class="uz-icon"></div>
         <div class="uz-title">Drop your file here or click to browse</div>
         <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
         <div class="uz-badge">🔒 Files deleted after processing</div>
         <input class="file-input" id="fi-pagenums" type="file" accept=".pdf" onchange="handleFiles('pagenums',this)">
       </div>
-      <div class="file-chips" id="fl-pagenums"></div>
-      <div class="pdf-preview-area" id="preview-pagenums"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
-      <div id="ocr-hint-pagenums"></div>
+      <div class="frs-single" id="frs-pagenums">
+        <div class="frs-single-inner">
+          <div class="frs-thumb-wrap" id="frs-thumb-pagenums">
+            <i class="ti ti-loader-2 ftc-spin" aria-hidden="true"></i>
+          </div>
+          <div class="frs-meta">
+            <div class="frs-fname" id="frs-fname-pagenums"></div>
+            <div class="frs-fsize" id="frs-fsize-pagenums"></div>
+            <button class="frs-restart" type="button" onclick="_singleRestart('pagenums')">
+              <i class="ti ti-rotate" aria-hidden="true"></i> Change file
+            </button>
+          </div>
+        </div>
       <label class="f-label">Position</label>
 <select class="f-select" id="pagenums-pos">
   <option value="bottom-center" selected>Bottom Center</option>
@@ -49,7 +59,10 @@
 </select>
 <label class="f-label">Start Number</label>
 <input class="f-input" id="pagenums-start" type="number" value="1" min="1">
-      <button class="action-btn" id="btn-pagenums" onclick="run_pagenums()">Add Page Numbers</button>
+
+        <button class="action-btn" id="btn-pagenums" onclick="run_pagenums()">Add Page Numbers</button>
+      </div>
+      <div id="ocr-hint-pagenums"></div>
       <div class="progress-wrap" id="pw-pagenums"><div class="progress-track"><div class="progress-fill" id="pb-pagenums"></div></div><div class="progress-label" id="pl-pagenums">Processing…</div></div>
       <div class="result-box" id="rb-pagenums"><p id="rb-pagenums-msg"></p></div>
     </div>

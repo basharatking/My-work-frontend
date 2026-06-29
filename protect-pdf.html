@@ -24,20 +24,33 @@
       <p class="tool-sub">Add AES-256 password encryption to your PDF to prevent unauthorized access.</p>
     </div>
     <div class="tool-card">
-      <div class="upload-zone" onclick="document.getElementById('fi-protect').click()">
+      <div class="upload-zone" id="uz-protect" onclick="document.getElementById('fi-protect').click()">
         <div class="uz-icon"></div>
         <div class="uz-title">Drop your file here or click to browse</div>
         <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
         <div class="uz-badge">🔒 Files deleted after processing</div>
         <input class="file-input" id="fi-protect" type="file" accept=".pdf" onchange="handleFiles('protect',this)">
       </div>
-      <div class="file-chips" id="fl-protect"></div>
-      <div class="pdf-preview-area" id="preview-protect"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
-      <div id="ocr-hint-protect"></div>
+      <div class="frs-single" id="frs-protect">
+        <div class="frs-single-inner">
+          <div class="frs-thumb-wrap" id="frs-thumb-protect">
+            <i class="ti ti-loader-2 ftc-spin" aria-hidden="true"></i>
+          </div>
+          <div class="frs-meta">
+            <div class="frs-fname" id="frs-fname-protect"></div>
+            <div class="frs-fsize" id="frs-fsize-protect"></div>
+            <button class="frs-restart" type="button" onclick="_singleRestart('protect')">
+              <i class="ti ti-rotate" aria-hidden="true"></i> Change file
+            </button>
+          </div>
+        </div>
       <label class="f-label">Password</label>
 <input class="f-input" id="protect-pwd" type="password" placeholder="Enter a strong password" autocomplete="new-password">
 <div class="notice notice-amber"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>Save your password — we cannot recover it.</span></div>
-      <button class="action-btn" id="btn-protect" onclick="run_protect()">Lock PDF</button>
+
+        <button class="action-btn" id="btn-protect" onclick="run_protect()">Lock PDF</button>
+      </div>
+      <div id="ocr-hint-protect"></div>
       <div class="progress-wrap" id="pw-protect"><div class="progress-track"><div class="progress-fill" id="pb-protect"></div></div><div class="progress-label" id="pl-protect">Processing…</div></div>
       <div class="result-box" id="rb-protect"><p id="rb-protect-msg"></p></div>
     </div>

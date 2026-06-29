@@ -24,16 +24,26 @@
       <p class="tool-sub">Add your text signature to any PDF. Choose position and style.</p>
     </div>
     <div class="tool-card">
-      <div class="upload-zone" onclick="document.getElementById('fi-signpdf').click()">
+      <div class="upload-zone" id="uz-signpdf" onclick="document.getElementById('fi-signpdf').click()">
         <div class="uz-icon"></div>
         <div class="uz-title">Drop your PDF here or click to browse</div>
         <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
         <div class="uz-badge">🔒 Files deleted after processing</div>
         <input class="file-input" id="fi-signpdf" type="file" accept=".pdf" onchange="handleFiles('signpdf',this)">
       </div>
-      <div class="file-chips" id="fl-signpdf"></div>
-      <div class="pdf-preview-area" id="preview-signpdf"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
-      <div id="ocr-hint-signpdf"></div>
+      <div class="frs-single" id="frs-signpdf">
+        <div class="frs-single-inner">
+          <div class="frs-thumb-wrap" id="frs-thumb-signpdf">
+            <i class="ti ti-loader-2 ftc-spin" aria-hidden="true"></i>
+          </div>
+          <div class="frs-meta">
+            <div class="frs-fname" id="frs-fname-signpdf"></div>
+            <div class="frs-fsize" id="frs-fsize-signpdf"></div>
+            <button class="frs-restart" type="button" onclick="_singleRestart('signpdf')">
+              <i class="ti ti-rotate" aria-hidden="true"></i> Change file
+            </button>
+          </div>
+        </div>
       <label class="f-label">Your Name / Signature Text</label>
       <input class="f-input" id="sign-name" type="text" placeholder="e.g. Muhammad Ali">
       <label class="f-label">Position</label>
@@ -48,7 +58,10 @@
         <option value="all">All Pages</option>
         <option value="first">First Page Only</option>
       </select>
-      <button class="action-btn" id="btn-signpdf" onclick="run_signpdf()">Sign PDF</button>
+
+        <button class="action-btn" id="btn-signpdf" onclick="run_signpdf()">Sign PDF</button>
+      </div>
+      <div id="ocr-hint-signpdf"></div>
       <div class="progress-wrap" id="pw-signpdf"><div class="progress-track"><div class="progress-fill" id="pb-signpdf"></div></div><div class="progress-label" id="pl-signpdf">Processing…</div></div>
       <div class="result-box" id="rb-signpdf"><p id="rb-signpdf-msg"></p></div>
     </div>

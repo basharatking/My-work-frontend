@@ -24,16 +24,26 @@
       <p class="tool-sub">Rotate PDF pages by 90, 180 or 270 degrees. Apply to all, odd or even pages.</p>
     </div>
     <div class="tool-card">
-      <div class="upload-zone" onclick="document.getElementById('fi-rotate').click()">
+      <div class="upload-zone" id="uz-rotate" onclick="document.getElementById('fi-rotate').click()">
         <div class="uz-icon"></div>
         <div class="uz-title">Drop your file here or click to browse</div>
         <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
         <div class="uz-badge">🔒 Files deleted after processing</div>
         <input class="file-input" id="fi-rotate" type="file" accept=".pdf" onchange="handleFiles('rotate',this)">
       </div>
-      <div class="file-chips" id="fl-rotate"></div>
-      <div class="pdf-preview-area" id="preview-rotate"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
-      <div id="ocr-hint-rotate"></div>
+      <div class="frs-single" id="frs-rotate">
+        <div class="frs-single-inner">
+          <div class="frs-thumb-wrap" id="frs-thumb-rotate">
+            <i class="ti ti-loader-2 ftc-spin" aria-hidden="true"></i>
+          </div>
+          <div class="frs-meta">
+            <div class="frs-fname" id="frs-fname-rotate"></div>
+            <div class="frs-fsize" id="frs-fsize-rotate"></div>
+            <button class="frs-restart" type="button" onclick="_singleRestart('rotate')">
+              <i class="ti ti-rotate" aria-hidden="true"></i> Change file
+            </button>
+          </div>
+        </div>
       <label class="f-label">Rotation Angle</label>
 <select class="f-select" id="rotate-angle">
   <option value="90">90° Clockwise</option>
@@ -46,7 +56,10 @@
   <option value="odd">Odd pages only</option>
   <option value="even">Even pages only</option>
 </select>
-      <button class="action-btn" id="btn-rotate" onclick="run_rotate()">Rotate PDF</button>
+
+        <button class="action-btn" id="btn-rotate" onclick="run_rotate()">Rotate PDF</button>
+      </div>
+      <div id="ocr-hint-rotate"></div>
       <div class="progress-wrap" id="pw-rotate"><div class="progress-track"><div class="progress-fill" id="pb-rotate"></div></div><div class="progress-label" id="pl-rotate">Processing…</div></div>
       <div class="result-box" id="rb-rotate"><p id="rb-rotate-msg"></p></div>
     </div>

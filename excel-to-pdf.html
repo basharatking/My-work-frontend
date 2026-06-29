@@ -24,17 +24,29 @@
       <p class="tool-sub">Convert your Excel .xlsx file to PDF instantly. Free and secure.</p>
     </div>
     <div class="tool-card">
-      <div class="upload-zone" onclick="document.getElementById('fi-excel2pdf').click()">
+      <div class="upload-zone" id="uz-excel2pdf" onclick="document.getElementById('fi-excel2pdf').click()">
         <div class="uz-icon"></div>
         <div class="uz-title">Drop your Excel file here or click to browse</div>
         <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
         <div class="uz-badge">🔒 Files deleted after processing</div>
         <input class="file-input" id="fi-excel2pdf" type="file" accept=".xls,.xlsx" onchange="handleFiles('excel2pdf',this)">
       </div>
-      <div class="file-chips" id="fl-excel2pdf"></div>
-      <div class="pdf-preview-area" id="preview-excel2pdf"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
+      <div class="frs-single" id="frs-excel2pdf">
+        <div class="frs-single-inner">
+          <div class="frs-thumb-wrap" id="frs-thumb-excel2pdf">
+            <i class="ti ti-loader-2 ftc-spin" aria-hidden="true"></i>
+          </div>
+          <div class="frs-meta">
+            <div class="frs-fname" id="frs-fname-excel2pdf"></div>
+            <div class="frs-fsize" id="frs-fsize-excel2pdf"></div>
+            <button class="frs-restart" type="button" onclick="_singleRestart('excel2pdf')">
+              <i class="ti ti-rotate" aria-hidden="true"></i> Change file
+            </button>
+          </div>
+        </div>
+        <button class="action-btn" id="btn-excel2pdf" onclick="run_excel2pdf()">Convert to PDF</button>
+      </div>
       <div id="ocr-hint-excel2pdf"></div>
-      <button class="action-btn" id="btn-excel2pdf" onclick="run_excel2pdf()">Convert to PDF</button>
       <div class="progress-wrap" id="pw-excel2pdf"><div class="progress-track"><div class="progress-fill" id="pb-excel2pdf"></div></div><div class="progress-label" id="pl-excel2pdf">Processing…</div></div>
       <div class="result-box" id="rb-excel2pdf"><p id="rb-excel2pdf-msg"></p></div>
     </div>

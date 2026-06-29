@@ -24,18 +24,29 @@
       <p class="tool-sub">Convert PDF pages to PowerPoint slides. Each page becomes a slide.</p>
     </div>
     <div class="tool-card">
-      <div class="upload-zone" onclick="document.getElementById('fi-pdfpptx').click()">
+      <div class="upload-zone" id="uz-pdfpptx" onclick="document.getElementById('fi-pdfpptx').click()">
         <div class="uz-icon"></div>
         <div class="uz-title">Drop your file here or click to browse</div>
         <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
         <div class="uz-badge">🔒 Files deleted after processing</div>
         <input class="file-input" id="fi-pdfpptx" type="file" accept=".pdf" onchange="handleFiles('pdfpptx',this)">
       </div>
-      <div class="file-chips" id="fl-pdfpptx"></div>
-      <div class="pdf-preview-area" id="preview-pdfpptx"><div class="pdf-preview-header"><span>Preview</span><strong></strong></div><div class="pdf-canvas-wrap"></div></div>
+      <div class="frs-single" id="frs-pdfpptx">
+        <div class="frs-single-inner">
+          <div class="frs-thumb-wrap" id="frs-thumb-pdfpptx">
+            <i class="ti ti-loader-2 ftc-spin" aria-hidden="true"></i>
+          </div>
+          <div class="frs-meta">
+            <div class="frs-fname" id="frs-fname-pdfpptx"></div>
+            <div class="frs-fsize" id="frs-fsize-pdfpptx"></div>
+            <button class="frs-restart" type="button" onclick="_singleRestart('pdfpptx')">
+              <i class="ti ti-rotate" aria-hidden="true"></i> Change file
+            </button>
+          </div>
+        </div>
+        <button class="action-btn" id="btn-pdfpptx" onclick="run_pdfpptx()">Convert to PowerPoint</button>
+      </div>
       <div id="ocr-hint-pdfpptx"></div>
-      
-      <button class="action-btn" id="btn-pdfpptx" onclick="run_pdfpptx()">Convert to PowerPoint</button>
       <div class="progress-wrap" id="pw-pdfpptx"><div class="progress-track"><div class="progress-fill" id="pb-pdfpptx"></div></div><div class="progress-label" id="pl-pdfpptx">Processing…</div></div>
       <div class="result-box" id="rb-pdfpptx"><p id="rb-pdfpptx-msg"></p></div>
     </div>
