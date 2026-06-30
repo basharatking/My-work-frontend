@@ -44,6 +44,13 @@
             </button>
           </div>
         </div>
+      <label class="f-label">Extraction Mode</label>
+<select class="f-select" id="pdfxl-mode">
+  <option value="smart" selected>Smart — Auto-detect tables, fallback to text</option>
+  <option value="tables">Tables Only — Extract structured tables</option>
+  <option value="text">Text Only — Extract raw text by line</option>
+</select>
+
         <button class="action-btn" id="btn-pdfxl" onclick="run_pdfxl()">Convert to Excel</button>
       </div>
       <div id="ocr-hint-pdfxl"></div>

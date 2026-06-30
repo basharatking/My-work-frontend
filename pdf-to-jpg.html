@@ -44,6 +44,13 @@
             </button>
           </div>
         </div>
+      <label class="f-label">Image Quality</label>
+<select class="f-select" id="pdfjpg-dpi">
+  <option value="100">Standard (100 DPI) — Smaller files</option>
+  <option value="150" selected>High (150 DPI) — Recommended</option>
+  <option value="300">Maximum (300 DPI) — Best quality, larger files</option>
+</select>
+
         <button class="action-btn" id="btn-pdfjpg" onclick="run_pdfjpg()">Convert to JPG</button>
       </div>
       <div id="ocr-hint-pdfjpg"></div>
