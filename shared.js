@@ -343,15 +343,65 @@ async function _ocrHint(tid, file){
   const el=document.getElementById("ocr-hint-"+tid); if(!el||!file) return;
   try{ const fd=new FormData(); fd.append("file",file); const r=await fetch(`${API_BASE}/ocr-check`,{method:"POST",body:fd}); if(!r.ok) return; const d=await r.json(); if(d.is_scanned) el.innerHTML=`<div class="notice notice-amber">${_iconHTML("ti-alert-circle")}<span><strong>Scanned PDF detected.</strong> Text extraction may be limited.</span></div>`; }catch(_){}
 }
-function showProgress(tid,pct,lbl){ document.getElementById("pw-"+tid)?.classList.add("show"); const pb=document.getElementById("pb-"+tid); const pl=document.getElementById("pl-"+tid); if(pb) pb.style.width=pct+"%"; if(pl&&lbl) pl.textContent=lbl; }
-function hideProgress(tid){ document.getElementById("pw-"+tid)?.classList.remove("show"); const pb=document.getElementById("pb-"+tid); if(pb) pb.style.width="0%"; }
+function _buildRing(tid){
+  /* Insert the circular progress overlay into the frs-single card (or body fallback) */
+  const existing = document.getElementById("cpr-"+tid);
+  if(existing) return;
+  const anchor = document.getElementById("frs-"+tid) || document.getElementById("uz-"+tid)?.parentNode;
+  if(!anchor) return;
+  const el = document.createElement("div");
+  el.id        = "cpr-"+tid;
+  el.className = "circ-progress-wrap";
+  el.innerHTML = `
+    <div class="circ-ring-box">
+      <svg class="circ-svg" viewBox="0 0 80 80" aria-hidden="true">
+        <circle class="circ-track" cx="40" cy="40" r="34"/>
+        <circle class="circ-fill" id="cpr-fill-${tid}" cx="40" cy="40" r="34"
+                stroke-dasharray="213.6" stroke-dashoffset="213.6"/>
+      </svg>
+      <span class="circ-pct" id="cpr-pct-${tid}">0%</span>
+    </div>
+    <div class="circ-label" id="cpr-lbl-${tid}">Uploading…</div>`;
+  anchor.style.position = "relative";
+  anchor.appendChild(el);
+}
+
+function showProgress(tid, pct, lbl){
+  _buildRing(tid);
+  const wrap = document.getElementById("cpr-"+tid);
+  const fill = document.getElementById("cpr-fill-"+tid);
+  const pctEl= document.getElementById("cpr-pct-"+tid);
+  const lblEl= document.getElementById("cpr-lbl-"+tid);
+  if(wrap)  wrap.classList.add("show");
+  if(fill){
+    const circumference = 213.6;
+    fill.style.strokeDashoffset = circumference - (circumference * Math.min(pct,100) / 100);
+  }
+  if(pctEl) pctEl.textContent = Math.min(Math.round(pct),100)+"%";
+  if(lblEl && lbl) lblEl.textContent = lbl;
+}
+
+function hideProgress(tid){
+  const wrap = document.getElementById("cpr-"+tid);
+  if(wrap){ wrap.classList.remove("show"); setTimeout(()=>wrap.remove(), 300); }
+}
+
 function showResult(tid,msg,err){
+  hideProgress(tid);
   const rb=document.getElementById("rb-"+tid), mp=document.getElementById("rb-"+tid+"-msg"); if(!rb||!mp) return;
   rb.className="result-box show"+(err?" err":"");
   const ico=err?_iconHTML("ti-x"):_iconHTML("ti-check");
   mp.innerHTML=ico+" "+_esc(msg); if(!err) toast(msg,"success"); else toast(msg,"error");
 }
-function setBtnState(tid,loading,label){ const btn=document.getElementById("btn-"+tid); if(!btn) return; btn.disabled=loading; if(loading) btn.innerHTML=`<span class="spinner"></span> Processing…`; else if(label) btn.textContent=label; }
+
+function setBtnState(tid,loading,label){
+  const btn=document.getElementById("btn-"+tid); if(!btn) return;
+  btn.disabled=loading;
+  if(loading) btn.innerHTML=`<span class="spinner"></span> Processing…`;
+  else if(label) btn.textContent=label;
+  if(!loading) hideProgress(tid);
+}
+
 function showDownloadBtn(tid,blob,filename){
   document.getElementById("dl-btn-"+tid)?.remove();
   const btn=document.createElement("button"); btn.id="dl-btn-"+tid; btn.className="download-btn";
@@ -360,16 +410,55 @@ function showDownloadBtn(tid,blob,filename){
   const rb=document.getElementById("rb-"+tid), ab=document.getElementById("btn-"+tid);
   const after=rb||ab; if(after?.parentNode) after.parentNode.insertBefore(btn,after.nextSibling);
 }
+
 async function callAPI(endpoint,fd,tid,label){
-  label=label||"Processing…"; showProgress(tid,10,"Uploading…");
-  let p=10; const tick=setInterval(()=>{ p=Math.min(p+5,88); showProgress(tid,p,label); },350);
+  label = label || "Processing…";
+
+  /* Realistic progress curve:
+     0-30%  fast  (upload phase)
+     30-75% medium (server processing)
+     75-90% slow  (almost done, building suspense)
+     90-96% very slow (finalising) */
+  let p = 0;
+  const STAGES = [
+    {target:30, step:4,  interval:120, lbl:"Uploading…"},
+    {target:75, step:3,  interval:200, lbl:label},
+    {target:90, step:1,  interval:400, lbl:label},
+    {target:96, step:0.5,interval:700, lbl:"Finalising…"},
+  ];
+  let stageIdx = 0;
+  showProgress(tid, 0, "Uploading…");
+
+  function advance(){
+    const s = STAGES[stageIdx];
+    if(!s) return;
+    p = Math.min(p + s.step, s.target);
+    showProgress(tid, p, s.lbl);
+    if(p >= s.target && stageIdx < STAGES.length - 1){
+      stageIdx++;
+      clearInterval(tick);
+      tick = setInterval(advance, STAGES[stageIdx].interval);
+    }
+  }
+  let tick = setInterval(advance, STAGES[0].interval);
+
   try{
-    const resp=await fetch(API_BASE+endpoint,{method:"POST",body:fd});
-    clearInterval(tick); showProgress(tid,96,"Finishing…");
-    if(resp.status===413) throw new Error(`File too large. Limit is ${FREE_MB} MB.`);
-    if(!resp.ok){ let m="Server error — please try again."; try{ const j=await resp.json(); m=j.detail||j.message||m; }catch(_){} throw new Error(m); }
-    showProgress(tid,100,"Done!"); return resp;
-  }catch(e){ clearInterval(tick); throw e; }
+    const resp = await fetch(API_BASE+endpoint, {method:"POST", body:fd});
+    clearInterval(tick);
+    showProgress(tid, 100, "Done! ✓");
+    await new Promise(r => setTimeout(r, 500)); /* let user see 100% */
+    if(resp.status === 413) throw new Error(`File too large. Limit is ${FREE_MB} MB.`);
+    if(!resp.ok){
+      let m = "Server error — please try again.";
+      try{ const j=await resp.json(); m=j.detail||j.message||m; }catch(_){}
+      throw new Error(m);
+    }
+    return resp;
+  }catch(e){
+    clearInterval(tick);
+    hideProgress(tid);
+    throw e;
+  }
 }
 function copyResult(btn){ const body=btn.closest(".ai-result")?.querySelector(".ai-result-body"); if(!body) return; navigator.clipboard.writeText(body.textContent).then(()=>{ toast("Copied!","success"); btn.textContent="✓ Copied"; setTimeout(()=>btn.textContent="Copy",1500); }); }
 function downloadBlob(blob,name){ const u=URL.createObjectURL(blob); const a=Object.assign(document.createElement("a"),{href:u,download:name}); document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(u); a.remove(); },2000); }

@@ -617,6 +617,31 @@ img, svg { display: block; }
 }
 .frs-restart:hover { color: var(--brand-dark); }
 
+/* ── Circular progress ring (Play Store style) ── */
+.circ-progress-wrap {
+  position: absolute; inset: 0; z-index: 20;
+  display: none; align-items: center; justify-content: center; flex-direction: column; gap: 10px;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+  border-radius: var(--r);
+}
+[data-theme="dark"] .circ-progress-wrap { background: rgba(12,14,26,.92); }
+.circ-progress-wrap.show { display: flex; animation: fadeIn .18s var(--ease) both; }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+.circ-ring-box { position: relative; width: 80px; height: 80px; }
+.circ-svg { width: 80px; height: 80px; transform: rotate(-90deg); }
+.circ-track { fill: none; stroke: var(--border); stroke-width: 6; }
+.circ-fill {
+  fill: none; stroke: var(--brand); stroke-width: 6; stroke-linecap: round;
+  transition: stroke-dashoffset .35s cubic-bezier(.4,0,.2,1);
+}
+.circ-pct {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 700; color: var(--ink); letter-spacing: -.5px;
+}
+.circ-label { font-size: 12.5px; font-weight: 500; color: var(--ink4); text-align: center; }
+
 /* ── TOOL PAGE ── */
 .tool-page { padding-top: calc(var(--nav-h) + 2.5rem); padding-bottom: 5rem; min-height: 100vh; }
 .tool-container { max-width: 700px; margin: 0 auto; padding: 0 1.5rem; }
