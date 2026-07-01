@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PowerPoint to PDF — RunDocs</title>
+<meta name="description" content="Convert PowerPoint .pptx files to PDF instantly. Free, no signup required. All slides preserved.">
+<meta name="robots" content="index,follow"><meta name="author" content="RunDocs"><meta name="theme-color" content="#2563EB">
+<link rel="canonical" href="https://rundocs.netlify.app/pptx-to-pdf">
+<meta property="og:title" content="PowerPoint to PDF — RunDocs"><meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"RunDocs PowerPoint to PDF","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<script src="config.js"></script>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-container">
+    <div class="tool-header">
+      <div class="tool-icon-wrap"></div>
+      <h1 class="tool-title">PowerPoint to PDF</h1>
+      <p class="tool-sub">Convert your .pptx or .ppt presentation to PDF. All slides included. Free and secure.</p>
+    </div>
+    <div class="tool-card">
+      <div class="upload-zone" id="uz-pptx2pdf" onclick="document.getElementById('fi-pptx2pdf').click()">
+        <div class="uz-icon"></div>
+        <div class="uz-title">Drop your PowerPoint file here or click to browse</div>
+        <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
+        <div class="uz-badge">🔒 Files deleted after processing</div>
+        <input class="file-input" id="fi-pptx2pdf" type="file" accept=".ppt,.pptx" onchange="handleFiles('pptx2pdf',this)">
+      </div>
+      <div class="frs-single" id="frs-pptx2pdf">
+        <div class="frs-single-inner">
+          <div class="frs-thumb-wrap" id="frs-thumb-pptx2pdf">
+            <i class="ti ti-loader-2 ftc-spin" aria-hidden="true"></i>
+          </div>
+          <div class="frs-meta">
+            <div class="frs-fname" id="frs-fname-pptx2pdf"></div>
+            <div class="frs-fsize" id="frs-fsize-pptx2pdf"></div>
+            <button class="frs-restart" type="button" onclick="_singleRestart('pptx2pdf')">
+              <i class="ti ti-rotate" aria-hidden="true"></i> Change file
+            </button>
+          </div>
+        </div>
+        <button class="action-btn" id="btn-pptx2pdf" onclick="run_pptx2pdf()">Convert to PDF</button>
+      </div>
+      <div id="ocr-hint-pptx2pdf"></div>
+      <div class="progress-wrap" id="pw-pptx2pdf"><div class="progress-track"><div class="progress-fill" id="pb-pptx2pdf"></div></div><div class="progress-label" id="pl-pptx2pdf">Processing…</div></div>
+      <div class="result-box" id="rb-pptx2pdf"><p id="rb-pptx2pdf-msg"></p></div>
+    </div>
+<script>
+async function run_pptx2pdf(){
+  const files=fileStore["pptx2pdf"]; if(!files?.length){toast("Please select a file first","error");return;}
+  setBtnState("pptx2pdf",true);
+  const fd=new FormData();
+  fd.append("file",files[0]);
+  try{
+    const resp=await callAPI("/pptx-to-pdf",fd,"pptx2pdf","Converting to PDF...");
+    const blob=await resp.blob();
+    showResult("pptx2pdf","Done! File ready to download.");
+    showDownloadBtn("pptx2pdf",blob,`${files[0].name.replace(/\.pptx?$/i,"")}.pdf`);
+  }catch(e){showResult("pptx2pdf",e.message,true);}
+  finally{setBtnState("pptx2pdf",false,"Convert to PDF");}
+}
+</script>
+    <div class="tool-footer-links">
+      <p>More free tools:</p>
+      <div class="tfl-grid">
+        <a href="/word-to-pdf" class="tfl-link"><i class="ti ti-file-word" aria-hidden="true"></i> Word to PDF</a>
+        <a href="/excel-to-pdf" class="tfl-link"><i class="ti ti-file-spreadsheet" aria-hidden="true"></i> Excel to PDF</a>
+        <a href="/html-to-pdf" class="tfl-link"><i class="ti ti-brand-html5" aria-hidden="true"></i> HTML to PDF</a>
+        <a href="/jpg-to-pdf" class="tfl-link"><i class="ti ti-photo" aria-hidden="true"></i> Image to PDF</a>
+        <a href="/merge-pdf" class="tfl-link"><i class="ti ti-stack-2" aria-hidden="true"></i> Merge PDF</a>
+        <a href="/compress-pdf" class="tfl-link"><i class="ti ti-zoom-out" aria-hidden="true"></i> Compress PDF</a>
+        <a href="/ai-tools" class="tfl-link"><i class="ti ti-sparkles" aria-hidden="true"></i> AI Tools</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+</body>
+</html>

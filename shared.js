@@ -15,6 +15,8 @@ const TOOL_ICONS = {
   "/pdf-to-pptx": "ti-presentation",
   "/pdf-to-text": "ti-file-text",
   "/word-to-pdf": "ti-file-type-doc",
+  "/html-to-pdf": "ti-brand-html5",
+  "/pptx-to-pdf": "ti-presentation",
   "/excel-to-pdf": "ti-file-type-xls",
   "/jpg-to-pdf": "ti-photo-plus",
   "/rotate-pdf": "ti-rotate-clockwise",
@@ -47,6 +49,7 @@ const AI_CARD_ICONS = {
 const TOOL_COLOR = {
   "/pdf-to-word": "blue", "/pdf-to-pptx": "blue", "/pdf-to-text": "blue",
   "/word-to-pdf": "blue", "/add-page-numbers": "blue", "/ai-tools": "blue",
+  "/html-to-pdf": "blue", "/pptx-to-pdf": "blue",
   "/compress-pdf": "green", "/pdf-to-excel": "green", "/excel-to-pdf": "green",
   "/repair-pdf": "green", "/optimize-pdf": "green", "/bank-statement": "green",
   "/invoice-to-excel": "green",
@@ -64,9 +67,11 @@ const CONVERT_ICONS = {
   "/pdf-to-jpg":   ["ti-file-type-pdf", "ti-photo"],
   "/pdf-to-pptx":  ["ti-file-type-pdf", "ti-presentation"],
   "/pdf-to-text":  ["ti-file-type-pdf", "ti-file-text"],
-  "/word-to-pdf":  ["ti-file-word", "ti-file-type-pdf"],
+  "/word-to-pdf":  ["ti-file-word",        "ti-file-type-pdf"],
   "/excel-to-pdf": ["ti-file-spreadsheet", "ti-file-type-pdf"],
-  "/jpg-to-pdf":   ["ti-photo", "ti-file-type-pdf"],
+  "/jpg-to-pdf":   ["ti-photo",            "ti-file-type-pdf"],
+  "/html-to-pdf":  ["ti-brand-html5",      "ti-file-type-pdf"],
+  "/pptx-to-pdf":  ["ti-presentation",     "ti-file-type-pdf"],
 };
 
 function _iconHTML(name, extraClass) {
@@ -369,15 +374,14 @@ function _buildRing(tid){
 function showProgress(tid, pct, lbl){
   _buildRing(tid);
   const wrap = document.getElementById("cpr-"+tid);
-  const fill = document.getElementById("cpr-fill-"+tid);
-  const pctEl= document.getElementById("cpr-pct-"+tid);
-  const lblEl= document.getElementById("cpr-lbl-"+tid);
-  if(wrap)  wrap.classList.add("show");
-  if(fill){
-    const circumference = 213.6;
-    fill.style.strokeDashoffset = circumference - (circumference * Math.min(pct,100) / 100);
+  const pctEl = document.getElementById("cpr-pct-"+tid);
+  const lblEl = document.getElementById("cpr-lbl-"+tid);
+  if(wrap){
+    wrap.classList.add("show");
+    if(pct >= 100) wrap.classList.add("done");
+    else           wrap.classList.remove("done");
   }
-  if(pctEl) pctEl.textContent = Math.min(Math.round(pct),100)+"%";
+  if(pctEl) pctEl.textContent = Math.min(Math.round(pct), 100) + "%";
   if(lblEl && lbl) lblEl.textContent = lbl;
 }
 
@@ -552,7 +556,7 @@ const NAV_DROPS = {
 
 /* ── Mobile tools data — icon field now holds a Tabler class ── */
 const MOBILE_TOOLS = [
-  { cat:"Convert PDF", icon:"ti-replace", tools:[["/pdf-to-word","ti-file-word","PDF to Word"],["/pdf-to-excel","ti-file-spreadsheet","PDF to Excel"],["/pdf-to-jpg","ti-photo","PDF to JPG"],["/pdf-to-pptx","ti-presentation","PDF to PowerPoint"],["/pdf-to-text","ti-file-text","PDF to Text"],["/word-to-pdf","ti-file-type-doc","Word to PDF"],["/excel-to-pdf","ti-file-type-xls","Excel to PDF"],["/jpg-to-pdf","ti-photo-plus","Image to PDF"]] },
+  { cat:"Convert PDF", icon:"ti-replace", tools:[["/pdf-to-word","ti-file-word","PDF to Word"],["/pdf-to-excel","ti-file-spreadsheet","PDF to Excel"],["/pdf-to-jpg","ti-photo","PDF to JPG"],["/pdf-to-pptx","ti-presentation","PDF to PowerPoint"],["/pdf-to-text","ti-file-text","PDF to Text"],["/word-to-pdf","ti-file-type-doc","Word to PDF"],["/excel-to-pdf","ti-file-type-xls","Excel to PDF"],["/jpg-to-pdf","ti-photo-plus","Image to PDF"],["/html-to-pdf","ti-brand-html5","HTML to PDF"],["/pptx-to-pdf","ti-presentation","PowerPoint to PDF"]] },
   { cat:"Merge & Organize", icon:"ti-folder", tools:[["/merge-pdf","ti-stack-2","Merge PDF"],["/split-pdf","ti-cut","Split PDF"],["/rotate-pdf","ti-rotate-clockwise","Rotate PDF"],["/delete-pages","ti-trash","Delete Pages"],["/reorder-pages","ti-arrows-sort","Reorder Pages"],["/add-page-numbers","ti-number-123","Page Numbers"]] },
   { cat:"Compress", icon:"ti-zoom-out", tools:[["/compress-pdf","ti-zoom-out","Compress PDF"],["/optimize-pdf","ti-bolt","Optimize PDF"],["/repair-pdf","ti-tool","Repair PDF"]] },
   { cat:"Security", icon:"ti-shield-lock", tools:[["/protect-pdf","ti-lock","Lock PDF"],["/unlock-pdf","ti-lock-open","Unlock PDF"],["/watermark-pdf","ti-stamp","Watermark"],["/sign-pdf","ti-signature","Sign PDF"]] },

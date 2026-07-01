@@ -152,6 +152,16 @@
   to = "/optimize-pdf"
   status = 301
 
+[[redirects]]
+  from = "/pptx-to-pdf.html"
+  to = "/pptx-to-pdf"
+  status = 301
+
+[[redirects]]
+  from = "/html-to-pdf.html"
+  to = "/html-to-pdf"
+  status = 301
+
 # ── 200 rewrites: clean URLs → serve the actual .html file (URL bar stays clean) ──
 [[redirects]]
   from = "/privacy"
@@ -296,6 +306,16 @@
 [[redirects]]
   from = "/optimize-pdf"
   to = "/optimize-pdf.html"
+  status = 200
+
+[[redirects]]
+  from = "/html-to-pdf"
+  to = "/html-to-pdf.html"
+  status = 200
+
+[[redirects]]
+  from = "/pptx-to-pdf"
+  to = "/pptx-to-pdf.html"
   status = 200
 
 [[headers]]
