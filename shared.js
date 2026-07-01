@@ -497,6 +497,8 @@ const NAV_DROPS = {
       ["/word-to-pdf","ti-file-type-doc","Word to PDF","Convert .docx to PDF"],
       ["/excel-to-pdf","ti-file-type-xls","Excel to PDF","Convert .xlsx to PDF"],
       ["/jpg-to-pdf","ti-photo-plus","Image to PDF","JPG/PNG to PDF"],
+      ["/html-to-pdf","ti-brand-html5","HTML to PDF","Convert webpage to PDF"],
+      ["/pptx-to-pdf","ti-presentation","PowerPoint to PDF","Convert .pptx to PDF"],
     ]
   },
   merge: {
