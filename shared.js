@@ -561,6 +561,15 @@ const NAV_DROPS = {
       ["/ai-keypoints", "ti-bulb",             "Key Points",      "Extract key insights"],
       ["/ai-translate", "ti-language",         "Translate PDF",   "Urdu, Arabic & more"],
     ]
+  },
+  business: {
+    label: "Business",
+    icon: "ti-briefcase",
+    tools: [
+      ["/invoice-to-excel", "ti-receipt",          "Invoice to Excel",    "Extract invoice data to Excel"],
+      ["/bank-statement",   "ti-building-bank",    "Bank Statement",      "Parse bank statements to Excel"],
+      ["/pdf-to-excel",     "ti-file-spreadsheet", "Smart Table Extract", "Extract any table from PDF"],
+    ]
   }
 };
 
@@ -600,7 +609,7 @@ function _buildDrop(key) {
 
 /* ── Build All Tools mega panel ── */
 function _buildAllTools() {
-  const allDropKeys = ["convert","merge","split","compress","security","ai"];
+  const allDropKeys = ["convert","merge","split","compress","security","ai","business"];
   const cols = allDropKeys.map(key => {
     const d = NAV_DROPS[key];
     return `<div class="all-tools-col">
