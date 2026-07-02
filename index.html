@@ -220,7 +220,7 @@
     </a>
   </div>
   <div style="text-align:center;margin-top:2.25rem">
-    <button onclick="document.getElementById('toolsMenuBtn').click();window.scrollTo({top:0,behavior:'smooth'})" class="btn btn-outline btn-lg">View All 25+ Tools →</button>
+    <button onclick="(function(){const btn=document.getElementById('toolsMenuBtn');if(btn&&getComputedStyle(btn).display!=='none'){window.scrollTo({top:0,behavior:'smooth'});setTimeout(()=>btn.click(),350);}else{toggleMenu();}})();" class="btn btn-outline btn-lg">View All 25+ Tools →</button>
   </div>
 </section>
 

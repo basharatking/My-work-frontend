@@ -619,7 +619,7 @@ function _buildAllTools() {
   }).join("");
   return `
     <div class="nav-dropdown" data-key="all">
-      <button class="nav-drop-btn nav-all-btn">
+      <button class="nav-drop-btn nav-all-btn" id="toolsMenuBtn">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
         All Tools
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
