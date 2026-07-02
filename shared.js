@@ -25,7 +25,7 @@ const TOOL_ICONS = {
   "/add-page-numbers": "ti-number-123",
   "/protect-pdf": "ti-lock",
   "/unlock-pdf": "ti-lock-open",
-  "/watermark-pdf": "ti-stamp",
+  "/watermark-pdf": "ti-writing-sign",
   "/sign-pdf": "ti-signature",
   "/repair-pdf": "ti-tool",
   "/optimize-pdf": "ti-bolt",
@@ -517,7 +517,7 @@ const NAV_DROPS = {
       ["/rotate-pdf",      "ti-rotate-clockwise", "Rotate PDF",      "90°, 180°, 270° rotation"],
       ["/reorder-pages",   "ti-arrows-sort",      "Reorder Pages",   "Rearrange page order"],
       ["/add-page-numbers","ti-number-123",       "Add Page Numbers","Auto number pages"],
-      ["/watermark-pdf",   "ti-stamp",            "Watermark PDF",   "Add text watermark"],
+      ["/watermark-pdf",   "ti-writing-sign",            "Watermark PDF",   "Add text watermark"],
     ]
   },
   split: {
@@ -573,7 +573,7 @@ const MOBILE_TOOLS = [
   { cat:"Convert PDF", icon:"ti-replace", tools:[["/pdf-to-word","ti-file-word","PDF to Word"],["/pdf-to-excel","ti-file-spreadsheet","PDF to Excel"],["/pdf-to-jpg","ti-photo","PDF to JPG"],["/pdf-to-pptx","ti-presentation","PDF to PowerPoint"],["/pdf-to-text","ti-file-text","PDF to Text"],["/word-to-pdf","ti-file-type-doc","Word to PDF"],["/excel-to-pdf","ti-file-type-xls","Excel to PDF"],["/jpg-to-pdf","ti-photo-plus","Image to PDF"],["/html-to-pdf","ti-brand-html5","HTML to PDF"],["/pptx-to-pdf","ti-presentation","PowerPoint to PDF"]] },
   { cat:"Merge & Organize", icon:"ti-folder", tools:[["/merge-pdf","ti-stack-2","Merge PDF"],["/split-pdf","ti-cut","Split PDF"],["/rotate-pdf","ti-rotate-clockwise","Rotate PDF"],["/delete-pages","ti-trash","Delete Pages"],["/reorder-pages","ti-arrows-sort","Reorder Pages"],["/add-page-numbers","ti-number-123","Page Numbers"]] },
   { cat:"Compress", icon:"ti-zoom-out", tools:[["/compress-pdf","ti-zoom-out","Compress PDF"],["/optimize-pdf","ti-bolt","Optimize PDF"],["/repair-pdf","ti-tool","Repair PDF"]] },
-  { cat:"Security", icon:"ti-shield-lock", tools:[["/protect-pdf","ti-lock","Lock PDF"],["/unlock-pdf","ti-lock-open","Unlock PDF"],["/watermark-pdf","ti-stamp","Watermark"],["/sign-pdf","ti-signature","Sign PDF"]] },
+  { cat:"Security", icon:"ti-shield-lock", tools:[["/protect-pdf","ti-lock","Lock PDF"],["/unlock-pdf","ti-lock-open","Unlock PDF"],["/watermark-pdf","ti-writing-sign","Watermark"],["/sign-pdf","ti-signature","Sign PDF"]] },
   { cat:"AI Tools", icon:"ti-sparkles", tools:[["/ask-pdf","ti-message-circle-2","Ask PDF"],["/ai-summary","ti-clipboard-text","Summarize"],["/ai-notes","ti-notes","Notes"],["/ai-quiz","ti-help-circle","Quiz Generator"],["/ai-keypoints","ti-bulb","Key Points"],["/ai-translate","ti-language","Translate"]] },
   { cat:"Business", icon:"ti-briefcase", tools:[["/invoice-to-excel","ti-receipt","Invoice to Excel"],["/bank-statement","ti-building-bank","Bank Statement"],["/pdf-to-excel","ti-file-spreadsheet","Smart Table Extract"]] },
 ];

@@ -848,7 +848,7 @@ img, svg { display: block; }
 
 /* All Tools mega panel */
 .nav-all-menu {
-  min-width: 880px;
+  min-width: 980px;
   left: auto; right: 0;
   transform: translateY(-6px);
 }
@@ -856,7 +856,7 @@ img, svg { display: block; }
   transform: translateY(0);
 }
 .all-tools-grid {
-  display: grid; grid-template-columns: repeat(6, 1fr);
+  display: grid; grid-template-columns: repeat(7, 1fr);
   gap: 0; padding: 1rem;
 }
 .all-tools-col { padding: 0 .75rem; border-right: 1px solid var(--border); }
