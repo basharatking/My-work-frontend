@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Quiz Generator — AI PDF Tool — RunDocs</title>
+<meta name="description" content="Auto-generate multiple-choice quiz questions from any PDF. Great for students and teachers.">
+<meta name="robots" content="index,follow"><meta name="author" content="RunDocs"><meta name="theme-color" content="#2563EB">
+<link rel="canonical" href="https://rundocs.netlify.app/ai-quiz">
+<meta property="og:title" content="Quiz Generator — RunDocs"><meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"RunDocs Quiz Generator","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<script src="config.js"></script>
+<style>
+
+.ai-output-box{display:none;margin-top:14px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.ai-output-hdr{background:var(--brand-pale);padding:.55rem .9rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);}
+.ai-output-hdr span{font-size:12px;font-weight:700;color:var(--brand);}
+.ai-output-body{padding:.9rem;font-size:13px;color:var(--ink2);line-height:1.8;white-space:pre-wrap;max-height:340px;overflow-y:auto;}
+.copy-btn{background:var(--bg3);border:1px solid var(--border);color:var(--ink4);padding:4px 11px;border-radius:var(--rxs);font-size:11.5px;font-weight:500;cursor:pointer;}
+.copy-btn:hover{border-color:var(--brand);color:var(--brand);}
+.ai-beta-notice{display:flex;align-items:flex-start;gap:8px;background:var(--brand-pale);border:1px solid var(--brand-border);border-radius:var(--r);padding:10px 13px;margin-bottom:14px;font-size:12.5px;color:var(--brand);line-height:1.5;}
+.chat-msg{padding:.65rem .9rem;border-radius:var(--r);font-size:13px;line-height:1.7;max-width:88%;}
+.chat-msg.user{background:var(--brand);color:#fff;align-self:flex-end;border-bottom-right-radius:3px;}
+.chat-msg.bot{background:var(--bg2);color:var(--ink2);border:1px solid var(--border);align-self:flex-start;border-bottom-left-radius:3px;}
+.chat-input{flex:1;padding:9px 12px;border:1px solid var(--border);border-radius:var(--r);font-size:13.5px;color:var(--ink);background:var(--bg);outline:none;font-family:var(--font);}
+.chat-input:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(79,110,247,.1);}
+.chat-send{background:var(--brand);color:#fff;border:none;padding:9px 15px;border-radius:var(--r);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);}
+
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-container">
+    <div class="tool-header">
+      <div class="tool-icon-wrap"></div>
+      <div style="display:inline-flex;align-items:center;gap:8px">
+        <h1 class="tool-title">Quiz Generator</h1>
+        <span style="background:var(--brand);color:#fff;font-size:10px;font-weight:700;padding:2px 9px;border-radius:100px;letter-spacing:.05em;vertical-align:middle">BETA</span>
+      </div>
+      <p class="tool-sub">Auto-generate multiple-choice quiz questions from PDF content instantly.</p>
+    </div>
+    <div class="tool-card">
+      <div class="ai-beta-notice">
+        <i class="ti ti-info-circle" style="flex-shrink:0;margin-top:1px" aria-hidden="true"></i>
+        <span>This feature is currently in <strong>Beta</strong>. AI results may vary based on document content and complexity.</span>
+      </div>
+      <div class="upload-zone" id="uz-aiquiz" onclick="document.getElementById('fi-aiquiz').click()">
+        <div class="uz-icon"></div>
+        <div class="uz-title">Drop your PDF here or click to browse</div>
+        <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
+        <div class="uz-badge">🔒 Files deleted after processing</div>
+        <input class="file-input" id="fi-aiquiz" type="file" accept=".pdf" onchange="handleFiles('aiquiz',this)">
+      </div>
+      <div class="frs-single" id="frs-aiquiz">
+        <div class="frs-single-inner">
+          <div class="frs-thumb-wrap" id="frs-thumb-aiquiz">
+            <i class="ti ti-loader-2 ftc-spin" aria-hidden="true"></i>
+          </div>
+          <div class="frs-meta">
+            <div class="frs-fname" id="frs-fname-aiquiz"></div>
+            <div class="frs-fsize" id="frs-fsize-aiquiz"></div>
+            <button class="frs-restart" type="button" onclick="_singleRestart('aiquiz')">
+              <i class="ti ti-rotate" aria-hidden="true"></i> Change file
+            </button>
+          </div>
+        </div>
+        <br><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div>
+          <label class="f-label">Questions</label>
+          <select class="f-select" id="aiquiz-count">
+            <option value="5">5 questions</option>
+            <option value="10" selected>10 questions</option>
+            <option value="15">15 questions</option>
+            <option value="20">20 questions</option>
+          </select>
+        </div>
+        <div>
+          <label class="f-label">Difficulty</label>
+          <select class="f-select" id="aiquiz-diff">
+            <option value="easy">Easy</option>
+            <option value="medium" selected>Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+      </div>
+        <button class="action-btn" id="btn-aiquiz" onclick="run_aiquiz()">Generate Quiz</button>
+      </div>
+      <div id="ocr-hint-aiquiz"></div>
+      <div class="progress-wrap" id="pw-aiquiz"><div class="progress-track"><div class="progress-fill" id="pb-aiquiz"></div></div><div class="progress-label" id="pl-aiquiz">Processing…</div></div>
+      <div class="result-box" id="rb-aiquiz"><p id="rb-aiquiz-msg"></p></div>
+      
+      <div class="ai-output-box" id="aiquiz-result-box">
+        <div class="ai-output-hdr"><span>Quiz Generator Result</span><button class="copy-btn" onclick="this.closest('.ai-output-box').querySelector('.ai-output-body').select?.();navigator.clipboard.writeText(document.getElementById('aiquiz-output').textContent);toast('Copied!','success')">Copy</button></div>
+        <div class="ai-output-body" id="aiquiz-output"></div>
+      </div>
+    </div>
+<script>
+async function run_aiquiz(){
+  const files=fileStore["aiquiz"];if(!files?.length){toast("Please select a PDF first","error");return;}
+  setBtnState("aiquiz",true);
+  const fd=new FormData();fd.append("file",files[0]);fd.append("count",document.getElementById("aiquiz-count").value);fd.append("difficulty",document.getElementById("aiquiz-diff").value);
+  try{
+    const resp=await callAPI("/ai-quiz",fd,"aiquiz","Generating quiz…");
+    if(!resp.ok){const j=await resp.json().catch(()=>({}));throw new Error(j.detail||"AI error.");}
+    const data=await resp.json();
+    showResult("aiquiz","Quiz ready!");
+    document.getElementById("aiquiz-output").textContent=data.result||"No result.";
+    document.getElementById("aiquiz-result-box").style.display="block";
+  }catch(e){showResult("aiquiz",e.message,true);}
+  finally{setBtnState("aiquiz",false,"Generate Quiz");}
+}
+</script>
+    <div class="tool-footer-links">
+      <p>More AI tools:</p>
+      <div class="tfl-grid">
+        <a href="/ask-pdf" class="tfl-link"><i class="ti ti-message-circle-2" aria-hidden="true"></i> Ask PDF</a>
+        <a href="/ai-summary" class="tfl-link"><i class="ti ti-clipboard-text" aria-hidden="true"></i> Summarize PDF</a>
+        <a href="/ai-notes" class="tfl-link"><i class="ti ti-notes" aria-hidden="true"></i> Generate Notes</a>
+        <a href="/ai-keypoints" class="tfl-link"><i class="ti ti-bulb" aria-hidden="true"></i> Key Points</a>
+        <a href="/ai-translate" class="tfl-link"><i class="ti ti-language" aria-hidden="true"></i> Translate PDF</a>
+        <a href="/ai-tools" class="tfl-link"><i class="ti ti-sparkles" aria-hidden="true"></i> All AI Tools</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+</body>
+</html>

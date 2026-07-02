@@ -4,7 +4,7 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>AI PDF Tools — RunDocs</title>
 <meta name="description" content="AI-powered PDF tools: summarize, generate notes, create quizzes, extract key points, translate and chat with your PDF. Free, no signup.">
-<meta name="robots" content="index,follow"><meta name="theme-color" content="#2563EB">
+<meta name="robots" content="index,follow"><meta name="author" content="RunDocs"><meta name="theme-color" content="#2563EB">
 <link rel="canonical" href="https://rundocs.netlify.app/ai-tools">
 <meta property="og:title" content="AI PDF Tools — RunDocs"><meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,313 +13,76 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <script src="config.js"></script>
 <style>
-.ai-hero{padding:calc(var(--nav-h)+3rem) 2rem 3rem;text-align:center;background:var(--bg2);border-bottom:1px solid var(--border)}
-.ai-hero h1{font-family:var(--font-display);font-size:clamp(28px,4vw,44px);font-weight:400;color:var(--ink);margin-bottom:.6rem;letter-spacing:-.02em}
-.ai-hero p{font-size:16px;color:var(--ink3);max-width:480px;margin:0 auto;line-height:1.7}
-.ai-badge{display:inline-flex;align-items:center;gap:6px;background:var(--brand-pale);border:1px solid var(--brand-border);color:var(--brand);font-size:11.5px;font-weight:700;padding:4px 13px;border-radius:var(--round);margin-bottom:1.1rem;text-transform:uppercase;letter-spacing:.06em}
-.ai-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:1100px;margin:0 auto}
-.ai-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--r2xl);overflow:hidden;transition:var(--t-md)}
-.ai-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:var(--brand-border)}
-.ai-card-hdr{padding:1.25rem 1.25rem 0}
-.ai-card-icon{font-size:1.6rem;margin-bottom:.5rem;color:var(--brand)}
-.ai-card-title{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:.25rem}
-.ai-card-desc{font-size:13px;color:var(--ink3);line-height:1.6;margin-bottom:.85rem}
-.ai-card-body{padding:0 1.25rem 1.25rem}
-.ai-result{margin-top:.75rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;display:none;animation:fadeUp .25s ease}
-.ai-result.show{display:block}
-.ai-result-header{background:var(--brand-pale);padding:.55rem .9rem;display:flex;align-items:center;gap:7px;border-bottom:1px solid var(--border)}
-.ai-result-header span{font-size:12px;font-weight:700;color:var(--brand)}
-.ai-result-body{padding:.9rem;font-size:13px;color:var(--ink2);line-height:1.8;white-space:pre-wrap;max-height:360px;overflow-y:auto}
-.copy-row{padding:.5rem .9rem;border-top:1px solid var(--border);display:flex;justify-content:flex-end}
-.copy-btn{background:var(--bg3);border:1px solid var(--border);color:var(--ink4);padding:4px 11px;border-radius:var(--rxs);font-size:11.5px;font-weight:500;cursor:pointer;transition:var(--t)}
-.copy-btn:hover{border-color:var(--brand);color:var(--brand);background:var(--brand-pale)}
-.chat-messages{max-height:260px;overflow-y:auto;display:flex;flex-direction:column;gap:.65rem;margin-bottom:.75rem}
-.chat-msg{padding:.65rem .9rem;border-radius:var(--r);font-size:13px;line-height:1.7;max-width:88%}
-.chat-msg.user{background:var(--brand);color:#fff;align-self:flex-end;border-bottom-right-radius:3px}
-.chat-msg.bot{background:var(--bg2);color:var(--ink2);border:1px solid var(--border);align-self:flex-start;border-bottom-left-radius:3px}
-.chat-input-row{display:flex;gap:7px}
-.chat-input{flex:1;padding:9px 12px;border:1px solid var(--border);border-radius:var(--r);font-size:13.5px;color:var(--ink);background:var(--bg);outline:none;font-family:var(--font)}
-.chat-input:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
-.chat-send{background:var(--brand);color:#fff;border:none;padding:9px 15px;border-radius:var(--r);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);transition:var(--t);white-space:nowrap}
-.chat-send:hover{background:var(--brand-dark)}
-.upload-zone-sm{padding:1.1rem 1rem !important}
-@media(max-width:900px){.ai-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.ai-grid{grid-template-columns:1fr}}
+.ai-hero{padding:calc(var(--nav-h)+3rem) 2rem 2.5rem;text-align:center;background:var(--bg2);border-bottom:1px solid var(--border)}
+.ai-hero h1{font-family:var(--font-display);font-size:clamp(26px,4vw,42px);font-weight:400;color:var(--ink);margin-bottom:.6rem;letter-spacing:-.02em}
+.ai-hero p{font-size:15px;color:var(--ink3);max-width:480px;margin:0 auto;line-height:1.7}
+.ai-badge{display:inline-flex;align-items:center;gap:6px;background:var(--brand-pale);border:1px solid var(--brand-border);color:var(--brand);font-size:11px;font-weight:700;padding:4px 13px;border-radius:var(--round);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.06em}
+.beta-pill{background:var(--brand);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;letter-spacing:.05em;vertical-align:middle;margin-left:6px}
+.ai-notice{max-width:640px;margin:2rem auto 0;display:flex;align-items:flex-start;gap:10px;background:var(--brand-pale);border:1px solid var(--brand-border);border-radius:var(--r);padding:12px 15px;font-size:13px;color:var(--brand);line-height:1.6}
+.ai-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;max-width:1000px;margin:0 auto;padding:3rem 2rem 5rem}
+.ai-card{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r2xl);padding:1.4rem;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:10px;transition:var(--t-md)}
+.ai-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:var(--brand-border)}
+.ai-card-icon{width:42px;height:42px;border-radius:12px;background:var(--brand-pale);display:flex;align-items:center;justify-content:center;color:var(--brand);font-size:1.2rem}
+.ai-card-title{font-size:15px;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:6px}
+.ai-card-desc{font-size:13px;color:var(--ink3);line-height:1.6}
+.ai-card-arrow{font-size:12px;color:var(--brand);margin-top:auto;font-weight:600}
+@media(max-width:860px){.ai-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.ai-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div id="nav-placeholder"></div>
 
 <div class="ai-hero">
-  <div class="ai-badge">✨ AI-Powered</div>
+  <div class="ai-badge">✨ AI-Powered <span class="beta-pill">BETA</span></div>
   <h1>Your PDF, understood instantly</h1>
   <p>Summarize, extract notes, generate quizzes, translate and chat with any PDF — all free.</p>
+  <div class="ai-notice">
+    <i class="ti ti-info-circle" style="flex-shrink:0;font-size:16px;margin-top:1px" aria-hidden="true"></i>
+    <span>These AI features are currently in <strong>Beta</strong>. Each tool opens on its own dedicated page for the best experience.</span>
+  </div>
 </div>
 
-<section style="padding:3rem 2rem 5rem">
-  <div class="ai-grid">
-
-    <!-- SUMMARY -->
-    <div class="ai-card" id="summary">
-      <div class="ai-card-hdr">
-        <div class="ai-card-icon"></div>
-        <div class="ai-card-title">PDF Summary</div>
-        <div class="ai-card-desc">Get a concise, well-structured summary of any PDF in seconds.</div>
-      </div>
-      <div class="ai-card-body">
-        <div class="upload-zone upload-zone-sm" onclick="document.getElementById('fi-summary').click()">
-          <div class="uz-title" style="font-size:13px">Drop PDF or click to browse</div>
-          <div class="uz-sub" style="font-size:12px">Up to 25 MB</div>
-          <input class="file-input" id="fi-summary" type="file" accept=".pdf" onchange="handleFiles('summary',this)">
-        </div>
-        <div class="file-chips" id="fl-summary"></div>
-        <label class="f-label">Summary Length</label>
-        <select class="f-select" id="summary-length" style="font-size:13px">
-          <option value="short">Short (2–3 sentences)</option>
-          <option value="medium" selected>Medium (1 paragraph)</option>
-          <option value="long">Long (detailed overview)</option>
-        </select>
-        <button class="action-btn" id="btn-summary" onclick="run_summary()" style="margin-top:.75rem;padding:11px;font-size:13.5px">Summarize PDF</button>
-        <div class="progress-wrap" id="pw-summary"><div class="progress-track"><div class="progress-fill" id="pb-summary"></div></div><div class="progress-label" id="pl-summary">Analyzing…</div></div>
-        <div class="ai-result" id="result-summary">
-          <div class="ai-result-header"><span>Summary</span></div>
-          <div class="ai-result-body" id="body-summary"></div>
-          <div class="copy-row"><button class="copy-btn" onclick="copyResult(this)">Copy</button></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- NOTES -->
-    <div class="ai-card" id="notes">
-      <div class="ai-card-hdr">
-        <div class="ai-card-icon"></div>
-        <div class="ai-card-title">Notes Generator</div>
-        <div class="ai-card-desc">Structured study notes from any PDF — perfect for learning.</div>
-      </div>
-      <div class="ai-card-body">
-        <div class="upload-zone upload-zone-sm" onclick="document.getElementById('fi-notes').click()">
-          <div class="uz-title" style="font-size:13px">Drop PDF or click to browse</div>
-          <div class="uz-sub" style="font-size:12px">Up to 25 MB</div>
-          <input class="file-input" id="fi-notes" type="file" accept=".pdf" onchange="handleFiles('notes',this)">
-        </div>
-        <div class="file-chips" id="fl-notes"></div>
-        <label class="f-label">Notes Style</label>
-        <select class="f-select" id="notes-style" style="font-size:13px">
-          <option value="bullet" selected>Bullet points</option>
-          <option value="outline">Structured outline</option>
-          <option value="cornell">Cornell format</option>
-          <option value="mindmap">Mind map text</option>
-        </select>
-        <button class="action-btn" id="btn-notes" onclick="run_notes()" style="margin-top:.75rem;padding:11px;font-size:13.5px">Generate Notes</button>
-        <div class="progress-wrap" id="pw-notes"><div class="progress-track"><div class="progress-fill" id="pb-notes"></div></div><div class="progress-label" id="pl-notes">Generating…</div></div>
-        <div class="ai-result" id="result-notes">
-          <div class="ai-result-header"><span>Notes</span></div>
-          <div class="ai-result-body" id="body-notes"></div>
-          <div class="copy-row"><button class="copy-btn" onclick="copyResult(this)">Copy</button></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- QUIZ -->
-    <div class="ai-card" id="quiz">
-      <div class="ai-card-hdr">
-        <div class="ai-card-icon"></div>
-        <div class="ai-card-title">Quiz Generator</div>
-        <div class="ai-card-desc">Auto-generate multiple-choice quiz questions from PDF content.</div>
-      </div>
-      <div class="ai-card-body">
-        <div class="upload-zone upload-zone-sm" onclick="document.getElementById('fi-quiz').click()">
-          <div class="uz-title" style="font-size:13px">Drop PDF or click to browse</div>
-          <div class="uz-sub" style="font-size:12px">Up to 25 MB</div>
-          <input class="file-input" id="fi-quiz" type="file" accept=".pdf" onchange="handleFiles('quiz',this)">
-        </div>
-        <div class="file-chips" id="fl-quiz"></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:.5rem">
-          <div>
-            <label class="f-label">Questions</label>
-            <select class="f-select" id="quiz-count" style="font-size:13px">
-              <option value="5">5 questions</option>
-              <option value="10" selected>10 questions</option>
-              <option value="15">15 questions</option>
-              <option value="20">20 questions</option>
-            </select>
-          </div>
-          <div>
-            <label class="f-label">Difficulty</label>
-            <select class="f-select" id="quiz-diff" style="font-size:13px">
-              <option value="easy">Easy</option>
-              <option value="medium" selected>Medium</option>
-              <option value="hard">Hard</option>
-            </select>
-          </div>
-        </div>
-        <button class="action-btn" id="btn-quiz" onclick="run_quiz()" style="margin-top:.75rem;padding:11px;font-size:13.5px">Generate Quiz</button>
-        <div class="progress-wrap" id="pw-quiz"><div class="progress-track"><div class="progress-fill" id="pb-quiz"></div></div><div class="progress-label" id="pl-quiz">Generating…</div></div>
-        <div class="ai-result" id="result-quiz">
-          <div class="ai-result-header"><span>Quiz Questions</span></div>
-          <div class="ai-result-body" id="body-quiz"></div>
-          <div class="copy-row"><button class="copy-btn" onclick="copyResult(this)">Copy</button></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- KEY POINTS -->
-    <div class="ai-card" id="keypoints">
-      <div class="ai-card-hdr">
-        <div class="ai-card-icon"></div>
-        <div class="ai-card-title">Key Points</div>
-        <div class="ai-card-desc">Extract the most important insights from any document instantly.</div>
-      </div>
-      <div class="ai-card-body">
-        <div class="upload-zone upload-zone-sm" onclick="document.getElementById('fi-keypoints').click()">
-          <div class="uz-title" style="font-size:13px">Drop PDF or click to browse</div>
-          <div class="uz-sub" style="font-size:12px">Up to 25 MB</div>
-          <input class="file-input" id="fi-keypoints" type="file" accept=".pdf" onchange="handleFiles('keypoints',this)">
-        </div>
-        <div class="file-chips" id="fl-keypoints"></div>
-        <button class="action-btn" id="btn-keypoints" onclick="run_keypoints()" style="margin-top:.75rem;padding:11px;font-size:13.5px">Extract Key Points</button>
-        <div class="progress-wrap" id="pw-keypoints"><div class="progress-track"><div class="progress-fill" id="pb-keypoints"></div></div><div class="progress-label" id="pl-keypoints">Extracting…</div></div>
-        <div class="ai-result" id="result-keypoints">
-          <div class="ai-result-header"><span>Key Points</span></div>
-          <div class="ai-result-body" id="body-keypoints"></div>
-          <div class="copy-row"><button class="copy-btn" onclick="copyResult(this)">Copy</button></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- TRANSLATE -->
-    <div class="ai-card" id="translate">
-      <div class="ai-card-hdr">
-        <div class="ai-card-icon"></div>
-        <div class="ai-card-title">Translate PDF</div>
-        <div class="ai-card-desc">Translate PDF content between English, Urdu, Arabic and more.</div>
-      </div>
-      <div class="ai-card-body">
-        <div class="upload-zone upload-zone-sm" onclick="document.getElementById('fi-translate').click()">
-          <div class="uz-title" style="font-size:13px">Drop PDF or click to browse</div>
-          <div class="uz-sub" style="font-size:12px">Up to 25 MB</div>
-          <input class="file-input" id="fi-translate" type="file" accept=".pdf" onchange="handleFiles('translate',this)">
-        </div>
-        <div class="file-chips" id="fl-translate"></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:.5rem">
-          <div>
-            <label class="f-label">From</label>
-            <select class="f-select" id="translate-from" style="font-size:13px">
-              <option value="auto" selected>Auto-detect</option>
-              <option value="English">English</option>
-              <option value="Urdu">Urdu</option>
-              <option value="Arabic">Arabic</option>
-              <option value="French">French</option>
-              <option value="Spanish">Spanish</option>
-            </select>
-          </div>
-          <div>
-            <label class="f-label">To</label>
-            <select class="f-select" id="translate-to" style="font-size:13px">
-              <option value="Urdu" selected>Urdu</option>
-              <option value="English">English</option>
-              <option value="Arabic">Arabic</option>
-              <option value="French">French</option>
-              <option value="Spanish">Spanish</option>
-              <option value="German">German</option>
-            </select>
-          </div>
-        </div>
-        <button class="action-btn" id="btn-translate" onclick="run_translate()" style="margin-top:.75rem;padding:11px;font-size:13.5px">Translate PDF</button>
-        <div class="progress-wrap" id="pw-translate"><div class="progress-track"><div class="progress-fill" id="pb-translate"></div></div><div class="progress-label" id="pl-translate">Translating…</div></div>
-        <div class="ai-result" id="result-translate">
-          <div class="ai-result-header"><span>Translation</span></div>
-          <div class="ai-result-body" id="body-translate"></div>
-          <div class="copy-row"><button class="copy-btn" onclick="copyResult(this)">Copy</button></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ASK PDF -->
-    <div class="ai-card" id="ask">
-      <div class="ai-card-hdr">
-        <div class="ai-card-icon"></div>
-        <div class="ai-card-title">Ask PDF</div>
-        <div class="ai-card-desc">Upload a PDF and ask any question — get direct answers from the document.</div>
-      </div>
-      <div class="ai-card-body">
-        <div class="upload-zone upload-zone-sm" onclick="document.getElementById('fi-ask').click()">
-          <div class="uz-title" style="font-size:13px">Drop PDF or click to browse</div>
-          <div class="uz-sub" style="font-size:12px">Up to 25 MB</div>
-          <input class="file-input" id="fi-ask" type="file" accept=".pdf" onchange="handleFiles('ask',this)">
-        </div>
-        <div class="file-chips" id="fl-ask"></div>
-        <div class="chat-messages" id="chat-messages" style="display:none;margin-top:.65rem"></div>
-        <div class="chat-input-row" style="margin-top:.65rem">
-          <input class="chat-input" id="ask-question" type="text" placeholder="Ask anything about your PDF…" onkeydown="if(event.key==='Enter')run_ask()">
-          <button class="chat-send" onclick="run_ask()">Ask →</button>
-        </div>
-        <div style="font-size:11px;color:var(--ink4);margin-top:3px;text-align:right" id="ask-char">0 / 500</div>
-        <div class="progress-wrap" id="pw-ask"><div class="progress-track"><div class="progress-fill" id="pb-ask"></div></div><div class="progress-label" id="pl-ask">Processing…</div></div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<section style="padding:2rem 2rem;background:var(--bg2);border-top:1px solid var(--border);text-align:center">
-  <div style="display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap">
-    <span style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink4)">✅ Files deleted after processing</span>
-    <span style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink4)">✅ 256-bit encrypted upload</span>
-    <span style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink4)">✅ No data stored or shared</span>
-  </div>
-</section>
+<div class="ai-grid">
+  <a href="/ask-pdf" class="ai-card">
+    <div class="ai-card-icon"><i class="ti ti-message-circle-2" aria-hidden="true"></i></div>
+    <div class="ai-card-title">Ask PDF <span class="beta-pill">BETA</span></div>
+    <div class="ai-card-desc">Upload a PDF and ask any question — get direct answers from the document.</div>
+    <div class="ai-card-arrow">Try it →</div>
+  </a>
+  <a href="/ai-summary" class="ai-card">
+    <div class="ai-card-icon"><i class="ti ti-clipboard-text" aria-hidden="true"></i></div>
+    <div class="ai-card-title">PDF Summary <span class="beta-pill">BETA</span></div>
+    <div class="ai-card-desc">Get a concise, well-structured summary of any PDF in seconds.</div>
+    <div class="ai-card-arrow">Try it →</div>
+  </a>
+  <a href="/ai-notes" class="ai-card">
+    <div class="ai-card-icon"><i class="ti ti-notes" aria-hidden="true"></i></div>
+    <div class="ai-card-title">Notes Generator <span class="beta-pill">BETA</span></div>
+    <div class="ai-card-desc">Structured study notes from any PDF — perfect for learning.</div>
+    <div class="ai-card-arrow">Try it →</div>
+  </a>
+  <a href="/ai-quiz" class="ai-card">
+    <div class="ai-card-icon"><i class="ti ti-help-circle" aria-hidden="true"></i></div>
+    <div class="ai-card-title">Quiz Generator <span class="beta-pill">BETA</span></div>
+    <div class="ai-card-desc">Auto-generate multiple-choice quiz questions from PDF content.</div>
+    <div class="ai-card-arrow">Try it →</div>
+  </a>
+  <a href="/ai-keypoints" class="ai-card">
+    <div class="ai-card-icon"><i class="ti ti-bulb" aria-hidden="true"></i></div>
+    <div class="ai-card-title">Key Points <span class="beta-pill">BETA</span></div>
+    <div class="ai-card-desc">Extract the most important insights from any document instantly.</div>
+    <div class="ai-card-arrow">Try it →</div>
+  </a>
+  <a href="/ai-translate" class="ai-card">
+    <div class="ai-card-icon"><i class="ti ti-language" aria-hidden="true"></i></div>
+    <div class="ai-card-title">Translate PDF <span class="beta-pill">BETA</span></div>
+    <div class="ai-card-desc">Translate PDF content between English, Urdu, Arabic and more.</div>
+    <div class="ai-card-arrow">Try it →</div>
+  </a>
+</div>
 
 <div id="footer-placeholder"></div>
 <script src="shared.js"></script>
-<script>
-let askHistory=[];
-document.getElementById("ask-question")?.addEventListener("input",function(){document.getElementById("ask-char").textContent=`${this.value.length} / 500`;});
-
-async function _aiCall(endpoint,formData,tid,label,resultId,bodyId){
-  setBtnState(tid,true);showProgress(tid,20,label);
-  try{
-    let p=20;const tick=setInterval(()=>{p=Math.min(p+5,90);showProgress(tid,p,"Processing…");},450);
-    const resp=await fetch(`${API_BASE}${endpoint}`,{method:"POST",body:formData});
-    clearInterval(tick);showProgress(tid,100,"Done!");hideProgress(tid);
-    if(!resp.ok){const j=await resp.json().catch(()=>({}));throw new Error(j.detail||"AI error. Check HF_TOKEN is configured.");}
-    const data=await resp.json();
-    document.getElementById(resultId).classList.add("show");
-    document.getElementById(bodyId).textContent=data.result||"No result generated.";
-    toast("Done!","success");
-  }catch(e){toast(e.message,"error");hideProgress(tid);}
-  finally{setBtnState(tid,false);}
-}
-async function run_summary(){const files=fileStore["summary"];if(!files?.length){toast("Please select a PDF first","error");return;}const fd=new FormData();fd.append("file",files[0]);fd.append("length",document.getElementById("summary-length").value);await _aiCall("/ai-summary",fd,"summary","Analyzing…","result-summary","body-summary");document.getElementById("btn-summary").textContent="Summarize PDF";}
-async function run_notes(){const files=fileStore["notes"];if(!files?.length){toast("Please select a PDF first","error");return;}const fd=new FormData();fd.append("file",files[0]);fd.append("style",document.getElementById("notes-style").value);await _aiCall("/ai-notes",fd,"notes","Generating notes…","result-notes","body-notes");document.getElementById("btn-notes").textContent="Generate Notes";}
-async function run_quiz(){const files=fileStore["quiz"];if(!files?.length){toast("Please select a PDF first","error");return;}const fd=new FormData();fd.append("file",files[0]);fd.append("count",document.getElementById("quiz-count").value);fd.append("difficulty",document.getElementById("quiz-diff").value);await _aiCall("/ai-quiz",fd,"quiz","Generating quiz…","result-quiz","body-quiz");document.getElementById("btn-quiz").textContent="Generate Quiz";}
-async function run_keypoints(){const files=fileStore["keypoints"];if(!files?.length){toast("Please select a PDF first","error");return;}const fd=new FormData();fd.append("file",files[0]);await _aiCall("/ai-keypoints",fd,"keypoints","Extracting…","result-keypoints","body-keypoints");document.getElementById("btn-keypoints").textContent="Extract Key Points";}
-async function run_translate(){const files=fileStore["translate"];if(!files?.length){toast("Please select a PDF first","error");return;}const fd=new FormData();fd.append("file",files[0]);fd.append("from_lang",document.getElementById("translate-from").value);fd.append("to_lang",document.getElementById("translate-to").value);await _aiCall("/ai-translate",fd,"translate","Translating…","result-translate","body-translate");document.getElementById("btn-translate").textContent="Translate PDF";}
-async function run_ask(){
-  const files=fileStore["ask"];const question=document.getElementById("ask-question").value.trim();
-  if(!files?.length){toast("Please select a PDF first","error");return;}
-  if(!question){toast("Please enter a question","error");return;}
-  if(question.length>500){toast("Question too long (max 500 chars)","error");return;}
-  const msgBox=document.getElementById("chat-messages");
-  msgBox.style.display="flex";
-  msgBox.innerHTML+=`<div class="chat-msg user">${_esc(question)}</div>`;
-  msgBox.scrollTop=msgBox.scrollHeight;
-  document.getElementById("ask-question").value="";
-  document.getElementById("ask-char").textContent="0 / 500";
-  showProgress("ask",30,"Searching document…");
-  const fd=new FormData();fd.append("file",files[0]);fd.append("question",question);fd.append("history",JSON.stringify(askHistory));
-  try{
-    let p=30;const tick=setInterval(()=>{p=Math.min(p+5,90);showProgress("ask",p,"Thinking…");},400);
-    const resp=await fetch(`${API_BASE}/ask-pdf`,{method:"POST",body:fd});
-    clearInterval(tick);showProgress("ask",100,"Done!");hideProgress("ask");
-    if(!resp.ok){const j=await resp.json().catch(()=>({}));throw new Error(j.detail||"AI error.");}
-    const data=await resp.json();const answer=data.result||"No answer found.";
-    askHistory.push({q:question,a:answer});
-    msgBox.innerHTML+=`<div class="chat-msg bot">${_esc(answer)}</div>`;
-    msgBox.scrollTop=msgBox.scrollHeight;
-  }catch(e){hideProgress("ask");msgBox.innerHTML+=`<div class="chat-msg bot" style="color:var(--red)">❌ ${_esc(e.message)}</div>`;msgBox.scrollTop=msgBox.scrollHeight;}
-}
-function _esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
-</script>
 </body>
 </html>

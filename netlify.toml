@@ -162,7 +162,66 @@
   to = "/html-to-pdf"
   status = 301
 
+[[redirects]]
+  from = "/ask-pdf.html"
+  to = "/ask-pdf"
+  status = 301
+
+[[redirects]]
+  from = "/ai-summary.html"
+  to = "/ai-summary"
+  status = 301
+
+[[redirects]]
+  from = "/ai-notes.html"
+  to = "/ai-notes"
+  status = 301
+
+[[redirects]]
+  from = "/ai-quiz.html"
+  to = "/ai-quiz"
+  status = 301
+
+[[redirects]]
+  from = "/ai-keypoints.html"
+  to = "/ai-keypoints"
+  status = 301
+
+[[redirects]]
+  from = "/ai-translate.html"
+  to = "/ai-translate"
+  status = 301
+
 # ── 200 rewrites: clean URLs → serve the actual .html file (URL bar stays clean) ──
+[[redirects]]
+  from = "/ask-pdf"
+  to = "/ask-pdf.html"
+  status = 200
+
+[[redirects]]
+  from = "/ai-summary"
+  to = "/ai-summary.html"
+  status = 200
+
+[[redirects]]
+  from = "/ai-notes"
+  to = "/ai-notes.html"
+  status = 200
+
+[[redirects]]
+  from = "/ai-quiz"
+  to = "/ai-quiz.html"
+  status = 200
+
+[[redirects]]
+  from = "/ai-keypoints"
+  to = "/ai-keypoints.html"
+  status = 200
+
+[[redirects]]
+  from = "/ai-translate"
+  to = "/ai-translate.html"
+  status = 200
 [[redirects]]
   from = "/privacy"
   to = "/privacy.html"

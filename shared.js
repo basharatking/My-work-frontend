@@ -31,7 +31,13 @@ const TOOL_ICONS = {
   "/optimize-pdf": "ti-bolt",
   "/bank-statement": "ti-building-bank",
   "/invoice-to-excel": "ti-receipt",
-  "/ai-tools": "ti-sparkles",
+  "/ai-tools":     "ti-sparkles",
+  "/ask-pdf":      "ti-message-circle-2",
+  "/ai-summary":   "ti-clipboard-text",
+  "/ai-notes":     "ti-notes",
+  "/ai-quiz":      "ti-help-circle",
+  "/ai-keypoints": "ti-bulb",
+  "/ai-translate": "ti-language",
 };
 
 /* Icon for the small AI-feature cards on ai-tools.html, keyed by element id */
@@ -50,6 +56,8 @@ const TOOL_COLOR = {
   "/pdf-to-word": "blue", "/pdf-to-pptx": "blue", "/pdf-to-text": "blue",
   "/word-to-pdf": "blue", "/add-page-numbers": "blue", "/ai-tools": "blue",
   "/html-to-pdf": "blue", "/pptx-to-pdf": "blue",
+  "/ask-pdf": "blue", "/ai-summary": "blue", "/ai-notes": "blue",
+  "/ai-quiz": "blue", "/ai-keypoints": "blue", "/ai-translate": "blue",
   "/compress-pdf": "green", "/pdf-to-excel": "green", "/excel-to-pdf": "green",
   "/repair-pdf": "green", "/optimize-pdf": "green", "/bank-statement": "green",
   "/invoice-to-excel": "green",
@@ -546,12 +554,12 @@ const NAV_DROPS = {
     label: "AI Tools",
     icon: "ti-sparkles",
     tools: [
-      ["/ai-tools#ask","ti-message-circle-2","Ask PDF","Chat with your document"],
-      ["/ai-tools#summary","ti-clipboard-text","Summarize PDF","Get instant summary"],
-      ["/ai-tools#notes","ti-notes","Generate Notes","Study notes from PDF"],
-      ["/ai-tools#quiz","ti-help-circle","Quiz Generator","Auto quiz questions"],
-      ["/ai-tools#keypoints","ti-bulb","Key Points","Extract key insights"],
-      ["/ai-tools#translate","ti-language","Translate PDF","Urdu, Arabic & more"],
+      ["/ask-pdf",      "ti-message-circle-2", "Ask PDF",         "Chat with your document"],
+      ["/ai-summary",   "ti-clipboard-text",   "Summarize PDF",   "Get instant summary"],
+      ["/ai-notes",     "ti-notes",            "Generate Notes",  "Study notes from PDF"],
+      ["/ai-quiz",      "ti-help-circle",      "Quiz Generator",  "Auto quiz questions"],
+      ["/ai-keypoints", "ti-bulb",             "Key Points",      "Extract key insights"],
+      ["/ai-translate", "ti-language",         "Translate PDF",   "Urdu, Arabic & more"],
     ]
   }
 };
@@ -562,7 +570,7 @@ const MOBILE_TOOLS = [
   { cat:"Merge & Organize", icon:"ti-folder", tools:[["/merge-pdf","ti-stack-2","Merge PDF"],["/split-pdf","ti-cut","Split PDF"],["/rotate-pdf","ti-rotate-clockwise","Rotate PDF"],["/delete-pages","ti-trash","Delete Pages"],["/reorder-pages","ti-arrows-sort","Reorder Pages"],["/add-page-numbers","ti-number-123","Page Numbers"]] },
   { cat:"Compress", icon:"ti-zoom-out", tools:[["/compress-pdf","ti-zoom-out","Compress PDF"],["/optimize-pdf","ti-bolt","Optimize PDF"],["/repair-pdf","ti-tool","Repair PDF"]] },
   { cat:"Security", icon:"ti-shield-lock", tools:[["/protect-pdf","ti-lock","Lock PDF"],["/unlock-pdf","ti-lock-open","Unlock PDF"],["/watermark-pdf","ti-stamp","Watermark"],["/sign-pdf","ti-signature","Sign PDF"]] },
-  { cat:"AI Tools", icon:"ti-sparkles", tools:[["/ai-tools","ti-message-circle-2","Ask PDF"],["/ai-tools#summary","ti-clipboard-text","Summarize"],["/ai-tools#notes","ti-notes","Notes"],["/ai-tools#quiz","ti-help-circle","Quiz Generator"],["/ai-tools#translate","ti-language","Translate"]] },
+  { cat:"AI Tools", icon:"ti-sparkles", tools:[["/ask-pdf","ti-message-circle-2","Ask PDF"],["/ai-summary","ti-clipboard-text","Summarize"],["/ai-notes","ti-notes","Notes"],["/ai-quiz","ti-help-circle","Quiz Generator"],["/ai-keypoints","ti-bulb","Key Points"],["/ai-translate","ti-language","Translate"]] },
   { cat:"Business", icon:"ti-briefcase", tools:[["/invoice-to-excel","ti-receipt","Invoice to Excel"],["/bank-statement","ti-building-bank","Bank Statement"],["/pdf-to-excel","ti-file-spreadsheet","Smart Table Extract"]] },
 ];
 

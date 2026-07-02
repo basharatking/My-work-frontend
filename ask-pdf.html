@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Ask PDF — AI PDF Tool — RunDocs</title>
+<meta name="description" content="Chat with any PDF — ask questions and get instant answers from your document. Free AI tool.">
+<meta name="robots" content="index,follow"><meta name="author" content="RunDocs"><meta name="theme-color" content="#2563EB">
+<link rel="canonical" href="https://rundocs.netlify.app/ask-pdf">
+<meta property="og:title" content="Ask PDF — RunDocs"><meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"RunDocs Ask PDF","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<script src="config.js"></script>
+<style>
+
+.ai-output-box{display:none;margin-top:14px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.ai-output-hdr{background:var(--brand-pale);padding:.55rem .9rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);}
+.ai-output-hdr span{font-size:12px;font-weight:700;color:var(--brand);}
+.ai-output-body{padding:.9rem;font-size:13px;color:var(--ink2);line-height:1.8;white-space:pre-wrap;max-height:340px;overflow-y:auto;}
+.copy-btn{background:var(--bg3);border:1px solid var(--border);color:var(--ink4);padding:4px 11px;border-radius:var(--rxs);font-size:11.5px;font-weight:500;cursor:pointer;}
+.copy-btn:hover{border-color:var(--brand);color:var(--brand);}
+.ai-beta-notice{display:flex;align-items:flex-start;gap:8px;background:var(--brand-pale);border:1px solid var(--brand-border);border-radius:var(--r);padding:10px 13px;margin-bottom:14px;font-size:12.5px;color:var(--brand);line-height:1.5;}
+.chat-msg{padding:.65rem .9rem;border-radius:var(--r);font-size:13px;line-height:1.7;max-width:88%;}
+.chat-msg.user{background:var(--brand);color:#fff;align-self:flex-end;border-bottom-right-radius:3px;}
+.chat-msg.bot{background:var(--bg2);color:var(--ink2);border:1px solid var(--border);align-self:flex-start;border-bottom-left-radius:3px;}
+.chat-input{flex:1;padding:9px 12px;border:1px solid var(--border);border-radius:var(--r);font-size:13.5px;color:var(--ink);background:var(--bg);outline:none;font-family:var(--font);}
+.chat-input:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(79,110,247,.1);}
+.chat-send{background:var(--brand);color:#fff;border:none;padding:9px 15px;border-radius:var(--r);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);}
+
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="tool-page">
+  <div class="tool-container">
+    <div class="tool-header">
+      <div class="tool-icon-wrap"></div>
+      <div style="display:inline-flex;align-items:center;gap:8px">
+        <h1 class="tool-title">Ask PDF</h1>
+        <span style="background:var(--brand);color:#fff;font-size:10px;font-weight:700;padding:2px 9px;border-radius:100px;letter-spacing:.05em;vertical-align:middle">BETA</span>
+      </div>
+      <p class="tool-sub">Upload a PDF and ask anything — get direct answers from the document instantly.</p>
+    </div>
+    <div class="tool-card">
+      <div class="ai-beta-notice">
+        <i class="ti ti-info-circle" style="flex-shrink:0;margin-top:1px" aria-hidden="true"></i>
+        <span>This feature is currently in <strong>Beta</strong>. AI results may vary based on document content and complexity.</span>
+      </div>
+      <div class="upload-zone" id="uz-askpdf" onclick="document.getElementById('fi-askpdf').click()">
+        <div class="uz-icon"></div>
+        <div class="uz-title">Drop your PDF here or click to browse</div>
+        <div class="uz-sub">Up to 25 MB free · Secure &amp; private</div>
+        <div class="uz-badge">🔒 Files deleted after processing</div>
+        <input class="file-input" id="fi-askpdf" type="file" accept=".pdf" onchange="handleFiles('askpdf',this)">
+      </div>
+      <div class="frs-single" id="frs-askpdf">
+        <div class="frs-single-inner">
+          <div class="frs-thumb-wrap" id="frs-thumb-askpdf">
+            <i class="ti ti-loader-2 ftc-spin" aria-hidden="true"></i>
+          </div>
+          <div class="frs-meta">
+            <div class="frs-fname" id="frs-fname-askpdf"></div>
+            <div class="frs-fsize" id="frs-fsize-askpdf"></div>
+            <button class="frs-restart" type="button" onclick="_singleRestart('askpdf')">
+              <i class="ti ti-rotate" aria-hidden="true"></i> Change file
+            </button>
+          </div>
+        </div>
+        <br><div class="chat-messages" id="askpdf-chat" style="display:none;max-height:220px;overflow-y:auto;display:none;flex-direction:column;gap:.65rem;margin-bottom:.75rem"></div>
+      <div class="chat-input-row" style="margin-top:.75rem;display:flex;gap:7px">
+        <input class="chat-input" id="askpdf-q" type="text" placeholder="Ask anything about your PDF…" onkeydown="if(event.key==='Enter')run_askpdf()">
+        <button class="chat-send" onclick="run_askpdf()">Ask →</button>
+      </div>
+      <div style="font-size:11px;color:var(--ink4);margin-top:3px;text-align:right" id="askpdf-char">0 / 500</div>
+
+      </div>
+      <div id="ocr-hint-askpdf"></div>
+      <div class="progress-wrap" id="pw-askpdf"><div class="progress-track"><div class="progress-fill" id="pb-askpdf"></div></div><div class="progress-label" id="pl-askpdf">Processing…</div></div>
+      <div class="result-box" id="rb-askpdf"><p id="rb-askpdf-msg"></p></div>
+      
+    </div>
+<script>
+let _askHistory=[];
+document.getElementById("askpdf-q")?.addEventListener("input",function(){document.getElementById("askpdf-char").textContent=this.value.length+" / 500";});
+async function run_askpdf(){
+  const files=fileStore["askpdf"];const q=document.getElementById("askpdf-q").value.trim();
+  if(!files?.length){toast("Please select a PDF first","error");return;}
+  if(!q){toast("Please enter a question","error");return;}
+  const msgBox=document.getElementById("askpdf-chat");
+  msgBox.style.display="flex";
+  msgBox.innerHTML+=`<div class="chat-msg user">${_esc(q)}</div>`;
+  msgBox.scrollTop=msgBox.scrollHeight;
+  document.getElementById("askpdf-q").value="";
+  document.getElementById("askpdf-char").textContent="0 / 500";
+  showProgress("askpdf",30,"Searching document…");
+  const fd=new FormData();fd.append("file",files[0]);fd.append("question",q);fd.append("history",JSON.stringify(_askHistory));
+  try{
+    let p=30;const tick=setInterval(()=>{p=Math.min(p+5,90);showProgress("askpdf",p,"Thinking…");},400);
+    const resp=await fetch(API_BASE+"/ask-pdf",{method:"POST",body:fd});
+    clearInterval(tick);showProgress("askpdf",100,"Done!");hideProgress("askpdf");
+    if(!resp.ok){const j=await resp.json().catch(()=>({}));throw new Error(j.detail||"AI service is currently unavailable. Please try again later.");}
+    const data=await resp.json();const ans=data.result||"No answer found.";
+    _askHistory.push({q,a:ans});
+    msgBox.innerHTML+=`<div class="chat-msg bot">${_esc(ans)}</div>`;
+    msgBox.scrollTop=msgBox.scrollHeight;
+  }catch(e){hideProgress("askpdf");msgBox.innerHTML+=`<div class="chat-msg bot" style="color:var(--red)">❌ ${_esc(e.message)}</div>`;msgBox.scrollTop=msgBox.scrollHeight;}
+}
+function _esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+</script>
+    <div class="tool-footer-links">
+      <p>More AI tools:</p>
+      <div class="tfl-grid">
+        <a href="/ai-summary" class="tfl-link"><i class="ti ti-clipboard-text" aria-hidden="true"></i> Summarize PDF</a>
+        <a href="/ai-notes" class="tfl-link"><i class="ti ti-notes" aria-hidden="true"></i> Generate Notes</a>
+        <a href="/ai-quiz" class="tfl-link"><i class="ti ti-help-circle" aria-hidden="true"></i> Quiz Generator</a>
+        <a href="/ai-keypoints" class="tfl-link"><i class="ti ti-bulb" aria-hidden="true"></i> Key Points</a>
+        <a href="/ai-translate" class="tfl-link"><i class="ti ti-language" aria-hidden="true"></i> Translate PDF</a>
+        <a href="/ai-tools" class="tfl-link"><i class="ti ti-sparkles" aria-hidden="true"></i> All AI Tools</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+</body>
+</html>
