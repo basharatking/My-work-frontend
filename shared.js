@@ -513,41 +513,37 @@ const NAV_DROPS = {
     label: "Merge PDF",
     icon: "ti-stack-2",
     tools: [
-      ["/merge-pdf","ti-stack-2","Merge PDF","Combine multiple PDFs into one"],
-      ["/rotate-pdf","ti-rotate-clockwise","Rotate PDF","90°, 180°, 270° rotation"],
-      ["/delete-pages","ti-trash","Delete Pages","Remove unwanted pages"],
-      ["/reorder-pages","ti-arrows-sort","Reorder Pages","Rearrange page order"],
-      ["/add-page-numbers","ti-number-123","Add Page Numbers","Auto number pages"],
+      ["/merge-pdf",       "ti-stack-2",         "Merge PDF",       "Combine multiple PDFs into one"],
+      ["/rotate-pdf",      "ti-rotate-clockwise", "Rotate PDF",      "90°, 180°, 270° rotation"],
+      ["/reorder-pages",   "ti-arrows-sort",      "Reorder Pages",   "Rearrange page order"],
+      ["/add-page-numbers","ti-number-123",       "Add Page Numbers","Auto number pages"],
+      ["/watermark-pdf",   "ti-stamp",            "Watermark PDF",   "Add text watermark"],
     ]
   },
   split: {
     label: "Split PDF",
     icon: "ti-cut",
     tools: [
-      ["/split-pdf","ti-cut","Split PDF","Split into individual pages"],
-      ["/split-pdf","ti-file-export","Extract Pages","Extract a specific page range"],
-      ["/delete-pages","ti-trash","Delete Pages","Remove specific pages"],
-      ["/pdf-to-jpg","ti-photo","PDF to Images","Export each page as JPG"],
-      ["/pdf-to-text","ti-file-text","Extract Text","Pull text content from PDF"],
+      ["/split-pdf",    "ti-cut",    "Split PDF",    "Split into pages or extract ranges"],
+      ["/delete-pages", "ti-trash",  "Delete Pages", "Remove specific pages from PDF"],
     ]
   },
   compress: {
     label: "Compress PDF",
     icon: "ti-zoom-out",
     tools: [
-      ["/compress-pdf","ti-zoom-out","Compress PDF","Reduce file size up to 90%"],
-      ["/optimize-pdf","ti-bolt","Optimize PDF","Optimize for web/print"],
-      ["/repair-pdf","ti-tool","Repair PDF","Fix corrupted PDFs"],
+      ["/compress-pdf",  "ti-zoom-out", "Compress PDF",  "Reduce file size up to 90%"],
+      ["/optimize-pdf",  "ti-bolt",     "Optimize PDF",  "Optimize for web or print"],
+      ["/repair-pdf",    "ti-tool",     "Repair PDF",    "Fix corrupted PDFs"],
     ]
   },
   security: {
     label: "Security",
     icon: "ti-shield-lock",
     tools: [
-      ["/protect-pdf","ti-lock","Lock PDF","AES-256 encryption"],
-      ["/unlock-pdf","ti-lock-open","Unlock PDF","Remove password"],
-      ["/watermark-pdf","ti-stamp","Watermark PDF","Add text watermark"],
-      ["/sign-pdf","ti-signature","Sign PDF","Add signature"],
+      ["/protect-pdf", "ti-lock",        "Lock PDF",    "AES-256 encryption"],
+      ["/unlock-pdf",  "ti-lock-open",   "Unlock PDF",  "Remove password"],
+      ["/sign-pdf",    "ti-signature",   "Sign PDF",    "Add signature"],
     ]
   },
   ai: {
@@ -566,9 +562,8 @@ const NAV_DROPS = {
     label: "Business",
     icon: "ti-briefcase",
     tools: [
-      ["/invoice-to-excel", "ti-receipt",          "Invoice to Excel",    "Extract invoice data to Excel"],
-      ["/bank-statement",   "ti-building-bank",    "Bank Statement",      "Parse bank statements to Excel"],
-      ["/pdf-to-excel",     "ti-file-spreadsheet", "Smart Table Extract", "Extract any table from PDF"],
+      ["/invoice-to-excel", "ti-receipt",       "Invoice to Excel", "Extract invoice data to Excel"],
+      ["/bank-statement",   "ti-building-bank", "Bank Statement",   "Parse bank statements to Excel"],
     ]
   }
 };

@@ -617,7 +617,7 @@ img, svg { display: block; }
 }
 .frs-restart:hover { color: var(--brand-dark); }
 
-/* ── Circular progress ring (Play Store style) ── */
+/* ── Circular progress ring — Play Store curly snake style ── */
 .circ-progress-wrap {
   position: absolute; inset: 0; z-index: 20;
   display: none; align-items: center; justify-content: center; flex-direction: column; gap: 10px;
@@ -630,12 +630,40 @@ img, svg { display: block; }
 @keyframes fadeIn { from{opacity:0} to{opacity:1} }
 
 .circ-ring-box { position: relative; width: 80px; height: 80px; }
-.circ-svg { width: 80px; height: 80px; transform: rotate(-90deg); }
+
+/* SVG rotates continuously — gives the orbit feel */
+.circ-svg {
+  width: 80px; height: 80px;
+  transform-origin: 40px 40px;
+  animation: circ-orbit 1s linear infinite;
+}
+@keyframes circ-orbit { to { transform: rotate(360deg); } }
+
 .circ-track { fill: none; stroke: var(--border); stroke-width: 6; }
+
+/* Snake arc: grows from tiny to big and back — the "curly" effect */
 .circ-fill {
   fill: none; stroke: var(--brand); stroke-width: 6; stroke-linecap: round;
-  transition: stroke-dashoffset .35s cubic-bezier(.4,0,.2,1);
+  stroke-dasharray: 20 207;
+  animation: circ-slither 1.6s ease-in-out infinite;
 }
+@keyframes circ-slither {
+  0%   { stroke-dasharray:  20 207; stroke-dashoffset: 0;   }
+  25%  { stroke-dasharray: 140 207;                         }
+  50%  { stroke-dasharray:  20 207; stroke-dashoffset: -207;}
+  75%  { stroke-dasharray: 140 207;                         }
+  100% { stroke-dasharray:  20 207; stroke-dashoffset: -414;}
+}
+
+/* Done state: snake stops, ring fills green */
+.circ-progress-wrap.done .circ-svg  { animation: none; }
+.circ-progress-wrap.done .circ-fill {
+  animation: none;
+  stroke-dasharray: 207; stroke-dashoffset: 0;
+  stroke: #22C55E;
+  transition: stroke-dashoffset .4s ease, stroke .25s;
+}
+
 .circ-pct {
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
   font-size: 15px; font-weight: 700; color: var(--ink); letter-spacing: -.5px;
