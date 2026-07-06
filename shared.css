@@ -272,13 +272,8 @@ img, svg { display: block; }
   flex-shrink: 0;
 }
 
-/* Mobile right — dark btn + hamburger */
-.nav-mobile-right {
-  display: none;
-  align-items: center; gap: 4px;
-  flex-shrink: 0;
-  margin-left: auto;
-}
+/* Mobile right — dark btn + hamburger — defined in RESPONSIVE section below */
+
 .nav-logo-mark {
   width: 36px; height: 36px; border-radius: 9px;
   background: linear-gradient(135deg, #3B55E0 0%, #4F6EF7 50%, #6B85FF 100%);
@@ -785,22 +780,24 @@ img, svg { display: block; }
 .faq-item.open .faq-a { max-height: 300px; padding-bottom: .95rem; }
 
 /* ── RESPONSIVE ── */
-/* Mobile nav right — dark btn + hamburger together */
 .nav-mobile-right {
   display: none;
   align-items: center;
-  gap: 4px;
-  margin-left: auto;
+  gap: 6px;
   flex-shrink: 0;
 }
 @media (max-width: 1024px) {
-  .nav { display: flex; align-items: center; }
-  .nav-links { display: none; }
-  .nav-tools-btn { display: none; }
-  .nav-right { display: none; }
-  .nav-spacer { display: none; }
+  .nav {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-links    { display: none; }
+  .nav-tools-btn{ display: none; }
+  .nav-right    { display: none; }
+  .nav-spacer   { display: none; }
   .nav-mobile-right { display: flex; }
-  .hamburger { display: flex; }
+  .hamburger    { display: flex; }
   .mega-overlay { display: none !important; }
 }
 @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1/-1; } }
