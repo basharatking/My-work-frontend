@@ -168,10 +168,12 @@ function toggleDark(){
   _setDarkIcon();
 }
 function _setDarkIcon(){
-  const btn = document.getElementById("darkBtn"); if(!btn) return;
   const dark = document.documentElement.getAttribute("data-theme") === "dark";
-  btn.title = dark ? "Light mode" : "Dark mode";
-  btn.innerHTML = dark ? _iconHTML("ti-sun") : _iconHTML("ti-moon");
+  ["darkBtn","darkBtnMobile"].forEach(id=>{
+    const btn = document.getElementById(id); if(!btn) return;
+    btn.title = dark ? "Light mode" : "Dark mode";
+    btn.innerHTML = dark ? _iconHTML("ti-sun") : _iconHTML("ti-moon");
+  });
 }
 function _initStickyNav(){
   const nav = document.querySelector(".nav"); if(!nav) return;
@@ -369,8 +371,7 @@ function _buildRing(tid){
     <div class="circ-ring-box">
       <svg class="circ-svg" viewBox="0 0 80 80" aria-hidden="true">
         <circle class="circ-track" cx="40" cy="40" r="34"/>
-        <circle class="circ-fill" id="cpr-fill-${tid}" cx="40" cy="40" r="34"
-                stroke-dasharray="213.6" stroke-dashoffset="213.6"/>
+        <circle class="circ-fill" id="cpr-fill-${tid}" cx="40" cy="40" r="34"/>
       </svg>
       <span class="circ-pct" id="cpr-pct-${tid}">0%</span>
     </div>
@@ -659,10 +660,13 @@ function buildNav(){
   <div class="nav-spacer"></div>
   <div class="nav-right">
     <button class="nav-icon-btn" id="darkBtn" onclick="toggleDark()"></button>
-    <a href="/contact" class="nav-btn-outline">Sign In</a>
+    <a href="/sign-in" class="nav-btn-outline">Sign In</a>
     <a href="/#tools" class="nav-btn-primary">Get Started →</a>
   </div>
-  <button class="hamburger" id="menuBtn" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  <div class="nav-mobile-right">
+    <button class="nav-icon-btn" id="darkBtnMobile" onclick="toggleDark()"></button>
+    <button class="hamburger" id="menuBtn" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
 </nav>
 
 <div class="drawer-overlay" id="navOverlay" onclick="toggleMenu()"></div>
@@ -680,7 +684,7 @@ function buildNav(){
   <div class="mobile-nav-sep">All Tools</div>
   <div style="padding:0 .5rem">${mobileAccs}</div>
   <div style="padding:.75rem 1rem;display:flex;flex-direction:column;gap:.5rem;border-top:1px solid var(--border);margin-top:.5rem">
-    <a href="/contact" class="btn btn-outline btn-full" style="justify-content:center">Sign In</a>
+    <a href="/sign-in" class="btn btn-outline btn-full" style="justify-content:center">Sign In</a>
     <a href="/#tools" class="btn btn-primary btn-full" style="justify-content:center">Get Started Free →</a>
   </div>
 </div>`;

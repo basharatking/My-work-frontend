@@ -192,6 +192,11 @@
   to = "/ai-translate"
   status = 301
 
+[[redirects]]
+  from = "/sign-in.html"
+  to = "/sign-in"
+  status = 301
+
 # ── 200 rewrites: clean URLs → serve the actual .html file (URL bar stays clean) ──
 [[redirects]]
   from = "/ask-pdf"
@@ -221,6 +226,11 @@
 [[redirects]]
   from = "/ai-translate"
   to = "/ai-translate.html"
+  status = 200
+
+[[redirects]]
+  from = "/sign-in"
+  to = "/sign-in.html"
   status = 200
 [[redirects]]
   from = "/privacy"
