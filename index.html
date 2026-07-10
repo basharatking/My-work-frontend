@@ -17,8 +17,14 @@
 <script src="config.js"></script>
 <style>
 /* HERO */
-.hero{min-height:94vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:calc(var(--nav-h)+4rem) 2rem 4rem;background:var(--bg);text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-40%;left:50%;transform:translateX(-50%);width:120%;height:80%;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(79,110,247,.08) 0%,transparent 70%);pointer-events:none}
+.hero{min-height:94vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:calc(var(--nav-h)+4rem) 2rem 4rem;background:linear-gradient(180deg,#F0F4FF 0%,#FFFFFF 55%);text-align:center;position:relative;overflow:hidden}
+
+/* Subtle top glow — iLovePDF style */
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:60%;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(79,110,247,.07) 0%,transparent 100%);pointer-events:none;z-index:0}
+.hero::after{display:none}
+
+/* All hero content above background */
+.hero>*{position:relative;z-index:1}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--brand);background:var(--brand-pale);border:1.5px solid var(--brand-border);padding:5px 14px;border-radius:var(--round);margin-bottom:1.6rem}
 .hero-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.8)}}
@@ -103,6 +109,7 @@
 .plan-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px)}
 .plan-card.featured{background:var(--ink2);border-color:transparent;padding-top:2.5rem}
 [data-theme="dark"] .plan-card.featured{background:#0E1020}
+[data-theme="dark"] .hero{background:linear-gradient(180deg,#0D1033 0%,var(--bg) 55%)}
 .plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--brand),var(--brand-light));color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:var(--round);white-space:nowrap;box-shadow:0 4px 12px rgba(79,110,247,.35)}
 .plan-tier{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--ink4);margin-bottom:4px}
 .plan-card.featured .plan-tier{color:rgba(255,255,255,.4)}
