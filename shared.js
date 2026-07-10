@@ -1,8 +1,33 @@
-/* RunDocs shared.js v3.1 — Real Tabler Icons (replaces emoji) */
+/* RunDocs shared.js v3.2 — Supabase Auth */
 const _CFG = window.RUNDOCS_CONFIG || {};
 const API_BASE   = _CFG.API_BASE   || "";
 const FREE_MB    = _CFG.FREE_LIMIT_MB || 25;
 const FREE_BYTES = FREE_MB * 1024 * 1024;
+
+/* ── Supabase Auth ─────────────────────────────────────── */
+let _sb = null;
+async function _sbClient(){
+  if(_sb) return _sb;
+  if(!window.supabase) return null;
+  _sb = window.supabase.createClient(_CFG.SUPABASE_URL, _CFG.SUPABASE_ANON_KEY);
+  return _sb;
+}
+async function getSession(){ const sb=await _sbClient(); if(!sb) return null; const {data}=await sb.auth.getSession(); return data?.session||null; }
+async function getUser(){ const s=await getSession(); return s?.user||null; }
+async function signOut(){ const sb=await _sbClient(); if(sb) await sb.auth.signOut(); window.location.href="/"; }
+
+async function _updateNavAuth(){
+  const user = await getUser();
+  const signinBtn = document.getElementById("nav-signin-btn");
+  const startBtn  = document.getElementById("nav-start-btn");
+  const mobileAuth = document.getElementById("nav-mobile-auth");
+  if(!user){ return; }
+  const name = user.user_metadata?.full_name || user.email?.split("@")[0] || "Account";
+  const initials = name.slice(0,2).toUpperCase();
+  if(signinBtn) signinBtn.outerHTML = `<div class="nav-user-pill" onclick="signOut()" title="Sign out — ${user.email}"><span class="nav-user-avatar">${initials}</span><span class="nav-user-name">${name.split(" ")[0]}</span><i class="ti ti-logout" aria-hidden="true"></i></div>`;
+  if(startBtn) startBtn.style.display = "none";
+  if(mobileAuth) mobileAuth.innerHTML = `<button class="btn btn-outline btn-full" onclick="signOut()" style="justify-content:center"><i class="ti ti-logout"></i> Sign Out (${user.email})</button>`;
+}
 
 /* ── Real Icon Map (Tabler Icons — replaces all emoji) ── */
 const TOOL_ICONS = {
@@ -660,8 +685,8 @@ function buildNav(){
   <div class="nav-spacer"></div>
   <div class="nav-right">
     <button class="nav-icon-btn" id="darkBtn" onclick="toggleDark()"></button>
-    <a href="/sign-in" class="nav-btn-outline">Sign In</a>
-    <a href="/#tools" class="nav-btn-primary">Get Started →</a>
+    <a href="/sign-in" class="nav-btn-outline" id="nav-signin-btn">Sign In</a>
+    <a href="/#tools" class="nav-btn-primary" id="nav-start-btn">Get Started →</a>
   </div>
   <div class="nav-mobile-right">
     <button class="nav-icon-btn" id="darkBtnMobile" onclick="toggleDark()"></button>
@@ -683,7 +708,7 @@ function buildNav(){
   </div>
   <div class="mobile-nav-sep">All Tools</div>
   <div style="padding:0 .5rem">${mobileAccs}</div>
-  <div style="padding:.75rem 1rem;display:flex;flex-direction:column;gap:.5rem;border-top:1px solid var(--border);margin-top:.5rem">
+  <div style="padding:.75rem 1rem;display:flex;flex-direction:column;gap:.5rem;border-top:1px solid var(--border);margin-top:.5rem" id="nav-mobile-auth">
     <a href="/sign-in" class="btn btn-outline btn-full" style="justify-content:center">Sign In</a>
     <a href="/#tools" class="btn btn-primary btn-full" style="justify-content:center">Get Started Free →</a>
   </div>
@@ -763,5 +788,5 @@ function buildFooter(){
 document.addEventListener("DOMContentLoaded", () => {
   const navPh=document.getElementById("nav-placeholder"); if(navPh) navPh.outerHTML=buildNav();
   const ftPh=document.getElementById("footer-placeholder"); if(ftPh) ftPh.outerHTML=buildFooter();
-  setTimeout(()=>{ _setDarkIcon(); _initStickyNav(); _initScrollReveal(); initDropZones(); _initDropdowns(); _applyRealIcons(); },50);
+  setTimeout(()=>{ _setDarkIcon(); _initStickyNav(); _initScrollReveal(); initDropZones(); _initDropdowns(); _applyRealIcons(); _updateNavAuth(); },50);
 });
