@@ -761,6 +761,31 @@ img, svg { display: block; }
 .copy-btn:hover { border-color: var(--brand); color: var(--brand); background: var(--brand-pale); }
 
 /* ── FOOTER ── */
+/* ── Footer Pricing ── */
+.footer-pricing { background: #090b14; padding: 4rem 2rem 3.5rem; border-top: 1px solid rgba(255,255,255,.07); }
+.footer-pricing-head { text-align: center; margin-bottom: 2.5rem; }
+.fp-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; max-width: 900px; margin: 0 auto; }
+.fp-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); border-radius: var(--r2xl); padding: 1.75rem 1.5rem; transition: var(--t-md); }
+.fp-card:hover { background: rgba(255,255,255,.07); transform: translateY(-2px); }
+.fp-featured { background: var(--brand) !important; border-color: transparent !important; position: relative; }
+.fp-badge { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); background: #fff; color: var(--brand); font-size: 11px; font-weight: 700; padding: 3px 14px; border-radius: 100px; white-space: nowrap; }
+.fp-tier { font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.4); margin-bottom: 2px; }
+.fp-name { font-size: 18px; font-weight: 700; color: rgba(255,255,255,.9); margin-bottom: 4px; }
+.fp-price { font-size: 32px; font-weight: 700; color: rgba(255,255,255,.9); line-height: 1; margin-bottom: 4px; }
+.fp-price sup { font-size: 16px; vertical-align: super; font-weight: 600; }
+.fp-per { font-size: 13px; font-weight: 400; color: rgba(255,255,255,.4); }
+.fp-sub { font-size: 12.5px; color: rgba(255,255,255,.4); margin-bottom: 0; }
+.fp-hr { border: none; border-top: 1px solid rgba(255,255,255,.1); margin: 1.1rem 0; }
+.fp-feats { list-style: none; margin: 0 0 1.4rem; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+.fp-feats li { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,.7); }
+.fp-feats li i { font-size: 15px; flex-shrink: 0; }
+.fp-feats .fp-no { color: rgba(255,255,255,.3); }
+.fp-btn-out { display: block; text-align: center; padding: 10px 16px; border: 1.5px solid rgba(255,255,255,.25); border-radius: var(--r); color: rgba(255,255,255,.8); font-size: 13.5px; font-weight: 600; text-decoration: none; transition: var(--t); }
+.fp-btn-out:hover { border-color: rgba(255,255,255,.6); color: #fff; background: rgba(255,255,255,.06); }
+.fp-btn-white { display: block; text-align: center; padding: 10px 16px; border-radius: var(--r); background: #fff; color: var(--brand); font-size: 13.5px; font-weight: 700; text-decoration: none; transition: var(--t); }
+.fp-btn-white:hover { background: rgba(255,255,255,.9); transform: translateY(-1px); }
+@media (max-width: 768px) { .fp-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; } }
+
 .site-footer { background: #000000; padding: 4.5rem 2rem 2.25rem; border-top: 1px solid rgba(255,255,255,.08); }
 [data-theme="dark"] .site-footer { background: #000000; }
 .footer-grid { max-width: var(--max-w); margin: 0 auto 3rem; display: grid; grid-template-columns: 2.2fr 1fr 1fr 1fr; gap: 2.5rem; }
