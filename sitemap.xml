@@ -35,6 +35,7 @@
   <url><loc>https://rundocs.netlify.app/invoice-to-excel</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://rundocs.netlify.app/bank-statement</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://rundocs.netlify.app/about</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://rundocs.netlify.app/pricing</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://rundocs.netlify.app/blog</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://rundocs.netlify.app/contact</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://rundocs.netlify.app/privacy</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
