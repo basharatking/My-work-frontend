@@ -23,7 +23,8 @@
 .plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:960px;margin:0 auto}
 .plan{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r2xl);padding:2rem 1.75rem;position:relative;transition:var(--t-md)}
 .plan:hover{box-shadow:var(--shadow-md);transform:translateY(-3px)}
-.plan.featured{background:var(--ink);border-color:var(--ink)}
+.plan.featured{background:var(--brand);border-color:var(--brand)}
+[data-theme="dark"] .plan.featured{background:var(--brand);border-color:var(--brand-dark)}
 .plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--brand);color:#fff;font-size:11px;font-weight:700;padding:3px 14px;border-radius:100px;white-space:nowrap}
 .plan-tier{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--ink4);margin-bottom:4px}
 .featured .plan-tier{color:rgba(255,255,255,.4)}
