@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Pricing — RunDocs</title>
+<meta name="description" content="RunDocs pricing plans. Free, Pro at $5/mo, Team at $12/mo. No hidden fees.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://rundocs.netlify.app/pricing">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<script src="config.js"></script>
+<style>
+.pricing-page{padding:calc(var(--nav-h)+3.5rem) 2rem 5rem;background:var(--bg);min-height:100vh}
+.pricing-hero{text-align:center;margin-bottom:3.5rem}
+.pricing-hero h1{font-family:var(--font-display);font-size:clamp(28px,4vw,44px);font-weight:700;color:var(--ink);letter-spacing:-.5px;margin-bottom:.6rem}
+.pricing-hero p{font-size:15px;color:var(--ink4);max-width:460px;margin:0 auto 1.5rem;line-height:1.7}
+.toggle-row{display:inline-flex;background:var(--bg3);border-radius:var(--round);padding:4px;gap:4px}
+.toggle-btn{padding:7px 20px;border:none;background:none;border-radius:var(--round);font-size:13.5px;font-weight:500;color:var(--ink4);cursor:pointer;transition:var(--t);font-family:var(--font)}
+.toggle-btn.on{background:var(--bg);color:var(--ink);box-shadow:0 1px 6px rgba(0,0,0,.1)}
+.save-badge{display:inline-block;background:var(--accent);color:#fff;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:100px;margin-left:6px;vertical-align:middle}
+.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:960px;margin:0 auto}
+.plan{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r2xl);padding:2rem 1.75rem;position:relative;transition:var(--t-md)}
+.plan:hover{box-shadow:var(--shadow-md);transform:translateY(-3px)}
+.plan.featured{background:var(--ink);border-color:var(--ink)}
+.plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--brand);color:#fff;font-size:11px;font-weight:700;padding:3px 14px;border-radius:100px;white-space:nowrap}
+.plan-tier{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--ink4);margin-bottom:4px}
+.featured .plan-tier{color:rgba(255,255,255,.4)}
+.plan-name{font-size:22px;font-weight:700;color:var(--ink);margin-bottom:8px}
+.featured .plan-name{color:#fff}
+.plan-price{font-size:40px;font-weight:700;color:var(--ink);line-height:1;margin-bottom:4px}
+.featured .plan-price{color:#fff}
+.plan-price sup{font-size:20px;vertical-align:super;font-weight:600}
+.plan-per{font-size:14px;font-weight:400;color:var(--ink4)}
+.featured .plan-per{color:rgba(255,255,255,.45)}
+.plan-sub{font-size:13px;color:var(--ink4);margin:.5rem 0 1.25rem;line-height:1.5}
+.featured .plan-sub{color:rgba(255,255,255,.5)}
+.plan-divider{border:none;border-top:1px solid var(--border);margin:1.25rem 0}
+.featured .plan-divider{border-color:rgba(255,255,255,.12)}
+.plan-feats{list-style:none;margin:0 0 1.75rem;padding:0;display:flex;flex-direction:column;gap:10px}
+.plan-feat{display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:var(--ink2);line-height:1.4}
+.featured .plan-feat{color:rgba(255,255,255,.8)}
+.plan-feat i{font-size:16px;flex-shrink:0;margin-top:1px}
+.plan-feat.no{color:var(--ink4)}
+.featured .plan-feat.no{color:rgba(255,255,255,.3)}
+.plan-btn{display:block;text-align:center;padding:12px 16px;border-radius:var(--r);font-size:14px;font-weight:600;text-decoration:none;transition:var(--t)}
+.plan-btn-out{border:1.5px solid var(--border);color:var(--ink);background:none}
+.plan-btn-out:hover{border-color:var(--brand);color:var(--brand);background:var(--brand-pale)}
+.plan-btn-primary{background:var(--brand);color:#fff;border:none}
+.plan-btn-primary:hover{background:var(--brand-dark);transform:translateY(-1px);box-shadow:0 4px 14px rgba(79,110,247,.4)}
+.plan-btn-white{background:#fff;color:var(--brand);border:none;font-weight:700}
+.plan-btn-white:hover{background:rgba(255,255,255,.9);transform:translateY(-1px)}
+.compare-section{max-width:760px;margin:4rem auto 0}
+.compare-section h2{font-size:20px;font-weight:700;color:var(--ink);text-align:center;margin-bottom:1.5rem}
+.compare-table{width:100%;border-collapse:collapse;font-size:13.5px}
+.compare-table th{padding:10px 14px;text-align:left;background:var(--bg3);color:var(--ink);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+.compare-table td{padding:12px 14px;border-top:1px solid var(--border);color:var(--ink2)}
+.compare-table tr:hover td{background:var(--bg2)}
+.compare-table .check{color:var(--accent);font-weight:700}
+.compare-table .cross{color:var(--ink4)}
+.compare-table .center{text-align:center}
+.faq-pricing{max-width:620px;margin:4rem auto 0}
+.faq-pricing h2{font-size:20px;font-weight:700;color:var(--ink);text-align:center;margin-bottom:1.5rem}
+.faq-item{border-top:1px solid var(--border);padding:1rem 0}
+.faq-q{font-size:14.5px;font-weight:600;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.faq-a{font-size:13.5px;color:var(--ink4);line-height:1.7;margin-top:.65rem;display:none}
+.faq-item.open .faq-a{display:block}
+.faq-item.open .faq-chevron{transform:rotate(180deg)}
+.faq-chevron{transition:transform .2s;flex-shrink:0}
+@media(max-width:768px){.plans-grid{grid-template-columns:1fr;max-width:400px;margin:0 auto}}
+@media(max-width:580px){.compare-section{overflow-x:auto}}
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="pricing-page">
+  <div class="pricing-hero">
+    <div class="section-eyebrow" style="justify-content:center">Pricing</div>
+    <h1>Simple, honest pricing</h1>
+    <p>Start free with all basic tools. Upgrade when you need more. Cancel anytime.</p>
+    <div class="toggle-row">
+      <button class="toggle-btn on" id="tbm" onclick="setBilling('m')">Monthly</button>
+      <button class="toggle-btn" id="tby" onclick="setBilling('y')">Yearly <span class="save-badge">Save 20%</span></button>
+    </div>
+  </div>
+
+  <div class="plans-grid">
+
+    <!-- FREE -->
+    <div class="plan">
+      <div class="plan-tier">Starter</div>
+      <div class="plan-name">Free</div>
+      <div class="plan-price"><sup>$</sup>0<span class="plan-per">/mo</span></div>
+      <div class="plan-sub">Perfect for occasional use. No signup required.</div>
+      <hr class="plan-divider">
+      <ul class="plan-feats">
+        <li class="plan-feat"><i class="ti ti-check" style="color:var(--accent)" aria-hidden="true"></i>All basic PDF tools</li>
+        <li class="plan-feat"><i class="ti ti-check" style="color:var(--accent)" aria-hidden="true"></i>Up to 25 MB per file</li>
+        <li class="plan-feat"><i class="ti ti-check" style="color:var(--accent)" aria-hidden="true"></i>5 tasks per day</li>
+        <li class="plan-feat"><i class="ti ti-check" style="color:var(--accent)" aria-hidden="true"></i>Instant file deletion</li>
+        <li class="plan-feat no"><i class="ti ti-x" style="color:var(--ink4)" aria-hidden="true"></i>AI tools</li>
+        <li class="plan-feat no"><i class="ti ti-x" style="color:var(--ink4)" aria-hidden="true"></i>Priority processing</li>
+      </ul>
+      <a href="/#tools" class="plan-btn plan-btn-out">Start for Free →</a>
+    </div>
+
+    <!-- PRO -->
+    <div class="plan featured">
+      <div class="plan-badge">⭐ Most Popular</div>
+      <div class="plan-tier">Premium</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-price"><sup>$</sup><span id="pro-price">5</span><span class="plan-per" id="pro-per">/mo</span></div>
+      <div class="plan-sub">Best for individuals who work with PDFs daily.</div>
+      <hr class="plan-divider">
+      <ul class="plan-feats">
+        <li class="plan-feat"><i class="ti ti-check" style="color:#86efac" aria-hidden="true"></i>All Free features</li>
+        <li class="plan-feat"><i class="ti ti-check" style="color:#86efac" aria-hidden="true"></i>Up to 200 MB per file</li>
+        <li class="plan-feat"><i class="ti ti-check" style="color:#86efac" aria-hidden="true"></i>Unlimited daily tasks</li>
+        <li class="plan-feat"><i class="ti ti-check" style="color:#86efac" aria-hidden="true"></i>All AI tools included</li>
+        <li class="plan-feat"><i class="ti ti-check" style="color:#86efac" aria-hidden="true"></i>Priority processing</li>
+        <li class="plan-feat"><i class="ti ti-check" style="color:#86efac" aria-hidden="true"></i>Email support</li>
+      </ul>
+      <a href="/contact" class="plan-btn plan-btn-white">Get Pro via WhatsApp →</a>
+    </div>
+
+    <!-- TEAM -->
+    <div class="plan">
+      <div class="plan-tier">Business</div>
+      <div class="plan-name">Team</div>
+      <div class="plan-price"><sup>$</sup><span id="team-price">12</span><span class="plan-per" id="team-per">/mo</span></div>
+      <div class="plan-sub">For teams and businesses with high-volume needs.</div>
+      <hr class="plan-divider">
+      <ul class="plan-feats">
+        <li class="plan-feat"><i class="ti ti-check" style="color:var(--accent)" aria-hidden="true"></i>Everything in Pro</li>
+        <li class="plan-feat"><i class="ti ti-check" style="color:var(--accent)" aria-hidden="true"></i>Up to 500 MB per file</li>
+        <li class="plan-feat"><i class="ti ti-check" style="color:var(--accent)" aria-hidden="true"></i>Up to 5 team seats</li>
+        <li class="plan-feat"><i class="ti ti-check" style="color:var(--accent)" aria-hidden="true"></i>API access</li>
+        <li class="plan-feat"><i class="ti ti-check" style="color:var(--accent)" aria-hidden="true"></i>Bulk processing</li>
+        <li class="plan-feat"><i class="ti ti-check" style="color:var(--accent)" aria-hidden="true"></i>Priority support</li>
+      </ul>
+      <a href="/contact" class="plan-btn plan-btn-out">Contact Us →</a>
+    </div>
+
+  </div>
+
+  <!-- Compare table -->
+  <div class="compare-section">
+    <h2>Compare plans</h2>
+    <table class="compare-table">
+      <thead><tr><th>Feature</th><th class="center">Free</th><th class="center">Pro</th><th class="center">Team</th></tr></thead>
+      <tbody>
+        <tr><td>Basic PDF tools</td><td class="center check">✓</td><td class="center check">✓</td><td class="center check">✓</td></tr>
+        <tr><td>Max file size</td><td class="center">25 MB</td><td class="center">200 MB</td><td class="center">500 MB</td></tr>
+        <tr><td>Daily tasks</td><td class="center">5</td><td class="center">Unlimited</td><td class="center">Unlimited</td></tr>
+        <tr><td>AI tools</td><td class="center cross">✗</td><td class="center check">✓</td><td class="center check">✓</td></tr>
+        <tr><td>Priority processing</td><td class="center cross">✗</td><td class="center check">✓</td><td class="center check">✓</td></tr>
+        <tr><td>Team seats</td><td class="center cross">✗</td><td class="center cross">✗</td><td class="center">5 seats</td></tr>
+        <tr><td>API access</td><td class="center cross">✗</td><td class="center cross">✗</td><td class="center check">✓</td></tr>
+        <tr><td>Email support</td><td class="center cross">✗</td><td class="center check">✓</td><td class="center check">✓</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq-pricing">
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Is the free plan really free? <i class="ti ti-chevron-down faq-chevron" aria-hidden="true"></i></div>
+      <div class="faq-a">Yes, completely free. No credit card, no signup required for basic tools. Use as long as you want.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">How do I pay for Pro? <i class="ti ti-chevron-down faq-chevron" aria-hidden="true"></i></div>
+      <div class="faq-a">Currently we accept payment via WhatsApp. Click "Get Pro via WhatsApp" and our team will set up your account within a few hours.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Can I cancel anytime? <i class="ti ti-chevron-down faq-chevron" aria-hidden="true"></i></div>
+      <div class="faq-a">Yes. Message us on WhatsApp and we will cancel your subscription immediately with no questions asked.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Are my files safe? <i class="ti ti-chevron-down faq-chevron" aria-hidden="true"></i></div>
+      <div class="faq-a">All files are transferred over TLS encryption and permanently deleted from our servers immediately after processing. We never store or access your documents.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">What AI tools are included in Pro? <i class="ti ti-chevron-down faq-chevron" aria-hidden="true"></i></div>
+      <div class="faq-a">Pro includes AI Summary, Notes Generator, Quiz Generator, Key Points Extractor, PDF Translator and Ask PDF (chat with your document).</div>
+    </div>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+<script>
+function setBilling(t){
+  document.getElementById('tbm').className='toggle-btn'+(t==='m'?' on':'');
+  document.getElementById('tby').className='toggle-btn'+(t==='y'?' on':'');
+  if(t==='y'){
+    document.getElementById('pro-price').textContent='4';
+    document.getElementById('pro-per').textContent='/mo, billed yearly';
+    document.getElementById('team-price').textContent='10';
+    document.getElementById('team-per').textContent='/mo, billed yearly';
+  } else {
+    document.getElementById('pro-price').textContent='5';
+    document.getElementById('pro-per').textContent='/mo';
+    document.getElementById('team-price').textContent='12';
+    document.getElementById('team-per').textContent='/mo';
+  }
+}
+function toggleFaq(el){
+  const item=el.parentElement;
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+  if(!isOpen) item.classList.add('open');
+}
+</script>
+</body>
+</html>

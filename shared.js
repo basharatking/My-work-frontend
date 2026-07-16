@@ -718,74 +718,6 @@ function buildNav(){
 /* ── Build Footer ── */
 function buildFooter(){
   return `<footer class="site-footer">
-
-  <!-- Pricing strip above footer -->
-  <div class="footer-pricing" id="pricing">
-    <div class="footer-pricing-head">
-      <div class="section-eyebrow" style="justify-content:center;color:rgba(255,255,255,.55)">Pricing</div>
-      <h2 style="font-size:clamp(20px,2.5vw,28px);font-weight:700;color:#fff;margin:.3rem 0 .5rem;letter-spacing:-.3px">Simple, honest pricing</h2>
-      <p style="font-size:13.5px;color:rgba(255,255,255,.55);margin:0">Start free. Upgrade when you need more. No hidden fees.</p>
-    </div>
-    <div class="fp-grid">
-
-      <!-- FREE -->
-      <div class="fp-card">
-        <div class="fp-tier">Starter</div>
-        <div class="fp-name">Free</div>
-        <div class="fp-price"><sup>$</sup>0<span class="fp-per">/mo</span></div>
-        <div class="fp-sub">No signup required.</div>
-        <hr class="fp-hr">
-        <ul class="fp-feats">
-          <li><i class="ti ti-check" style="color:var(--accent)"></i>All basic PDF tools</li>
-          <li><i class="ti ti-check" style="color:var(--accent)"></i>Up to 25 MB per file</li>
-          <li><i class="ti ti-check" style="color:var(--accent)"></i>5 tasks per day</li>
-          <li><i class="ti ti-check" style="color:var(--accent)"></i>Instant file deletion</li>
-          <li class="fp-no"><i class="ti ti-x"></i>AI tools</li>
-          <li class="fp-no"><i class="ti ti-x"></i>Priority processing</li>
-        </ul>
-        <a href="/#tools" class="fp-btn-out">Start Free →</a>
-      </div>
-
-      <!-- PRO -->
-      <div class="fp-card fp-featured">
-        <div class="fp-badge">⭐ Most Popular</div>
-        <div class="fp-tier" style="color:rgba(255,255,255,.5)">Premium</div>
-        <div class="fp-name" style="color:#fff">Pro</div>
-        <div class="fp-price" style="color:#fff"><sup>$</sup>5<span class="fp-per" style="color:rgba(255,255,255,.5)">/mo</span></div>
-        <div class="fp-sub" style="color:rgba(255,255,255,.6)">Best for daily use.</div>
-        <hr class="fp-hr" style="border-color:rgba(255,255,255,.15)">
-        <ul class="fp-feats">
-          <li style="color:#fff"><i class="ti ti-check" style="color:#86efac"></i>All Free features</li>
-          <li style="color:#fff"><i class="ti ti-check" style="color:#86efac"></i>Up to 200 MB per file</li>
-          <li style="color:#fff"><i class="ti ti-check" style="color:#86efac"></i>Unlimited daily tasks</li>
-          <li style="color:#fff"><i class="ti ti-check" style="color:#86efac"></i>All AI tools included</li>
-          <li style="color:#fff"><i class="ti ti-check" style="color:#86efac"></i>Priority processing</li>
-          <li style="color:#fff"><i class="ti ti-check" style="color:#86efac"></i>Email support</li>
-        </ul>
-        <a href="/contact" class="fp-btn-white">Get Pro via WhatsApp →</a>
-      </div>
-
-      <!-- TEAM -->
-      <div class="fp-card">
-        <div class="fp-tier">Business</div>
-        <div class="fp-name">Team</div>
-        <div class="fp-price"><sup>$</sup>12<span class="fp-per">/mo</span></div>
-        <div class="fp-sub">For teams & high volume.</div>
-        <hr class="fp-hr">
-        <ul class="fp-feats">
-          <li><i class="ti ti-check" style="color:var(--accent)"></i>Everything in Pro</li>
-          <li><i class="ti ti-check" style="color:var(--accent)"></i>Up to 500 MB per file</li>
-          <li><i class="ti ti-check" style="color:var(--accent)"></i>5 team seats</li>
-          <li><i class="ti ti-check" style="color:var(--accent)"></i>API access</li>
-          <li><i class="ti ti-check" style="color:var(--accent)"></i>Bulk processing</li>
-          <li><i class="ti ti-check" style="color:var(--accent)"></i>Priority support</li>
-        </ul>
-        <a href="/contact" class="fp-btn-out">Contact Us →</a>
-      </div>
-
-    </div>
-  </div>
-
   <div class="footer-grid">
     <div class="footer-brand">
       <div class="footer-logo-wrap">
@@ -797,6 +729,13 @@ function buildFooter(){
         ${_iconHTML("ti-shield-check")}
         Files deleted after processing
       </div>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <a href="/">Home</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/#tools">All Tools</a>
     </div>
     <div class="footer-col">
       <h4>Tools</h4>

@@ -197,6 +197,11 @@
   to = "/sign-in"
   status = 301
 
+[[redirects]]
+  from = "/pricing.html"
+  to = "/pricing"
+  status = 301
+
 # ── 200 rewrites: clean URLs → serve the actual .html file (URL bar stays clean) ──
 [[redirects]]
   from = "/ask-pdf"
@@ -231,6 +236,11 @@
 [[redirects]]
   from = "/sign-in"
   to = "/sign-in.html"
+  status = 200
+
+[[redirects]]
+  from = "/pricing"
+  to = "/pricing.html"
   status = 200
 [[redirects]]
   from = "/privacy"
