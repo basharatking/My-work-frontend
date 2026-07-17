@@ -815,7 +815,9 @@ function buildFooter(){
     </div>
     <div class="footer-bottom-links">
       <a href="/privacy">Privacy</a>
+      <span style="color:rgba(255,255,255,.3)">·</span>
       <a href="/terms">Terms</a>
+      <span style="color:rgba(255,255,255,.3)">·</span>
       <a href="/contact">Contact</a>
     </div>
   </div>
