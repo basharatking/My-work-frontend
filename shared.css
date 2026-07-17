@@ -788,7 +788,7 @@ img, svg { display: block; }
 
 .site-footer { background: #000000; padding: 4.5rem 2rem 2.25rem; border-top: 1px solid rgba(255,255,255,.08); }
 [data-theme="dark"] .site-footer { background: #000000; }
-.footer-grid { max-width: var(--max-w); margin: 0 auto 3rem; display: grid; grid-template-columns: 2.2fr 1fr 1fr 1fr; gap: 2.5rem; }
+.footer-grid { max-width: var(--max-w); margin: 0 auto 3rem; display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr 1fr; gap: 2rem; }
 .footer-logo-wrap { display: flex; align-items: center; gap: 9px; margin-bottom: .9rem; }
 .footer-logo-mark { width: 36px; height: 36px; border-radius: 8px; background: linear-gradient(135deg, #3B55E0, #4F6EF7, #6B85FF); display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 10px rgba(79,110,247,.4); overflow: visible; }
 .footer-logo-name { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: white; letter-spacing: -.3px; }
