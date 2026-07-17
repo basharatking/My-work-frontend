@@ -847,5 +847,14 @@ function buildFooter(){
 document.addEventListener("DOMContentLoaded", () => {
   const navPh=document.getElementById("nav-placeholder"); if(navPh) navPh.outerHTML=buildNav();
   const ftPh=document.getElementById("footer-placeholder"); if(ftPh) ftPh.outerHTML=buildFooter();
-  setTimeout(()=>{ _setDarkIcon(); _initStickyNav(); _initScrollReveal(); initDropZones(); _initDropdowns(); _applyRealIcons(); _updateNavAuth(); },50);
+  setTimeout(()=>{ _setDarkIcon(); _initStickyNav(); _initScrollReveal(); initDropZones(); _initDropdowns(); _applyRealIcons(); },50);
+  /* Auth: use onAuthStateChange so Dashboard appears the instant session is confirmed — no race condition */
+  _sbClient().then(sb=>{
+    if(!sb) return;
+    sb.auth.onAuthStateChange((event, session)=>{
+      if(session?.user) _updateNavAuth();
+    });
+    /* Also call once immediately for already-logged-in users */
+    _updateNavAuth();
+  });
 });

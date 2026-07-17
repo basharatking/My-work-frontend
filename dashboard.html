@@ -33,16 +33,16 @@
 .dash-head-btn.danger:hover{ border-color:var(--red); color:var(--red); background:var(--red-bg); }
 
 /* ── Onboarding checklist ── */
-.onboard-card{ background:linear-gradient(135deg,#EEF1FF 0%,#F5F0FF 100%); border:1.5px solid var(--brand-border); border-radius:var(--rxl); padding:1.25rem 1.4rem; margin-bottom:1.75rem; }
+.onboard-card{ background:var(--brand-pale); border:1.5px solid var(--brand-border); border-radius:var(--rxl); padding:1.25rem 1.4rem; margin-bottom:1.75rem; }
 .onboard-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:1rem; }
-.onboard-title{ font-size:14px; font-weight:700; color:var(--brand-dark); }
-.onboard-prog-bar{ flex:1; height:6px; border-radius:100px; background:rgba(79,110,247,.18); overflow:hidden; max-width:160px; }
+.onboard-title{ font-size:14px; font-weight:700; color:var(--brand); }
+.onboard-prog-bar{ flex:1; height:6px; border-radius:100px; background:var(--brand-border); overflow:hidden; max-width:160px; }
 .onboard-prog-fill{ height:100%; border-radius:100px; background:var(--brand); transition:width .4s ease; }
 .onboard-prog-txt{ font-size:12px; font-weight:600; color:var(--brand); white-space:nowrap; }
 .onboard-steps{ display:flex; flex-direction:column; gap:8px; }
-.onboard-step{ display:flex; align-items:center; gap:10px; font-size:13.5px; color:var(--ink3); }
+.onboard-step{ display:flex; align-items:center; gap:10px; font-size:13.5px; color:var(--ink4); }
 .onboard-step.done{ color:var(--ink); }
-.onboard-check{ width:20px; height:20px; border-radius:50%; border:2px solid var(--brand-border); background:#fff; display:flex; align-items:center; justify-content:center; font-size:11px; flex-shrink:0; color:transparent; transition:var(--t); }
+.onboard-check{ width:20px; height:20px; border-radius:50%; border:2px solid var(--brand-border); background:var(--bg); display:flex; align-items:center; justify-content:center; font-size:11px; flex-shrink:0; color:transparent; transition:var(--t); }
 .onboard-step.done .onboard-check{ background:var(--brand); border-color:var(--brand); color:#fff; }
 .onboard-dismiss{ font-size:12px; color:var(--ink4); cursor:pointer; border:none; background:none; padding:0; margin-top:.75rem; }
 .onboard-dismiss:hover{ color:var(--ink); }
@@ -62,13 +62,12 @@
 .upgrade-btn:hover{ transform:translateY(-1px); box-shadow:0 4px 14px rgba(79,110,247,.35); }
 
 /* ── Upgrade banner (shows when near/at limit) ── */
-.upgrade-banner{ display:none; background:linear-gradient(135deg,#FFF7ED,#FEF3C7); border:1.5px solid #FED7AA; border-radius:var(--rxl); padding:1.1rem 1.25rem; margin-bottom:1.75rem; display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
-.upgrade-banner i{ font-size:22px; color:#C2410C; flex-shrink:0; }
-.upgrade-banner-text{ flex:1; min-width:200px; }
-.upgrade-banner-text strong{ font-size:14px; color:#92400E; display:block; margin-bottom:2px; }
-.upgrade-banner-text span{ font-size:13px; color:#B45309; }
-.upgrade-banner-btn{ display:inline-flex; align-items:center; gap:6px; padding:8px 18px; border-radius:var(--r); font-size:13px; font-weight:600; background:#C2410C; color:#fff; border:none; cursor:pointer; text-decoration:none; white-space:nowrap; flex-shrink:0; }
-.upgrade-banner-btn:hover{ background:#9A3412; }
+.upgrade-banner{ display:none; background:var(--amber-bg); border:1.5px solid var(--amber-border); border-radius:var(--rxl); padding:1.1rem 1.25rem; margin-bottom:1.75rem; display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+.upgrade-banner i{ font-size:22px; color:var(--amber); flex-shrink:0; }
+.upgrade-banner-text strong{ font-size:14px; color:var(--ink); display:block; margin-bottom:2px; }
+.upgrade-banner-text span{ font-size:13px; color:var(--ink3); }
+.upgrade-banner-btn{ display:inline-flex; align-items:center; gap:6px; padding:8px 18px; border-radius:var(--r); font-size:13px; font-weight:600; background:var(--amber); color:#fff; border:none; cursor:pointer; text-decoration:none; white-space:nowrap; flex-shrink:0; }
+.upgrade-banner-btn:hover{ opacity:.9; }
 
 /* ── Stat cards ── */
 .dash-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:1.75rem; }
