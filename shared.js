@@ -16,6 +16,34 @@ async function getSession(){ const sb=await _sbClient(); if(!sb) return null; co
 async function getUser(){ const s=await getSession(); return s?.user||null; }
 async function signOut(){ const sb=await _sbClient(); if(sb) await sb.auth.signOut(); window.location.href="/"; }
 
+/* ── Conversion History logging (Supabase) ─────────────── */
+function _fdFileInfo(fd){
+  try{
+    const single = fd.get("file");
+    if(single && single.name) return { name: single.name, size: single.size||0, count: 1 };
+    const multi = (fd.getAll("files")||[]).filter(f=>f && f.name);
+    if(multi.length) return { name: multi.length===1 ? multi[0].name : `${multi.length} files`, size: multi.reduce((s,f)=>s+(f.size||0),0), count: multi.length };
+  }catch(_){}
+  return { name:"file", size:0, count:1 };
+}
+async function logConversion(fileName, fileSize, fileCount){
+  try{
+    const sb = await _sbClient(); if(!sb) return;
+    const user = await getUser(); if(!user) return; /* guests aren't tracked — no account to attach history to */
+    const toolPath = window.location.pathname || "/";
+    const toolName = (document.title.split(" — ")[0] || toolPath.replace("/","")).trim();
+    await sb.from("conversions").insert({
+      user_id: user.id,
+      tool_path: toolPath,
+      tool_name: toolName,
+      file_name: fileName || null,
+      file_size: fileSize || 0,
+      file_count: fileCount || 1,
+      status: "success"
+    });
+  }catch(_){ /* logging must never block the user's actual download */ }
+}
+
 async function _updateNavAuth(){
   const user = await getUser();
   const signinBtn = document.getElementById("nav-signin-btn");
@@ -24,9 +52,9 @@ async function _updateNavAuth(){
   if(!user){ return; }
   const name = user.user_metadata?.full_name || user.email?.split("@")[0] || "Account";
   const initials = name.slice(0,2).toUpperCase();
-  if(signinBtn) signinBtn.outerHTML = `<div class="nav-user-pill" onclick="signOut()" title="Sign out — ${user.email}"><span class="nav-user-avatar">${initials}</span><span class="nav-user-name">${name.split(" ")[0]}</span><i class="ti ti-logout" aria-hidden="true"></i></div>`;
+  if(signinBtn) signinBtn.outerHTML = `<a href="/dashboard" class="nav-btn-outline" id="nav-dash-btn"><i class="ti ti-layout-dashboard" aria-hidden="true"></i> Dashboard</a><div class="nav-user-pill" onclick="signOut()" title="Sign out — ${user.email}"><span class="nav-user-avatar">${initials}</span><span class="nav-user-name">${name.split(" ")[0]}</span><i class="ti ti-logout" aria-hidden="true"></i></div>`;
   if(startBtn) startBtn.style.display = "none";
-  if(mobileAuth) mobileAuth.innerHTML = `<button class="btn btn-outline btn-full" onclick="signOut()" style="justify-content:center"><i class="ti ti-logout"></i> Sign Out (${user.email})</button>`;
+  if(mobileAuth) mobileAuth.innerHTML = `<a href="/dashboard" class="btn btn-outline btn-full" style="justify-content:center"><i class="ti ti-layout-dashboard"></i> Dashboard</a><button class="btn btn-outline btn-full" onclick="signOut()" style="justify-content:center"><i class="ti ti-logout"></i> Sign Out (${user.email})</button>`;
 }
 
 /* ── Real Icon Map (Tabler Icons — replaces all emoji) ── */
@@ -491,6 +519,8 @@ async function callAPI(endpoint,fd,tid,label){
       try{ const j=await resp.json(); m=j.detail||j.message||m; }catch(_){}
       throw new Error(m);
     }
+    const _fi = _fdFileInfo(fd);
+    logConversion(_fi.name, _fi.size, _fi.count); /* fire-and-forget, never blocks the result */
     return resp;
   }catch(e){
     clearInterval(tick);
