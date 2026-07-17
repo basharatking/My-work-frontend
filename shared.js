@@ -709,6 +709,7 @@ function buildNav(){
     <a href="/split-pdf" class="nav-plain-link">Split PDF</a>
     <a href="/compress-pdf" class="nav-plain-link">Compress PDF</a>
     ${_buildDrop("convert")}
+    ${_buildDrop("ai")}
     ${_buildAllTools()}
   </div>
 
