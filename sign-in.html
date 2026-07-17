@@ -2,6 +2,20 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+/* Instant already-signed-in check — runs before anything renders, so there's
+   no flash of the sign-in form before bouncing to home on slower (mobile) connections. */
+(function(){
+  try{
+    var raw = localStorage.getItem("sb-qmiksanrefiplaicmnii-auth-token");
+    if(!raw) return;
+    var s = JSON.parse(raw);
+    var tok = s && (s.access_token || s.currentSession?.access_token);
+    var exp = s && (s.expires_at || s.currentSession?.expires_at);
+    if(tok && exp && exp*1000 > Date.now()) window.location.replace("/");
+  }catch(e){}
+})();
+</script>
 <title>Sign In — RunDocs</title>
 <meta name="description" content="Sign in to your RunDocs account.">
 <meta name="robots" content="noindex">
