@@ -970,6 +970,7 @@ img, svg { display: block; }
   .nav-links { display: none; }
   .hamburger { display: flex; }
   .nav-btn-outline { display: none; }
+  #nav-dash-btn[style*="inline-flex"] { display: inline-flex !important; }
   .nav-btn-primary { display: none; }
 }
 

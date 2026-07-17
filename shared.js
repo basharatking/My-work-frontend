@@ -46,15 +46,33 @@ async function logConversion(fileName, fileSize, fileCount){
 
 async function _updateNavAuth(){
   const user = await getUser();
-  const signinBtn = document.getElementById("nav-signin-btn");
-  const startBtn  = document.getElementById("nav-start-btn");
+  const signinBtn  = document.getElementById("nav-signin-btn");
+  const startBtn   = document.getElementById("nav-start-btn");
   const mobileAuth = document.getElementById("nav-mobile-auth");
+  const dashBtn    = document.getElementById("nav-dash-btn");
   if(!user){ return; }
   const name = user.user_metadata?.full_name || user.email?.split("@")[0] || "Account";
   const initials = name.slice(0,2).toUpperCase();
-  if(signinBtn) signinBtn.outerHTML = `<a href="/dashboard" class="nav-btn-outline" id="nav-dash-btn"><i class="ti ti-layout-dashboard" aria-hidden="true"></i> Dashboard</a><div class="nav-user-pill" onclick="signOut()" title="Sign out — ${user.email}"><span class="nav-user-avatar">${initials}</span><span class="nav-user-name">${name.split(" ")[0]}</span><i class="ti ti-logout" aria-hidden="true"></i></div>`;
-  if(startBtn) startBtn.style.display = "none";
-  if(mobileAuth) mobileAuth.innerHTML = `<a href="/dashboard" class="btn btn-outline btn-full" style="justify-content:center"><i class="ti ti-layout-dashboard"></i> Dashboard</a><button class="btn btn-outline btn-full" onclick="signOut()" style="justify-content:center"><i class="ti ti-logout"></i> Sign Out (${user.email})</button>`;
+  /* Desktop */
+  if(signinBtn) signinBtn.style.display = "none";
+  if(startBtn)  startBtn.style.display  = "none";
+  if(dashBtn){
+    dashBtn.style.display = "inline-flex";
+    dashBtn.innerHTML = `<i class="ti ti-layout-dashboard" aria-hidden="true"></i> Dashboard`;
+  }
+  /* Inject user pill after dash btn */
+  const navRight = document.querySelector(".nav-right");
+  if(navRight && !document.getElementById("nav-user-pill-el")){
+    const pill = document.createElement("div");
+    pill.id = "nav-user-pill-el";
+    pill.className = "nav-user-pill";
+    pill.title = `Sign out — ${user.email}`;
+    pill.onclick = signOut;
+    pill.innerHTML = `<span class="nav-user-avatar">${initials}</span><span class="nav-user-name">${name.split(" ")[0]}</span><i class="ti ti-logout" aria-hidden="true"></i>`;
+    navRight.appendChild(pill);
+  }
+  /* Mobile */
+  if(mobileAuth) mobileAuth.innerHTML = `<a href="/dashboard" class="btn btn-primary btn-full" style="justify-content:center"><i class="ti ti-layout-dashboard"></i> Dashboard</a><button class="btn btn-outline btn-full" onclick="signOut()" style="justify-content:center"><i class="ti ti-logout"></i> Sign Out (${user.email})</button>`;
 }
 
 /* ── Real Icon Map (Tabler Icons — replaces all emoji) ── */
@@ -716,6 +734,7 @@ function buildNav(){
   <div class="nav-spacer"></div>
   <div class="nav-right">
     <button class="nav-icon-btn" id="darkBtn" onclick="toggleDark()"></button>
+    <a href="/dashboard" class="nav-btn-outline" id="nav-dash-btn" style="display:none"><i class="ti ti-layout-dashboard" aria-hidden="true"></i> Dashboard</a>
     <a href="/sign-in" class="nav-btn-outline" id="nav-signin-btn">Sign In</a>
     <a href="/#tools" class="nav-btn-primary" id="nav-start-btn">Get Started →</a>
   </div>
