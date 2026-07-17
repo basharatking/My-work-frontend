@@ -252,6 +252,9 @@ img, svg { display: block; }
   transition: box-shadow .2s, background .2s;
 }
 [data-theme="dark"] .nav { background: rgba(12,14,26,.92); }
+[data-theme="dark"] .hero-wrap { background: linear-gradient(180deg,#0D1033 0%,var(--bg) 65%); }
+[data-theme="dark"] .hero-wrap::before { background: radial-gradient(ellipse 80% 60% at 50% 0%,rgba(107,133,255,.1) 0%,transparent 100%); }
+[data-theme="dark"] .float-card { background: var(--bg2); border-color: var(--border); box-shadow: 0 6px 24px rgba(0,0,0,.35); }
 .nav.scrolled { box-shadow: var(--shadow-sm); }
 
 /* Left — logo */
