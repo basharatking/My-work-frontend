@@ -4,7 +4,6 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>All PDF Tools — RunDocs</title>
 <meta name="description" content="All RunDocs tools — Convert, Compress, Merge, Split, Secure PDFs and use AI tools. 30+ free PDF tools in one place.">
-<meta name="robots" content="index,follow">
 <link rel="canonical" href="https://rundocs.netlify.app/all-tools">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
@@ -12,180 +11,481 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <script src="config.js"></script>
 <style>
-.at-page{ max-width:1100px; margin:0 auto; padding:calc(var(--nav-h) + 2.5rem) 1.5rem 5rem; }
-.at-hero{ text-align:center; margin-bottom:3rem; }
-.at-hero h1{ font-family:var(--font-display); font-size:clamp(1.8rem,3.5vw,2.8rem); font-weight:700; color:var(--ink); letter-spacing:-.03em; margin-bottom:.5rem; }
-.at-hero p{ font-size:15px; color:var(--ink4); max-width:460px; margin:0 auto 1.5rem; line-height:1.7; }
+.at-page{ max-width:860px; margin:0 auto; padding:calc(var(--nav-h) + 2.5rem) 1.5rem 5rem; }
 
 /* Search */
-.at-search-wrap{ display:flex; align-items:center; gap:10px; max-width:420px; margin:0 auto; border:1.5px solid var(--border2); border-radius:var(--r); padding:10px 16px; background:var(--bg); transition:border-color .15s; }
+.at-search-wrap{ display:flex; align-items:center; gap:10px; max-width:460px; margin:0 auto 3rem; border:1.5px solid var(--border2); border-radius:var(--r); padding:11px 16px; background:var(--bg); transition:border-color .15s; box-shadow:0 2px 8px rgba(0,0,0,.05); }
 .at-search-wrap:focus-within{ border-color:var(--brand); }
-.at-search-wrap i{ color:var(--ink4); font-size:17px; flex-shrink:0; }
-.at-search-wrap input{ border:none; outline:none; background:transparent; font-size:14px; color:var(--ink); font-family:inherit; width:100%; }
+.at-search-wrap i{ color:var(--ink4); font-size:18px; flex-shrink:0; }
+.at-search-wrap input{ border:none; outline:none; background:transparent; font-size:14.5px; color:var(--ink); font-family:inherit; width:100%; }
 .at-search-wrap input::placeholder{ color:var(--ink5); }
 
-/* Category sections */
-.at-section{ margin-bottom:3rem; }
-.at-section-head{ display:flex; align-items:center; gap:12px; margin-bottom:1.25rem; padding-bottom:.75rem; border-bottom:2px solid var(--border); }
-.at-section-icon{ width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0; }
-.at-section-icon.convert{ background:#EEF1FF; color:#4F6EF7; }
-.at-section-icon.merge{ background:#F0FDF4; color:#16A34A; }
-.at-section-icon.split{ background:#FFF7ED; color:#D97706; }
-.at-section-icon.compress{ background:#FEF2F2; color:#DC2626; }
-.at-section-icon.security{ background:#F5F3FF; color:#7C3AED; }
-.at-section-icon.ai{ background:linear-gradient(135deg,#EEF1FF,#F5F3FF); color:#4F6EF7; }
-.at-section-icon.business{ background:#F0FDF4; color:#0D9488; }
-[data-theme="dark"] .at-section-icon.convert{ background:rgba(79,110,247,.15); }
-[data-theme="dark"] .at-section-icon.merge{ background:rgba(22,163,74,.15); }
-[data-theme="dark"] .at-section-icon.split{ background:rgba(217,119,6,.15); }
-[data-theme="dark"] .at-section-icon.compress{ background:rgba(220,38,38,.15); }
-[data-theme="dark"] .at-section-icon.security{ background:rgba(124,58,237,.15); }
-[data-theme="dark"] .at-section-icon.ai{ background:rgba(79,110,247,.15); }
-[data-theme="dark"] .at-section-icon.business{ background:rgba(13,148,136,.15); }
-.at-section-title{ font-size:17px; font-weight:700; color:var(--ink); }
-.at-section-count{ font-size:12px; color:var(--ink4); background:var(--bg3); padding:2px 9px; border-radius:100px; margin-left:auto; }
+/* Category section */
+.at-cat{ margin-bottom:3.5rem; }
+.at-cat-heading{ font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--ink4); padding-bottom:.75rem; border-bottom:1.5px solid var(--border); margin-bottom:2rem; }
 
-/* Tool grid */
-.at-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
-.at-tool{ background:var(--bg); border:1.5px solid var(--border); border-radius:var(--rxl); padding:1rem; text-decoration:none; color:inherit; display:flex; align-items:center; gap:12px; transition:var(--t-md); }
-.at-tool:hover{ border-color:var(--brand-border); background:var(--brand-pale); transform:translateY(-2px); box-shadow:0 4px 16px rgba(79,110,247,.12); }
-.at-tool-icon{ width:38px; height:38px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
-.at-tool-name{ font-size:13.5px; font-weight:600; color:var(--ink); line-height:1.3; }
-.at-tool-desc{ font-size:11.5px; color:var(--ink4); margin-top:2px; line-height:1.4; }
-.at-tool.ai-tool .at-tool-icon{ background:linear-gradient(135deg,var(--brand-pale),#F5F3FF); color:var(--brand); }
-.at-tool:not(.ai-tool) .at-tool-icon{ background:var(--bg2); color:var(--brand); }
-.at-beta{ display:inline-flex; align-items:center; font-size:9px; font-weight:700; padding:1px 6px; border-radius:100px; background:var(--brand); color:#fff; margin-left:5px; vertical-align:middle; letter-spacing:.04em; }
+/* Tool entry — iLovePDF style */
+.at-tool-entry{ display:flex; gap:18px; margin-bottom:2.25rem; padding-bottom:2.25rem; border-bottom:1px solid var(--border); }
+.at-tool-entry:last-child{ border-bottom:none; margin-bottom:0; padding-bottom:0; }
+.at-tool-icon-wrap{ flex-shrink:0; width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px; margin-top:2px; }
+.at-tool-icon-wrap.convert{ background:#EEF1FF; color:var(--brand); }
+.at-tool-icon-wrap.merge{ background:#F0FDF4; color:#16A34A; }
+.at-tool-icon-wrap.compress{ background:#FEF2F2; color:#DC2626; }
+.at-tool-icon-wrap.security{ background:#F5F3FF; color:#7C3AED; }
+.at-tool-icon-wrap.ai{ background:linear-gradient(135deg,#EEF1FF,#F5F3FF); color:var(--brand); }
+.at-tool-icon-wrap.business{ background:#F0FDFA; color:#0D9488; }
+[data-theme="dark"] .at-tool-icon-wrap.convert{ background:rgba(79,110,247,.15); }
+[data-theme="dark"] .at-tool-icon-wrap.merge{ background:rgba(22,163,74,.15); }
+[data-theme="dark"] .at-tool-icon-wrap.compress{ background:rgba(220,38,38,.15); }
+[data-theme="dark"] .at-tool-icon-wrap.security{ background:rgba(124,58,237,.15); }
+[data-theme="dark"] .at-tool-icon-wrap.ai{ background:rgba(79,110,247,.15); }
+[data-theme="dark"] .at-tool-icon-wrap.business{ background:rgba(13,148,136,.15); }
+.at-tool-body{ flex:1; min-width:0; }
+.at-tool-title{ font-size:18px; font-weight:700; color:var(--ink); margin-bottom:.6rem; display:flex; align-items:center; gap:8px; }
+.at-tool-title a{ color:inherit; text-decoration:none; transition:color .15s; }
+.at-tool-title a:hover{ color:var(--brand); }
+.at-beta{ display:inline-flex; font-size:9px; font-weight:700; padding:2px 7px; border-radius:100px; background:var(--brand); color:#fff; letter-spacing:.04em; vertical-align:middle; }
+.at-tool-desc{ font-size:14px; color:var(--ink3); line-height:1.75; }
+.at-tool-desc p{ margin-bottom:.75rem; }
+.at-tool-desc p:last-child{ margin-bottom:0; }
+.at-tool-desc strong{ color:var(--ink); font-weight:600; }
+.at-tool-desc a{ color:var(--brand); font-weight:600; text-decoration:underline; text-underline-offset:2px; }
+.at-tool-desc a:hover{ opacity:.8; }
+.at-tool-cta{ display:inline-flex; align-items:center; gap:6px; margin-top:1rem; padding:8px 18px; border-radius:var(--r); background:var(--brand); color:#fff; font-size:13px; font-weight:600; text-decoration:none; transition:var(--t); }
+.at-tool-cta:hover{ background:var(--brand-dark); transform:translateY(-1px); }
 
 /* No results */
 .at-no-results{ text-align:center; padding:4rem 1rem; display:none; }
 .at-no-results i{ font-size:2.5rem; color:var(--ink5); display:block; margin-bottom:1rem; }
-.at-no-results h3{ font-size:16px; font-weight:700; color:var(--ink); margin-bottom:.4rem; }
-.at-no-results p{ font-size:13.5px; color:var(--ink4); }
 
-@media(max-width:900px){ .at-grid{ grid-template-columns:repeat(3,1fr); } }
-@media(max-width:640px){ .at-grid{ grid-template-columns:repeat(2,1fr); } .at-tool{ flex-direction:column; align-items:flex-start; gap:8px; } }
-@media(max-width:360px){ .at-grid{ grid-template-columns:1fr; } }
+@media(max-width:560px){
+  .at-tool-entry{ flex-direction:column; gap:12px; }
+  .at-tool-title{ font-size:16px; }
+}
 </style>
 </head>
 <body>
 <div id="nav-placeholder"></div>
 
 <div class="at-page">
-  <div class="at-hero">
-    <h1>All Tools</h1>
-    <p>30+ free PDF and AI tools, organized by category.</p>
-    <div class="at-search-wrap">
-      <i class="ti ti-search" aria-hidden="true"></i>
-      <input type="text" id="at-search" placeholder="Search tools…" oninput="filterTools(this.value)" autocomplete="off">
-    </div>
+
+  <div class="at-search-wrap">
+    <i class="ti ti-search" aria-hidden="true"></i>
+    <input type="text" id="at-search" placeholder="Search tools…" oninput="filterTools(this.value)" autocomplete="off">
   </div>
 
-  <div id="at-sections">
+  <div id="at-content">
 
-    <!-- Convert PDF -->
-    <div class="at-section" data-cat="convert">
-      <div class="at-section-head">
-        <div class="at-section-icon convert"><i class="ti ti-replace" aria-hidden="true"></i></div>
-        <div class="at-section-title">Convert PDF</div>
-        <div class="at-section-count">10 tools</div>
+    <!-- CONVERT PDF -->
+    <div class="at-cat" data-cat="convert">
+      <div class="at-cat-heading">Convert PDF</div>
+
+      <div class="at-tool-entry" data-name="pdf to word">
+        <div class="at-tool-icon-wrap convert"><i class="ti ti-file-word"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/pdf-to-word">PDF to Word</a></div>
+          <div class="at-tool-desc">
+            <p>To convert a <strong>PDF to an editable Word document</strong>, select your file from your device and RunDocs will extract the text and layout into a clean <strong>.docx file</strong>.</p>
+            <p><a href="/pdf-to-word">Upload</a> your PDF and download a fully editable Word file in seconds. Perfect for editing scanned reports, contracts, and documents.</p>
+          </div>
+          <a href="/pdf-to-word" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Convert PDF to Word</a>
+        </div>
       </div>
-      <div class="at-grid">
-        <a href="/pdf-to-word" class="at-tool"><div class="at-tool-icon"><i class="ti ti-file-word"></i></div><div><div class="at-tool-name">PDF to Word</div><div class="at-tool-desc">Convert PDF to editable .docx</div></div></a>
-        <a href="/pdf-to-excel" class="at-tool"><div class="at-tool-icon"><i class="ti ti-file-spreadsheet"></i></div><div><div class="at-tool-name">PDF to Excel</div><div class="at-tool-desc">Smart table extraction</div></div></a>
-        <a href="/pdf-to-jpg" class="at-tool"><div class="at-tool-icon"><i class="ti ti-photo"></i></div><div><div class="at-tool-name">PDF to JPG</div><div class="at-tool-desc">Export pages as images</div></div></a>
-        <a href="/pdf-to-pptx" class="at-tool"><div class="at-tool-icon"><i class="ti ti-presentation"></i></div><div><div class="at-tool-name">PDF to PowerPoint</div><div class="at-tool-desc">Each page = one slide</div></div></a>
-        <a href="/pdf-to-text" class="at-tool"><div class="at-tool-icon"><i class="ti ti-file-text"></i></div><div><div class="at-tool-name">PDF to Text</div><div class="at-tool-desc">Extract raw plain text</div></div></a>
-        <a href="/word-to-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-file-type-doc"></i></div><div><div class="at-tool-name">Word to PDF</div><div class="at-tool-desc">Convert .docx to PDF</div></div></a>
-        <a href="/excel-to-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-file-type-xls"></i></div><div><div class="at-tool-name">Excel to PDF</div><div class="at-tool-desc">Convert .xlsx to PDF</div></div></a>
-        <a href="/jpg-to-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-photo-plus"></i></div><div><div class="at-tool-name">Image to PDF</div><div class="at-tool-desc">JPG/PNG to PDF</div></div></a>
-        <a href="/html-to-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-brand-html5"></i></div><div><div class="at-tool-name">HTML to PDF</div><div class="at-tool-desc">Convert webpage to PDF</div></div></a>
-        <a href="/pptx-to-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-presentation"></i></div><div><div class="at-tool-name">PowerPoint to PDF</div><div class="at-tool-desc">Convert .pptx to PDF</div></div></a>
+
+      <div class="at-tool-entry" data-name="pdf to excel spreadsheet">
+        <div class="at-tool-icon-wrap convert"><i class="ti ti-file-spreadsheet"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/pdf-to-excel">PDF to Excel</a></div>
+          <div class="at-tool-desc">
+            <p>Convert a <strong>PDF with tables into an Excel spreadsheet</strong>. RunDocs intelligently detects table structures across multiple pages and groups them into clean, organized sheets.</p>
+            <p><a href="/pdf-to-excel">Upload</a> your PDF and download a structured <strong>.xlsx file</strong> ready for analysis. Ideal for invoices, bank statements, and financial reports.</p>
+          </div>
+          <a href="/pdf-to-excel" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Convert PDF to Excel</a>
+        </div>
+      </div>
+
+      <div class="at-tool-entry" data-name="pdf to jpg image photo">
+        <div class="at-tool-icon-wrap convert"><i class="ti ti-photo"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/pdf-to-jpg">PDF to JPG</a></div>
+          <div class="at-tool-desc">
+            <p>Convert <strong>each page of a PDF into a high-quality JPG image</strong>. Select your PDF from your device and choose the image quality you need.</p>
+            <p><a href="/pdf-to-jpg">Upload</a> your PDF and get individual images for each page. Great for sharing slides, extracting diagrams, or creating thumbnails.</p>
+          </div>
+          <a href="/pdf-to-jpg" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Convert PDF to JPG</a>
+        </div>
+      </div>
+
+      <div class="at-tool-entry" data-name="pdf to powerpoint pptx presentation slides">
+        <div class="at-tool-icon-wrap convert"><i class="ti ti-presentation"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/pdf-to-pptx">PDF to PowerPoint</a></div>
+          <div class="at-tool-desc">
+            <p>Convert a <strong>PDF into a PowerPoint presentation</strong> where each page becomes an editable slide. Perfect for repurposing PDF reports into presentations.</p>
+            <p><a href="/pdf-to-pptx">Upload</a> your PDF and download a <strong>.pptx file</strong> ready to edit in PowerPoint or Google Slides.</p>
+          </div>
+          <a href="/pdf-to-pptx" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Convert PDF to PowerPoint</a>
+        </div>
+      </div>
+
+      <div class="at-tool-entry" data-name="pdf to text txt extract">
+        <div class="at-tool-icon-wrap convert"><i class="ti ti-file-text"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/pdf-to-text">PDF to Text</a></div>
+          <div class="at-tool-desc">
+            <p>Extract <strong>all text content from a PDF</strong> into a plain .txt file. Useful for copying content, data processing, or feeding text into other tools.</p>
+            <p><a href="/pdf-to-text">Upload</a> your PDF and download a clean text file with all readable content extracted.</p>
+          </div>
+          <a href="/pdf-to-text" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Convert PDF to Text</a>
+        </div>
+      </div>
+
+      <div class="at-tool-entry" data-name="word to pdf docx convert">
+        <div class="at-tool-icon-wrap convert"><i class="ti ti-file-type-doc"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/word-to-pdf">Word to PDF</a></div>
+          <div class="at-tool-desc">
+            <p>Convert a <strong>Word document (.docx) to PDF</strong> while preserving fonts, formatting, and layout. The fastest way to create a professional PDF from a Word file.</p>
+            <p><a href="/word-to-pdf">Upload</a> your .docx file and download a pixel-perfect PDF instantly.</p>
+          </div>
+          <a href="/word-to-pdf" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Convert Word to PDF</a>
+        </div>
+      </div>
+
+      <div class="at-tool-entry" data-name="excel to pdf xlsx convert spreadsheet">
+        <div class="at-tool-icon-wrap convert"><i class="ti ti-file-type-xls"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/excel-to-pdf">Excel to PDF</a></div>
+          <div class="at-tool-desc">
+            <p>Convert an <strong>Excel spreadsheet (.xlsx) to a PDF</strong> document. All sheets, tables, and data are preserved in the output PDF.</p>
+            <p><a href="/excel-to-pdf">Upload</a> your Excel file and share your data as a professional PDF without anyone needing Excel installed.</p>
+          </div>
+          <a href="/excel-to-pdf" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Convert Excel to PDF</a>
+        </div>
+      </div>
+
+      <div class="at-tool-entry" data-name="image jpg png to pdf convert photo">
+        <div class="at-tool-icon-wrap convert"><i class="ti ti-photo-plus"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/jpg-to-pdf">Image to PDF</a></div>
+          <div class="at-tool-desc">
+            <p>Convert <strong>JPG, PNG, or other images into a PDF</strong>. You can combine multiple images into a single PDF document in the order you choose.</p>
+            <p><a href="/jpg-to-pdf">Upload</a> one or more images and download a single, clean PDF ready to share or print.</p>
+          </div>
+          <a href="/jpg-to-pdf" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Convert Image to PDF</a>
+        </div>
+      </div>
+
+      <div class="at-tool-entry" data-name="html webpage to pdf convert">
+        <div class="at-tool-icon-wrap convert"><i class="ti ti-brand-html5"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/html-to-pdf">HTML to PDF</a></div>
+          <div class="at-tool-desc">
+            <p>Convert an <strong>HTML file or webpage into a PDF</strong> document. Styles, fonts, and layout are preserved in the output.</p>
+            <p><a href="/html-to-pdf">Upload</a> your HTML file and get a PDF version perfect for reports, email templates, or archiving web pages.</p>
+          </div>
+          <a href="/html-to-pdf" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Convert HTML to PDF</a>
+        </div>
+      </div>
+
+      <div class="at-tool-entry" data-name="powerpoint pptx to pdf convert presentation">
+        <div class="at-tool-icon-wrap convert"><i class="ti ti-presentation"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/pptx-to-pdf">PowerPoint to PDF</a></div>
+          <div class="at-tool-desc">
+            <p>Convert a <strong>PowerPoint presentation (.pptx) to PDF</strong>. Each slide becomes a page in the PDF, preserving all design elements.</p>
+            <p><a href="/pptx-to-pdf">Upload</a> your .pptx file and share your presentation as a universally readable PDF.</p>
+          </div>
+          <a href="/pptx-to-pdf" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Convert PowerPoint to PDF</a>
+        </div>
       </div>
     </div>
 
-    <!-- Merge & Organize -->
-    <div class="at-section" data-cat="merge">
-      <div class="at-section-head">
-        <div class="at-section-icon merge"><i class="ti ti-stack-2" aria-hidden="true"></i></div>
-        <div class="at-section-title">Merge & Organize</div>
-        <div class="at-section-count">7 tools</div>
+    <!-- MERGE & ORGANIZE -->
+    <div class="at-cat" data-cat="merge">
+      <div class="at-cat-heading">Merge & Organize</div>
+
+      <div class="at-tool-entry" data-name="merge pdf combine join">
+        <div class="at-tool-icon-wrap merge"><i class="ti ti-stack-2"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/merge-pdf">Merge PDF</a></div>
+          <div class="at-tool-desc">
+            <p>To <strong>merge two or more PDFs into one</strong>, select the documents from your device. You can arrange the files in any order before merging.</p>
+            <p>You can also combine several password-protected documents into one. <a href="/merge-pdf">Upload</a> the selected files, process them, and download your merged PDF instantly.</p>
+          </div>
+          <a href="/merge-pdf" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Merge PDF</a>
+        </div>
       </div>
-      <div class="at-grid">
-        <a href="/merge-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-stack-2"></i></div><div><div class="at-tool-name">Merge PDF</div><div class="at-tool-desc">Combine multiple PDFs into one</div></div></a>
-        <a href="/split-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-cut"></i></div><div><div class="at-tool-name">Split PDF</div><div class="at-tool-desc">Split into pages or ranges</div></div></a>
-        <a href="/rotate-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-rotate-clockwise"></i></div><div><div class="at-tool-name">Rotate PDF</div><div class="at-tool-desc">90°, 180°, 270° rotation</div></div></a>
-        <a href="/delete-pages" class="at-tool"><div class="at-tool-icon"><i class="ti ti-trash"></i></div><div><div class="at-tool-name">Delete Pages</div><div class="at-tool-desc">Remove specific pages</div></div></a>
-        <a href="/reorder-pages" class="at-tool"><div class="at-tool-icon"><i class="ti ti-arrows-sort"></i></div><div><div class="at-tool-name">Reorder Pages</div><div class="at-tool-desc">Rearrange page order</div></div></a>
-        <a href="/add-page-numbers" class="at-tool"><div class="at-tool-icon"><i class="ti ti-number-123"></i></div><div><div class="at-tool-name">Add Page Numbers</div><div class="at-tool-desc">Auto number pages</div></div></a>
-        <a href="/watermark-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-writing-sign"></i></div><div><div class="at-tool-name">Watermark PDF</div><div class="at-tool-desc">Add text watermark</div></div></a>
+
+      <div class="at-tool-entry" data-name="split pdf separate pages divide">
+        <div class="at-tool-icon-wrap merge"><i class="ti ti-cut"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/split-pdf">Split PDF</a></div>
+          <div class="at-tool-desc">
+            <p>To <strong>split a PDF into different files</strong>, select the document from your device. You can split by page ranges or extract individual pages.</p>
+            <p><a href="/split-pdf">Upload</a> your PDF and divide it however you like — split every page, or define custom ranges to extract exactly what you need.</p>
+          </div>
+          <a href="/split-pdf" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Split PDF</a>
+        </div>
+      </div>
+
+      <div class="at-tool-entry" data-name="rotate pdf pages turn">
+        <div class="at-tool-icon-wrap merge"><i class="ti ti-rotate-clockwise"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/rotate-pdf">Rotate PDF</a></div>
+          <div class="at-tool-desc">
+            <p><strong>Rotate pages</strong> in your PDF by 90°, 180°, or 270°. Fix scanned documents that are upside down or sideways.</p>
+            <p><a href="/rotate-pdf">Upload</a> your PDF, choose the rotation angle, and download the corrected file instantly.</p>
+          </div>
+          <a href="/rotate-pdf" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Rotate PDF</a>
+        </div>
+      </div>
+
+      <div class="at-tool-entry" data-name="delete remove pages pdf">
+        <div class="at-tool-icon-wrap merge"><i class="ti ti-trash"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/delete-pages">Delete Pages</a></div>
+          <div class="at-tool-desc">
+            <p><strong>Remove specific pages</strong> from a PDF document. Select which pages to delete and keep the rest intact.</p>
+            <p><a href="/delete-pages">Upload</a> your PDF, select the pages you want to remove, and download the cleaned-up document.</p>
+          </div>
+          <a href="/delete-pages" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Delete Pages</a>
+        </div>
+      </div>
+
+      <div class="at-tool-entry" data-name="reorder rearrange pages pdf order">
+        <div class="at-tool-icon-wrap merge"><i class="ti ti-arrows-sort"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/reorder-pages">Reorder Pages</a></div>
+          <div class="at-tool-desc">
+            <p><strong>Rearrange the pages</strong> of a PDF in any order you want. Drag and drop pages into the correct sequence.</p>
+            <p><a href="/reorder-pages">Upload</a> your PDF and reorganize pages before saving your final document.</p>
+          </div>
+          <a href="/reorder-pages" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Reorder Pages</a>
+        </div>
+      </div>
+
+      <div class="at-tool-entry" data-name="add page numbers pdf numbering">
+        <div class="at-tool-icon-wrap merge"><i class="ti ti-number-123"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/add-page-numbers">Add Page Numbers</a></div>
+          <div class="at-tool-desc">
+            <p><strong>Automatically add page numbers</strong> to your PDF. Choose position (header or footer), starting number, and format.</p>
+            <p><a href="/add-page-numbers">Upload</a> your PDF and get a professionally numbered document ready to share or print.</p>
+          </div>
+          <a href="/add-page-numbers" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Add Page Numbers</a>
+        </div>
+      </div>
+
+      <div class="at-tool-entry" data-name="watermark pdf text stamp">
+        <div class="at-tool-icon-wrap merge"><i class="ti ti-writing-sign"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/watermark-pdf">Watermark PDF</a></div>
+          <div class="at-tool-desc">
+            <p><strong>Add a text watermark</strong> to every page of your PDF. Customize the text, opacity, position, and angle to match your needs.</p>
+            <p><a href="/watermark-pdf">Upload</a> your PDF, set your watermark text, and download a stamped document.</p>
+          </div>
+          <a href="/watermark-pdf" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Watermark PDF</a>
+        </div>
       </div>
     </div>
 
-    <!-- Compress & Optimize -->
-    <div class="at-section" data-cat="compress">
-      <div class="at-section-head">
-        <div class="at-section-icon compress"><i class="ti ti-zoom-out" aria-hidden="true"></i></div>
-        <div class="at-section-title">Compress & Optimize</div>
-        <div class="at-section-count">3 tools</div>
+    <!-- COMPRESS & OPTIMIZE -->
+    <div class="at-cat" data-cat="compress">
+      <div class="at-cat-heading">Compress & Optimize</div>
+
+      <div class="at-tool-entry" data-name="compress pdf reduce size smaller">
+        <div class="at-tool-icon-wrap compress"><i class="ti ti-zoom-out"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/compress-pdf">Compress PDF</a></div>
+          <div class="at-tool-desc">
+            <p>To <strong>reduce the file size of a PDF</strong>, select your document from your device. RunDocs compresses images and removes unnecessary data while keeping the content readable.</p>
+            <p><a href="/compress-pdf">Upload</a> your PDF and reduce its size by up to 90% — perfect for email attachments and faster uploads.</p>
+          </div>
+          <a href="/compress-pdf" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Compress PDF</a>
+        </div>
       </div>
-      <div class="at-grid">
-        <a href="/compress-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-zoom-out"></i></div><div><div class="at-tool-name">Compress PDF</div><div class="at-tool-desc">Reduce file size up to 90%</div></div></a>
-        <a href="/optimize-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-bolt"></i></div><div><div class="at-tool-name">Optimize PDF</div><div class="at-tool-desc">Optimize for web or print</div></div></a>
-        <a href="/repair-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-tool"></i></div><div><div class="at-tool-name">Repair PDF</div><div class="at-tool-desc">Fix corrupted PDFs</div></div></a>
+
+      <div class="at-tool-entry" data-name="optimize pdf web print fast">
+        <div class="at-tool-icon-wrap compress"><i class="ti ti-bolt"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/optimize-pdf">Optimize PDF</a></div>
+          <div class="at-tool-desc">
+            <p><strong>Optimize your PDF</strong> for web viewing or high-quality print. Linearizes the file so it loads faster in browsers.</p>
+            <p><a href="/optimize-pdf">Upload</a> your PDF and choose your optimization target — web, screen, or print.</p>
+          </div>
+          <a href="/optimize-pdf" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Optimize PDF</a>
+        </div>
+      </div>
+
+      <div class="at-tool-entry" data-name="repair pdf fix corrupted broken">
+        <div class="at-tool-icon-wrap compress"><i class="ti ti-tool"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/repair-pdf">Repair PDF</a></div>
+          <div class="at-tool-desc">
+            <p><strong>Fix corrupted or damaged PDF files</strong> that won't open. RunDocs attempts to recover and rebuild the document structure.</p>
+            <p><a href="/repair-pdf">Upload</a> your broken PDF and download a repaired version.</p>
+          </div>
+          <a href="/repair-pdf" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Repair PDF</a>
+        </div>
       </div>
     </div>
 
-    <!-- Security -->
-    <div class="at-section" data-cat="security">
-      <div class="at-section-head">
-        <div class="at-section-icon security"><i class="ti ti-shield-lock" aria-hidden="true"></i></div>
-        <div class="at-section-title">Security</div>
-        <div class="at-section-count">3 tools</div>
+    <!-- SECURITY -->
+    <div class="at-cat" data-cat="security">
+      <div class="at-cat-heading">Security</div>
+
+      <div class="at-tool-entry" data-name="lock protect password pdf encrypt secure">
+        <div class="at-tool-icon-wrap security"><i class="ti ti-lock"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/protect-pdf">Lock PDF</a></div>
+          <div class="at-tool-desc">
+            <p><strong>Password-protect your PDF</strong> with AES-256 encryption. Only people with the password will be able to open the document.</p>
+            <p><a href="/protect-pdf">Upload</a> your PDF, set a strong password, and download an encrypted file that is safe to share.</p>
+          </div>
+          <a href="/protect-pdf" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Lock PDF</a>
+        </div>
       </div>
-      <div class="at-grid">
-        <a href="/protect-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-lock"></i></div><div><div class="at-tool-name">Lock PDF</div><div class="at-tool-desc">AES-256 encryption</div></div></a>
-        <a href="/unlock-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-lock-open"></i></div><div><div class="at-tool-name">Unlock PDF</div><div class="at-tool-desc">Remove password protection</div></div></a>
-        <a href="/sign-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-signature"></i></div><div><div class="at-tool-name">Sign PDF</div><div class="at-tool-desc">Add digital signature</div></div></a>
+
+      <div class="at-tool-entry" data-name="unlock pdf remove password decrypt">
+        <div class="at-tool-icon-wrap security"><i class="ti ti-lock-open"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/unlock-pdf">Unlock PDF</a></div>
+          <div class="at-tool-desc">
+            <p><strong>Remove the password</strong> from a PDF you have access to. Enter the current password and RunDocs will create an unlocked version.</p>
+            <p><a href="/unlock-pdf">Upload</a> your protected PDF, enter the password, and download an unrestricted copy.</p>
+          </div>
+          <a href="/unlock-pdf" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Unlock PDF</a>
+        </div>
+      </div>
+
+      <div class="at-tool-entry" data-name="sign pdf digital signature esign">
+        <div class="at-tool-icon-wrap security"><i class="ti ti-signature"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/sign-pdf">Sign PDF</a></div>
+          <div class="at-tool-desc">
+            <p><strong>Add your digital signature</strong> to any PDF document. Draw, type, or upload your signature and place it anywhere on the page.</p>
+            <p><a href="/sign-pdf">Upload</a> your PDF, add your signature, and download a signed document ready for submission.</p>
+          </div>
+          <a href="/sign-pdf" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Sign PDF</a>
+        </div>
       </div>
     </div>
 
-    <!-- AI Tools -->
-    <div class="at-section" data-cat="ai">
-      <div class="at-section-head">
-        <div class="at-section-icon ai"><i class="ti ti-sparkles" aria-hidden="true"></i></div>
-        <div class="at-section-title">AI Tools <span class="at-beta">BETA</span></div>
-        <div class="at-section-count">6 tools</div>
+    <!-- AI TOOLS -->
+    <div class="at-cat" data-cat="ai">
+      <div class="at-cat-heading">AI Tools <span style="display:inline-flex;font-size:9px;font-weight:700;padding:2px 7px;border-radius:100px;background:var(--brand);color:#fff;letter-spacing:.04em;vertical-align:middle;margin-left:6px">BETA</span></div>
+
+      <div class="at-tool-entry" data-name="ask pdf chat question answer ai">
+        <div class="at-tool-icon-wrap ai"><i class="ti ti-message-circle-2"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/ask-pdf">Ask PDF</a> <span style="display:inline-flex;font-size:9px;font-weight:700;padding:2px 7px;border-radius:100px;background:var(--brand);color:#fff;letter-spacing:.04em">BETA</span></div>
+          <div class="at-tool-desc">
+            <p><strong>Chat with your PDF document</strong> using AI. Ask any question about the content and get an instant, accurate answer from the document itself.</p>
+            <p><a href="/ask-pdf">Upload</a> your PDF and start asking questions — no need to read the whole document manually.</p>
+          </div>
+          <a href="/ask-pdf" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Ask PDF</a>
+        </div>
       </div>
-      <div class="at-grid">
-        <a href="/ask-pdf" class="at-tool ai-tool"><div class="at-tool-icon"><i class="ti ti-message-circle-2"></i></div><div><div class="at-tool-name">Ask PDF</div><div class="at-tool-desc">Chat with your document</div></div></a>
-        <a href="/ai-summary" class="at-tool ai-tool"><div class="at-tool-icon"><i class="ti ti-clipboard-text"></i></div><div><div class="at-tool-name">Summarize PDF</div><div class="at-tool-desc">Get instant AI summary</div></div></a>
-        <a href="/ai-notes" class="at-tool ai-tool"><div class="at-tool-icon"><i class="ti ti-notes"></i></div><div><div class="at-tool-name">Generate Notes</div><div class="at-tool-desc">Study notes from PDF</div></div></a>
-        <a href="/ai-quiz" class="at-tool ai-tool"><div class="at-tool-icon"><i class="ti ti-help-circle"></i></div><div><div class="at-tool-name">Quiz Generator</div><div class="at-tool-desc">Auto quiz questions</div></div></a>
-        <a href="/ai-keypoints" class="at-tool ai-tool"><div class="at-tool-icon"><i class="ti ti-bulb"></i></div><div><div class="at-tool-name">Key Points</div><div class="at-tool-desc">Extract key insights</div></div></a>
-        <a href="/ai-translate" class="at-tool ai-tool"><div class="at-tool-icon"><i class="ti ti-language"></i></div><div><div class="at-tool-name">Translate PDF</div><div class="at-tool-desc">Urdu, Arabic & more</div></div></a>
+
+      <div class="at-tool-entry" data-name="summarize pdf ai summary brief">
+        <div class="at-tool-icon-wrap ai"><i class="ti ti-clipboard-text"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/ai-summary">Summarize PDF</a> <span style="display:inline-flex;font-size:9px;font-weight:700;padding:2px 7px;border-radius:100px;background:var(--brand);color:#fff;letter-spacing:.04em">BETA</span></div>
+          <div class="at-tool-desc">
+            <p><strong>Get an instant AI-generated summary</strong> of any PDF. Understand the key points of a long document in seconds without reading it all.</p>
+            <p><a href="/ai-summary">Upload</a> your PDF and receive a concise, accurate summary powered by AI.</p>
+          </div>
+          <a href="/ai-summary" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Summarize PDF</a>
+        </div>
+      </div>
+
+      <div class="at-tool-entry" data-name="notes generate study pdf ai">
+        <div class="at-tool-icon-wrap ai"><i class="ti ti-notes"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/ai-notes">Generate Notes</a> <span style="display:inline-flex;font-size:9px;font-weight:700;padding:2px 7px;border-radius:100px;background:var(--brand);color:#fff;letter-spacing:.04em">BETA</span></div>
+          <div class="at-tool-desc">
+            <p><strong>Automatically generate study notes</strong> from any PDF. Ideal for students and professionals who need to quickly extract key learning points.</p>
+            <p><a href="/ai-notes">Upload</a> your document and get structured, readable notes ready for revision.</p>
+          </div>
+          <a href="/ai-notes" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Generate Notes</a>
+        </div>
+      </div>
+
+      <div class="at-tool-entry" data-name="quiz generator pdf questions ai test">
+        <div class="at-tool-icon-wrap ai"><i class="ti ti-help-circle"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/ai-quiz">Quiz Generator</a> <span style="display:inline-flex;font-size:9px;font-weight:700;padding:2px 7px;border-radius:100px;background:var(--brand);color:#fff;letter-spacing:.04em">BETA</span></div>
+          <div class="at-tool-desc">
+            <p><strong>Generate quiz questions</strong> from any PDF automatically. Great for teachers creating tests or students testing their own understanding.</p>
+            <p><a href="/ai-quiz">Upload</a> your PDF and get a ready-to-use quiz based on the document content.</p>
+          </div>
+          <a href="/ai-quiz" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Generate Quiz</a>
+        </div>
+      </div>
+
+      <div class="at-tool-entry" data-name="key points extract insights pdf ai">
+        <div class="at-tool-icon-wrap ai"><i class="ti ti-bulb"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/ai-keypoints">Key Points</a> <span style="display:inline-flex;font-size:9px;font-weight:700;padding:2px 7px;border-radius:100px;background:var(--brand);color:#fff;letter-spacing:.04em">BETA</span></div>
+          <div class="at-tool-desc">
+            <p><strong>Extract the most important key points</strong> from any PDF. Get a bulleted list of critical insights without reading the full document.</p>
+            <p><a href="/ai-keypoints">Upload</a> your PDF and get the key takeaways instantly.</p>
+          </div>
+          <a href="/ai-keypoints" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Extract Key Points</a>
+        </div>
+      </div>
+
+      <div class="at-tool-entry" data-name="translate pdf language urdu arabic ai">
+        <div class="at-tool-icon-wrap ai"><i class="ti ti-language"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/ai-translate">Translate PDF</a> <span style="display:inline-flex;font-size:9px;font-weight:700;padding:2px 7px;border-radius:100px;background:var(--brand);color:#fff;letter-spacing:.04em">BETA</span></div>
+          <div class="at-tool-desc">
+            <p><strong>Translate your PDF into another language</strong> using AI. Supports Urdu, Arabic, French, Spanish, German, and many more languages.</p>
+            <p><a href="/ai-translate">Upload</a> your PDF, select the target language, and download a translated version of your document.</p>
+          </div>
+          <a href="/ai-translate" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Translate PDF</a>
+        </div>
       </div>
     </div>
 
-    <!-- Business -->
-    <div class="at-section" data-cat="business">
-      <div class="at-section-head">
-        <div class="at-section-icon business"><i class="ti ti-briefcase" aria-hidden="true"></i></div>
-        <div class="at-section-title">Business</div>
-        <div class="at-section-count">2 tools</div>
+    <!-- BUSINESS -->
+    <div class="at-cat" data-cat="business">
+      <div class="at-cat-heading">Business</div>
+
+      <div class="at-tool-entry" data-name="invoice to excel extract data pdf">
+        <div class="at-tool-icon-wrap business"><i class="ti ti-receipt"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/invoice-to-excel">Invoice to Excel</a></div>
+          <div class="at-tool-desc">
+            <p><strong>Extract invoice data from PDFs into Excel</strong>. Automatically pulls out invoice numbers, dates, line items, totals, and vendor information.</p>
+            <p><a href="/invoice-to-excel">Upload</a> your invoice PDF and get a structured Excel file perfect for accounting and bookkeeping.</p>
+          </div>
+          <a href="/invoice-to-excel" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Convert Invoice to Excel</a>
+        </div>
       </div>
-      <div class="at-grid">
-        <a href="/invoice-to-excel" class="at-tool"><div class="at-tool-icon"><i class="ti ti-receipt"></i></div><div><div class="at-tool-name">Invoice to Excel</div><div class="at-tool-desc">Extract invoice data to Excel</div></div></a>
-        <a href="/bank-statement" class="at-tool"><div class="at-tool-icon"><i class="ti ti-building-bank"></i></div><div><div class="at-tool-name">Bank Statement</div><div class="at-tool-desc">Parse bank statements to Excel</div></div></a>
+
+      <div class="at-tool-entry" data-name="bank statement pdf excel parse extract">
+        <div class="at-tool-icon-wrap business"><i class="ti ti-building-bank"></i></div>
+        <div class="at-tool-body">
+          <div class="at-tool-title"><a href="/bank-statement">Bank Statement</a></div>
+          <div class="at-tool-desc">
+            <p><strong>Convert bank statement PDFs into Excel</strong>. RunDocs parses transaction rows, dates, descriptions, and amounts into clean columns.</p>
+            <p><a href="/bank-statement">Upload</a> your bank statement PDF and get a fully organized Excel file ready for budgeting or audits.</p>
+          </div>
+          <a href="/bank-statement" class="at-tool-cta"><i class="ti ti-arrow-right"></i> Parse Bank Statement</a>
+        </div>
       </div>
     </div>
 
-  </div>
+  </div><!-- /at-content -->
 
   <div class="at-no-results" id="at-no-results">
     <i class="ti ti-search-off" aria-hidden="true"></i>
-    <h3>No tools found</h3>
-    <p>Try a different search term</p>
+    <h3 style="font-size:16px;font-weight:700;color:var(--ink);margin-bottom:.4rem">No tools found</h3>
+    <p style="font-size:13.5px;color:var(--ink4)">Try a different search term</p>
   </div>
+
 </div>
 
 <div id="footer-placeholder"></div>
@@ -193,21 +493,21 @@
 <script>
 function filterTools(q){
   q = q.toLowerCase().trim();
-  const sections = document.querySelectorAll(".at-section");
-  let totalVisible = 0;
-  sections.forEach(sec => {
-    const tools = sec.querySelectorAll(".at-tool");
-    let secVisible = 0;
-    tools.forEach(t => {
-      const text = t.textContent.toLowerCase();
+  const cats = document.querySelectorAll(".at-cat");
+  let total = 0;
+  cats.forEach(cat => {
+    const entries = cat.querySelectorAll(".at-tool-entry");
+    let visible = 0;
+    entries.forEach(e => {
+      const text = (e.dataset.name||"") + " " + e.textContent.toLowerCase();
       const show = !q || text.includes(q);
-      t.style.display = show ? "" : "none";
-      if(show) secVisible++;
+      e.style.display = show ? "" : "none";
+      if(show) visible++;
     });
-    sec.style.display = secVisible ? "" : "none";
-    totalVisible += secVisible;
+    cat.style.display = visible ? "" : "none";
+    total += visible;
   });
-  document.getElementById("at-no-results").style.display = totalVisible ? "none" : "block";
+  document.getElementById("at-no-results").style.display = total ? "none" : "block";
 }
 </script>
 </body>
