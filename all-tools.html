@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>All PDF Tools — RunDocs</title>
+<meta name="description" content="All RunDocs tools — Convert, Compress, Merge, Split, Secure PDFs and use AI tools. 30+ free PDF tools in one place.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://rundocs.netlify.app/all-tools">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<script src="config.js"></script>
+<style>
+.at-page{ max-width:1100px; margin:0 auto; padding:calc(var(--nav-h) + 2.5rem) 1.5rem 5rem; }
+.at-hero{ text-align:center; margin-bottom:3rem; }
+.at-hero h1{ font-family:var(--font-display); font-size:clamp(1.8rem,3.5vw,2.8rem); font-weight:700; color:var(--ink); letter-spacing:-.03em; margin-bottom:.5rem; }
+.at-hero p{ font-size:15px; color:var(--ink4); max-width:460px; margin:0 auto 1.5rem; line-height:1.7; }
+
+/* Search */
+.at-search-wrap{ display:flex; align-items:center; gap:10px; max-width:420px; margin:0 auto; border:1.5px solid var(--border2); border-radius:var(--r); padding:10px 16px; background:var(--bg); transition:border-color .15s; }
+.at-search-wrap:focus-within{ border-color:var(--brand); }
+.at-search-wrap i{ color:var(--ink4); font-size:17px; flex-shrink:0; }
+.at-search-wrap input{ border:none; outline:none; background:transparent; font-size:14px; color:var(--ink); font-family:inherit; width:100%; }
+.at-search-wrap input::placeholder{ color:var(--ink5); }
+
+/* Category sections */
+.at-section{ margin-bottom:3rem; }
+.at-section-head{ display:flex; align-items:center; gap:12px; margin-bottom:1.25rem; padding-bottom:.75rem; border-bottom:2px solid var(--border); }
+.at-section-icon{ width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0; }
+.at-section-icon.convert{ background:#EEF1FF; color:#4F6EF7; }
+.at-section-icon.merge{ background:#F0FDF4; color:#16A34A; }
+.at-section-icon.split{ background:#FFF7ED; color:#D97706; }
+.at-section-icon.compress{ background:#FEF2F2; color:#DC2626; }
+.at-section-icon.security{ background:#F5F3FF; color:#7C3AED; }
+.at-section-icon.ai{ background:linear-gradient(135deg,#EEF1FF,#F5F3FF); color:#4F6EF7; }
+.at-section-icon.business{ background:#F0FDF4; color:#0D9488; }
+[data-theme="dark"] .at-section-icon.convert{ background:rgba(79,110,247,.15); }
+[data-theme="dark"] .at-section-icon.merge{ background:rgba(22,163,74,.15); }
+[data-theme="dark"] .at-section-icon.split{ background:rgba(217,119,6,.15); }
+[data-theme="dark"] .at-section-icon.compress{ background:rgba(220,38,38,.15); }
+[data-theme="dark"] .at-section-icon.security{ background:rgba(124,58,237,.15); }
+[data-theme="dark"] .at-section-icon.ai{ background:rgba(79,110,247,.15); }
+[data-theme="dark"] .at-section-icon.business{ background:rgba(13,148,136,.15); }
+.at-section-title{ font-size:17px; font-weight:700; color:var(--ink); }
+.at-section-count{ font-size:12px; color:var(--ink4); background:var(--bg3); padding:2px 9px; border-radius:100px; margin-left:auto; }
+
+/* Tool grid */
+.at-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+.at-tool{ background:var(--bg); border:1.5px solid var(--border); border-radius:var(--rxl); padding:1rem; text-decoration:none; color:inherit; display:flex; align-items:center; gap:12px; transition:var(--t-md); }
+.at-tool:hover{ border-color:var(--brand-border); background:var(--brand-pale); transform:translateY(-2px); box-shadow:0 4px 16px rgba(79,110,247,.12); }
+.at-tool-icon{ width:38px; height:38px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+.at-tool-name{ font-size:13.5px; font-weight:600; color:var(--ink); line-height:1.3; }
+.at-tool-desc{ font-size:11.5px; color:var(--ink4); margin-top:2px; line-height:1.4; }
+.at-tool.ai-tool .at-tool-icon{ background:linear-gradient(135deg,var(--brand-pale),#F5F3FF); color:var(--brand); }
+.at-tool:not(.ai-tool) .at-tool-icon{ background:var(--bg2); color:var(--brand); }
+.at-beta{ display:inline-flex; align-items:center; font-size:9px; font-weight:700; padding:1px 6px; border-radius:100px; background:var(--brand); color:#fff; margin-left:5px; vertical-align:middle; letter-spacing:.04em; }
+
+/* No results */
+.at-no-results{ text-align:center; padding:4rem 1rem; display:none; }
+.at-no-results i{ font-size:2.5rem; color:var(--ink5); display:block; margin-bottom:1rem; }
+.at-no-results h3{ font-size:16px; font-weight:700; color:var(--ink); margin-bottom:.4rem; }
+.at-no-results p{ font-size:13.5px; color:var(--ink4); }
+
+@media(max-width:900px){ .at-grid{ grid-template-columns:repeat(3,1fr); } }
+@media(max-width:640px){ .at-grid{ grid-template-columns:repeat(2,1fr); } .at-tool{ flex-direction:column; align-items:flex-start; gap:8px; } }
+@media(max-width:360px){ .at-grid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<div class="at-page">
+  <div class="at-hero">
+    <h1>All Tools</h1>
+    <p>30+ free PDF and AI tools, organized by category.</p>
+    <div class="at-search-wrap">
+      <i class="ti ti-search" aria-hidden="true"></i>
+      <input type="text" id="at-search" placeholder="Search tools…" oninput="filterTools(this.value)" autocomplete="off">
+    </div>
+  </div>
+
+  <div id="at-sections">
+
+    <!-- Convert PDF -->
+    <div class="at-section" data-cat="convert">
+      <div class="at-section-head">
+        <div class="at-section-icon convert"><i class="ti ti-replace" aria-hidden="true"></i></div>
+        <div class="at-section-title">Convert PDF</div>
+        <div class="at-section-count">10 tools</div>
+      </div>
+      <div class="at-grid">
+        <a href="/pdf-to-word" class="at-tool"><div class="at-tool-icon"><i class="ti ti-file-word"></i></div><div><div class="at-tool-name">PDF to Word</div><div class="at-tool-desc">Convert PDF to editable .docx</div></div></a>
+        <a href="/pdf-to-excel" class="at-tool"><div class="at-tool-icon"><i class="ti ti-file-spreadsheet"></i></div><div><div class="at-tool-name">PDF to Excel</div><div class="at-tool-desc">Smart table extraction</div></div></a>
+        <a href="/pdf-to-jpg" class="at-tool"><div class="at-tool-icon"><i class="ti ti-photo"></i></div><div><div class="at-tool-name">PDF to JPG</div><div class="at-tool-desc">Export pages as images</div></div></a>
+        <a href="/pdf-to-pptx" class="at-tool"><div class="at-tool-icon"><i class="ti ti-presentation"></i></div><div><div class="at-tool-name">PDF to PowerPoint</div><div class="at-tool-desc">Each page = one slide</div></div></a>
+        <a href="/pdf-to-text" class="at-tool"><div class="at-tool-icon"><i class="ti ti-file-text"></i></div><div><div class="at-tool-name">PDF to Text</div><div class="at-tool-desc">Extract raw plain text</div></div></a>
+        <a href="/word-to-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-file-type-doc"></i></div><div><div class="at-tool-name">Word to PDF</div><div class="at-tool-desc">Convert .docx to PDF</div></div></a>
+        <a href="/excel-to-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-file-type-xls"></i></div><div><div class="at-tool-name">Excel to PDF</div><div class="at-tool-desc">Convert .xlsx to PDF</div></div></a>
+        <a href="/jpg-to-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-photo-plus"></i></div><div><div class="at-tool-name">Image to PDF</div><div class="at-tool-desc">JPG/PNG to PDF</div></div></a>
+        <a href="/html-to-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-brand-html5"></i></div><div><div class="at-tool-name">HTML to PDF</div><div class="at-tool-desc">Convert webpage to PDF</div></div></a>
+        <a href="/pptx-to-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-presentation"></i></div><div><div class="at-tool-name">PowerPoint to PDF</div><div class="at-tool-desc">Convert .pptx to PDF</div></div></a>
+      </div>
+    </div>
+
+    <!-- Merge & Organize -->
+    <div class="at-section" data-cat="merge">
+      <div class="at-section-head">
+        <div class="at-section-icon merge"><i class="ti ti-stack-2" aria-hidden="true"></i></div>
+        <div class="at-section-title">Merge & Organize</div>
+        <div class="at-section-count">7 tools</div>
+      </div>
+      <div class="at-grid">
+        <a href="/merge-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-stack-2"></i></div><div><div class="at-tool-name">Merge PDF</div><div class="at-tool-desc">Combine multiple PDFs into one</div></div></a>
+        <a href="/split-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-cut"></i></div><div><div class="at-tool-name">Split PDF</div><div class="at-tool-desc">Split into pages or ranges</div></div></a>
+        <a href="/rotate-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-rotate-clockwise"></i></div><div><div class="at-tool-name">Rotate PDF</div><div class="at-tool-desc">90°, 180°, 270° rotation</div></div></a>
+        <a href="/delete-pages" class="at-tool"><div class="at-tool-icon"><i class="ti ti-trash"></i></div><div><div class="at-tool-name">Delete Pages</div><div class="at-tool-desc">Remove specific pages</div></div></a>
+        <a href="/reorder-pages" class="at-tool"><div class="at-tool-icon"><i class="ti ti-arrows-sort"></i></div><div><div class="at-tool-name">Reorder Pages</div><div class="at-tool-desc">Rearrange page order</div></div></a>
+        <a href="/add-page-numbers" class="at-tool"><div class="at-tool-icon"><i class="ti ti-number-123"></i></div><div><div class="at-tool-name">Add Page Numbers</div><div class="at-tool-desc">Auto number pages</div></div></a>
+        <a href="/watermark-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-writing-sign"></i></div><div><div class="at-tool-name">Watermark PDF</div><div class="at-tool-desc">Add text watermark</div></div></a>
+      </div>
+    </div>
+
+    <!-- Compress & Optimize -->
+    <div class="at-section" data-cat="compress">
+      <div class="at-section-head">
+        <div class="at-section-icon compress"><i class="ti ti-zoom-out" aria-hidden="true"></i></div>
+        <div class="at-section-title">Compress & Optimize</div>
+        <div class="at-section-count">3 tools</div>
+      </div>
+      <div class="at-grid">
+        <a href="/compress-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-zoom-out"></i></div><div><div class="at-tool-name">Compress PDF</div><div class="at-tool-desc">Reduce file size up to 90%</div></div></a>
+        <a href="/optimize-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-bolt"></i></div><div><div class="at-tool-name">Optimize PDF</div><div class="at-tool-desc">Optimize for web or print</div></div></a>
+        <a href="/repair-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-tool"></i></div><div><div class="at-tool-name">Repair PDF</div><div class="at-tool-desc">Fix corrupted PDFs</div></div></a>
+      </div>
+    </div>
+
+    <!-- Security -->
+    <div class="at-section" data-cat="security">
+      <div class="at-section-head">
+        <div class="at-section-icon security"><i class="ti ti-shield-lock" aria-hidden="true"></i></div>
+        <div class="at-section-title">Security</div>
+        <div class="at-section-count">3 tools</div>
+      </div>
+      <div class="at-grid">
+        <a href="/protect-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-lock"></i></div><div><div class="at-tool-name">Lock PDF</div><div class="at-tool-desc">AES-256 encryption</div></div></a>
+        <a href="/unlock-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-lock-open"></i></div><div><div class="at-tool-name">Unlock PDF</div><div class="at-tool-desc">Remove password protection</div></div></a>
+        <a href="/sign-pdf" class="at-tool"><div class="at-tool-icon"><i class="ti ti-signature"></i></div><div><div class="at-tool-name">Sign PDF</div><div class="at-tool-desc">Add digital signature</div></div></a>
+      </div>
+    </div>
+
+    <!-- AI Tools -->
+    <div class="at-section" data-cat="ai">
+      <div class="at-section-head">
+        <div class="at-section-icon ai"><i class="ti ti-sparkles" aria-hidden="true"></i></div>
+        <div class="at-section-title">AI Tools <span class="at-beta">BETA</span></div>
+        <div class="at-section-count">6 tools</div>
+      </div>
+      <div class="at-grid">
+        <a href="/ask-pdf" class="at-tool ai-tool"><div class="at-tool-icon"><i class="ti ti-message-circle-2"></i></div><div><div class="at-tool-name">Ask PDF</div><div class="at-tool-desc">Chat with your document</div></div></a>
+        <a href="/ai-summary" class="at-tool ai-tool"><div class="at-tool-icon"><i class="ti ti-clipboard-text"></i></div><div><div class="at-tool-name">Summarize PDF</div><div class="at-tool-desc">Get instant AI summary</div></div></a>
+        <a href="/ai-notes" class="at-tool ai-tool"><div class="at-tool-icon"><i class="ti ti-notes"></i></div><div><div class="at-tool-name">Generate Notes</div><div class="at-tool-desc">Study notes from PDF</div></div></a>
+        <a href="/ai-quiz" class="at-tool ai-tool"><div class="at-tool-icon"><i class="ti ti-help-circle"></i></div><div><div class="at-tool-name">Quiz Generator</div><div class="at-tool-desc">Auto quiz questions</div></div></a>
+        <a href="/ai-keypoints" class="at-tool ai-tool"><div class="at-tool-icon"><i class="ti ti-bulb"></i></div><div><div class="at-tool-name">Key Points</div><div class="at-tool-desc">Extract key insights</div></div></a>
+        <a href="/ai-translate" class="at-tool ai-tool"><div class="at-tool-icon"><i class="ti ti-language"></i></div><div><div class="at-tool-name">Translate PDF</div><div class="at-tool-desc">Urdu, Arabic & more</div></div></a>
+      </div>
+    </div>
+
+    <!-- Business -->
+    <div class="at-section" data-cat="business">
+      <div class="at-section-head">
+        <div class="at-section-icon business"><i class="ti ti-briefcase" aria-hidden="true"></i></div>
+        <div class="at-section-title">Business</div>
+        <div class="at-section-count">2 tools</div>
+      </div>
+      <div class="at-grid">
+        <a href="/invoice-to-excel" class="at-tool"><div class="at-tool-icon"><i class="ti ti-receipt"></i></div><div><div class="at-tool-name">Invoice to Excel</div><div class="at-tool-desc">Extract invoice data to Excel</div></div></a>
+        <a href="/bank-statement" class="at-tool"><div class="at-tool-icon"><i class="ti ti-building-bank"></i></div><div><div class="at-tool-name">Bank Statement</div><div class="at-tool-desc">Parse bank statements to Excel</div></div></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="at-no-results" id="at-no-results">
+    <i class="ti ti-search-off" aria-hidden="true"></i>
+    <h3>No tools found</h3>
+    <p>Try a different search term</p>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+<script>
+function filterTools(q){
+  q = q.toLowerCase().trim();
+  const sections = document.querySelectorAll(".at-section");
+  let totalVisible = 0;
+  sections.forEach(sec => {
+    const tools = sec.querySelectorAll(".at-tool");
+    let secVisible = 0;
+    tools.forEach(t => {
+      const text = t.textContent.toLowerCase();
+      const show = !q || text.includes(q);
+      t.style.display = show ? "" : "none";
+      if(show) secVisible++;
+    });
+    sec.style.display = secVisible ? "" : "none";
+    totalVisible += secVisible;
+  });
+  document.getElementById("at-no-results").style.display = totalVisible ? "none" : "block";
+}
+</script>
+</body>
+</html>
