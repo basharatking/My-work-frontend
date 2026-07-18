@@ -208,6 +208,11 @@
   status = 301
 
 [[redirects]]
+  from = "/admin.html"
+  to = "/admin"
+  status = 301
+
+[[redirects]]
   from = "/pricing.html"
   to = "/pricing"
   status = 301
@@ -256,6 +261,11 @@
 [[redirects]]
   from = "/settings"
   to = "/settings.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin"
+  to = "/admin.html"
   status = 200
 
 [[redirects]]
