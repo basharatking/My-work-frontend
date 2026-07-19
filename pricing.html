@@ -26,7 +26,8 @@
 .plans-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; max-width:980px; margin:0 auto; }
 .plan{ background:var(--bg); border:1.5px solid var(--border); border-radius:var(--r2xl); padding:2rem 1.75rem; position:relative; transition:var(--t-md); display:flex; flex-direction:column; }
 .plan:hover{ box-shadow:var(--shadow-md); transform:translateY(-3px); }
-.plan.featured{ background:var(--ink2); border-color:var(--ink2); }
+.plan.featured{ background:var(--brand); border-color:var(--brand); }
+[data-theme="dark"] .plan.featured{ background:var(--brand-dark); border-color:var(--brand-dark); }
 .plan-badge{ position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,var(--brand),var(--brand-light)); color:#fff; font-size:11px; font-weight:700; padding:4px 16px; border-radius:100px; white-space:nowrap; box-shadow:0 2px 8px rgba(79,110,247,.3); }
 .plan-tier{ font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.09em; color:var(--ink4); margin-bottom:4px; }
 .featured .plan-tier{ color:rgba(255,255,255,.35); }
