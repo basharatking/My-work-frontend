@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
 <style>
@@ -143,7 +144,7 @@
         <li class="plan-feat"><i class="ti ti-check" style="color:#86efac"></i>Conversion history</li>
         <li class="plan-feat"><i class="ti ti-check" style="color:#86efac"></i>Email support</li>
       </ul>
-      <a href="/sign-in" class="plan-btn plan-btn-white">Get Started with Pro →</a>
+      <a href="#" class="plan-btn plan-btn-white" id="pro-checkout-btn" onclick="startCheckout(event)">Get Started with Pro →</a>
     </div>
 
     <!-- BUSINESS -->
@@ -247,7 +248,10 @@
 <div id="footer-placeholder"></div>
 <script src="shared.js"></script>
 <script>
+let _billing = 'm';
+
 function setBilling(t){
+  _billing = t;
   document.getElementById('tbm').className='toggle-btn'+(t==='m'?' on':'');
   document.getElementById('tby').className='toggle-btn'+(t==='y'?' on':'');
   if(t==='y'){
@@ -262,12 +266,50 @@ function setBilling(t){
     document.getElementById('biz-per').textContent='/mo';
   }
 }
+
 function toggleFaq(el){
   const item=el.parentElement;
   const isOpen=item.classList.contains('open');
   document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
   if(!isOpen) item.classList.add('open');
 }
+
+/* ── Paddle Checkout ── */
+async function startCheckout(e){
+  e.preventDefault();
+  const cfg = window.RUNDOCS_CONFIG;
+
+  /* Must be signed in */
+  const sb = window.supabase?.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY);
+  if(!sb){ window.location.href='/sign-in'; return; }
+  const { data: { session } } = await sb.auth.getSession();
+  if(!session){ window.location.href='/sign-in?next=/pricing'; return; }
+
+  const priceId = _billing === 'y' ? cfg.PADDLE_PRO_YEARLY : cfg.PADDLE_PRO_MONTHLY;
+
+  /* Init Paddle */
+  Paddle.Environment.set(cfg.PADDLE_SANDBOX ? 'sandbox' : 'production');
+  Paddle.Initialize({ token: cfg.PADDLE_CLIENT_TOKEN });
+
+  Paddle.Checkout.open({
+    items: [{ priceId: priceId, quantity: 1 }],
+    customer: { email: session.user.email },
+    customData: { user_id: session.user.id, plan: 'pro' },
+    settings: {
+      displayMode: 'overlay',
+      theme: 'light',
+      locale: 'en',
+      successUrl: window.location.origin + '/dashboard?upgraded=1',
+    }
+  });
+}
+
+/* Show success toast if redirected from checkout */
+window.addEventListener('DOMContentLoaded', () => {
+  if(new URLSearchParams(window.location.search).get('upgraded')==='1'){
+    setTimeout(()=>{ if(typeof toast==='function') toast('🎉 Welcome to Pro! Your plan is now active.','success',5000); },600);
+  }
+});
 </script>
 </body>
 </html>
