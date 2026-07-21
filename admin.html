@@ -124,7 +124,15 @@ body{font-family:var(--font);background:var(--bg2);color:var(--ink);min-height:1
 </head>
 <body>
 
-<!-- GATE — shown if not admin -->
+<!-- Loading state -->
+<div id="adm-loading" style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg2)">
+  <div style="text-align:center">
+    <div style="width:40px;height:40px;border:3px solid var(--border2);border-top-color:var(--brand);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 1rem"></div>
+    <div style="font-size:14px;color:var(--ink4)">Loading admin panel…</div>
+  </div>
+</div>
+<style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+
 <div id="adm-gate" style="display:none">
   <div class="adm-gate-card">
     <i class="ti ti-shield-lock adm-gate-icon" aria-hidden="true"></i>
@@ -404,16 +412,27 @@ function _renderOverviewRecent(){
 
 /* ── init ── */
 async function initAdmin(){
+  const loading=document.getElementById('adm-loading');
   const user=await getUser();
-  if(!user){ document.getElementById("adm-gate").style.display="flex"; return; }
-
-  /* Check if user is admin */
+  if(!user){
+    if(loading) loading.style.display='none';
+    document.getElementById("adm-gate").style.display="flex";
+    return;
+  }
   try{
     const sb=await _sbClient();
     const {data,error}=await sb.from("admin_users").select("email").eq("email",user.email).single();
-    if(error||!data){ document.getElementById("adm-gate").style.display="flex"; return; }
-  }catch(e){ document.getElementById("adm-gate").style.display="flex"; return; }
-
+    if(error||!data){
+      if(loading) loading.style.display='none';
+      document.getElementById("adm-gate").style.display="flex";
+      return;
+    }
+  }catch(e){
+    if(loading) loading.style.display='none';
+    document.getElementById("adm-gate").style.display="flex";
+    return;
+  }
+  if(loading) loading.style.display='none';
   document.getElementById("adm-app").style.display="flex";
   document.getElementById("adm-email-badge").textContent="Signed in as "+user.email;
   loadAll();
