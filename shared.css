@@ -142,18 +142,18 @@
   --ink: #0A0F1E;
   --ink2: #161B30;
   --ink3: #4A5170;
-  --ink4: #8B91AA;
-  --ink5: #C8CCDC;
+  --ink4: #7B82A0;
+  --ink5: #B8BCCC;
 
-  /* Backgrounds */
-  --bg: #FFFFFF;
-  --bg2: #F7F8FC;
-  --bg3: #EEF0F8;
-  --bg4: #E1E4EF;
+  /* Backgrounds — subtle blue tint for vibrancy */
+  --bg: #FAFBFF;
+  --bg2: #F2F4FC;
+  --bg3: #E8EBFA;
+  --bg4: #DDE1F5;
 
   /* Borders */
-  --border: #E4E7F2;
-  --border2: #CDD1E4;
+  --border: #DDE1F2;
+  --border2: #C8CCDF;
 
   /* Status */
   --green: #16A34A;
