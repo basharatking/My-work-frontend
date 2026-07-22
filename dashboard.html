@@ -382,8 +382,30 @@ async function initDashboard(){
   document.getElementById("dash-avatar").textContent=name.slice(0,2).toUpperCase();
   document.getElementById("dash-hello").textContent=`Welcome back, ${name.split(" ")[0]}`;
   document.getElementById("dash-email").textContent=user.email||"";
+
   try{
     const sb=await _sbClient();
+
+    /* Check user plan from Subscriptions table */
+    const {data:subData}=await sb.from("Subscriptions")
+      .select("Plan,Status")
+      .eq("User_id",user.id)
+      .eq("Status","active")
+      .order("created_at",{ascending:false})
+      .limit(1)
+      .single();
+
+    const plan = subData?.Plan || "free";
+    const badge = document.getElementById("dash-plan-badge");
+    if(plan==="pro"){
+      badge.className="dash-plan-badge pro";
+      badge.innerHTML='<i class="ti ti-crown" aria-hidden="true"></i> Pro';
+    } else if(plan==="business"){
+      badge.className="dash-plan-badge pro";
+      badge.innerHTML='<i class="ti ti-building" aria-hidden="true"></i> Business';
+    }
+
+    /* Load conversions */
     const {data,error}=await sb.from("conversions").select("*").order("created_at",{ascending:false}).limit(500);
     if(error) throw error;
     _allConversions=data||[];
