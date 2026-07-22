@@ -125,12 +125,12 @@
     <div class="sett-card-body">
       <div class="plan-row">
         <div class="plan-info">
-          <strong>Free Plan</strong>
-          <span>50 conversions/month · 25 MB max file size</span>
+          <strong id="plan-name">Free Plan</strong>
+          <span id="plan-desc">50 conversions/month · 25 MB max file size</span>
         </div>
-        <span class="plan-badge"><i class="ti ti-bolt" aria-hidden="true"></i> Free</span>
+        <span class="plan-badge" id="plan-badge"><i class="ti ti-bolt" aria-hidden="true"></i> Free</span>
       </div>
-      <div>
+      <div id="plan-cta">
         <a href="/pricing" class="sett-save" style="text-decoration:none">
           <i class="ti ti-crown" aria-hidden="true"></i> Upgrade to Pro
         </a>
@@ -262,6 +262,35 @@ async function initSettings(){
   document.getElementById("field-email").value = user.email || "";
   const notif = localStorage.getItem("rd-notif-usage");
   if(notif==="0"){ _notifEnabled=false; toggleNotif(); }
+
+  /* Fetch plan from Subscriptions table */
+  try{
+    const sb = await _sbClient();
+    const {data} = await sb.from("Subscriptions")
+      .select("Plan,Status,billing_period")
+      .eq("User_id", user.id)
+      .eq("Status", "active")
+      .order("created_at", {ascending:false})
+      .limit(1)
+      .single();
+
+    const plan = data?.Plan || "free";
+    const billing = data?.billing_period || "monthly";
+
+    if(plan === "pro"){
+      document.getElementById("plan-name").textContent = "Pro Plan";
+      document.getElementById("plan-desc").textContent = `Unlimited conversions · 200 MB max file size · billed ${billing}`;
+      document.getElementById("plan-badge").innerHTML = '<i class="ti ti-crown" aria-hidden="true"></i> Pro';
+      document.getElementById("plan-badge").style.cssText = "background:#FFF7ED;color:#C2410C;border-color:#FED7AA";
+      document.getElementById("plan-cta").innerHTML = '<button class="sett-save" style="background:var(--red);cursor:pointer" onclick="alert(\'To cancel, contact support at contact page.\')"><i class="ti ti-x"></i> Cancel Subscription</button>';
+    } else if(plan === "business"){
+      document.getElementById("plan-name").textContent = "Business Plan";
+      document.getElementById("plan-desc").textContent = `Unlimited conversions · 500 MB max file size · 10 seats · billed ${billing}`;
+      document.getElementById("plan-badge").innerHTML = '<i class="ti ti-building" aria-hidden="true"></i> Business';
+      document.getElementById("plan-badge").style.cssText = "background:#F5F3FF;color:#7C3AED;border-color:#DDD6FE";
+      document.getElementById("plan-cta").innerHTML = '<button class="sett-save" style="background:var(--red);cursor:pointer" onclick="alert(\'To cancel, contact support at contact page.\')"><i class="ti ti-x"></i> Cancel Subscription</button>';
+    }
+  }catch(e){ /* free plan remains */ }
 }
 
 document.addEventListener("DOMContentLoaded",()=>{ setTimeout(initSettings,60); });
