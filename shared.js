@@ -1,8 +1,13 @@
-/* RunDocs shared.js v3.2 — Supabase Auth */
+/* RunDocs shared.js v3.3 — Dual Server Support */
 const _CFG = window.RUNDOCS_CONFIG || {};
 const API_BASE   = _CFG.API_BASE   || "";
+const AI_BASE    = _CFG.AI_BASE    || _CFG.API_BASE || "";
 const FREE_MB    = _CFG.FREE_LIMIT_MB || 25;
 const FREE_BYTES = FREE_MB * 1024 * 1024;
+
+/* AI endpoints — routed to AI_BASE */
+const _AI_ENDPOINTS = new Set(["/ask-pdf","/ai-summary","/ai-notes","/ai-quiz","/ai-keypoints","/ai-translate"]);
+function _baseFor(endpoint){ return _AI_ENDPOINTS.has(endpoint) ? AI_BASE : API_BASE; }
 
 /* ── Supabase Auth ─────────────────────────────────────── */
 let _sb = null;
@@ -527,7 +532,7 @@ async function callAPI(endpoint,fd,tid,label){
   let tick = setInterval(advance, STAGES[0].interval);
 
   try{
-    const resp = await fetch(API_BASE+endpoint, {method:"POST", body:fd});
+    const resp = await fetch(_baseFor(endpoint)+endpoint, {method:"POST", body:fd});
     clearInterval(tick);
     showProgress(tid, 100, "Done! ✓");
     await new Promise(r => setTimeout(r, 500)); /* let user see 100% */
@@ -811,7 +816,7 @@ function buildFooter(){
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© ${new Date().getFullYear()} RunDocs. All rights reserved.</p>
+    <p>© ${new Date().getFullYear()} RunDocs. All rights reserved. &nbsp;·&nbsp; Version 1.0.0</p>
     <div class="footer-social">
       <a href="#" class="social-btn" title="Twitter / X" aria-label="Twitter">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
