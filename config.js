@@ -1,7 +1,7 @@
 window.RUNDOCS_CONFIG = {
   /* ── Servers ── */
   API_BASE: "https://my-work-backend--mrjb54890.replit.app",     // PDF Server
-  AI_BASE:  "https://my-work-backend--mrjb54890.replit.app",     // AI Server (update when separate)
+  AI_BASE:  "https://my-backend-ai-server--basharatmasih12.replit.app",     // AI Server
 
   /* ── App ── */
   FREE_LIMIT_MB: 25,
