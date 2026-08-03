@@ -98,7 +98,7 @@ async function run_askpdf(){
   const fd=new FormData();fd.append("file",files[0]);fd.append("question",q);fd.append("history",JSON.stringify(_askHistory));
   try{
     let p=30;const tick=setInterval(()=>{p=Math.min(p+5,90);showProgress("askpdf",p,"Thinking…");},400);
-    const resp=await fetch(API_BASE+"/ask-pdf",{method:"POST",body:fd});
+    const resp=await fetch((window.RUNDOCS_CONFIG?.AI_BASE||API_BASE)+"/ask-pdf",{method:"POST",body:fd});
     clearInterval(tick);showProgress("askpdf",100,"Done!");hideProgress("askpdf");
     if(!resp.ok){const j=await resp.json().catch(()=>({}));throw new Error(j.detail||"AI service is currently unavailable. Please try again later.");}
     const data=await resp.json();const ans=data.result||"No answer found.";
